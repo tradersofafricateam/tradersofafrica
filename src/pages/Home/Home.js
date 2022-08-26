@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import "./Home.css";
 
@@ -16,6 +16,8 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Partners from "../../components/Partners/Partners";
 import Testimonials from "../../components/Testimonials/Testimonials";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // import AOS from "aos";
 // import "aos/dist/aos.css";
@@ -25,6 +27,10 @@ import Testimonials from "../../components/Testimonials/Testimonials";
 // }
 
 const Home = () => {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
   return (
     <div>
       <Navbar />
@@ -95,61 +101,95 @@ const Home = () => {
       </section>
 
       {/* Lp Services */}
-      <section id="lp-our-services">
-        <div className="container">
-          <div className="row mb-3">
-            <div className="col-lg-6" align="center">
-              <img className="img-fluid lp-img1" src={HomeImg1} alt="" />
+        <section id="lp-our-services" >
+          <div className="container">
+            <div className="row mb-3"
+                data-aos="fade-up"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="false"
+                data-aos-anchor-placement="top-center">
+              <div className="col-lg-6" align="center">
+                <img className="img-fluid lp-img1" src={HomeImg1} alt="" />
+              </div>
+              <div className="col-lg-6">
+                <div className="lp-service-info">
+                  <h2>Visibility and Access</h2>
+                  <p>
+                    We are showcasing African products to buyers all over the
+                    world, while providing access to local and international
+                    markets for African suppliers.
+                  </p>
+                  <div className="line" />
+                </div>
+              </div>
             </div>
-            <div className="col-lg-6">
-              <div className="lp-service-info">
-                <h2>Visibility and Access</h2>
-                <p>
-                  We are showcasing African products to buyers all over the
-                  world, while providing access to local and international
-                  markets for African suppliers.
-                </p>
-                <div className="line" />
+            <div className="row mb-3"
+                data-aos="fade-up"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="false"
+                data-aos-anchor-placement="top-center">
+              <div className="col-lg-6 order-last order-lg-first">
+                <div className="lp-service-info">
+                  <h2>Training and Mentorship </h2>
+                  <p>
+                    Dedicated to building a strong network of credible African
+                    traders who have the capacity to meet the global demand for
+                    African products, through partnerships.
+                  </p>
+                  <div className="line" />
+                </div>
+              </div>
+              <div className="col-lg-6" align="center">
+                <img className="img-fluid lp-img2" src={HomeImg2} alt="" />
+              </div>
+            </div>
+            <div className="row"
+                data-aos="fade-up"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="false"
+                data-aos-anchor-placement="top-center">
+              <div className="col-lg-6" align="center">
+                <img className="img-fluid lp-img3" src={HomeImg3} alt="" />
+              </div>
+              <div className="col-lg-6">
+                <div className="lp-service-info">
+                  <h2>Market Intelligence</h2>
+                  <p>
+                    Through our activities and technology, we are able to provide
+                    reliable data across several African products.
+                  </p>
+                  <div className="line" />
+                </div>
               </div>
             </div>
           </div>
-          <div className="row mb-3">
-            <div className="col-lg-6 order-last order-lg-first">
-              <div className="lp-service-info">
-                <h2>Training and Mentorship </h2>
-                <p>
-                  Dedicated to building a strong network of credible African
-                  traders who have the capacity to meet the global demand for
-                  African products, through partnerships.
-                </p>
-                <div className="line" />
-              </div>
-            </div>
-            <div className="col-lg-6" align="center">
-              <img className="img-fluid lp-img2" src={HomeImg2} alt="" />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6" align="center">
-              <img className="img-fluid lp-img3" src={HomeImg3} alt="" />
-            </div>
-            <div className="col-lg-6">
-              <div className="lp-service-info">
-                <h2>Market Intelligence</h2>
-                <p>
-                  Through our activities and technology, we are able to provide
-                  reliable data across several African products.
-                </p>
-                <div className="line" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+    
+      
 
       {/* Product Focus */}
       <section id="lp-product">
-        <div className="container">
+        <div className="container" 
+              data-aos="fade-up"
+              data-aos-offset="200"
+              data-aos-delay="50"
+              data-aos-duration="1000"
+              data-aos-easing="ease-in-out"
+              data-aos-mirror="true"
+              data-aos-once="false"
+              data-aos-anchor-placement="top-center">
           <div className="row mb-5">
             <div className="col-lg-12">
               <h2>Products we are focused on</h2>
