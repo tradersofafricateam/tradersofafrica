@@ -1,1 +1,266 @@
 
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, p {
+    color: #282828; 
+}
+  
+* {
+    font-family: 'Mulish', sans-serif; 
+}
+
+.js-scroll {
+    opacity: 0;
+    transition: opacity 500ms; 
+}
+
+
+.js-scroll.scrolled {
+    opacity: 1; 
+}
+
+.scrolled.fade-in {
+    animation: fade-in 1s ease-in-out both; 
+}
+
+.scrolled.fade-in-bottom {
+    animation: fade-in-bottom 1s ease-in-out both; 
+}
+
+.scrolled.slide-left {
+    animation: slide-in-left 1s ease-in-out both; 
+}
+
+.scrolled.slide-right {
+    animation: slide-in-right 1s ease-in-out both; 
+}
+
+@keyframes slide-in-left {
+0% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0; }
+100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+
+@keyframes slide-in-right {
+0% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0; }
+100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+
+@keyframes fade-in-bottom {
+0% {
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    opacity: 0; }
+100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1; } }
+
+@keyframes fade-in {
+0% {
+    opacity: 0; }
+100% {
+    opacity: 1; } }
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1200px !important; 
+    } 
+}
+button {
+    background: #DC4D04;
+    border: 1px solid #DC4D04;
+    border-radius: 4px;
+    box-shadow: none !important;
+    outline: 0px !important;
+    border-radius: 4px;
+    padding: 12px 32px !important;
+    font-size: 0.9 !important;
+}
+button img {
+    height: 11px;
+    margin-left: 10px; 
+}
+
+/* Media Queries */
+
+@media (max-width: 992px) {
+    #lp-what-we-do .lp-map {
+        display: none; }
+    br {
+        display: none; }
+    #goals h2, #goals .h2 {
+        font-size: 1rem; }
+    footer .footer-wrap {
+        padding: 50px 0; }
+    footer .footer-content div {
+        margin-bottom: 45px; }
+    #goals {
+        padding: 50px 0; }
+        #goals .vision {
+        padding: 40px 0 0 0; }
+        #goals .mission {
+        padding-top: 0; }
+        #goals .line {
+        border-right: none;
+        border-bottom: 0.2px solid #5c5c5c; }
+    .navbar-nav .nav-item .nav-link {
+        margin: 0; }
+    #sourcepro-finance .cb-img {
+        margin-top: 30px;
+        float: left; }
+    #sourcepro-finance .sp-img {
+        float: left; }
+    #sourcepro-finance .tf-img {
+        float: left; }
+    #traction-wrap .padding-left {
+        padding-left: 0px; }
+    #intel-top {
+        min-height: auto; }
+        #intel-top .intell-img {
+        display: none; }
+    #comm-data .commodity-info p {
+        padding-right: 0; }
+    #comm-data svg {
+        float: left; } 
+}
+
+@media (max-width: 768px) {
+    br {
+        display: none !important; }
+    .navbar-nav .nav-item .nav-link {
+        margin: 0; }
+    .container {
+        padding-left: 20px;
+        padding-right: 20px; }
+    .navbar-brand img {
+        height: 45px; }
+    #main-hero {
+        height: 65vh; }
+        #main-hero .row {
+        height: 65vh;
+        align-items: center; }
+        #main-hero .hero-text h1, #main-hero .hero-text .h1 {
+        font-size: 3rem; }
+    #lp-what-we-do {
+        padding: 50px 0; }
+        #lp-what-we-do h2, #lp-what-we-do .h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 35px;
+        margin: 0;
+        padding: 0; }
+        #lp-what-we-do .lp-map {
+        display: none; }
+    #lp-our-services .row {
+        margin-bottom: 35px !important; }
+    #lp-our-services .line {
+        display: none; }
+    #lp-our-services .lp-service-info {
+        padding: 0; }
+        #lp-our-services .lp-service-info h2, #lp-our-services .lp-service-info .h2 {
+        font-size: 1.5rem;
+        padding: 10px 0 0; }
+        #lp-our-services .lp-service-info p {
+        font-size: 16px;
+        line-height: 28px; }
+    #lp-our-services .lp-img {
+        width: 100%;
+        float: left; }
+    #lp-product {
+        padding: 50px 0; }
+        #lp-product .product-box {
+        margin-bottom: 25px; }
+    #testimonial {
+        padding: 50px 0; }
+        #testimonial h2, #testimonial .h2 {
+        padding: 0; }
+        #testimonial .testimonial-box {
+        width: 100%;
+        margin: 25px 0 0; }
+    #partners {
+        padding: 50px 0; }
+        #partners img {
+        height: 25px;
+        margin-bottom: 20px;
+        margin-right: 30px; }
+    footer .footer-wrap {
+        padding: 50px 0;
+        display: none; }
+    footer .footer-content div {
+        margin-bottom: 45px; }
+    #about-us {
+        padding: 50px 0 50px; }
+        #about-us h2, #about-us .h2 {
+        font-size: 1.5rem; }
+        #about-us p {
+        padding-right: 0 !important; }
+        #about-us h3, #about-us .h3 {
+        padding-right: 0 !important;
+        padding-left: 15px !important; }
+    #goals {
+        padding: 50px 0; }
+        #goals .vision {
+        padding: 40px 0 0 0; }
+        #goals .mission {
+        padding-top: 0; }
+        #goals .line {
+        border-right: none;
+        border-bottom: 0.2px solid #5c5c5c; }
+    #l-team .l-member-wrap {
+        margin: 0 10px 35px 0; }
+    #l-team .l-member-wrap .l-member-img {
+        width: 165px; }
+    #solution-wrap-1 {
+        padding: 50px 0; }
+        #solution-wrap-1 h2, #solution-wrap-1 .h2 {
+        font-size: 1.5rem;
+        line-height: 35px; }
+    #what-we-do-top {
+        padding: 75px 0; }
+        #what-we-do-top h2, #what-we-do-top .h2 {
+        font-size: 2rem; }
+    #sourcepro-finance {
+        padding: 50px 0; }
+        #sourcepro-finance h2, #sourcepro-finance .h2 {
+        font-size: 1.5rem;
+        line-height: 35px; }
+        #sourcepro-finance .row-margin {
+        margin-bottom: 50px; }
+        #sourcepro-finance .margin-top {
+        margin-top: 50px; }
+        #sourcepro-finance .cb-img {
+        margin-top: 30px;
+        float: left; }
+        #sourcepro-finance .sp-img {
+        float: left; }
+        #sourcepro-finance .tf-img {
+        float: left; }
+    #traction-wrap {
+        padding: 50px 0; }
+        #traction-wrap .padding-left {
+        padding-left: 20px; }
+    #tf-feature {
+        padding: 50px 0; }
+    #tofa-tribe {
+        padding: 75px 0; }
+        #tofa-tribe h2, #tofa-tribe .h2 {
+        font-size: 2.5rem; }
+    #intel-top {
+        min-height: auto; }
+        #intel-top h2, #intel-top .h2 {
+        margin-top: 0; }
+        #intel-top .intell-img {
+        display: none; }
+    #comm-data .commodity-info p {
+        padding-right: 0; }
+    #comm-data svg {
+        float: left; } 
+}

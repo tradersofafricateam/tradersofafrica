@@ -1,0 +1,47 @@
+#testimonial {
+    padding: 100px 0;
+    background: #FFFFFF;
+    border-bottom: .5px solid #DDDDDD; }
+#testimonial h2, #testimonial .h2 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px;
+    margin: 0;
+    padding: 75px 0 0; }
+#testimonial h2 span, #testimonial .h2 span {
+    font-weight: 700; }
+#testimonial p {
+    font-size: 20px;
+    font-weight: 400;
+    color: #DC4D04;
+    margin: 0;
+    padding: 25px 0 0;
+    line-height: 28px; }
+#testimonial .testimonial-box {
+    width: 100%;
+    height: auto;
+    background-color: #F9F9F9;
+    padding: 35px 25px;
+    border-radius: 4px;
+    margin-top: 25px; }
+#testimonial .testimonial-box img {
+    margin-bottom: 25px; }
+#testimonial .testimonial-box .customer {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0 0 30px !important;
+    line-height: 25px;
+    color: #282828; }
+#testimonial .testimonial-box .name {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 0 2.5px !important; }
+#testimonial .testimonial-box .company {
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0;
+    padding: 0 0 0 !important;
+    line-height: 28px;
+    color: #282828; }

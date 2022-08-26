@@ -1,0 +1,117 @@
+#what-we-do-top {
+  padding: 150px 0;
+  background-image: url("../../assets/img/sol-img.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+  #what-we-do-top h2, #what-we-do-top .h2 {
+    color: #282828;
+    margin: 0;
+    padding: 0 0 0;
+    font-size: 3rem;
+    font-weight: 700; }
+  #what-we-do-top p {
+    color: #282828;
+    margin: 0;
+    padding: 15px 0 0;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 32px; }
+
+#solution-wrap-1 {
+  padding: 100px 0;
+  background: #F9F9F9; }
+  #solution-wrap-1 h2, #solution-wrap-1 .h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 0; }
+  #solution-wrap-1 p {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+    padding: 15px 0 0;
+    line-height: 28px; }
+  #solution-wrap-1 .sol-box {
+    width: 97%;
+    border-radius: 4px;
+    margin-bottom: 25px; }
+    #solution-wrap-1 .sol-box .sol-img {
+      margin-bottom: 25px;
+      overflow: hidden;
+      cursor: pointer; }
+      #solution-wrap-1 .sol-box .sol-img img {
+        width: 100%; }
+    #solution-wrap-1 .sol-box .sol-img:hover {
+      opacity: .9; }
+    #solution-wrap-1 .sol-box h2, #solution-wrap-1 .sol-box .h2 {
+      font-size: 1.2rem; }
+    #solution-wrap-1 .sol-box p {
+      font-size: 1rem; }
+      #solution-wrap-1 .sol-box p a {
+        color: #DC4D04;
+        text-decoration: none;
+        font-weight: 400 !important;
+        margin-top: 15px; }
+        #solution-wrap-1 .sol-box p a img {
+          height: 11px;
+          margin-left: 10px; }
+    #solution-wrap-1 .sol-box .training-cta {
+      background: #DC4D04;
+      border: 1px solid #DC4D04;
+      color: #FFFFFF;
+      margin-top: 15px; }
+
+#sourcepro-finance {
+  padding: 100px 0 100px;
+  background-image: url("../../assets/img/h1-map1.svg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+  #sourcepro-finance .row-margin {
+    margin-bottom: 150px; }
+  #sourcepro-finance .padding-left {
+    padding-left: 60px; }
+  #sourcepro-finance .margin-top {
+    margin-top: 100px; }
+  #sourcepro-finance .padding-top {
+    padding-top: 20px; }
+  #sourcepro-finance h2, #sourcepro-finance .h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 50px;
+    margin: 30px 0 0;
+    padding: 0 0 15px; }
+  #sourcepro-finance p {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+    padding: 0 0 15px;
+    line-height: 28px; }
+    #sourcepro-finance p a {
+      color: #DC4D04;
+      text-decoration: none;
+      font-weight: 400 !important;
+      margin-top: 15px; }
+      #sourcepro-finance p a img {
+        height: 11px;
+        margin-left: 10px; }
+  #sourcepro-finance .tf-img {
+    width: 360px; }
+  #sourcepro-finance .sp-img {
+    width: 450px; }
+  #sourcepro-finance .cb-img {
+    width: 500px; }
+  #sourcepro-finance .training-cta {
+    background: #DC4D04;
+    border: 1px solid #DC4D04;
+    color: #FFFFFF;
+    margin-top: 15px; }
+  #sourcepro-finance .training-cta:hover {
+    background: #F05305;
+    border: 1px solid #F05305;
+    color: #FFFFFF !important; }

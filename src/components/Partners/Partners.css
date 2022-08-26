@@ -1,0 +1,22 @@
+#partners {
+    padding: 100px 0;
+    background: #FFFFFF;
+}
+#partners h2, #partners .h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 0; 
+}
+#partners p {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+    padding: 15px 0 0;
+    line-height: 28px; 
+}
+#partners img {
+    height: 35px;
+    margin-right: 50px;
+    margin-bottom: 25px; 
+}

@@ -1,0 +1,71 @@
+/* footer {
+    background-image: url("/img/insight-bg.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; } */
+  
+  .ft-logo {
+    width: 50px;
+    margin-bottom: 15px; }
+  
+  .social-icon {
+    height: 20px;
+    margin-right: 35px;
+    margin-top: 10px; }
+  
+  .tagline {
+    color: #FFFFFF;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 30px;
+    margin: 0;
+    padding: 15px 0 20px; }
+  
+  .footer-wrap {
+    padding: 80px 0;
+    background-color: #1B1B1B;
+    height: auto; }
+  
+  .footer-headers {
+    color: #f3f3f3;
+    font-weight: lighter;
+    font-size: 12px;
+    margin: 0 0 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase; }
+  
+  .text {
+    color: #fff;
+    font-weight: 200;
+    font-size: 14px;
+    margin: 0; }
+  
+  footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  
+  footer ul li {
+    padding: 20px 0 0; }
+  
+  footer ul li a {
+    text-decoration: none; }
+  
+  footer ul li a:hover {
+    color: #DD4F05;
+    font-weight: 300;
+    text-decoration: underline; }
+  
+  .bottom-wrap {
+    background-color: #000;
+    margin-top: 0px;
+    padding: 20px 0; }
+  
+  .bottom-wrap .copyright {
+    color: #f3f3f3;
+    font-weight: lighter;
+    font-size: 13px;
+    margin: 0; }

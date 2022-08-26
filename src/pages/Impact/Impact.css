@@ -1,0 +1,126 @@
+#imp-hero {
+    padding: 100px 0;
+    background-image: url("../../assets/img/imp-bn.jpg");
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; }
+    #imp-hero h2, #imp-hero .h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0;
+      padding: 0 0 40px; }
+    #imp-hero p {
+      margin: 0;
+      padding: 0; }
+    #imp-hero .cutomer-quote {
+      font-size: 1.35rem;
+      font-weight: 300;
+      padding: 15px 0 0;
+      color: #FFFFFF; }
+    #imp-hero .customer-name {
+      font-size: 14px;
+      color: #FFFFFF;
+      padding-top: 20px;
+      font-weight: 300; }
+    #imp-hero .play-icon-wrap {
+      margin-top: 35px; }
+      #imp-hero .play-icon-wrap img {
+        margin-right: 15px; }
+      #imp-hero .play-icon-wrap .play-icon-text {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 10px 0 0 !important;
+        font-weight: 400; }
+        #imp-hero .play-icon-wrap .play-icon-text a {
+          color: #FFFFFF;
+          text-decoration: none; }
+        #imp-hero .play-icon-wrap .play-icon-text a:hover {
+          color: #DC4D04;
+          text-decoration: underline; }
+  
+  #traction-wrap {
+    padding: 100px 0;
+    background: #FFFFFF; }
+    #traction-wrap .padding-left {
+      padding-left: 100px; }
+    #traction-wrap h2, #traction-wrap .h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 60px 0 0;
+      padding: 0; }
+    #traction-wrap h3, #traction-wrap .h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+      padding: 25px 0 35px; }
+    #traction-wrap p {
+      font-size: 16px;
+      font-weight: 300;
+      margin: 0;
+      padding: 15px 0 0;
+      line-height: 28px; }
+      #traction-wrap p span {
+        font-weight: 500; }
+    #traction-wrap .metric-wrap {
+      margin-bottom: 50px;
+      margin-right: 30px; }
+      #traction-wrap .metric-wrap img {
+        height: 50px;
+        float: left;
+        margin-right: 20px; }
+      #traction-wrap .metric-wrap .metric-desc .metric-value {
+        margin: 5px 0 0;
+        padding: 0;
+        font-size: 1.2rem;
+        font-weight: 600; }
+      #traction-wrap .metric-wrap .metric-desc .metric-name {
+        margin: 0;
+        padding: 0;
+        font-size: 14px; }
+  
+  #tofa-tribe {
+    padding: 150px 0;
+    background-image: url("../../assets/img/tribe-bn.jpg");
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center; }
+    #tofa-tribe h2, #tofa-tribe .h2 {
+      font-size: 3.5rem;
+      margin: 0;
+      padding: 0 0 0;
+      font-weight: 700;
+      color: #FFFFFF; }
+    #tofa-tribe p {
+      font-size: 18px;
+      font-weight: 300;
+      margin: 0;
+      padding: 25px 0 15px;
+      line-height: 32px;
+      color: #FFFFFF; }
+      #tofa-tribe p a {
+        color: #FFFFFF;
+        text-decoration: none;
+        font-weight: 400 !important; }
+        #tofa-tribe p a img {
+          height: 11px;
+          margin-left: 10px; }
+  
+  #tf-feature {
+    padding: 100px 0;
+    background: #FFFFFF; }
+    #tf-feature h2, #tf-feature .h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 0 0;
+      padding: 0 0 50px;
+      text-align: center; }
+    #tf-feature img {
+      height: 40px;
+      margin-top: 20px;
+      margin-right: 15px; }

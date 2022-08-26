@@ -1,45 +1,80 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import './Navbar.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
+import Logo from "../../assets/img/logo.png";
 
 const Navbar = () => {
   return (
     <>
-        <nav className='navbar'>
-            <div className='nav-bar-container'>
-                <Link to="/" className='logo'> TOFA
-                </Link>
-            </div>
-            <div>
-              <div>
-                <Link to="/story">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light main-nav">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            <img className="logo" src={Logo} alt="TOFA" />
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
+              <li className="nav-item">
+                <Link
+                  className="nav-link main-nav-link"
+                  aria-current="page"
+                  to="/our-story"
+                >
                   Our Story
                 </Link>
-              </div>
-              <div>
-                <Link to="/what-we-do">
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link main-nav-link" to="/what-we-do">
                   What we do
                 </Link>
-              </div>
-              <div>
-                <Link to="/impact">
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link main-nav-link" to="/our-impact">
                   Our Impact
                 </Link>
-              </div>
-              <div>
-                <Link to="/market">
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link main-nav-link" to="/market-intelligence">
                   Market Intelligence
                 </Link>
-              </div>
-             <div>
-                <Link to="/buyers-hub">
-                    Buy Commodities
+              </li>
+              {/* <li className="nav-item">
+                      <Link className="nav-link main-nav-link" href="./market-intelligence.html">Sell Commodities</Link>
+                  </li> */}
+              <li className="nav-item">
+                <Link
+                  className="nav-link btn btn-danger nav-btn-sec text-white"
+                  to="/buyers-hub"
+                  role="button"
+                >
+                  Sell Commodities
                 </Link>
-             </div>
-            </div>
-        </nav>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link btn btn-danger nav-btn text-white"
+                  to="/buyers-hub"
+                  role="button"
+                >
+                  Buy Commodities
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
