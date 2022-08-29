@@ -10,7 +10,7 @@ import "./Partners.css";
 const Partners = () => {
   return (
     <section id="partners">
-      <div className="container">
+      <div className="container" data-aos="fade-up" data-aos-duration="1000">
         <div className="row mb-5">
           <div className="col-lg-12">
             <h2>Our Partners</h2>
