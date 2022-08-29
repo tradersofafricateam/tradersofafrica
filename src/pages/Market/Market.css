@@ -1,79 +1,128 @@
 #intel-top {
-    background: #f9f9f9;
-    padding: 50px 0;
-    min-height: 850px; }
-    #intel-top .container {
-      position: relative; }
-    #intel-top .intell-img {
-      height: 700px;
-      position: absolute;
-      right: 0; }
-    #intel-top h2, #intel-top .h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin: 50px 0 0;
-      padding: 0; }
-    #intel-top h3, #intel-top .h3 {
-      font-size: 18px;
-      font-weight: 500;
-      margin: 0;
-      padding: 25px 0 15px; }
-      #intel-top h3 img, #intel-top .h3 img {
-        margin-right: 15px; }
-    #intel-top p {
-      font-size: 16px;
-      font-weight: 300;
-      margin: 0;
-      padding: 15px 0 10px;
-      line-height: 28px; }
-  
-  #comm-data {
-    padding: 100px 0;
-    background-image: url("../../assets/img/insight-bg.png");
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; }
-    #comm-data svg .cls-1 {
-      fill: #282828;
-      stroke: #FFFFFF !important;
-      stroke-width: 1.5;
-      transition: .8s; }
-    #comm-data svg .cls-1:hover {
-      fill: #FB7837 !important;
-      stroke: #FB7837;
-      transition: 0.6s;
-      cursor: pointer; }
-    #comm-data .commodity-wrap h2, #comm-data .commodity-wrap .h2 {
-      color: #FFFFFF;
-      font-size: 2rem;
-      font-weight: 600;
-      margin: 0 0 15px;
-      padding: 0; }
-    #comm-data .commodity-wrap p {
-      color: #FFFFFF;
-      display: inline-block;
-      margin-right: 15px;
-      font-size: 14px;
-      cursor: pointer; }
-    #comm-data .commodity-wrap p:hover {
-      color: #DC4D04; }
-    #comm-data .commodity-info {
-      margin-top: 20px; }
-    #comm-data .commodity-info h2, #comm-data .commodity-info .h2 {
-      color: #FFFFFF;
-      font-size: 18px;
-      margin: 0 0 15px;
-      padding: 0; }
-    #comm-data .commodity-info p {
-      color: #FFFFFF;
-      display: inline-block;
-      margin-right: 15px;
-      font-size: 14px;
-      padding-right: 70px;
-      text-align: left; }
-    #comm-data .hide {
-      height: 450px;
-      overflow-y: scroll;
-      margin-bottom: 25px; }
+  background: #f9f9f9;
+  padding: 50px 0;
+  min-height: 850px;
+}
+#intel-top .container {
+  position: relative;
+}
+#intel-top .intell-img {
+  height: 700px;
+  position: absolute;
+  right: 0;
+}
+#intel-top h2,
+#intel-top .h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 50px 0 0;
+  padding: 0;
+}
+#intel-top h3,
+#intel-top .h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  padding: 25px 0 15px;
+}
+#intel-top h3 img,
+#intel-top .h3 img {
+  margin-right: 15px;
+}
+#intel-top p {
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0;
+  padding: 15px 0 10px;
+  line-height: 28px;
+}
+
+#comm-data {
+  padding: 100px 0;
+  background-image: url("../../assets/img/insight-bg.png");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/*  product dropdown*/
+label {
+  background-color: transparent;
+}
+.products-ctn {
+  background-color: transparent;
+  outline: none;
+  color: #ffffff;
+}
+
+option {
+  background-color: transparent;
+  color: #282828;
+  outline: none;
+}
+
+/* end of product dropdown */
+#comm-data svg .cls-1 {
+  fill: #282828;
+  stroke: #ffffff !important;
+  stroke-width: 1.5;
+  transition: 0.8s;
+}
+#comm-data svg .cls-1:hover {
+  fill: #fb7837 !important;
+  stroke: #fb7837;
+  transition: 0.6s;
+  cursor: pointer;
+}
+#comm-data .commodity-wrap h2,
+#comm-data .commodity-wrap .h2 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 15px;
+  padding: 0;
+}
+#comm-data .commodity-wrap p {
+  color: #ffffff;
+  display: inline-block;
+  margin-right: 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+#comm-data .commodity-wrap p:hover {
+  color: #dc4d04;
+}
+#comm-data .commodity-info {
+  margin-top: 20px;
+}
+#comm-data .commodity-info h2,
+#comm-data .commodity-info .h2 {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 0 0 15px;
+  padding: 0;
+}
+#comm-data .commodity-info p {
+  color: #ffffff;
+  display: inline-block;
+  margin-right: 15px;
+  font-size: 14px;
+  padding-right: 70px;
+  text-align: left;
+}
+#comm-data .hide {
+  height: 450px;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+}
+
+#comm-data svg .cls-1 {
+  transition: 0.6s;
+}
+
+#comm-data svg .cls-1.selected {
+  fill: #fb7837 !important;
+  stroke: #fb7837;
+}
