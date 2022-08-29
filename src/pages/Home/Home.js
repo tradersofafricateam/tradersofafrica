@@ -103,7 +103,12 @@ const Home = () => {
       {/* Lp Services */}
       <section id="lp-our-services">
         <div className="container">
-          <div className="row mb-3" data-aos="fade-up" data-aos-duration="1000">
+          <div
+            className="row mb-3"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-offset="300"
+          >
             <div className="col-lg-6" align="center">
               <img className="img-fluid lp-img1" src={HomeImg1} alt="" />
             </div>
@@ -120,7 +125,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="row mb-3" data-aos="fade-up" data-aos-duration="1000">
+          <div
+            className="row mb-3"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-offset="300"
+          >
             <div className="col-lg-6 order-last order-lg-first">
               <div className="lp-service-info">
                 <h2>Training and Mentorship </h2>
@@ -137,7 +147,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="row" data-aos="fade-up" data-aos-duration="1000">
+          <div
+            className="row"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-offset="300"
+          >
             <div className="col-lg-6" align="center">
               <img className="img-fluid lp-img3" src={HomeImg3} alt="" />
             </div>
