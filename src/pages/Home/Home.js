@@ -9,7 +9,7 @@ import HomeImg3 from "../../assets/img/lp-3.png";
 import ProductFocus1 from "../../assets/img/pf-1.png";
 import ProductFocus2 from "../../assets/img/pf-2.png";
 import ProductFocus3 from "../../assets/img/pf-3.png";
-import QuoteImg from "../../assets/img/quote.svg";
+// import QuoteImg from "../../assets/img/quote.svg";
 import ChevronRight from "../../assets/img/chevron-right.svg";
 
 import Footer from "../../components/Footer/Footer";
