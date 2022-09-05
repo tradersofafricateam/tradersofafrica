@@ -126,3 +126,10 @@ option {
   fill: #fb7837 !important;
   stroke: #fb7837;
 }
+
+.products-ctn {
+    width: 45%;
+    box-shadow: none !important;
+    outline: 0px !important;
+    border-radius: 4px;
+}

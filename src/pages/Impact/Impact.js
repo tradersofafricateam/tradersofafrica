@@ -138,7 +138,7 @@ const Impact = () => {
                   </div>
                   <div className="metric-wrap">
                     <div className="d-flex justify-content-start">
-                      <img src={SupplierIcon} alt="" />
+                      <img src={TraineeIcon} alt="" />
                       <div className="metric-desc">
                         <h4 className="metric-value">300</h4>
                         <p className="metric-name">Trainees</p>
@@ -167,7 +167,7 @@ const Impact = () => {
               <div className="col-lg-12">
                 <h2>Be a Part of <br />our Community</h2>
                 <p>As a member of our TOFA Tribe, you will be trained on the best practices with regards to <br />agro commodities trading in commercial quantities. Gain access to funding, off-take, <br />and mentorship to boost your supply capacity and grow your agribusiness. </p>
-                <p><a href="#">Get Started <img src={PlayBtnW} alt="" /></a></p>
+                <p><a href="#">Get Started <img src={ChevronRight} alt="" /></a></p>
               </div>
             </div>
           </div>

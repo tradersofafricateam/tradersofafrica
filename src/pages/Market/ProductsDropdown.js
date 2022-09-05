@@ -7,8 +7,8 @@ export default function ProductsDropdown({ handleChange, value }) {
   }
 
   return (
-    <label>
-      <select className="products-ctn" value={value} onChange={onChangeHandler}>
+    <div>
+      <select className="products-ctn form-select" value={value} onChange={onChangeHandler}>
         <option className="comm-marker-1" value="cashew">
           Cashew nuts
         </option>
@@ -25,6 +25,6 @@ export default function ProductsDropdown({ handleChange, value }) {
           Ginger
         </option>
       </select>
-    </label>
+    </div>
   )
 }
