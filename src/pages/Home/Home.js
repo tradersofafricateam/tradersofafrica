@@ -19,10 +19,6 @@ import Testimonials from "../../components/Testimonials/Testimonials";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// componentDidMount() {
-//   AOS.init({duration: 2000});
-// }
-
 const Home = () => {
   useEffect(() => {
     AOS.init();

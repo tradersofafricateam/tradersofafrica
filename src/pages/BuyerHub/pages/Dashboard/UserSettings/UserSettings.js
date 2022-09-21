@@ -9,7 +9,7 @@ import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
 
 import "../Dashboard.css";
 
-const OrderInfo = () => {
+const UserSettings = () => {
   return (
     <div>
        <div className="grid-container">
@@ -19,7 +19,7 @@ const OrderInfo = () => {
         
         <header className="header">
           <div className="header__message">
-            <h2>Order Information</h2>
+            <h2>Settings</h2>
           </div>
           <div className="header__search">
 
@@ -58,4 +58,4 @@ const OrderInfo = () => {
   )
 }
 
-export default OrderInfo
+export default UserSettings

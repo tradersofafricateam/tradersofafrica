@@ -1,0 +1,128 @@
+#b-features {
+    padding: 70px 0;
+    background: linear-gradient(0deg, #F5F9FE 0%, rgba(245, 249, 254, 0) 100%);
+}
+
+#b-features h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 0;
+}
+
+#b-features .f-subtitle {
+    font-size: .9rem;
+    font-weight: 300;
+    margin: 0;
+    padding: 10px 0 0;
+    line-height: 26px;
+}
+
+#b-features h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 0;
+}
+
+#b-features p {
+    font-size: .95rem;
+    font-weight: 300;
+    margin: 0;
+    padding: 10px 0 0;
+    line-height: 26px;
+}
+
+#b-features .b-feature-icon {
+    height: 45px;
+    margin: 50px 0 25px;
+}
+
+
+#b-trending {
+    padding: 50px 0;
+    background:#FFFFFF;
+}
+
+#b-trending h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 40px;
+}
+
+#b-trending .subtitle {
+    font-size: .9rem;
+    padding: 0 0 35px;
+    margin: 0;
+    color: #282828;
+}
+
+#b-trending .subtitle .scroll-icon {
+    width: 25px;
+    margin-right: 15px;
+}
+
+/* Advert Space */
+
+#ad-space {
+    padding:0 0 50px;
+}
+
+.feature-ad {
+    background-image: url("../../assets/img/blue-g.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    border-radius:6px;
+    padding: 70px 50px;
+}
+
+.feature-ad h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0 0 10px;
+    color: #FFFFFF;
+}
+
+.feature-ad p {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    color: #FFFFFF;
+}
+
+.e-newsletter {
+    width: 100%;
+    border-radius:0px;
+    padding: 40px 30px;
+    border:1px solid #DDDDDD;
+    border-radius: 6px;
+    margin: 0 0 50px;
+}
+
+.e-newsletter h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0 0 10px;
+}
+
+.e-newsletter p {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.e-newsletter input {
+    font-size: .9rem;
+    padding:12px 15px;
+}
+
+.e-newsletter button {
+    font-size: .9rem;
+}

@@ -1,15 +1,15 @@
 import React from 'react'
 import { Iconly } from 'react-iconly'
-import Sidebar from "./components/Sidebar";
+import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 
-import TrackImg from "../../../../assets/img/track-illus.png";
-import OrdersImg from "../../../../assets/img/orders-illus.png";
-import ProductImgTable from "../../../../assets/img/products/p-img1.png";
+import TrackImg from "../../../../../assets/img/track-illus.png";
+import OrdersImg from "../../../../../assets/img/orders-illus.png";
+import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
 
-import "./Dashboard.css";
+import "../Dashboard.css";
 
-const Dashboard = () => {
+const Inquiries = () => {
   return (
     <div>
        <div className="grid-container">
@@ -19,7 +19,7 @@ const Dashboard = () => {
         
         <header className="header">
           <div className="header__message">
-            <h2>Hello Erhun!</h2>
+            <h2>My Inquiries</h2>
           </div>
           <div className="header__search">
 
@@ -31,10 +31,8 @@ const Dashboard = () => {
             </form>
             
             <div className="notify-wrap position-relative">
-              <Link to="/dashboard">
-                <Iconly name='Notification' set='bulk' primaryColor='#282828' size='medium' />
-                <span className="icon-notification position-absolute"></span>
-              </Link>
+              <Iconly name='Notification' set='bulk' primaryColor='#282828' size='medium' />
+              <span className="icon-notification position-absolute"></span>
             </div>
 
           </div>
@@ -44,57 +42,34 @@ const Dashboard = () => {
 
         <main className="main">
 
-          {/* <div className="info-cards">
-            <div className="card">
-              <div>
-                <h2>Track it all!</h2>
-                <p>Keep track of all your and transactions activities here in your Dashboard</p>
-              </div>
-              <img src={TrackImg} alt="..."/>
-            </div>
-            <div className="card">
-              <div>
-                <h2>Monitor Your Orders</h2>
-                <p>Keep track of all your and transactions activities here in your order tab on the dashboard</p>
-              </div>
-              <img src={OrdersImg} alt="..."/>
-            </div>
-          </div>           */}
-
-          <h1 className="section-title">Activity Summary</h1>
           <div className="main-overview">
             <div className="overview-card">
               <div>
-                <h2>Total Orders</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <h2>All Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
                   <h3>125</h3>
-                  <Link className="overview-card-link" to="/orders">View all</Link>
                 </div>
               </div>
             </div>
             <div className="overview-card">
               <div>
-                <h2>Total Inquiries</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <h2>Pending Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>22</h3>
-                  <Link className="overview-card-link" to="/inquiries">View all</Link>
+                  <h3>25</h3>
                 </div>
               </div>
             </div>
             <div className="overview-card">
               <div>
-                <h2>Total Quotes</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <h2>Received Quotes</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>5</h3>
+                  <h3>100</h3>
                 </div>
               </div>
             </div>
           </div>
 
-          <h1 className="section-title">Latest Orders</h1>
+          <h1 className="section-title">All Inquiries</h1>
           <div className="main-overview">
             <div className="overview-card no-padding">
               <div class="table-responsive">
@@ -124,11 +99,7 @@ const Dashboard = () => {
                       <td>USD 40,000</td>
                       <td>FOB</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-warning">
-                          Pending
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                     <tr>
                       <td>
@@ -145,11 +116,7 @@ const Dashboard = () => {
                       <td>USD 40,000</td>
                       <td>CIF</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-primary">
-                          Processing
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                     <tr>
                       <td>
@@ -166,11 +133,7 @@ const Dashboard = () => {
                       <td>XAF 20,000,000</td>
                       <td>Local Delivery</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-success">
-                          Shipped
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                     <tr>
                       <td>
@@ -187,11 +150,7 @@ const Dashboard = () => {
                       <td>USD 40,000</td>
                       <td>CFR</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-success">
-                          Delivered
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                   </tbody>
                 </table>
@@ -209,4 +168,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Inquiries

@@ -44,7 +44,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link main-nav-link" to="/market-intelligence">
+                <Link
+                  className="nav-link main-nav-link"
+                  to="/market-intelligence"
+                >
                   Market Intelligence
                 </Link>
               </li>
@@ -63,7 +66,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link
                   className="nav-link btn btn-danger nav-btn text-white"
-                  to="/buyers-hub"
+                  to="/buy-commodities"
                   role="button"
                 >
                   Buy Commodities
