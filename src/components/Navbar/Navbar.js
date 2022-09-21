@@ -60,7 +60,7 @@ const Navbar = () => {
                   to="/buyers-hub"
                   role="button"
                 >
-                  Sell Commodities
+                  Marketplace
                 </Link>
               </li>
               <li className="nav-item">

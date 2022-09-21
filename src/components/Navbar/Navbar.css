@@ -9,6 +9,7 @@
 
 .navbar-nav .nav-item {
 font-size: .85rem; }
+
 .navbar-nav .nav-item .nav-link {
     color: #282828;
     padding: .8rem 0;
@@ -26,7 +27,7 @@ font-size: .85rem; }
     border-radius:50%;
     background-color: #DC4D04;
     position: absolute;
-    left:7px;
+    left:12px;
 }
 
 .navbar-nav .main-nav-link .dropdown-icon {
@@ -97,4 +98,113 @@ font-size: .85rem; }
 .nav-btn-sec:hover {
     background: rgba(240, 83, 5, 0.1) !important;
     border: 1px solid rgba(240, 83, 5, 0.1) !important;
-    color: #DC4D04 !important; }
+    color: #DC4D04 !important; 
+}
+
+/* NAvbar dropdown */
+
+.main-nav .navbar-nav .dropdown-menu {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 20%);
+    list-style: none;
+    padding: 1.5rem 0 1.5rem;
+    z-index: 2;
+    transform: translateY(8%);
+    border:none;
+    top: 42px;
+}
+
+.main-nav .navbar-nav .dropdown-menu li {
+    font-size: .9rem;
+    margin-bottom: 15px;
+}
+
+.main-nav .navbar-nav .dropdown-menu li:last-child {
+    margin-bottom: 0;
+}
+
+.main-nav .navbar-nav .dropdown-menu li a{
+    padding-left: 20px;
+    padding-right: 50px;
+}
+
+.main-nav .navbar-nav .dropdown-menu .dropdown-item .nav-icon{
+    margin-right: 10px;
+}
+
+.main-nav .navbar-nav .dropdown-menu .dropdown-item:hover {
+    background: #f9f9f9;
+}
+
+.main-nav .navbar-nav .dropdown-menu .dropdown-item span:hover {
+    color:initial;
+}
+
+.main-nav .navbar-nav .dropdown-menu li span{
+    font-size: .8rem;
+    color: #282828;
+    font-weight: 400;
+}
+
+/* End of navbar dropdown */
+
+
+/* .dropdown:hover .dropdown-menu{
+    display: block;
+}
+.dropdown-menu{
+    margin-top: 0;
+} */
+
+/*Dropdown menu animation*/
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+
+@media (min-width: 768px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+/*End Dropdown menu animation*/

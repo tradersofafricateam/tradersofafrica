@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Iconly } from 'react-iconly'
 
 import Logo from "../../../../assets/img/logo.png";
-import Notify from "../../../../assets/img/icons/notification-icon.svg";
-import Message from "../../../../assets/img/icons/message-icon.svg";
 import ChevronDown from "../../../../assets/img/icons/chevron-down-icon.svg";
 
 const BuyHubNavbar = () => {
@@ -28,7 +27,7 @@ const BuyHubNavbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
               <li className="nav-item">
-                <Link className="nav-link main-nav-link" to="/">
+                <Link className="nav-link main-nav-link" to="/buy-commodities">
                   Browse Products
                 </Link>
               </li>
@@ -38,7 +37,7 @@ const BuyHubNavbar = () => {
                 </Link>
               </li>
               {/* When user is logged in */}
-              {/* <li className="nav-item dropdown">
+              <li className="nav-item dropdown">
                 <Link
                   className="nav-link main-nav-link "
                   to="#"
@@ -50,20 +49,29 @@ const BuyHubNavbar = () => {
                   Erhun Abbe
                   <img className="dropdown-icon" src={ChevronDown} alt="" />
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul className="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
                   <li>
-                    <Link className="dropdown-item" to="/">
-                      Action
+                    <Link className="dropdown-item" to="/orders">
+                      <Iconly className="nav-icon" name='Paper' set='line' primaryColor='#282828' size='small' />
+                      My Orders
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/message-center">
+                      <Iconly className="nav-icon" name='Message' set='line' primaryColor='#282828' size='small' />
+                      Message Center
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/inquiries">
+                      <Iconly className="nav-icon" name='Folder' set='line' primaryColor='#282828' size='small' />
+                      Inquiries
                     </Link>
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/">
-                      Another action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/">
-                      Something else here
+                      <Iconly className="nav-icon" name='Logout' set='line' primaryColor='#282828' size='small' />
+                      Logout
                     </Link>
                   </li>
                 </ul>
@@ -77,10 +85,10 @@ const BuyHubNavbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <img className="" src={Notify} alt="" />
+                  <Iconly name='Notification' set='line' primaryColor='#282828' size='medium' />
                   <span className="notify"></span>
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul className="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
                   <li>
                     <Link className="dropdown-item" to="/">
                       Action
@@ -98,14 +106,16 @@ const BuyHubNavbar = () => {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
+
+              {/* <li className="nav-item">
                 <Link className="nav-link main-nav-link" to="/">
-                  <img className="" src={Message} alt="" />
+                  <Iconly name='Message' set='line' primaryColor='#282828' size='medium' />
                   <span className="msgs">5</span>
                 </Link>
               </li> */}
+
               {/* End of When user is logged in */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link main-nav-link" to="/login">
                   Login
                 </Link>
@@ -118,7 +128,7 @@ const BuyHubNavbar = () => {
                 >
                   Sign Up
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

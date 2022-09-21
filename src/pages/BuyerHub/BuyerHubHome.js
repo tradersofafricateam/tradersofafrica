@@ -10,10 +10,6 @@ import ProductImg2 from "../../assets/img/products/p-img2.png";
 import ProductImg3 from "../../assets/img/products/p-img3.png";
 import ProductImg4 from "../../assets/img/products/p-img4.png";
 
-import SafeIcon from "../../assets/img/icons/secured.svg";
-import QualityIcon from "../../assets/img/icons/quality.svg";
-import LogisticsIcon from "../../assets/img/icons/logistics.svg";
-
 import "./BuyersHome.css";
 
 const BuyerHome = () => {
@@ -41,52 +37,6 @@ const BuyerHome = () => {
           </div>
         </div>
       </section>
-
-      {/* Feature Section */}
-      {/* <section id="b-features">
-        <div className="container" align="center">
-          <div className="row">
-            <div className="col-lg-7">
-              <h2 className="f-title">What to expect </h2>
-              <p className="f-subtitle">
-                When you buy products from TOFA, your orders will be handled
-                specially by our SourcePro Unit. This means that we will
-                ourselves source the products you need according to your
-                specifications and deliver them to you anywhere in the world.
-              </p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-4">
-              <img src={SafeIcon} className="b-feature-icon" alt="..." />
-              <h3>Safe Transactions</h3>
-              <p>
-                Our watchword is "integrity." We accept <br />
-                various payment terms to make you feel <br />
-                safe while fulfilling all of your orders.
-              </p>
-            </div>
-            <div className="col-lg-4">
-              <img src={QualityIcon} className="b-feature-icon" alt="..." />
-              <h3>Quality Products</h3>
-              <p>
-                We conduct routine quality tests and <br />
-                inspections to supply only high-quality <br />
-                products to our buyers.
-              </p>
-            </div>
-            <div className="col-lg-4">
-              <img src={LogisticsIcon} className="b-feature-icon" alt="..." />
-              <h3>Last Mile Logistics</h3>
-              <p>
-                It is our job to manage all logistics <br />
-                involved in fulfilling your orders and provide<br />
-                 adequate documentation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       {/* Trending Products */}
       <section id="b-trending">

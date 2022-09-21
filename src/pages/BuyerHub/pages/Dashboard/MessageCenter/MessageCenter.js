@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import TrackImg from "../../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../../assets/img/orders-illus.png";
 import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
-import UserAvatar from "../../../../../assets/img/erhun.png";
+import UserAvatar from "../../../../../assets/img/logo.jpg";
 
 import "../Dashboard.css";
 
@@ -58,7 +58,7 @@ const MessageCenter = () => {
           <div className="chat-container">
             <div className="main-overview no-margin">
               <div className="overview-card no-padding">
-                <div className="chat-area">
+                <div className="chat-wrap">
 
                   <div className="chat-header">
                     <div className="d-flex align-items-center">
@@ -66,9 +66,15 @@ const MessageCenter = () => {
                         <img className="chat-rep-img" src={UserAvatar} alt="..."/>
                       </div>
                       <div className="flex-grow-1 ms-3">
-                        <p>Erhun Abbe</p>
+                        <h2>TOFA SourcePro</h2>
+                        <p>Salami Johnson</p>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="chat-area">
+                    <div>1</div>
+                    <div>2</div>
                   </div>
 
                 </div>
