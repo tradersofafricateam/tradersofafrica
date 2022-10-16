@@ -19,10 +19,6 @@ import Testimonials from "../../components/Testimonials/Testimonials";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// componentDidMount() {
-//   AOS.init({duration: 2000});
-// }
-
 const Home = () => {
   useEffect(() => {
     AOS.init();
@@ -100,15 +96,7 @@ const Home = () => {
       {/* Lp Services */}
       <section id="lp-our-services">
         <div className="container">
-          <div className="row mb-3"
-          data-aos="fade-up"
-          data-aos-offset="200"
-          data-aos-delay="50"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-mirror="true"
-          data-aos-once="false"
-          data-aos-anchor-placement="top-center">
+          <div className="row mb-3" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="300">
             <div className="col-lg-6" align="center">
               <img className="img-fluid lp-img1" src={HomeImg1} alt="" />
             </div>
@@ -124,15 +112,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="row mb-3"
-          data-aos="fade-up"
-          data-aos-offset="200"
-          data-aos-delay="50"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-mirror="true"
-          data-aos-once="false"
-          data-aos-anchor-placement="top-center">
+          <div className="row mb-3" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="300">
             <div className="col-lg-6 order-last order-lg-first">
               <div className="lp-service-info">
                 <h2>Training and Mentorship </h2>
@@ -148,15 +128,7 @@ const Home = () => {
               <img className="img-fluid lp-img2" src={HomeImg2} alt="" />
             </div>
           </div>
-          <div className="row"
-          data-aos="fade-up"
-          data-aos-offset="200"
-          data-aos-delay="50"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-mirror="true"
-          data-aos-once="false"
-          data-aos-anchor-placement="top-center">
+          <div className="row" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="300">
             <div className="col-lg-6" align="center">
               <img className="img-fluid lp-img3" src={HomeImg3} alt="" />
             </div>
@@ -176,7 +148,7 @@ const Home = () => {
 
       {/* Product Focus */}
       <section id="lp-product">
-        <div className="container">
+        <div className="container" data-aos="fade-up" data-aos-duration="1000">
           <div className="row mb-5">
             <div className="col-lg-12">
               <h2>Products we are focused on</h2>

@@ -70,12 +70,14 @@ option {
   stroke-width: 1.5;
   transition: 0.8s;
 }
-#comm-data svg .cls-1:hover {
+
+/* #comm-data svg .cls-1:hover {
   fill: #fb7837 !important;
   stroke: #fb7837;
   transition: 0.6s;
   cursor: pointer;
-}
+} */
+
 #comm-data .commodity-wrap h2,
 #comm-data .commodity-wrap .h2 {
   color: #ffffff;

@@ -7,7 +7,7 @@ import QuoteImg from "../../assets/img/quote.svg";
 const Testimonials = () => {
   return (
     <section id="testimonial">
-        <div className="container">
+        <div className="container" data-aos="fade-up" data-aos-duration="1000">
           <div className="row">
             <div className="col-lg-4">
               <h2>Trusted by <br />

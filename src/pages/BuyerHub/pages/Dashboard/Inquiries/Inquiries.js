@@ -9,7 +9,7 @@ import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
 
 import "../Dashboard.css";
 
-const Orders = () => {
+const Inquiries = () => {
   return (
     <div>
        <div className="grid-container">
@@ -19,7 +19,7 @@ const Orders = () => {
         
         <header className="header">
           <div className="header__message">
-            <h2>My Orders</h2>
+            <h2>My Inquiries</h2>
           </div>
           <div className="header__search">
 
@@ -45,7 +45,7 @@ const Orders = () => {
           <div className="main-overview">
             <div className="overview-card">
               <div>
-                <h2>All Orders</h2>
+                <h2>All Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
                   <h3>125</h3>
                 </div>
@@ -53,7 +53,7 @@ const Orders = () => {
             </div>
             <div className="overview-card">
               <div>
-                <h2>Pending Orders</h2>
+                <h2>Pending Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
                   <h3>25</h3>
                 </div>
@@ -61,7 +61,7 @@ const Orders = () => {
             </div>
             <div className="overview-card">
               <div>
-                <h2>Delivered Orders</h2>
+                <h2>Received Quotes</h2>
                 <div class="d-flex justify-content-between mt-4">
                   <h3>100</h3>
                 </div>
@@ -69,7 +69,7 @@ const Orders = () => {
             </div>
           </div>
 
-          <h1 className="section-title">All Orders</h1>
+          <h1 className="section-title">All Inquiries</h1>
           <div className="main-overview">
             <div className="overview-card no-padding">
               <div class="table-responsive">
@@ -99,11 +99,7 @@ const Orders = () => {
                       <td>USD 40,000</td>
                       <td>FOB</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-warning">
-                          Pending
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                     <tr>
                       <td>
@@ -120,11 +116,7 @@ const Orders = () => {
                       <td>USD 40,000</td>
                       <td>CIF</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-primary">
-                          Processing
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                     <tr>
                       <td>
@@ -141,11 +133,7 @@ const Orders = () => {
                       <td>XAF 20,000,000</td>
                       <td>Local Delivery</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-success">
-                          Shipped
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                     <tr>
                       <td>
@@ -162,11 +150,7 @@ const Orders = () => {
                       <td>USD 40,000</td>
                       <td>CFR</td>
                       <td>Letter of Credit</td>
-                      <td>
-                        <div className="text-success">
-                          Delivered
-                        </div>
-                      </td>
+                      <td>Pending</td>
                     </tr>
                   </tbody>
                 </table>
@@ -181,4 +165,4 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export default Inquiries

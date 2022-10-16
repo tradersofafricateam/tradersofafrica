@@ -1,0 +1,373 @@
+#product-details {
+    padding: 50px 0 20px;
+}
+
+#product-details .back-text {
+    font-size: .9rem;
+    color: #5C5C5C;
+}
+
+#product-details .back-text a{
+    color: #5C5C5C;
+    text-decoration: none;
+}
+
+#product-details .back-icon {
+    margin-right: 15px;
+}
+
+.mp-wrap .main-product-pic {
+    width: 90%;
+    height: 350px;
+    background-color: #F9F9F9;
+    margin-bottom: 6px;
+}
+
+.mp-wrap .product-thumbnail {
+    width: 90%;
+}
+
+.mp-wrap .product-thumbnail .pt-box{
+    width: 80px;
+    height: 75px;
+    background-color: #F9F9F9;
+}
+
+.main-product-details .m-product-name {
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0 0 10px;
+}
+
+.main-product-details .m-product-price {
+    font-size: 1.3rem;
+    margin: 0;
+    padding: 0 0 20px;
+}
+
+.main-product-details .m-product-price .mp-currency {
+    color: #5C5C5C;
+    font-weight: 300;
+}
+
+.main-product-details .m-product-price .mp-unit {
+    font-size: 1rem;
+}
+
+.main-product-details .m-product-info-wrap .m-product-info {
+    font-size: .9rem;
+    margin:0 25px 0 0;
+    padding: 0;
+}
+
+.main-product-details .m-product-info-wrap .m-product-info span {
+    color: #5C5C5C;
+}
+
+/* Specification Table */
+
+.m-product-spec-box {
+    margin: 25px 0;
+}
+
+.m-product-spec-box .m-product-spec-title {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0 0 15px;
+}
+
+.m-product-spec-box .m-product-spec-title2 {
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0 0 15px;
+}
+
+.m-product-spec-box .spec-link {
+    font-size: .8rem;
+    color: #DC4D04;
+    float: right;
+    margin: 0;
+    padding: 0 0 0;
+}
+
+.m-product-spec-box .mp-desc {
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 26px;
+    margin: 0;
+    padding: 0 0 15px;
+}
+
+.m-product-spec-box table {
+    width:100%;
+    font-size: .85rem;
+    margin-bottom: 0;
+}
+
+.m-product-spec-box table tr {
+    border-color: transparent!important;
+}
+
+.m-product-spec-box table tr td{
+    padding: 12px 15px;
+}
+
+.m-product-spec-box table tr .mps-title{
+    color: #5C5C5C;
+}
+
+.m-product-spec-box .cls-1 {
+    fill: #FFFFFF;
+    stroke: #282828;
+    stroke-linecap: round;
+}
+
+#product-description {
+    padding: 50px 0;
+    background-color: #F9F9F9;
+}
+
+/* End of Specification Table */
+
+.main-product-details .m-product-cta button{
+    margin-right: 25px;
+    font-size: .85rem;
+}
+
+.main-product-details .m-product-cta .inquiry-cta {
+    background-color: #FFFFFF;
+    color: #DC4D04;
+}
+
+/* Place Order Modal */
+
+.place-order-modal .modal-header{
+    border: none;
+    padding: 30px 50px 30px;
+}
+
+.place-order-modal .modal-title{
+    font-size: 1.2rem;
+}
+
+.place-order-modal .btn-close{
+    padding: 0!important;
+    width:.8em!important;    
+}
+
+.place-order-modal .modal-body{
+    padding: 0 50px 50px;
+}
+
+.place-order-modal .modal-body .modal-sub-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 0 15px;
+}
+
+.place-order-modal .modal-body form {
+    width: 90%;
+    margin: 20px 0 0;
+}
+
+.place-order-modal .modal-body form label {
+    font-size: .85rem;
+    font-weight: 400;
+    margin: 0 0 10px;
+}
+
+.place-order-modal .modal-body form input {
+    padding: 10px 15px;
+    font-size: .85rem;
+}
+
+.place-order-modal .modal-body form select {
+    padding: 10px 15px;
+    font-size: .85rem;
+}
+
+.place-order-modal .modal-body form textarea {
+    padding: 10px 15px;
+    font-size: .85rem;
+}
+
+.place-order-modal .modal-body form .custom-input {
+    width:100%;
+    padding: 0!important;
+}
+
+.place-order-modal .modal-body form .custom-input .form-unit {
+    margin: 11px 0 11px 10px;
+    padding:0 15px;
+    font-size: .8rem;
+    border-left: 1px solid #DDDDDD;
+}
+
+.place-order-modal .modal-body form .custom-style {
+    border:none;
+}
+
+.place-order-modal .modal-body form .modal-info {
+    font-size: .8rem;
+    color: #DC4D04;
+    margin: 15px 0 10px;
+    padding: 0;
+}
+
+.place-order-modal .modal-body .order-summary {
+    margin: 20px 0;
+}
+
+.place-order-modal .modal-body button {
+    font-size: 14px;
+}
+
+.order-summary .s-product-img {
+    width: 65px;
+}
+
+.order-summary .s-product-name {
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0 0 10px;
+}
+
+.order-summary .s-product-price {
+    font-size: .9rem;
+    margin: 0;
+    padding: 0 0 20px;
+}
+
+.order-summary .s-product-price .s-mp-currency {
+    color: #5C5C5C;
+    font-weight: 300;
+}
+
+.order-summary .s-product-price .s-mp-unit {
+    font-size:.7rem;
+}
+
+.order-summary .os-details {
+    width: 100%;
+}
+
+.order-summary .os-details table {
+    font-size: .85rem;
+    margin-bottom: 0;
+}
+
+.order-summary .os-details table tr td{
+    padding: 10px 15px;
+}
+
+.order-summary .os-details table tr .osd-title{
+    color: #5C5C5C;
+    padding-left: 0;
+}
+
+.order-summary .os-details .line {
+    height: 1px;
+    background-color: #DDDDDD;
+    margin:20px 0;
+}
+
+.modal-contact-info {
+    margin-top: 50px;
+}
+
+.modal-contact-info .contact-head{
+    font-size: 1rem;
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+.modal-contact-info p {
+    font-size: .85rem;
+    margin: 0 0  10px;
+    padding: 0;
+}
+
+.order-summary .os-details p {
+    font-size: 1rem;
+    margin: 0 0  10px;
+    padding: 0;
+}
+
+.order-summary .os-details p span {
+    color: #5C5C5C;
+    margin-right: 50px;
+}
+
+/* Inquiry form */
+
+#inquiry-form {
+    padding: 50px 0;
+    background-color: #FFFFFF;
+}
+
+form {
+    width: 100%;
+    margin: 20px 0;
+    font-size: .85rem;
+}
+
+form label {
+    font-size: .85rem;
+    font-weight: 400;
+    margin: 0 0 10px;
+}
+
+form input {
+    padding: 10px 15px!important;
+    font-size: .85rem!important;
+}
+
+form select {
+    padding: 10px 15px!important;
+    font-size: .85rem!important;
+}
+
+form textarea {
+    padding: 10px 15px!important;
+    font-size: .85rem!important;
+}
+
+form .custom-input {
+    width:100%;
+    padding: 0!important;
+}
+
+form .custom-input .form-unit {
+    margin: 11px 0 11px 10px;
+    padding:0 15px;
+    font-size: .8rem;
+    border-left: 1px solid #DDDDDD;
+}
+
+form .custom-style {
+    border:none;
+}
+
+@media (max-width: 768px) {
+    .mp-wrap .main-product-pic {
+        width: 100%;
+    }
+
+    .mp-wrap .product-thumbnail {
+        width: 100%;
+    }
+
+    .mp-wrap .product-thumbnail .pt-box {
+        width: 65px;
+        height: 65px;
+    }
+
+    .mp-wrap {
+        margin-bottom: 40px;
+    }
+
+    .place-order-modal .modal-body form {
+        width: 100%!important;
+    }
+}
