@@ -229,28 +229,151 @@ const BuyerHome = () => {
       <section id="ad-space">
         <div className="container">
           <div className="feature-ad">
-            <div className="d-flex align-items-center">
-              <div className="flex-grow-1">
+            <div className="featured-ad-wrap">
+              <div className="inq-left flex-grow-1">
                 <h2>Get deals at the Best Prices</h2>
                 <p>
-                  Submit a Request for Quote and let our sourcing team find you
-                  the best quality of your desired product
+                  Submit an inquiry and let our sourcing team find you the best
+                  quality of your desired product.
                 </p>
               </div>
-              <div className="flex-shrink-0">
-                <button>Make Request</button>
+              <div className="inq-right flex-shrink-0">
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Make Inquiry
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Inquiry Modal */}
+      <div
+        className="modal fade place-order-modal"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Product Inquiry
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="row">
+                <div className="col-lg-12">
+                  <form className="w-100">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1">Product Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="Enter Product Name"
+                      />
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1">
+                        Product Requirements
+                      </label>
+                      <textarea
+                        class="form-control"
+                        id=""
+                        rows="3"
+                        placeholder="Enter product requirements"
+                      ></textarea>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-lg-6 mb-3">
+                        <label for="exampleInputPassword1">Quantity</label>
+                        <div className="custom-input form-control">
+                          <div className="row">
+                            <div className="col-lg-7 col">
+                              <input
+                                type="number"
+                                className="form-control custom-style"
+                                id=""
+                                placeholder="Enter quantity"
+                              />
+                            </div>
+                            <div className="col-lg-5 col">
+                              <div className="form-unit">metric tons</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 mb-3">
+                        <label for="exampleInputPassword1">
+                          Shipping Terms
+                        </label>
+                        <select
+                          className="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option selected>Select shipping terms</option>
+                          <option value="1">FOB</option>
+                          <option value="2">CIF</option>
+                          <option value="3">CFR</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-lg-6 mb-3">
+                        <label for="exampleInputPassword1">Payment Terms</label>
+                        <select
+                          className="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option selected>Select payment terms</option>
+                          <option value="1">LC</option>
+                          <option value="2">DP</option>
+                          <option value="2">CAD</option>
+                          <option value="3">TT</option>
+                        </select>
+                      </div>
+                      <div className="col-lg-6 mb-3">
+                        <label for="exampleInputPassword1">
+                          Destination Country
+                        </label>
+                        <select
+                          className="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option selected>Select destination country</option>
+                          <option value="1">India</option>
+                          <option value="2">China</option>
+                          <option value="3">Bangladesh</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button className="mt-3">Submit Inquiry</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Trending Products */}
       <section id="b-trending">
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
-              <h1>Upcoming Products</h1>
+              <h1>Newly Added Products</h1>
             </div>
             <div className="col-lg-6" align="right">
               <Link className="subtitle" to="/">
@@ -433,7 +556,7 @@ const BuyerHome = () => {
       </section>
 
       {/* Newsletter Space */}
-      <section id="ad-space">
+      {/* <section id="ad-space">
         <div className="container">
           <div className="e-newsletter">
             <div className="d-flex align-items-center">
@@ -465,7 +588,7 @@ const BuyerHome = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

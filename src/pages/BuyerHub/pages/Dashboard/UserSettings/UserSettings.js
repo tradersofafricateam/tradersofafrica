@@ -50,9 +50,6 @@ const UserSettings = () => {
 
         </main>
 
-        <footer className="footer">
-          <div className="footer__copyright">&copy; 2022 Traders of Africa. All Rights Reserved</div>
-        </footer>
       </div>
     </div>
   )

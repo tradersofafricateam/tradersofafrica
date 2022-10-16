@@ -7,7 +7,7 @@ const OrderModal = () => {
     <div>
       {/* Modal */}
       <div className="modal fade place-order-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered modal-xl">
+        <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">Raw Cashew Kernels W320</h5>
@@ -25,15 +25,15 @@ const OrderModal = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col mb-3">
+                      <div className="col-lg-6 mb-3">
                         
                       <label for="exampleInputPassword1">Quantity</label>
                         <div className="custom-input form-control">
                           <div className="row">
-                            <div className="col-lg-7">
+                            <div className="col-lg-7 col">
                               <input type="number" className="form-control custom-style" id="" placeholder="Enter quantity"/>
                             </div>
-                            <div className="col-lg-5">
+                            <div className="col-lg-5 col">
                               <div className="form-unit">
                                 metric tons
                               </div>
@@ -42,7 +42,7 @@ const OrderModal = () => {
                         </div>
 
                       </div>
-                      <div className="col mb-3">
+                      <div className="col-lg-6 mb-3">
                       <label for="exampleInputPassword1">Shipping Terms</label>
                         <select className="form-select" aria-label="Default select example">
                           <option selected>Select shipping terms</option>
@@ -55,7 +55,7 @@ const OrderModal = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col mb-3">
+                      <div className="col-lg-6 mb-3">
                         <label for="exampleInputPassword1">Country of Origin</label>
                         <select className="form-select" aria-label="Default select example">
                           <option selected>Select country of origin</option>
@@ -64,7 +64,7 @@ const OrderModal = () => {
                           <option value="3">Three</option>
                         </select>
                       </div>
-                      <div className="col mb-3">
+                      <div className="col-lg-6 mb-3">
                         <label for="exampleInputPassword1">Payment Terms</label>
                         <select className="form-select" aria-label="Default select example">
                           <option selected>Select payment terms</option>
@@ -76,7 +76,7 @@ const OrderModal = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col">
+                      <div className="col-lg-6 mb-3">
                         <label for="exampleInputPassword1">Destination Country</label>
                         <select className="form-select" aria-label="Default select example">
                           <option selected>Select destination country</option>
@@ -85,15 +85,13 @@ const OrderModal = () => {
                           <option value="3">Three</option>
                         </select>
                       </div>
-                      <div className="col mb-3">
+                      <div className="col-lg-6 mb-3">
                         <label for="exampleInputPassword1">Destination Port</label>
                         <input type="text" class="form-control" id="" placeholder="Enter destination port"/>
                       </div>
                     </div>
 
                     <p className="modal-info">For local delivery please proceed to chat with a SourcPro agent to continue</p>
-
-                    <button className="mt-3">Place Order</button>
 
                   </form>
                 </div>
@@ -116,36 +114,31 @@ const OrderModal = () => {
 
                     <div className="os-details">
                       <table class="table table-borderless">
-                        <tr>
-                          <td className="osd-title">Quantity:</td>
-                          <td>100 MT</td>
-                        </tr>
-                        <tr>
-                          <td className="osd-title">Origin:</td>
-                          <td>Nigeria</td>
-                        </tr>
-                        <tr>
-                          <td className="osd-title">Destination:</td>
-                          <td>India</td>
-                        </tr>
-                        <tr>
-                          <td className="osd-title">Shipping Terms:</td>
-                          <td>FOB</td>
-                        </tr>
-                        <tr>
-                          <td className="osd-title">Payment Terms:</td>
-                          <td>Letter of Credit</td>
-                        </tr>
+                      <tr>
+                        <td className="osd-title">Quantity:</td>
+                        <td>100 MT</td>
+                      </tr>
+                      <tr>
+                        <td className="osd-title">Shipping Terms:</td>
+                        <td>FOB</td>
+                      </tr>
+                      <tr>
+                        <td className="osd-title">Price / MT:</td>
+                        <td>USD 1150</td>
+                      </tr>
+                      <tr>
+                        <td className="osd-title">Origin:</td>
+                        <td>Nigeria</td>
+                      </tr>
+                      <tr>
+                        <td className="osd-title">Destination:</td>
+                        <td>India</td>
+                      </tr>
+                      <tr>
+                        <td className="osd-title">Payment Terms:</td>
+                        <td>Letter of Credit</td>
+                      </tr>
                       </table>
-
-                      <div className="line"></div>
-
-                      <div className="modal-contact-info">
-                        <h4 className="contact-head">Contact information</h4>
-                        <p>Erhun Abbe</p>
-                        <p>Dory International Trading Company</p>
-                        <p>erhunabbe@gmail.com | +234 703 713 8919</p>
-                      </div>
 
                       <div className="line"></div>
 
@@ -156,6 +149,9 @@ const OrderModal = () => {
                     </div>
 
                   </div>
+                </div>
+                <div className="col-lg-12">
+                  <button className="mt-3">Place Order</button>
                 </div>
               </div>
             </div>

@@ -76,35 +76,11 @@ const BuyHubNavbar = () => {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link main-nav-link "
-                  to="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <Iconly name='Notification' set='line' primaryColor='#282828' size='medium' />
+              <li className="nav-item">
+                <Link className="nav-link main-nav-link" to="#">
+                 <Iconly name='Notification' set='line' primaryColor='#282828' size='medium' />
                   <span className="notify"></span>
                 </Link>
-                <ul className="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
-                  <li>
-                    <Link className="dropdown-item" to="/">
-                      Action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/">
-                      Another action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/">
-                      Something else here
-                    </Link>
-                  </li>
-                </ul>
               </li>
 
               {/* <li className="nav-item">

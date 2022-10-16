@@ -40,7 +40,7 @@ const Sidebar = () => {
           </ul>
 
           <ul class="sidenav__list mt-auto">
-            <li className="sidenav__list-item"><Link className="sidenav-link" to="/buy-commodities"><Iconly className="list_icon" name='Setting' set='light' size='small' />Back to Buyers Hub</Link></li>
+            <li className="sidenav__list-item"><Link className="sidenav-link" to="/buy-commodities"><Iconly className="list_icon" name='ArrowLeft' set='light' size='small' />Back to Buyers Hub</Link></li>
           </ul>
 
         </aside>
