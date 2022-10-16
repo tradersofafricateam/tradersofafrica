@@ -10,16 +10,23 @@ import Contact from "./pages/Contact/Contact";
 import Academy from "./pages/Academy/Academy";
 import BuyerHome from "./pages/BuyerHub/BuyerHubHome";
 import Details from "./pages/BuyerHub/pages/Details/Details";
-
 import Dashboard from "./pages/BuyerHub/pages/Dashboard/Dashboard";
 import Order from "./pages/BuyerHub/pages/Dashboard/Orders/Orders";
 import OrderInfo from "./pages/BuyerHub/pages/Dashboard/OrderInfo/OrderInfo";
 import MessageCenter from "./pages/BuyerHub/pages/Dashboard/MessageCenter/MessageCenter";
 import Inquiries from "./pages/BuyerHub/pages/Dashboard/Inquiries/Inquiries";
 import UserSettings from "./pages/BuyerHub/pages/Dashboard/UserSettings/UserSettings";
+import BuyerRegistration from "./pages/BuyerHub/BuyerRegistration";
+import Login from "./pages/BuyerHub/login";
+import ForgotPassword from "./pages/BuyerHub/changePassword/ForgotPassword";
+import ResetPassword from "./pages/BuyerHub/changePassword/ResetPassword";
+import EmailVerification from "./pages/BuyerHub/emailVerification";
+import ProtectedRoutes from "./components/utils/ProtectedRoutes";
+import GlobalState from "./components/utils/GlobalState";
+
 function App() {
   return (
-    <>
+    <GlobalState>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} exact />
@@ -30,17 +37,27 @@ function App() {
           <Route path="/contact" element={<Contact />} exact />
           <Route path="/academy" element={<Academy />} exact />
           <Route path="/buy-commodities" element={<BuyerHome />} exact></Route>
-          <Route path="/details" element={<Details />} exact />
-
-          <Route path="/dashboard" element={<Dashboard />} exact />
-          <Route path="/orders" element={<Order />} exact />
-          <Route path="/order-info" element={<OrderInfo />} exact />
-          <Route path="/message-center" element={<MessageCenter />} exact />
-          <Route path="/inquiries" element={<Inquiries />} exact />
-          <Route path="/settings" element={<UserSettings />} exact />
+          <Route exact path="/registration" element={<BuyerRegistration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/:buyerId/:token" element={<Login />} />
+          <Route
+            path="/passwordreset/:resetToken"
+            element={<ResetPassword />}
+          />
+          <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/verify-email/:email" element={<EmailVerification />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/dashboard" element={<Dashboard />} exact />
+            <Route path="/order-info" element={<OrderInfo />} exact />
+            <Route path="/message-center" element={<MessageCenter />} exact />
+            <Route path="/orders" element={<Order />} exact />
+            <Route path="/details/:productId" element={<Details />} exact />
+            <Route path="/inquiries" element={<Inquiries />} exact />
+            <Route path="/settings" element={<UserSettings />} exact />
+          </Route>
         </Routes>
       </Router>
-    </>
+    </GlobalState>
   );
 }
 
