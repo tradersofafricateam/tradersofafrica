@@ -5,19 +5,37 @@ import { GlobalContext } from "../../../components/utils/GlobalState";
 import "../../../assets/styles/global.css";
 import "../pages/Details/Details.css";
 
-const TrendingProduct = () => {
-  const { product } = useContext(GlobalContext);
+const TrendingProduct = ({ sectionTitle }) => {
+  const { product, userLoading } = useContext(GlobalContext);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
+
+  if (userLoading) {
+    return (
+      <div
+        className="loader mx-auto"
+        align="center"
+        id="loader"
+        style={{
+          position: "absolute",
+          top: "calc(50% - 60px)",
+          left: "calc(50% - 60px)",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      ></div>
+    );
+  }
 
   return (
     <section id="b-trending">
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
-            <h1>You might be interested in</h1>
+            <h1>{sectionTitle}</h1>
           </div>
           <div className="col-lg-6" align="right">
             <Link className="subtitle" to="/">

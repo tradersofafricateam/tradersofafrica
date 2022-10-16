@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import BuyHubNavbar from "./components/BuyHubNavbar/BuyHubNavbar";
+import { axios } from "../../components/baseUrl";
+import { ReactNotifications, Store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+
+import { GlobalContext } from "../../components/utils/GlobalState";
 
 import Banner from "../../assets/img/b-home-bn2.png";
 
@@ -11,10 +16,94 @@ import ProductImg3 from "../../assets/img/products/p-img3.png";
 import ProductImg4 from "../../assets/img/products/p-img4.png";
 
 import "./BuyersHome.css";
+import TrendingProduct from "./components/TrendingProduct";
 
 const BuyerHome = () => {
+  const { userLoading } = useContext(GlobalContext);
+  // const [subscribeToNewsletter, setSubscribeToNewsletter] = useState({
+  //   name: "",
+  //   email: "",
+  // });
+
+  const sectionTitle = "Trending Products";
+  const newlyAddedProducts = "Newly Added Products";
+
+  // const handleChange = (e) => {
+  //   setSubscribeToNewsletter({
+  //     ...subscribeToNewsletter,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  // const handleSubmitSubscriber = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const createSubscriber = {
+  //       fullName: subscribeToNewsletter.name,
+  //       email: subscribeToNewsletter.email,
+  //     };
+  //     const { data } = await axios.post("/auth/news-letter", createSubscriber);
+  //     console.log(data);
+  //     setSubscribeToNewsletter({
+  //       name: "",
+  //       email: "",
+  //     });
+
+  //     Store.addNotification({
+  //       title: "Success!",
+  //       message: "You have successfully subscribed to Tofa's Newsletter",
+  //       type: "success",
+  //       insert: "top",
+  //       container: "top-right",
+  //       animationIn: ["animate__animated", "animate__fadeIn"],
+  //       animationOut: ["animate__animated", "animate__fadeOut"],
+  //       dismiss: {
+  //         duration: 5000,
+  //         onScreen: true,
+  //       },
+  //       isMobile: true,
+  //       breakpoint: 768,
+  //     });
+  //   } catch (error) {
+  //     console.log(error.response.data.errors);
+  //     Store.addNotification({
+  //       title: "Failed!",
+  //       message: "Try Again.",
+  //       type: "danger",
+  //       insert: "top",
+  //       container: "top-right",
+  //       animationIn: ["animate__animated", "animate__fadeIn"],
+  //       animationOut: ["animate__animated", "animate__fadeOut"],
+  //       dismiss: {
+  //         duration: 5000,
+  //         onScreen: true,
+  //       },
+  //       isMobile: true,
+  //       breakpoint: 768,
+  //     });
+  //   }
+  // };
+
+  if (userLoading) {
+    return (
+      <div
+        className="loader mx-auto"
+        align="center"
+        id="loader"
+        style={{
+          position: "absolute",
+          top: "calc(50% - 60px)",
+          left: "calc(50% - 60px)",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      ></div>
+    );
+  }
   return (
     <div>
+      {/* <ReactNotifications /> */}
       <BuyHubNavbar />
 
       {/* Hero Section */}
@@ -39,191 +128,7 @@ const BuyerHome = () => {
       </section>
 
       {/* Trending Products */}
-      <section id="b-trending">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <h1>Trending Products</h1>
-            </div>
-            <div className="col-lg-6" align="right">
-              <Link className="subtitle" to="/">
-                View more
-              </Link>
-            </div>
-          </div>
-          <div className="row main-container">
-            <div className="p-container">
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg1}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg2}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg3}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg4}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg3}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg4}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrendingProduct sectionTitle={sectionTitle} />
 
       {/* Feature Advert Space */}
       <section id="ad-space">
@@ -253,8 +158,8 @@ const BuyerHome = () => {
         id="exampleModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        
+        aria-hidden="true"
+      >
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
@@ -369,191 +274,7 @@ const BuyerHome = () => {
       </div>
 
       {/* Trending Products */}
-      <section id="b-trending">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <h1>Newly Added Products</h1>
-            </div>
-            <div className="col-lg-6" align="right">
-              <Link className="subtitle" to="/">
-                View more
-              </Link>
-            </div>
-          </div>
-          <div className="row main-container">
-            <div className="p-container">
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg1}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg2}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg3}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg4}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg3}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-
-              <Link className="link" to="/details">
-                <div className="product-card">
-                  <div className="product-card-img">
-                    <img
-                      src={ProductImg4}
-                      className="img-fluid product-img"
-                      alt="..."
-                    />
-                    <span class="badge bg-success">Updated</span>
-                  </div>
-                  <div className="product-card-info">
-                    <h2 className="product-name">Dried Hibiscus Flower</h2>
-                    <h3 className="product-price">
-                      <span className="p-currency">USD</span> 500 - 650{" "}
-                      <span className="p-unit">/ MT</span>
-                    </h3>
-                    <p className="product-spec-sum">
-                      <span>Available Specs:</span>
-                      <br />
-                      Dried, Moisture 8%, Dark Red colour
-                    </p>
-                    <Link className="product-link" to="/details">
-                      View Product
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrendingProduct sectionTitle={newlyAddedProducts} />
 
       {/* Newsletter Space */}
       {/* <section id="ad-space">
