@@ -1,0 +1,46 @@
+#buyer-page {
+  height: 100vh;
+}
+
+.sign-up,
+.map {
+  padding: 0;
+}
+
+.checkbox-label {
+  padding: 10px;
+}
+
+.buyer-form {
+  margin-top: 30px;
+}
+
+.button {
+  width: 100%;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.divider span {
+  background: #fff;
+  padding: 0 15px;
+}
+
+.PhoneInputInput {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.errors {
+  color: red !important;
+  font-size: 12px !important;
+}
+
+@media (max-width: 768px) {
+  .all-content {
+    padding: 2rem;
+    margin-top: 1rem;
+  }
+}

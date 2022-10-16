@@ -1,0 +1,188 @@
+#user-auth {
+  height: 100vh !important;
+}
+
+.auth-logo {
+  width: 100px;
+  position: absolute;
+}
+
+.section-body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.form-control:focus {
+  color: #282828;
+  background-color: #ffffff;
+  border-color: #dd4f05;
+}
+
+select {
+  height: 50px;
+  font-size: 0.9rem;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  outline: 0px !important;
+  border-radius: 4px;
+}
+
+label {
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.return {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.back-icon-button {
+  border: none;
+  background-color: #ffffff;
+  align-items: center;
+}
+
+/* .back-icon-button img{
+    margin-top: ;
+} */
+
+.back-icon-button a {
+  color: #282828 !important;
+}
+
+.errors p {
+  color: red !important;
+  font-size: 15px;
+}
+.passwordToggle {
+  display: flex;
+  align-content: center;
+  align-content: center;
+  justify-content: space-between;
+}
+.password-input {
+  border: none !important;
+  margin: 0;
+}
+
+.map-img {
+  height: 100vh;
+  background-image: url(../../assets/img/grainMap.jpeg);
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 30px;
+}
+
+#form-page {
+  height: 100vh;
+  overflow: scroll;
+}
+
+/* .info-txt{
+	float: right;	
+} */
+#buyer-section {
+  height: 100vh;
+  /* overflow: scroll; */
+}
+
+.all-content h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.all-content {
+  padding: 2rem 10rem;
+}
+.social-btns button {
+  background: #ffffff;
+  border: 1px solid #f5f5f5;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08) !important;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.social-btns button span img {
+  width: 16px;
+  margin-right: 25px;
+}
+.buyer-form label {
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.buyer-form .input {
+  height: 50px;
+}
+
+.buyer-form button {
+  background: #dd4f05;
+  border-color: #dd4f05;
+  opacity: 1;
+  margin-bottom: 35px;
+  margin-top: 10px;
+}
+
+.buyer-form button:hover {
+  background: #dd4f05;
+  border-color: #dd4f05;
+  opacity: 0.9;
+}
+
+.back {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.return-to {
+  display: flex;
+  justify-content: flex-end;
+}
+.errors p {
+  color: red !important;
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .all-content {
+    padding: 1rem 1rem;
+  }
+
+  .all-content h3 {
+    font-size: 1.4rem !important;
+  }
+
+  label {
+    font-size: 0.8rem !important;
+  }
+
+  .back-icon-button {
+    padding: 0 !important;
+  }
+
+  .back-icon-button,
+  .info-txt {
+    font-size: 0.8rem !important;
+  }
+
+  .form-control {
+    font-size: 0.8rem;
+  }
+
+  .password-icon {
+    align-items: center !important;
+    padding-top: 4px;
+  }
+
+  .forgot-pwd {
+    text-align: left !important;
+  }
+}

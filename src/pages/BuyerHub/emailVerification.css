@@ -1,0 +1,39 @@
+.verify-email {
+  background-color: #ffff;
+  border: 1px solid #f5f5f5;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08) !important;
+  width: 50%;
+  margin: 3rem;
+  padding: 2rem;
+}
+.verify-email p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.verify-email h3 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.verify-email a {
+  text-decoration: underline !important;
+  color: rgb(29, 29, 119) !important;
+  margin-left: 5px;
+}
+
+@media (max-width: 900px) {
+  .verify-email {
+    width: 90%;
+    margin: 1rem;
+  }
+  .verify-email p {
+    font-size: 0.8rem;
+  }
+  .verify-email h3 {
+    font-size: 1.5rem;
+  }
+  button {
+    font-size: 0.8rem !important;
+    padding: 10px !important;
+  }
+}
