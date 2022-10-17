@@ -27,7 +27,8 @@ const Orders = () => {
     userOrderSummary.total_delivered_orders +
     userOrderSummary.total_pending_orders +
     userOrderSummary.total_shipped_orders +
-    userOrderSummary.total_confirmed_orders;
+    userOrderSummary.total_confirmed_orders +
+    userOrderSummary.total_cancelled_orders;
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
