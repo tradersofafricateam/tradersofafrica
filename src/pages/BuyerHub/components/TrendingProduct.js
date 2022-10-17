@@ -66,7 +66,11 @@ const TrendingProduct = ({ sectionTitle }) => {
                           }
                           className="img-fluid product-img"
                           alt="..."
-                          style={{ width: "100%", objectFit: "cover" }}
+                          style={{
+                            width: "100%",
+
+                            objectFit: "cover",
+                          }}
                         />
                         <span className="badge bg-success">Updated</span>
                       </div>
