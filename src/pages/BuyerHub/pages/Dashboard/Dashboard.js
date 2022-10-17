@@ -247,7 +247,7 @@ const Dashboard = () => {
                             <div className="text-success">Delivery</div>
                           )}
                           {orders.status === "CANCELLED" && (
-                            <div className="text-secondary">Cancelled</div>
+                            <div className="text-danger">Cancelled</div>
                           )}
                         </td>
                       </tr>
