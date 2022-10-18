@@ -13,7 +13,7 @@ font-size: .85rem; }
 .navbar-nav .nav-item .nav-link {
     color: #282828;
     padding: .8rem 0;
-    margin-left: 25px;
+    margin-left: 15px;
     border-bottom: 2px solid transparent; 
 }
 
@@ -27,7 +27,7 @@ font-size: .85rem; }
     border-radius:50%;
     background-color: #DC4D04;
     position: absolute;
-    left:12px;
+    left:21px;
 }
 
 .navbar-nav .main-nav-link .dropdown-icon {
@@ -63,23 +63,24 @@ font-size: .85rem; }
     height: 50px; }
 
 .nav-btn {
-    background: #DC4D04;
-    border: 1px solid #DC4D04;
-    border-bottom: 1px solid !important;
+    background: #DC4D04!important;
+    border: 1px solid #DC4D04!important;
+    border: 1px solid #DC4D04!important;
     border-radius: 4px;
     padding: 12px 32px !important;
     font-size: 1rem;
-    color: #FFFFFF;
+    color: #FFFFFF!important;
     font-size: 0.85rem !important;
     border-radius: 4px;
     box-shadow: none !important;
     outline: 0px !important;
-    margin-left: 1.2rem; }
+    margin-left: 1.2rem; 
+}
 
 .nav-btn-sec {
-    background: #FFFFFF;
-    border: 1px solid #DC4D04;
-    border-bottom: 1px solid !important;
+    background: #FFFFFF!important;
+    border: 1px solid #DC4D04!important;
+    border: 1px solid !important;
     border-radius: 4px;
     padding: 12px 32px !important;
     font-size: 1rem;

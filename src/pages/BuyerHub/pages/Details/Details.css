@@ -119,7 +119,7 @@
 }
 
 .m-product-spec-box table tr .mps-title {
-  color: #5c5c5c;
+  color: #5c5c5c!important;
 }
 
 .m-product-spec-box .cls-1 {
@@ -138,6 +138,7 @@
 .main-product-details .m-product-cta button {
   margin-right: 25px;
   font-size: 0.85rem;
+  color: #FFFFFF;
 }
 
 .main-product-details .m-product-cta .inquiry-cta {
@@ -149,7 +150,7 @@
 
 .place-order-modal .modal-header {
   border: none;
-  padding: 30px 50px 30px;
+  padding: 30px 50px 10px;
 }
 
 .place-order-modal .modal-title {
@@ -191,6 +192,25 @@
 .place-order-modal .modal-body form select {
   padding: 10px 15px;
   font-size: 0.85rem;
+  height: 42.39px;
+}
+
+.place-order-modal .modal-body form .custom-country-list {
+  /* padding: 10px 15px; */
+  font-size: 0.85rem;
+  height: 42.39px!important;
+}
+
+.place-order-modal .modal-body form .custom-country-list .css-1s2u09g-control {
+  border-color: #ced4da;
+}
+
+/* .place-order-modal .modal-body form .custom-country-list .css-1s2u09g-control:focus-within {
+  border-color: red;
+} */
+
+.place-order-modal .modal-body form .custom-country-list input {
+  padding: 3.5px 15px!important;
 }
 
 .place-order-modal .modal-body form textarea {
@@ -201,6 +221,10 @@
 .place-order-modal .modal-body form .custom-input {
   width: 100%;
   padding: 0 !important;
+}
+
+.place-order-modal .modal-body form .custom-input:focus-within {
+  border-color: #DC4D04;
 }
 
 .place-order-modal .modal-body form .custom-input .form-unit {
@@ -227,6 +251,7 @@
 
 .place-order-modal .modal-body button {
   font-size: 14px;
+  color: #FFFFFF;
 }
 
 .order-summary .s-product-img {
@@ -312,6 +337,12 @@
   background-color: #ffffff;
 }
 
+.inq-form-wrap {
+  border:1px solid #dddddd;
+  padding: 20px 50px;
+  border-radius: 10px;
+}
+
 form {
   width: 100%;
   margin: 20px 0;
@@ -324,24 +355,33 @@ form label {
   margin: 0 0 10px;
 }
 
+form .custom-country-list input {
+  padding: 3px 15px!important;
+}
+
 form input {
-  padding: 10px 15px !important;
-  font-size: 0.85rem !important;
+  padding: 10px 15px ;
+  font-size: 0.85rem ;
 }
 
 form select {
-  padding: 10px 15px !important;
+  padding: 10px 15px ;
   font-size: 0.85rem !important;
+  height: 40.39px;
 }
 
 form textarea {
-  padding: 10px 15px !important;
+  padding: 10px 15px ;
   font-size: 0.85rem !important;
 }
 
 form .custom-input {
   width: 100%;
   padding: 0 !important;
+}
+
+form .custom-input:focus-within {
+  border-color: #DC4D04;
 }
 
 form .custom-input .form-unit {
@@ -354,6 +394,11 @@ form .custom-input .form-unit {
 form .custom-style {
   border: none;
 }
+
+form button {
+  color: #FFFFFF;
+}
+
 /* commodity insight */
 svg .cls-1.selected {
   fill: #fb7837 !important;

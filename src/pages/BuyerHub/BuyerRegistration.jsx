@@ -9,6 +9,7 @@ import { axios } from "../../components/baseUrl";
 import Icon, { EyeOutlined } from "@ant-design/icons";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { Iconly } from "react-iconly";
 
 export default function BuyerRegistration() {
   const ShowPasswordIcon = (props) => {
@@ -109,17 +110,21 @@ export default function BuyerRegistration() {
         </div>
 
         <div className="col-lg-6 sign-up" id="buyer-section">
-          <main className="row mr-1 mt-3 return">
+          <main className="row auth-header" id="header-info">
             <div className="col-lg-6 col-3">
-              <p className="back-txt mb-0">
-                <button
-                  className="back-icon-button d-flex"
-                  onClick={() => navigate(-1)}
-                >
-                  <img src={backIcon} alt="back icon" />
-                  <a href="#">Back</a>
-                </button>
-              </p>
+              <button
+                className="back-btn d-flex"
+                onClick={() => navigate(-1)}
+              >
+                <Iconly
+                  className="me-2 auth-back-btn"
+                  name="ChevronLeft"
+                  set="light"
+                  size="medium"
+                  color="#282828"
+                />
+                <a href="#">Back</a>
+              </button>
             </div>
             <div className="col-lg-6 col-9 return-to" id="header-text">
               <p className="info-txt m-0">
@@ -129,7 +134,7 @@ export default function BuyerRegistration() {
           </main>
 
           <section className="all-content">
-            <h3>Register</h3>
+            <h2>Register</h2>
 
             <form className="buyer-form" onSubmit={handleSubmit}>
               <div>
@@ -197,10 +202,20 @@ export default function BuyerRegistration() {
                     onClick={handlePasswordToggle}
                   >
                     {inputType === "password" ? (
-                      <ShowPasswordIcon />
+                      <Iconly
+                        className="mt-1 pt-1"
+                        name="Hide"
+                        set="light"
+                        size="medium"
+                        color="#5C5C5C"
+                      />
                     ) : (
-                      <EyeOutlined
-                        style={{ opacity: "0.35", fontSize: "19px" }}
+                      <Iconly
+                        className="mt-1 pt-1"
+                        name="Show"
+                        set="light"
+                        size="medium"
+                        color="#5C5C5C"
                       />
                     )}
                   </span>

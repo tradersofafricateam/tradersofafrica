@@ -409,118 +409,122 @@ const Details = () => {
                         <p>{user.fullName}</p>
                         {/* <p>Dory International Trading Company</p> */}
                         <p>
-                          {user.email} | {user.phoneNumber}
+                          {user.email}
                         </p>
+                        <p>{user.phoneNumber}</p>
                       </div>
                     </div>
                     <div className="col-lg-8">
-                      <form onSubmit={handleInquirySubmit}>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1">
-                            Product Requirements
-                          </label>
-                          <textarea
-                            class="form-control"
-                            id=""
-                            rows="3"
-                            placeholder="Enter product requirements"
-                            name="productDescription"
-                            value={inquiry.productDescription}
-                            onChange={handleChange}
-                            required
-                          ></textarea>
-                        </div>
+                      <div className="inq-form-wrap">
+                        <form onSubmit={handleInquirySubmit}>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1">
+                              Product Requirements
+                            </label>
+                            <textarea
+                              class="form-control"
+                              id=""
+                              rows="3"
+                              placeholder="Enter product requirements"
+                              name="productDescription"
+                              value={inquiry.productDescription}
+                              onChange={handleChange}
+                              required
+                            ></textarea>
+                          </div>
 
-                        <div className="row">
-                          <div className="col-lg-6 mb-3">
-                            <label for="exampleInputPassword1">Quantity</label>
-                            <div className="custom-input form-control">
-                              <div className="row">
-                                <div className="col-lg-7 col">
-                                  <input
-                                    type="number"
-                                    className="form-control custom-style"
-                                    id=""
-                                    placeholder="Enter quantity"
-                                    name="quantityRequired"
-                                    value={inquiry.quantityRequired}
-                                    onChange={handleChange}
-                                    required
-                                  />
-                                </div>
-                                <div className="col-lg-5 col">
-                                  <div className="form-unit">metric tons</div>
+                          <div className="row">
+                            <div className="col-lg-6 mb-3">
+                              <label for="exampleInputPassword1">Quantity</label>
+                              <div className="custom-input form-control">
+                                <div className="row">
+                                  <div className="col-lg-7 col">
+                                    <input
+                                      type="number"
+                                      className="form-control custom-style"
+                                      id=""
+                                      placeholder="Enter quantity"
+                                      name="quantityRequired"
+                                      value={inquiry.quantityRequired}
+                                      onChange={handleChange}
+                                      required
+                                    />
+                                  </div>
+                                  <div className="col-lg-5 col">
+                                    <div className="form-unit">metric tons</div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+                            <div className="col-lg-6 mb-3">
+                              <label for="exampleInputPassword1">
+                                Shipping Terms
+                              </label>
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                name="termsOfTrade"
+                                value={inquiry.termsOfTrade}
+                                onChange={handleChange}
+                              >
+                                <option selected>Select shipping terms</option>
+                                <option value="LOCAL">Local Delivery</option>
+                                <option value="CIF">CIF</option>
+                                <option value="CFR">CFR</option>
+                                <option value="CIP">CIP</option>
+                                {/* <option value="CPT">CPT</option>
+                                <option value="DDP">DDP</option>
+                                <option value="DAT">DAT</option>
+                                <option value="DAP">DAP</option>
+                                <option value="EXW">EXW</option> */}
+                                <option value="FOB">FOB</option>
+                                <option value="FAS">FAS</option>
+                                <option value="FCA">FCA</option>
+                              </select>
+                            </div>
                           </div>
-                          <div className="col-lg-6 mb-3">
-                            <label for="exampleInputPassword1">
-                              Shipping Terms
-                            </label>
-                            <select
-                              className="form-select"
-                              aria-label="Default select example"
-                              name="termsOfTrade"
-                              value={inquiry.termsOfTrade}
-                              onChange={handleChange}
-                            >
-                              <option selected>Select shipping terms</option>
-                              <option value="LOCAL">Local Delivery</option>
-                              <option value="CIF">CIF</option>
-                              <option value="CFR">CFR</option>
-                              <option value="CIP">CIP</option>
-                              {/* <option value="CPT">CPT</option>
-                              <option value="DDP">DDP</option>
-                              <option value="DAT">DAT</option>
-                              <option value="DAP">DAP</option>
-                              <option value="EXW">EXW</option> */}
-                              <option value="FOB">FOB</option>
-                              <option value="FAS">FAS</option>
-                              <option value="FCA">FCA</option>
-                            </select>
-                          </div>
-                        </div>
 
-                        <div className="row">
-                          <div className="col-lg-6 mb-3">
-                            <label for="exampleInputPassword1">
-                              Payment Terms
-                            </label>
-                            <select
-                              className="form-select"
-                              aria-label="Default select example"
-                              name="paymentTerms"
-                              value={inquiry.paymentTerms}
-                              onChange={handleChange}
-                            >
-                              <option selected>Select payment terms</option>
-                              <option value="LC">Letter of Credit</option>
-                              <option value="CAD">Cash Against Delivery</option>
-                              <option value="DP">
-                                Document Against Payment
-                              </option>
-                              <option value="TT">Telegraphic Transfer</option>
-                            </select>
-                          </div>
-                          <div className="col-lg-6 mb-3">
-                            <label for="exampleInputPassword1">
-                              Destination Country
-                            </label>
+                          <div className="row">
+                            <div className="col-lg-6 mb-3">
+                              <label for="exampleInputPassword1">
+                                Payment Terms
+                              </label>
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                name="paymentTerms"
+                                value={inquiry.paymentTerms}
+                                onChange={handleChange}
+                              >
+                                <option selected>Select payment terms</option>
+                                <option value="LC">Letter of Credit</option>
+                                <option value="CAD">Cash Against Delivery</option>
+                                <option value="DP">
+                                  Document Against Payment
+                                </option>
+                                <option value="TT">Telegraphic Transfer</option>
+                              </select>
+                            </div>
+                            <div className="col-lg-6 mb-3">
+                              <label for="exampleInputPassword1">
+                                Destination Country
+                              </label>
 
-                            <Select
-                              options={options}
-                              name="country"
-                              value={country}
-                              onChange={setCountry}
-                            />
+                              <Select
+                                className="custom-country-list"
+                                options={options}
+                                name="country"
+                                value={country}
+                                onChange={setCountry}
+                              />
+                            </div>
                           </div>
-                        </div>
 
-                        <button className="mt-3" type="submit">
-                          Submit Inquiry
-                        </button>
-                      </form>
+                          <button className="mt-3" type="submit">
+                            Submit Inquiry
+                          </button>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>

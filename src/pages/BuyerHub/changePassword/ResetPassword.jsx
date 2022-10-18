@@ -9,6 +9,7 @@ import { axios } from "../../../components/baseUrl";
 import Icon, { EyeOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
+import { Iconly } from "react-iconly";
 
 export default function ResetPassword() {
   const ShowPasswordIcon = (props) => {
@@ -145,21 +146,27 @@ export default function ResetPassword() {
           </div>
 
           <div className="col-lg-6 p-0">
-            <div>
-              <p className="back-txt m-2">
+            <main className="row auth-header" id="header-info">
+              <div className="col-lg-6 col-3">
                 <button
-                  className="back-icon-button d-flex"
+                  className="back-btn d-flex"
                   onClick={() => navigate(-1)}
                 >
-                  <img src={backIcon} />
+                  <Iconly
+                    className="me-2 auth-back-btn"
+                    name="ChevronLeft"
+                    set="light"
+                    size="medium"
+                    color="#282828"
+                  />
                   <a href="#">Back</a>
                 </button>
-              </p>
-            </div>
-            <main className="password-content">
+              </div>
+            </main>
+            <div className="password-content">
               <div className="mt-3">
-                <h3>Set New Password</h3>
-                <p className="mt-1">
+                <h2>Set New Password</h2>
+                <p className="mt-1 mb-4">
                   Input your new desired password in the input fields below to
                   create a new password. We strongly advise to store it safely.
                 </p>
@@ -184,11 +191,21 @@ export default function ResetPassword() {
                       onClick={handlePasswordToggle}
                     >
                       {inputType === "password" ? (
-                        <ShowPasswordIcon />
+                        <Iconly
+                            className="mt-1 pt-1"
+                            name="Hide"
+                            set="light"
+                            size="medium"
+                            color="#5C5C5C"
+                          />
                       ) : (
-                        <EyeOutlined
-                          style={{ opacity: "0.35", fontSize: "19px" }}
-                        />
+                        <Iconly
+                            className="mt-1 pt-1"
+                            name="Show"
+                            set="light"
+                            size="medium"
+                            color="#5C5C5C"
+                          />
                       )}
                     </span>
                   </div>
@@ -213,11 +230,21 @@ export default function ResetPassword() {
                       onClick={handleConfirmPasswordToggle}
                     >
                       {confirmInputType === "password" ? (
-                        <ShowPasswordIcon />
+                        <Iconly
+                            className="mt-1 pt-1"
+                            name="Hide"
+                            set="light"
+                            size="medium"
+                            color="#5C5C5C"
+                          />
                       ) : (
-                        <EyeOutlined
-                          style={{ opacity: "0.35", fontSize: "19px" }}
-                        />
+                        <Iconly
+                            className="mt-1 pt-1"
+                            name="Show"
+                            set="light"
+                            size="medium"
+                            color="#5C5C5C"
+                          />
                       )}
                     </span>
                   </div>
@@ -233,7 +260,7 @@ export default function ResetPassword() {
                   </div>
                 </div>
               </form>
-            </main>
+            </div>
           </div>
         </section>
         <Modal

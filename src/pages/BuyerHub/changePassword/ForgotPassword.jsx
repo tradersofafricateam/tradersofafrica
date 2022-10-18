@@ -8,6 +8,7 @@ import LogoWhite from "../../../assets/img/icons/logo-white.png";
 import { axios } from "../../../components/baseUrl";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
+import { Iconly } from "react-iconly";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
@@ -50,32 +51,33 @@ export default function ForgotPassword() {
         </div>
 
         <div className="col-lg-6 p-0">
-          <div className="row mr-1 mt-3 return">
-            <div className="col-lg-6 col-3 back">
-              <p className="back-txt">
-                <button
-                  className="back-icon-button d-flex"
-                  onClick={() => navigate(-1)}
-                >
-                  <img src={backIcon} />
-                  <a href="#">Back</a>
-                </button>
-              </p>
+          <main className="row auth-header" id="header-info">
+            <div className="col-lg-6 col-3">
+              <button
+                className="back-btn d-flex"
+                onClick={() => navigate(-1)}
+              >
+                <Iconly
+                  className="me-2 auth-back-btn"
+                  name="ChevronLeft"
+                  set="light"
+                  size="medium"
+                  color="#282828"
+                />
+                <a href="#">Back</a>
+              </button>
             </div>
             <div className="col-lg-6 col-9 return-to" id="header-text">
-              <p className="info-txt">
-                <a href="/login" style={{ color: "rgb(201, 79, 5)" }}>
+              <a href="/login" style={{ color: "rgb(201, 79, 5)" }}>
                   Return to login
-                </a>
-              </p>
+              </a>
             </div>
-          </div>
-          <main className="password-content">
+          </main>
+          <div className="password-content">
             <div className="mt-3">
-              <h3>Reset Password</h3>
-              <p className="mt-1">
-                Please enter the e-mail address associated with your TOFA
-                account. We will send you a link to this e-mail address to reset
+              <h2>Reset Password</h2>
+              <p className="mt-1 mb-4">
+                Please enter the e-mail address associated with your account. We will send you a link to this e-mail address to reset
                 your password
               </p>
             </div>
@@ -100,7 +102,7 @@ export default function ForgotPassword() {
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
-                  Send
+                  Reset Password
                 </button>
               </div>
               <Modal
@@ -112,7 +114,7 @@ export default function ForgotPassword() {
                 {message}
               </Modal>
             </form>
-          </main>
+          </div>
         </div>
       </section>
     </section>

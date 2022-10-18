@@ -35,17 +35,11 @@ const Sidebar = () => {
           {user ? (
             <div className="d-flex align-items-center">
               <div
-                className="flex-shrink-0"
-                style={{
-                  background: "#5c5c5c",
-                  color: "white",
-                  fontSize: "20px",
-                  padding: "8px 16px",
-                  borderRadius: "50%",
-                }}
+                className="flex-shrink-0 user-area-art"
               >
                 {" "}
                 {user.fullName.charAt(0).toUpperCase()}
+                
               </div>
               <div className="flex-grow-1 ms-3">
                 <p>{Capitalize(user.fullName)}</p>

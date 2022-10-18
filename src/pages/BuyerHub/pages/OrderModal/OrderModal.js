@@ -246,10 +246,11 @@ const OrderModal = () => {
         <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                {productInfo.productName
+              <h5 className="modal-title mb-4" id="exampleModalLabel">
+                {/* {productInfo.productName
                   ? Capitalize(productInfo.productName)
-                  : ""}
+                  : ""} */}
+                  Place order now
               </h5>
               <button
                 type="button"
@@ -390,6 +391,7 @@ const OrderModal = () => {
                           Destination Country
                         </label>
                         <Select
+                          className="custom-country-list"
                           options={options}
                           name="country"
                           value={country}

@@ -9,6 +9,7 @@ import { axios } from "../../components/baseUrl";
 import Icon, { EyeOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
+import { Iconly } from "react-iconly";
 
 export default function Login() {
   const ShowPasswordIcon = (props) => {
@@ -111,13 +112,19 @@ export default function Login() {
             </div>
 
             <div className="col-lg-6 p-0" id="buyer-section">
-              <main className="row mr-1 mt-3 return" id="header-info">
+              <main className="row auth-header" id="header-info">
                 <div className="col-lg-6 col-3">
                   <button
-                    className="back-icon-button d-flex"
+                    className="back-btn d-flex"
                     onClick={() => navigate(-1)}
                   >
-                    <img src={backIcon} />
+                    <Iconly
+                      className="me-2 auth-back-btn"
+                      name="ChevronLeft"
+                      set="light"
+                      size="medium"
+                      color="#282828"
+                    />
                     <a href="#">Back</a>
                   </button>
                 </div>
@@ -129,7 +136,7 @@ export default function Login() {
               </main>
 
               <section className="all-content">
-                <h3 style={{ color: "#dd4f05" }}>Login</h3>
+                <h2>Welcome back</h2>
 
                 <form onSubmit={handleSubmit} className="buyer-form">
                   <div>
@@ -171,10 +178,20 @@ export default function Login() {
                         onClick={handlePasswordToggle}
                       >
                         {inputType === "password" ? (
-                          <ShowPasswordIcon />
+                          <Iconly
+                            className="mt-1 pt-1"
+                            name="Hide"
+                            set="light"
+                            size="medium"
+                            color="#5C5C5C"
+                          />
                         ) : (
-                          <EyeOutlined
-                            style={{ opacity: "0.35", fontSize: "19px" }}
+                          <Iconly
+                            className="mt-1 pt-1"
+                            name="Show"
+                            set="light"
+                            size="medium"
+                            color="#5C5C5C"
                           />
                         )}
                       </span>
@@ -197,7 +214,7 @@ export default function Login() {
                           className="checkbox-label mt-2"
                         >
                           {" "}
-                          I agree to terms & condition{" "}
+                          Remember me{" "}
                         </label>
                       </div>
                     </div>

@@ -100,7 +100,7 @@ const Dashboard = () => {
 
         <header className="header">
           <div className="header__message">
-            <h2>{user.fullName ? Capitalize(user.fullName) : ""}!</h2>
+            <h2>Hello {user.fullName ? Capitalize(user.fullName) : ""}</h2>
           </div>
           <div className="header__search">
             <SearchInput
@@ -130,6 +130,7 @@ const Dashboard = () => {
         <main className="main">
           {user.lastLoggedIn === null && (
             <div className="info-cards">
+
               <div className="card">
                 <div>
                   <h2>Track it all!</h2>
@@ -140,6 +141,7 @@ const Dashboard = () => {
                 </div>
                 <img src={TrackImg} alt="..." />
               </div>
+              
               <div className="card">
                 <div>
                   <h2>Monitor Your Orders</h2>

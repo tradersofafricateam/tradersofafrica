@@ -56,7 +56,7 @@ const Navbar = () => {
                   </li> */}
               <li className="nav-item">
                 <Link
-                  className="nav-link btn btn-danger nav-btn-sec text-white"
+                  className="nav-link btn btn-danger nav-btn-sec"
                   to="/buyers-hub"
                   role="button"
                 >
@@ -65,7 +65,7 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  className="nav-link btn btn-danger nav-btn text-white"
+                  className="nav-link btn btn-danger nav-btn"
                   to="/buy-commodities"
                   role="button"
                 >
