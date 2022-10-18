@@ -19,14 +19,13 @@ const GlobalState = ({ children }) => {
   const getData = async () => {
     try {
       axios.get("/product").then((response) => {
-        setIsLoading(true);
+        setUserLoading(true);
         console.log("buy-commodities", response.data.data);
         setProduct(response.data.data);
-        setIsLoading(false);
+        setUserLoading(false);
       });
     } catch (error) {
-      console.log(error.response.data.erros);
-      setIsLoading(true);
+      console.log("error loading products", error.response.data.erros);
     }
   };
 
@@ -43,8 +42,7 @@ const GlobalState = ({ children }) => {
         setUserLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setUserLoading(true);
+        console.log("error loading user", error);
       });
   }, []);
 
@@ -57,8 +55,7 @@ const GlobalState = ({ children }) => {
         setUserLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setUserLoading(true);
+        console.log("error loading order summary", error);
       });
   }, []);
 
@@ -71,8 +68,7 @@ const GlobalState = ({ children }) => {
         setUserLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setUserLoading(true);
+        console.log("error loading inquiry summary", error);
       });
   }, []);
 
@@ -85,8 +81,7 @@ const GlobalState = ({ children }) => {
         setUserLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setUserLoading(true);
+        console.log("error loading all orders", error);
       });
   }, []);
 
@@ -99,8 +94,7 @@ const GlobalState = ({ children }) => {
         setUserLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setUserLoading(true);
+        console.log("error loading all inquires", error);
       });
   }, []);
 

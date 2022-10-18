@@ -1,25 +1,31 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import BuyHubNavbar from "./components/BuyHubNavbar/BuyHubNavbar";
 import { axios } from "../../components/baseUrl";
 import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import Select from "react-select";
+import countryList from "react-select-country-list";
 
 import { GlobalContext } from "../../components/utils/GlobalState";
 
 import Banner from "../../assets/img/b-home-bn2.png";
 
-import ProductImg1 from "../../assets/img/products/p-img1.png";
-import ProductImg2 from "../../assets/img/products/p-img2.png";
-import ProductImg3 from "../../assets/img/products/p-img3.png";
-import ProductImg4 from "../../assets/img/products/p-img4.png";
-
 import "./BuyersHome.css";
 import TrendingProduct from "./components/TrendingProduct";
 
 const BuyerHome = () => {
+  const [country, setCountry] = useState("");
   const { userLoading } = useContext(GlobalContext);
+  const options = useMemo(() => countryList().getData(), []);
+  const [inquiry, setInquiry] = useState({
+    productName: "",
+    productDescription: "",
+    quantityRequired: "1",
+    termsOfTrade: "",
+    paymentTerms: "",
+  });
   // const [subscribeToNewsletter, setSubscribeToNewsletter] = useState({
   //   name: "",
   //   email: "",
@@ -27,6 +33,76 @@ const BuyerHome = () => {
 
   const sectionTitle = "Trending Products";
   const newlyAddedProducts = "Newly Added Products";
+
+  const handleChange = (e) => {
+    setInquiry({
+      ...inquiry,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleInquirySubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const createInquiry = {
+        productName: inquiry.productName,
+        productDescription: inquiry.productDescription,
+        quantityRequired: inquiry.quantityRequired,
+        destinationPort: country.label,
+        termsOfTrade: inquiry.termsOfTrade,
+        paymentTerms: inquiry.paymentTerms,
+      };
+      console.log("inquiry sending", createInquiry);
+      const {
+        data: { data },
+      } = await axios.post("/rfq", createInquiry);
+      console.log("inquiry created", data);
+      setInquiry({
+        productName: "",
+        productDescription: "",
+        quantityRequired: "1",
+        termsOfTrade: "",
+        paymentTerms: "",
+      });
+      setCountry("");
+      Store.addNotification({
+        title: "Inquiry Successful!",
+        message: "Your inquiry has been successfully sent.",
+        type: "success",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 1500,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+      setTimeout(() => {
+        // navigate(-1);
+        window.location.reload();
+      }, 1800);
+    } catch (error) {
+      console.log(error.response.data.errors);
+      Store.addNotification({
+        title: "Order Failed!",
+        message: "Try Again.",
+        type: "danger",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    }
+  };
 
   // const handleChange = (e) => {
   //   setSubscribeToNewsletter({
@@ -103,7 +179,7 @@ const BuyerHome = () => {
   }
   return (
     <div>
-      {/* <ReactNotifications /> */}
+      <ReactNotifications />
       <BuyHubNavbar />
 
       {/* Hero Section */}
@@ -176,7 +252,7 @@ const BuyerHome = () => {
             <div className="modal-body">
               <div className="row">
                 <div className="col-lg-12">
-                  <form className="w-100">
+                  <form className="w-100" onSubmit={handleInquirySubmit}>
                     <div class="mb-3">
                       <label for="exampleInputEmail1">Product Name</label>
                       <input
@@ -184,6 +260,10 @@ const BuyerHome = () => {
                         class="form-control"
                         id=""
                         placeholder="Enter Product Name"
+                        name="productName"
+                        value={inquiry.productName}
+                        onChange={handleChange}
+                        required
                       />
                     </div>
 
@@ -196,6 +276,10 @@ const BuyerHome = () => {
                         id=""
                         rows="3"
                         placeholder="Enter product requirements"
+                        name="productDescription"
+                        value={inquiry.productDescription}
+                        onChange={handleChange}
+                        required
                       ></textarea>
                     </div>
 
@@ -210,6 +294,10 @@ const BuyerHome = () => {
                                 className="form-control custom-style"
                                 id=""
                                 placeholder="Enter quantity"
+                                name="quantityRequired"
+                                value={inquiry.quantityRequired}
+                                onChange={handleChange}
+                                required
                               />
                             </div>
                             <div className="col-lg-5 col">
@@ -225,11 +313,15 @@ const BuyerHome = () => {
                         <select
                           className="form-select"
                           aria-label="Default select example"
+                          name="termsOfTrade"
+                          value={inquiry.termsOfTrade}
+                          onChange={handleChange}
                         >
                           <option selected>Select shipping terms</option>
-                          <option value="1">FOB</option>
-                          <option value="2">CIF</option>
-                          <option value="3">CFR</option>
+                          <option value="FOB">FOB</option>
+                          <option value="CIF">CIF</option>
+                          <option value="CFR">CFR</option>
+                          <option value="LOCAL">Local Delivery</option>
                         </select>
                       </div>
                     </div>
@@ -240,31 +332,34 @@ const BuyerHome = () => {
                         <select
                           className="form-select"
                           aria-label="Default select example"
+                          name="paymentTerms"
+                          value={inquiry.paymentTerms}
+                          onChange={handleChange}
                         >
                           <option selected>Select payment terms</option>
-                          <option value="1">LC</option>
-                          <option value="2">DP</option>
-                          <option value="2">CAD</option>
-                          <option value="3">TT</option>
+                          <option value="LC">LC</option>
+                          <option value="DP">DP</option>
+                          <option value="CAD">CAD</option>
+                          <option value="TT">TT</option>
                         </select>
                       </div>
                       <div className="col-lg-6 mb-3">
                         <label for="exampleInputPassword1">
                           Destination Country
                         </label>
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option selected>Select destination country</option>
-                          <option value="1">India</option>
-                          <option value="2">China</option>
-                          <option value="3">Bangladesh</option>
-                        </select>
+                        <Select
+                          className="custom-country-list"
+                          options={options}
+                          name="country"
+                          value={country}
+                          onChange={setCountry}
+                        />
                       </div>
                     </div>
 
-                    <button className="mt-3">Submit Inquiry</button>
+                    <button className="mt-3" type="submit">
+                      Submit Inquiry
+                    </button>
                   </form>
                 </div>
               </div>

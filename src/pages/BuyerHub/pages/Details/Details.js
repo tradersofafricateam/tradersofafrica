@@ -203,23 +203,24 @@ const Details = () => {
                   </div>
                   <div className="product-thumbnail">
                     <div className="d-flex justify-content-start flex-wrap">
-                      {productImages.map((image, index) => (
-                        <div
-                          className="pt-box"
-                          onClick={() => displayImageHandler(index)}
-                        >
-                          <img
-                            key={index}
-                            src={image.image}
-                            alt=""
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "cover",
-                            }}
-                          />
-                        </div>
-                      ))}
+                      {productImages &&
+                        productImages.slice(0, 5).map((image, index) => (
+                          <div
+                            className="pt-box"
+                            onClick={() => displayImageHandler(index)}
+                          >
+                            <img
+                              key={index}
+                              src={image.image}
+                              alt=""
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                              }}
+                            />
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -282,8 +283,8 @@ const Details = () => {
                         </tr>
 
                         <tr>
-                          <td className="mps-title">Category:</td>
-                          <td>{productInfo.category}</td>
+                          <td className="mps-title">Sub-category:</td>
+                          <td>{productInfo.subCategory}</td>
                         </tr>
                         <tr>
                           <td className="mps-title">Origin:</td>
@@ -332,25 +333,26 @@ const Details = () => {
                   </h3>
                   <table class="table table-striped">
                     <tbody>
-                      <tr>
+                      {/* <tr>
                         <td className="mps-title">Category:</td>
                         <td>{productInfo.category}</td>
-                      </tr>
-                      <tr>
-                        <td className="mps-title">Sub-category:</td>
-                        <td>{productInfo.subCategory}</td>
-                      </tr>
+                      </tr> */}
+
                       {productInfo.productSpecification &&
-                        Object.entries(productInfo.productSpecification).map(
-                          (specification) => (
+                        Object.entries(productInfo.productSpecification)
+                          .slice(1, productInfo.productSpecification.length)
+                          .map((specification) => (
                             <tr>
                               <td className="mps-title">
                                 {Capitalize(specification[0])}:
                               </td>
                               <td>{Capitalize(specification[1])}</td>
                             </tr>
-                          )
-                        )}
+                          ))}
+                      <tr>
+                        <td className="mps-title">Sub-category:</td>
+                        <td>{productInfo.subCategory}</td>
+                      </tr>
 
                       <tr>
                         <td className="mps-title">Origin:</td>
@@ -408,9 +410,7 @@ const Details = () => {
                         <h4 className="contact-head">Contact information</h4>
                         <p>{user.fullName}</p>
                         {/* <p>Dory International Trading Company</p> */}
-                        <p>
-                          {user.email}
-                        </p>
+                        <p>{user.email}</p>
                         <p>{user.phoneNumber}</p>
                       </div>
                     </div>
@@ -435,7 +435,9 @@ const Details = () => {
 
                           <div className="row">
                             <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">Quantity</label>
+                              <label for="exampleInputPassword1">
+                                Quantity
+                              </label>
                               <div className="custom-input form-control">
                                 <div className="row">
                                   <div className="col-lg-7 col">
@@ -468,18 +470,10 @@ const Details = () => {
                                 onChange={handleChange}
                               >
                                 <option selected>Select shipping terms</option>
-                                <option value="LOCAL">Local Delivery</option>
+                                <option value="FOB">FOB</option>
                                 <option value="CIF">CIF</option>
                                 <option value="CFR">CFR</option>
-                                <option value="CIP">CIP</option>
-                                {/* <option value="CPT">CPT</option>
-                                <option value="DDP">DDP</option>
-                                <option value="DAT">DAT</option>
-                                <option value="DAP">DAP</option>
-                                <option value="EXW">EXW</option> */}
-                                <option value="FOB">FOB</option>
-                                <option value="FAS">FAS</option>
-                                <option value="FCA">FCA</option>
+                                <option value="LOCAL">Local Delivery</option>
                               </select>
                             </div>
                           </div>
@@ -498,7 +492,9 @@ const Details = () => {
                               >
                                 <option selected>Select payment terms</option>
                                 <option value="LC">Letter of Credit</option>
-                                <option value="CAD">Cash Against Delivery</option>
+                                <option value="CAD">
+                                  Cash Against Delivery
+                                </option>
                                 <option value="DP">
                                   Document Against Payment
                                 </option>
