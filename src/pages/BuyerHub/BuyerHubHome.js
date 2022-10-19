@@ -81,7 +81,6 @@ const BuyerHome = () => {
         breakpoint: 768,
       });
       setTimeout(() => {
-        // navigate(-1);
         window.location.reload();
       }, 1800);
     } catch (error) {

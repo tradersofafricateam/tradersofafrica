@@ -26,6 +26,7 @@ const Inquiries = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const ITEMS_PER_PAGE = 10;
+  const [noMatch, setNoMatch] = useState(false);
 
   const inquiryData = useMemo(() => {
     let computedInquiry = allUserEnquire;
@@ -38,6 +39,15 @@ const Inquiries = () => {
           inquiry.productName.toLowerCase().includes(search.toLowerCase()) ||
           inquiry.status.toLowerCase().includes(search.toLowerCase())
       );
+      console.log("computedInquiry", computedInquiry);
+      if (computedInquiry.length < 1) {
+        setNoMatch(true);
+      } else if (computedInquiry.length > 0) {
+        setNoMatch(false);
+      }
+      console.log("search", search);
+    } else {
+      setNoMatch(false);
     }
 
     setTotalItems(computedInquiry.length);
@@ -47,6 +57,7 @@ const Inquiries = () => {
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
   }, [allUserEnquire, currentPage, search]);
+
   return (
     <div>
       <div className="grid-container">
@@ -110,66 +121,86 @@ const Inquiries = () => {
           </div>
 
           <h1 className="section-title">All Inquiries</h1>
-          <div className="main-overview">
-            <div className="overview-card no-padding">
-              <div class="table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Product Info</th>
-                      <th scope="col">Quantity /MT</th>
-                      <th scope="col">Shipping Terms</th>
-                      <th scope="col">Payment Terms</th>
-                      <th scope="col">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {inquiryData.map((inquiries, index) => (
-                      <tr key={index}>
-                        <td>
-                          <div className="d-flex">
-                            <div className="flex-shrink-0">
-                              <img
-                                className="table-product-img"
-                                src={ProductImgTable}
-                                alt="..."
-                              />
-                            </div>
-                            <div className="flex-grow-1 ms-3">
-                              <p>{Capitalize(inquiries.productName)}</p>
-                              <p className="table-order-no">
-                                Order No: 0123456543
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>{inquiries.quantityRequired}</td>
-                        <td>{inquiries.termsOfTrade}</td>
-                        <td>{inquiries.paymentTerms}</td>
-                        <td>
-                          {inquiries.status === "PENDING" && (
-                            <div className="text-warning ">Pending</div>
-                          )}
-                          {inquiries.status === "RECEIVED" && (
-                            <div className="text-primary ">Received</div>
-                          )}
-                          {inquiries.status === "COMPLETED" && (
-                            <div className="text-info">Completed</div>
-                          )}
-                        </td>
+          {allUserEnquire && allUserEnquire.length < 1 ? (
+            <div className="empty-state">
+              <h3>Welcome to your Inquiry history page</h3>
+              <p>
+                Get started by making inquiry for any product! All your inquiry
+                will be displayed on this page.
+              </p>
+            </div>
+          ) : (
+            <div className="main-overview">
+              <div className="overview-card no-padding">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product Info</th>
+                        <th scope="col">Quantity /MT</th>
+                        <th scope="col">Shipping Terms</th>
+                        <th scope="col">Payment Terms</th>
+                        <th scope="col">Status</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {inquiryData.map((inquiries, index) => (
+                        <tr key={index}>
+                          <td>
+                            <div className="d-flex">
+                              <div className="flex-shrink-0">
+                                <img
+                                  className="table-product-img"
+                                  src={ProductImgTable}
+                                  alt="..."
+                                />
+                              </div>
+                              <div className="flex-grow-1 ms-3">
+                                <p>{Capitalize(inquiries.productName)}</p>
+                                <p className="table-order-no">
+                                  Order No: 0123456543
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>{inquiries.quantityRequired}</td>
+                          <td>{inquiries.termsOfTrade}</td>
+                          <td>{inquiries.paymentTerms}</td>
+                          <td>
+                            {inquiries.status === "PENDING" && (
+                              <div className="text-warning ">Pending</div>
+                            )}
+                            {inquiries.status === "RECEIVED" && (
+                              <div className="text-primary ">Received</div>
+                            )}
+                            {inquiries.status === "COMPLETED" && (
+                              <div className="text-info">Completed</div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
-          <PaginationComponent
-            total={totalItems}
-            itemsPerPage={ITEMS_PER_PAGE}
-            currentPage={currentPage}
-            onPageChange={(page) => setCurrentPage(page)}
-          />
+          )}
+          {noMatch === true ? (
+            <div className="empty-state">
+              <h4>No results found</h4>
+              <p>
+                No Inquiry matched your criteria. Try searching for something
+                else.
+              </p>
+            </div>
+          ) : (
+            <PaginationComponent
+              total={totalItems}
+              itemsPerPage={ITEMS_PER_PAGE}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          )}
         </main>
       </div>
     </div>

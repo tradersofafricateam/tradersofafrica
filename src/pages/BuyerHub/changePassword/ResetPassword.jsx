@@ -138,7 +138,7 @@ export default function ResetPassword() {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 5000,
+          duration: 3000,
           onScreen: true,
         },
         isMobile: true,
@@ -146,7 +146,7 @@ export default function ResetPassword() {
       });
       setTimeout(() => {
         navigate(`/login`);
-      }, 5800);
+      }, 3800);
     } catch (error) {
       console.log(error);
       setLinkExpire("Your token has expired");
