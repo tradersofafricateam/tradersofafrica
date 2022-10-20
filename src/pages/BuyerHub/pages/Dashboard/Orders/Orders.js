@@ -230,10 +230,11 @@ const Orders = () => {
             </div>
           ) : (
             <div className="empty-state">
-              <h3>Welcome to your Order history page</h3>
+              <h3>There are no orders</h3>
               <p>
-                Get started by placing an order! All your order will be
-                displayed on this page.
+                Start order in the{" "}
+                <Link to="/message-center">Message Center.</Link> All your order
+                will be displayed on this page.
               </p>
             </div>
           )}
@@ -241,7 +242,8 @@ const Orders = () => {
             <div className="empty-state">
               <h4>No results found</h4>
               <p>
-                No order matched your criteria. Try searching for something else
+                No order matched your criteria. Try searching for something
+                else.
               </p>
             </div>
           ) : (

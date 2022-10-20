@@ -195,8 +195,12 @@ const Dashboard = () => {
             <div className="empty-state">
               <h3>Welcome to your Dashboard</h3>
               <p>
-                Access history to all your order and inquiry , chat a SourcePro,
-                edit password, email and name here.
+                Access history to all your <Link to="/orders">Orders</Link> and{" "}
+                <Link to="/inquiries">Inquiries</Link> , chat a{" "}
+                <Link to="/message-center">SourcePro</Link>,{" "}
+                <Link to="/settings">
+                  edit your name, email and password here.
+                </Link>
               </p>
             </div>
           ) : (
