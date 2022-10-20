@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
@@ -8,10 +8,14 @@ import OrdersImg from "../../../../../assets/img/orders-illus.png";
 import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
 import ProductImg3 from "../../../../../assets/img/products/p-img3.png";
+import Select from "react-select";
+import countryList from "react-select-country-list";
 
 import "../Dashboard.css";
 
 const MessageCenter = () => {
+  const [country, setCountry] = useState("");
+  const options = useMemo(() => countryList().getData(), []);
   return (
     <div>
       <div className="grid-container">
@@ -92,7 +96,6 @@ const MessageCenter = () => {
 
                   <div className="chat-area">
                     <div className="message-area">
-
                       <div className="chat-order-request-msg receiver">
                         <div class="order-msg d-flex">
                           <div class="flex-shrink-0">
@@ -106,7 +109,13 @@ const MessageCenter = () => {
                             </p>
                           </div>
                         </div>
-                        <button data-bs-toggle="modal" data-bs-target="#vieworderModal" className="order_msg-btn">View Order</button>
+                        <button
+                          data-bs-toggle="modal"
+                          data-bs-target="#vieworderModal"
+                          className="order_msg-btn"
+                        >
+                          View Order
+                        </button>
                         <button className="order_msg-btn">Place Order</button>
                         <p className="chat-timestamp">11:20 am</p>
                       </div>
@@ -202,7 +211,8 @@ const MessageCenter = () => {
               id="orderModal"
               tabindex="-1"
               aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
+              aria-hidden="true"
+            >
               <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -275,9 +285,10 @@ const MessageCenter = () => {
                                 aria-label="Default select example"
                               >
                                 <option selected>Select shipping terms</option>
-                                <option value="1">FOB</option>
-                                <option value="2">CIF</option>
-                                <option value="3">CFR</option>
+                                <option value="FOB">FOB</option>
+                                <option value="CIF">CIF</option>
+                                <option value="CFR">CFR</option>
+                                <option value="LOCAL">Local Delivery</option>
                               </select>
                             </div>
                           </div>
@@ -292,10 +303,10 @@ const MessageCenter = () => {
                                 aria-label="Default select example"
                               >
                                 <option selected>Select payment terms</option>
-                                <option value="1">LC</option>
-                                <option value="2">DP</option>
-                                <option value="2">CAD</option>
-                                <option value="3">TT</option>
+                                <option value="LC">LC</option>
+                                <option value="DP">DP</option>
+                                <option value="CAD">CAD</option>
+                                <option value="TT">TT</option>
                               </select>
                             </div>
                             <div className="col-lg-6 mb-3">
@@ -319,18 +330,13 @@ const MessageCenter = () => {
                               <label for="exampleInputPassword1">
                                 Destination Country
                               </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>
-                                  Select Destination Country
-                                </option>
-                                <option value="1">India</option>
-                                <option value="2">China</option>
-                                <option value="2">Vietnam</option>
-                                <option value="3">Bangladesh</option>
-                              </select>
+                              <Select
+                                className="custom-country-list"
+                                options={options}
+                                name="country"
+                                value={country}
+                                onChange={setCountry}
+                              />
                             </div>
                             <div className="col-lg-6 mb-3">
                               <label for="exampleInputPassword1">
@@ -361,7 +367,8 @@ const MessageCenter = () => {
               id="disputeModal"
               tabindex="-1"
               aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
+              aria-hidden="true"
+            >
               <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -418,59 +425,91 @@ const MessageCenter = () => {
               </div>
             </div>
             {/* End of Raise Dispute Modal */}
-            
+
             {/* View Order */}
-            <div className="modal fade place-order-modal" id="vieworderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div
+              className="modal fade place-order-modal"
+              id="vieworderModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
                   </div>
                   <div className="modal-body">
                     <div className="row">
                       <div className="col-lg-8">
                         <h5 className="modal-sub-title">Product information</h5>
                         <form>
-
                           <div class="mb-3">
-                            <label for="exampleInputEmail1">Product Requirements</label>
-                            <textarea class="form-control" id="" rows="3" value="Jute bag packaging, KOR 48 - 50" placeholder="Enter product requirements like etc" disabled></textarea>
+                            <label for="exampleInputEmail1">
+                              Product Requirements
+                            </label>
+                            <textarea
+                              class="form-control"
+                              id=""
+                              rows="3"
+                              value="Jute bag packaging, KOR 48 - 50"
+                              placeholder="Enter product requirements like etc"
+                              disabled
+                            ></textarea>
                           </div>
 
                           <div className="row">
                             <div className="col-lg-6 mb-3">
-                              
-                            <label for="exampleInputPassword1">Quantity</label>
+                              <label for="exampleInputPassword1">
+                                Quantity
+                              </label>
                               <div className="custom-input form-control">
                                 <div className="row">
                                   <div className="col-lg-7 col">
-                                    <input type="number" className="form-control custom-style" value="100" id="" placeholder="Enter quantity" />
+                                    <input
+                                      type="number"
+                                      className="form-control custom-style"
+                                      value="100"
+                                      id=""
+                                      placeholder="Enter quantity"
+                                    />
                                   </div>
                                   <div className="col-lg-5 col">
-                                    <div className="form-unit">
-                                      metric tons
-                                    </div>
+                                    <div className="form-unit">metric tons</div>
                                   </div>
                                 </div>
                               </div>
-
                             </div>
                             <div className="col-lg-6 mb-3">
-                            <label for="exampleInputPassword1">Shipping Terms</label>
-                              <select className="form-select" aria-label="Default select example" >
+                              <label for="exampleInputPassword1">
+                                Shipping Terms
+                              </label>
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                              >
                                 <option selected>FOB</option>
                                 <option value="1">FOB</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                               </select>
-                              
                             </div>
                           </div>
 
                           <div className="row">
                             <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">Country of Origin</label>
-                              <select className="form-select" aria-label="Default select example" >
+                              <label for="exampleInputPassword1">
+                                Country of Origin
+                              </label>
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                              >
                                 <option selected>Nigeria</option>
                                 <option value="1">Nigeria</option>
                                 <option value="2">Two</option>
@@ -478,8 +517,13 @@ const MessageCenter = () => {
                               </select>
                             </div>
                             <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">Payment Terms</label>
-                              <select className="form-select" aria-label="Default select example" >
+                              <label for="exampleInputPassword1">
+                                Payment Terms
+                              </label>
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                              >
                                 <option selected>Letter of Credit</option>
                                 <option value="1">Letter of Credit</option>
                                 <option value="2">Two</option>
@@ -490,8 +534,13 @@ const MessageCenter = () => {
 
                           <div className="row">
                             <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">Destination Country</label>
-                              <select className="form-select" aria-label="Default select example" >
+                              <label for="exampleInputPassword1">
+                                Destination Country
+                              </label>
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                              >
                                 <option selected>India</option>
                                 <option value="1">India</option>
                                 <option value="2">Two</option>
@@ -499,25 +548,38 @@ const MessageCenter = () => {
                               </select>
                             </div>
                             <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">Destination Port</label>
-                              <input type="text" class="form-control" value="Port of India" id="" placeholder="Enter destination port" />
+                              <label for="exampleInputPassword1">
+                                Destination Port
+                              </label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                value="Port of India"
+                                id=""
+                                placeholder="Enter destination port"
+                              />
                             </div>
                           </div>
-
                         </form>
                       </div>
                       <div className="col-lg-4">
                         <h5 className="modal-sub-title">Order Summary</h5>
                         <div className="order-summary">
-
                           <div class="d-flex mb-2">
                             <div class="flex-shrink-0">
-                              <img className="s-product-img" src={ProductImg3} alt="..."/>
+                              <img
+                                className="s-product-img"
+                                src={ProductImg3}
+                                alt="..."
+                              />
                             </div>
                             <div class="flex-grow-1 ms-3">
-                              <h2 className="s-product-name">Raw Cashew Kernels W320</h2>
+                              <h2 className="s-product-name">
+                                Raw Cashew Kernels W320
+                              </h2>
                               <h3 className="s-product-price">
-                                <span className="s-mp-currency">USD</span> 1050 - 1250
+                                <span className="s-mp-currency">USD</span> 1050
+                                - 1250
                                 <span className="s-mp-unit"> / MT</span>
                               </h3>
                             </div>
@@ -553,12 +615,12 @@ const MessageCenter = () => {
 
                             <div className="line"></div>
 
-                            <p><span>Total Cost:</span>USD 115,000</p>
+                            <p>
+                              <span>Total Cost:</span>USD 115,000
+                            </p>
 
                             <div className="line"></div>
-
                           </div>
-
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -568,9 +630,8 @@ const MessageCenter = () => {
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
             {/* End of View Order Modal */}
-
           </div>
         </main>
       </div>
