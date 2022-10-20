@@ -155,7 +155,8 @@ const Dashboard = () => {
                 <h2>Total Orders</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{orderSummary}</h3>
+                  {orderSummary === NaN ? <h3>0</h3> : <h3>{orderSummary}</h3>}
+
                   <Link className="overview-card-link" to="/orders">
                     View all
                   </Link>
@@ -167,7 +168,11 @@ const Dashboard = () => {
                 <h2>Total Inquiries</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{enquireSummary}</h3>
+                  {enquireSummary === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{enquireSummary}</h3>
+                  )}
                   <Link className="overview-card-link" to="/inquiries">
                     View all
                   </Link>

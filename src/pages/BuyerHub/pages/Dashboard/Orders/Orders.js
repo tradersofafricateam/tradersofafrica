@@ -128,7 +128,7 @@ const Orders = () => {
               <div>
                 <h2>Total Orders</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{orderSummary}</h3>
+                  {orderSummary === NaN ? <h3>0</h3> : <h3>{orderSummary}</h3>}
                 </div>
               </div>
             </div>
@@ -136,7 +136,11 @@ const Orders = () => {
               <div>
                 <h2>Pending Orders</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{userOrderSummary.total_pending_orders}</h3>
+                  {userOrderSummary.total_pending_orders === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{userOrderSummary.total_pending_orders}</h3>
+                  )}
                 </div>
               </div>
             </div>
@@ -144,7 +148,11 @@ const Orders = () => {
               <div>
                 <h2>Delivered Orders</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{userOrderSummary.total_delivered_orders}</h3>
+                  {userOrderSummary.total_delivered_orders === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{userOrderSummary.total_delivered_orders}</h3>
+                  )}
                 </div>
               </div>
             </div>

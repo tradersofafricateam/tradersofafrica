@@ -98,7 +98,14 @@ const Inquiries = () => {
               <div>
                 <h2>All Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{enquireSummary}</h3>
+                  <h3>
+                    {" "}
+                    {enquireSummary === NaN ? (
+                      <h3>0</h3>
+                    ) : (
+                      <h3>{enquireSummary}</h3>
+                    )}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -106,7 +113,11 @@ const Inquiries = () => {
               <div>
                 <h2>Pending Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{userEnquireSummary.total_pending_enquiries}</h3>
+                  {userEnquireSummary.total_pending_enquiries === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{userEnquireSummary.total_pending_enquiries}</h3>
+                  )}
                 </div>
               </div>
             </div>
@@ -114,7 +125,11 @@ const Inquiries = () => {
               <div>
                 <h2>Received Quotes</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{userEnquireSummary.total_received_quote}</h3>
+                  {userEnquireSummary.total_received_quote === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{userEnquireSummary.total_received_quote}</h3>
+                  )}
                 </div>
               </div>
             </div>
