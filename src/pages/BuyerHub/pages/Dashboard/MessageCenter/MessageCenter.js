@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
+import io from "socket.io-client";
 import TrackImg from "../../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../../assets/img/orders-illus.png";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
@@ -11,8 +12,42 @@ import { RaiseDisputeModal } from "./RaiseDisputeModal";
 import ViewOrderModal from "./ViewOrderModal";
 import { NewOrderModal } from "./NewOrderModal";
 import { ChatOrder } from "./ChatOrder";
+import { GlobalContext } from "../../../../../components/utils/GlobalState";
+import { ChatInput } from "./ChatInput";
 
 const MessageCenter = () => {
+  const { user } = useContext(GlobalContext);
+  const socket = useRef();
+
+  const socketEvents = {
+    connection: "connection",
+    addUser: "add-user",
+    sendMessage: "send-message",
+    receiveMessage: "receive-message",
+    disconnect: "disconnect",
+  };
+
+  useEffect(() => {
+    if (user) {
+      socket.current = io("http://localhost:8081");
+      socket.current.emit(socketEvents.addUser, user.id);
+    }
+  }, [user]);
+
+  const handleSendMsg = async (msg) => {
+    try {
+      const payload = {
+        to: user.id,
+        from: user.id,
+        message: msg,
+      };
+
+      socket.current.emit("send-message", payload);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="grid-container">
@@ -112,69 +147,9 @@ const MessageCenter = () => {
                         </p>
                         <p className="chat-timestamp">11:25 am</p>
                       </div>
-                      <div className="chat-msg sender">
-                        <p>
-                          Very Random text between tofa sourcepro and the buyer
-                          trying to conclude a transaction, Very Random text
-                          between tofa sourcepro and the buyer trying
-                        </p>
-                        <p className="chat-timestamp">11:20 am</p>
-                      </div>
-                      <div className="chat-msg receiver">
-                        <p>Very Random</p>
-                        <p className="chat-timestamp">11:25 am</p>
-                      </div>
-                      <div className="chat-msg sender">
-                        <p>Okay</p>
-                        <p className="chat-timestamp">11:20 am</p>
-                      </div>
                     </div>
 
-                    <div className="message-input">
-                      <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#orderModal"
-                        className="msg-center-btn btn-primary me-2"
-                        align="right"
-                      >
-                        Start Order
-                      </button>
-                      <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#disputeModal"
-                        className="msg-center-btn btn-primary me-2"
-                        align="right"
-                      >
-                        Raise Dispute
-                      </button>
-                      <form className="chat-form">
-                        <div className="chat-input-area d-flex justify-content-between">
-                          <textarea
-                            class="form-control"
-                            id=""
-                            placeholder="Type your message here..."
-                          ></textarea>
-                          <Link to="/message-center">
-                            <Iconly
-                              className="chat-icon"
-                              name="PaperUpload"
-                              set="light"
-                              primaryColor="#5C5C5C"
-                              size="medium"
-                            />
-                          </Link>
-                          <Link to="/message-center">
-                            <Iconly
-                              className="send-icon ms-3"
-                              name="Send"
-                              set="bulk"
-                              primaryColor="#5C5C5C"
-                              size="medium"
-                            />
-                          </Link>
-                        </div>
-                      </form>
-                    </div>
+                    <ChatInput handleSendMsg={handleSendMsg} />
                   </div>
                 </div>
               </div>
