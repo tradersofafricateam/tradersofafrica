@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext, useMemo } from "react";
-import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import BuyHubNavbar from "./components/BuyHubNavbar/BuyHubNavbar";
 import { axios } from "../../components/baseUrl";
@@ -35,6 +34,7 @@ const BuyerHome = () => {
   const newlyAddedProducts = "Newly Added Products";
 
   const handleChange = (e) => {
+    e.preventDefault();
     setInquiry({
       ...inquiry,
       [e.target.name]: e.target.value,

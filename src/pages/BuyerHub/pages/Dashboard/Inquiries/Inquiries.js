@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useContext } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
-
+import { Link } from "react-router-dom";
 import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
 
 import "../Dashboard.css";
@@ -98,7 +98,14 @@ const Inquiries = () => {
               <div>
                 <h2>All Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{enquireSummary}</h3>
+                  <h3>
+                    {" "}
+                    {enquireSummary === NaN ? (
+                      <h3>0</h3>
+                    ) : (
+                      <h3>{enquireSummary}</h3>
+                    )}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -106,7 +113,11 @@ const Inquiries = () => {
               <div>
                 <h2>Pending Inquiries</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{userEnquireSummary.total_pending_enquiries}</h3>
+                  {userEnquireSummary.total_pending_enquiries === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{userEnquireSummary.total_pending_enquiries}</h3>
+                  )}
                 </div>
               </div>
             </div>
@@ -114,19 +125,24 @@ const Inquiries = () => {
               <div>
                 <h2>Received Quotes</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{userEnquireSummary.total_received_quote}</h3>
+                  {userEnquireSummary.total_received_quote === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{userEnquireSummary.total_received_quote}</h3>
+                  )}
                 </div>
               </div>
             </div>
           </div>
 
           <h1 className="section-title">All Inquiries</h1>
-          {allUserEnquire && allUserEnquire.length < 1 ? (
+          {allUserEnquire && allUserEnquire.length < 3 ? (
             <div className="empty-state">
-              <h3>Welcome to your Inquiry history page</h3>
+              <h3>There are no inquiries</h3>
               <p>
-                Get started by making inquiry for any product! All your inquiry
-                will be displayed on this page.
+                Make inquiry for any product on the{" "}
+                <a href="/buy-commodities">Buy commodity page.</a> All your
+                inquiries will be displayed on this page.
               </p>
             </div>
           ) : (
@@ -148,18 +164,15 @@ const Inquiries = () => {
                         <tr key={index}>
                           <td>
                             <div className="d-flex">
-                              <div className="flex-shrink-0">
+                              {/* <div className="flex-shrink-0">
                                 <img
                                   className="table-product-img"
                                   src={ProductImgTable}
                                   alt="..."
                                 />
-                              </div>
+                              </div> */}
                               <div className="flex-grow-1 ms-3">
                                 <p>{Capitalize(inquiries.productName)}</p>
-                                <p className="table-order-no">
-                                  Order No: 0123456543
-                                </p>
                               </div>
                             </div>
                           </td>

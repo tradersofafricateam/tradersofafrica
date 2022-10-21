@@ -1,21 +1,53 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
-
+import io from "socket.io-client";
 import TrackImg from "../../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../../assets/img/orders-illus.png";
-import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
-import ProductImg3 from "../../../../../assets/img/products/p-img3.png";
-import Select from "react-select";
-import countryList from "react-select-country-list";
 
 import "../Dashboard.css";
+import { RaiseDisputeModal } from "./RaiseDisputeModal";
+import ViewOrderModal from "./ViewOrderModal";
+import { NewOrderModal } from "./NewOrderModal";
+import { ChatOrder } from "./ChatOrder";
+import { GlobalContext } from "../../../../../components/utils/GlobalState";
+import { ChatInput } from "./ChatInput";
 
 const MessageCenter = () => {
-  const [country, setCountry] = useState("");
-  const options = useMemo(() => countryList().getData(), []);
+  const { user } = useContext(GlobalContext);
+  const socket = useRef();
+
+  const socketEvents = {
+    connection: "connection",
+    addUser: "add-user",
+    sendMessage: "send-message",
+    receiveMessage: "receive-message",
+    disconnect: "disconnect",
+  };
+
+  useEffect(() => {
+    if (user) {
+      socket.current = io("http://localhost:8081");
+      socket.current.emit(socketEvents.addUser, user.id);
+    }
+  }, [user]);
+
+  const handleSendMsg = async (msg) => {
+    try {
+      const payload = {
+        to: user.id,
+        from: user.id,
+        message: msg,
+      };
+
+      socket.current.emit("send-message", payload);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="grid-container">
@@ -96,29 +128,7 @@ const MessageCenter = () => {
 
                   <div className="chat-area">
                     <div className="message-area">
-                      <div className="chat-order-request-msg receiver">
-                        <div class="order-msg d-flex">
-                          <div class="flex-shrink-0">
-                            <img src={ProductImgTable} alt="..." />
-                          </div>
-                          <div class="flex-grow-1 ms-3">
-                            <h2>New Order</h2>
-                            <p className="cp-name">Dried Hibiscus</p>
-                            <p className="cp-price">
-                              <span>USD</span> 500 <span>/ MT</span>
-                            </p>
-                          </div>
-                        </div>
-                        <button
-                          data-bs-toggle="modal"
-                          data-bs-target="#vieworderModal"
-                          className="order_msg-btn"
-                        >
-                          View Order
-                        </button>
-                        <button className="order_msg-btn">Place Order</button>
-                        <p className="chat-timestamp">11:20 am</p>
-                      </div>
+                      <ChatOrder />
 
                       <div className="chat-msg sender">
                         <p>
@@ -137,500 +147,24 @@ const MessageCenter = () => {
                         </p>
                         <p className="chat-timestamp">11:25 am</p>
                       </div>
-                      <div className="chat-msg sender">
-                        <p>
-                          Very Random text between tofa sourcepro and the buyer
-                          trying to conclude a transaction, Very Random text
-                          between tofa sourcepro and the buyer trying
-                        </p>
-                        <p className="chat-timestamp">11:20 am</p>
-                      </div>
-                      <div className="chat-msg receiver">
-                        <p>Very Random</p>
-                        <p className="chat-timestamp">11:25 am</p>
-                      </div>
-                      <div className="chat-msg sender">
-                        <p>Okay</p>
-                        <p className="chat-timestamp">11:20 am</p>
-                      </div>
                     </div>
 
-                    <div className="message-input">
-                      <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#orderModal"
-                        className="msg-center-btn btn-primary me-2"
-                        align="right"
-                      >
-                        Start Order
-                      </button>
-                      <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#disputeModal"
-                        className="msg-center-btn btn-primary me-2"
-                        align="right"
-                      >
-                        Raise Dispute
-                      </button>
-                      <form className="chat-form">
-                        <div className="chat-input-area d-flex justify-content-between">
-                          <textarea
-                            class="form-control"
-                            id=""
-                            placeholder="Type your message here..."
-                          ></textarea>
-                          <Link to="/message-center">
-                            <Iconly
-                              className="chat-icon"
-                              name="PaperUpload"
-                              set="light"
-                              primaryColor="#5C5C5C"
-                              size="medium"
-                            />
-                          </Link>
-                          <Link to="/message-center">
-                            <Iconly
-                              className="send-icon ms-3"
-                              name="Send"
-                              set="bulk"
-                              primaryColor="#5C5C5C"
-                              size="medium"
-                            />
-                          </Link>
-                        </div>
-                      </form>
-                    </div>
+                    <ChatInput handleSendMsg={handleSendMsg} />
                   </div>
                 </div>
               </div>
             </div>
 
             {/* New Order Modal */}
-            <div
-              className="modal fade place-order-modal"
-              id="orderModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog modal-dialog-centered modal-lg">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">
-                      New Order Request
-                    </h5>
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <form className="w-100">
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1">Product Name</label>
-                            <select
-                              className="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option selected>Select Product</option>
-                              <option value="1">Cashew</option>
-                              <option value="2">Cocoa</option>
-                              <option value="3">Paddy Rice</option>
-                            </select>
-                          </div>
-
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1">
-                              Product Requirements
-                            </label>
-                            <textarea
-                              class="form-control"
-                              id=""
-                              rows="3"
-                              placeholder="Enter product requirements"
-                            ></textarea>
-                          </div>
-
-                          <div className="row">
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Quantity
-                              </label>
-                              <div className="custom-input form-control">
-                                <div className="row">
-                                  <div className="col-lg-7 col">
-                                    <input
-                                      type="number"
-                                      className="form-control custom-style"
-                                      id=""
-                                      placeholder="Enter quantity"
-                                    />
-                                  </div>
-                                  <div className="col-lg-5 col">
-                                    <div className="form-unit">metric tons</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Shipping Terms
-                              </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>Select shipping terms</option>
-                                <option value="FOB">FOB</option>
-                                <option value="CIF">CIF</option>
-                                <option value="CFR">CFR</option>
-                                <option value="LOCAL">Local Delivery</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div className="row">
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Payment Terms
-                              </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>Select payment terms</option>
-                                <option value="LC">LC</option>
-                                <option value="DP">DP</option>
-                                <option value="CAD">CAD</option>
-                                <option value="TT">TT</option>
-                              </select>
-                            </div>
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Destination Country
-                              </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>Country of Origin</option>
-                                <option value="1">India</option>
-                                <option value="2">China</option>
-                                <option value="3">Bangladesh</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div className="row">
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Destination Country
-                              </label>
-                              <Select
-                                className="custom-country-list"
-                                options={options}
-                                name="country"
-                                value={country}
-                                onChange={setCountry}
-                              />
-                            </div>
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Destination Port
-                              </label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id=""
-                                placeholder="Enter Destination Port"
-                              />
-                            </div>
-                          </div>
-
-                          <button className="mt-3">Submit Order Request</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <NewOrderModal />
             {/* End of New Order MOdal */}
 
             {/* Raise Dispute Modal */}
-            <div
-              className="modal fade place-order-modal"
-              id="disputeModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog modal-dialog-centered modal-lg">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">
-                      Raise a Dispute
-                    </h5>
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <form className="w-100">
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1">Dispute Type</label>
-                            <select
-                              className="form-select"
-                              aria-label="Default select example"
-                            >
-                              <option selected>Select Dispute Type</option>
-                              <option value="1">Cashew</option>
-                              <option value="2">Cocoa</option>
-                              <option value="3">Paddy Rice</option>
-                            </select>
-                          </div>
-
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1">
-                              Dispute Details
-                            </label>
-                            <textarea
-                              class="form-control"
-                              id=""
-                              rows="3"
-                              placeholder=""
-                            ></textarea>
-                          </div>
-
-                          <p className="modal-info">
-                            For local delivery please proceed to chat with a
-                            SourcPro agent to continue
-                          </p>
-
-                          <button className="mt-3">Submit Dispute</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <RaiseDisputeModal />
             {/* End of Raise Dispute Modal */}
 
             {/* View Order */}
-            <div
-              className="modal fade place-order-modal"
-              id="vieworderModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog modal-xl">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="row">
-                      <div className="col-lg-8">
-                        <h5 className="modal-sub-title">Product information</h5>
-                        <form>
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1">
-                              Product Requirements
-                            </label>
-                            <textarea
-                              class="form-control"
-                              id=""
-                              rows="3"
-                              value="Jute bag packaging, KOR 48 - 50"
-                              placeholder="Enter product requirements like etc"
-                              disabled
-                            ></textarea>
-                          </div>
-
-                          <div className="row">
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Quantity
-                              </label>
-                              <div className="custom-input form-control">
-                                <div className="row">
-                                  <div className="col-lg-7 col">
-                                    <input
-                                      type="number"
-                                      className="form-control custom-style"
-                                      value="100"
-                                      id=""
-                                      placeholder="Enter quantity"
-                                    />
-                                  </div>
-                                  <div className="col-lg-5 col">
-                                    <div className="form-unit">metric tons</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Shipping Terms
-                              </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>FOB</option>
-                                <option value="1">FOB</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div className="row">
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Country of Origin
-                              </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>Nigeria</option>
-                                <option value="1">Nigeria</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </div>
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Payment Terms
-                              </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>Letter of Credit</option>
-                                <option value="1">Letter of Credit</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div className="row">
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Destination Country
-                              </label>
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>India</option>
-                                <option value="1">India</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </div>
-                            <div className="col-lg-6 mb-3">
-                              <label for="exampleInputPassword1">
-                                Destination Port
-                              </label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                value="Port of India"
-                                id=""
-                                placeholder="Enter destination port"
-                              />
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <div className="col-lg-4">
-                        <h5 className="modal-sub-title">Order Summary</h5>
-                        <div className="order-summary">
-                          <div class="d-flex mb-2">
-                            <div class="flex-shrink-0">
-                              <img
-                                className="s-product-img"
-                                src={ProductImg3}
-                                alt="..."
-                              />
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h2 className="s-product-name">
-                                Raw Cashew Kernels W320
-                              </h2>
-                              <h3 className="s-product-price">
-                                <span className="s-mp-currency">USD</span> 1050
-                                - 1250
-                                <span className="s-mp-unit"> / MT</span>
-                              </h3>
-                            </div>
-                          </div>
-
-                          <div className="os-details">
-                            <table class="table table-borderless">
-                              <tr>
-                                <td className="osd-title">Quantity:</td>
-                                <td>100 MT</td>
-                              </tr>
-                              <tr>
-                                <td className="osd-title">Shipping Terms:</td>
-                                <td>FOB</td>
-                              </tr>
-                              <tr>
-                                <td className="osd-title">Price / MT:</td>
-                                <td>USD 1150</td>
-                              </tr>
-                              <tr>
-                                <td className="osd-title">Origin:</td>
-                                <td>Nigeria</td>
-                              </tr>
-                              <tr>
-                                <td className="osd-title">Destination:</td>
-                                <td>India</td>
-                              </tr>
-                              <tr>
-                                <td className="osd-title">Payment Terms:</td>
-                                <td>Letter of Credit</td>
-                              </tr>
-                            </table>
-
-                            <div className="line"></div>
-
-                            <p>
-                              <span>Total Cost:</span>USD 115,000
-                            </p>
-
-                            <div className="line"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-12">
-                        <button className="mt-3">Place Order</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ViewOrderModal />
             {/* End of View Order Modal */}
           </div>
         </main>
