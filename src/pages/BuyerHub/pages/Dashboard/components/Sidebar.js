@@ -8,7 +8,6 @@ import axios from "axios";
 
 const Sidebar = () => {
   const { user } = useContext(GlobalContext);
-  console.log("this is the current user", user);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -34,12 +33,9 @@ const Sidebar = () => {
         <div className="user-area">
           {user ? (
             <div className="d-flex align-items-center">
-              <div
-                className="flex-shrink-0 user-area-art"
-              >
+              <div className="flex-shrink-0 user-area-art">
                 {" "}
                 {user.fullName.charAt(0).toUpperCase()}
-                
               </div>
               <div className="flex-grow-1 ms-3">
                 <p>{Capitalize(user.fullName)}</p>

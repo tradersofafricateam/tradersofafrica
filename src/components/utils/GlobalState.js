@@ -20,7 +20,6 @@ const GlobalState = ({ children }) => {
     try {
       axios.get("/product").then((response) => {
         setUserLoading(true);
-        console.log("buy-commodities", response.data.data);
         setProduct(response.data.data);
         setUserLoading(false);
       });
@@ -29,9 +28,9 @@ const GlobalState = ({ children }) => {
     }
   };
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   useEffect(() => {
     setUserLoading(true);
@@ -46,57 +45,57 @@ const GlobalState = ({ children }) => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   setUserLoading(true);
-  //   axios
-  //     .get(`/buyer-hub/order-summary`)
-  //     .then((response) => {
-  //       setUserOrderSummary(response.data.data);
-  //       setUserLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error loading order summary", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    setUserLoading(true);
+    axios
+      .get(`/buyer-hub/order-summary`)
+      .then((response) => {
+        setUserOrderSummary(response.data.data);
+        setUserLoading(false);
+      })
+      .catch((error) => {
+        console.log("error loading order summary", error);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   setUserLoading(true);
-  //   axios
-  //     .get(`/buyer-hub/enquiry-summary`)
-  //     .then((response) => {
-  //       setUserEnquireSummary(response.data.data);
-  //       setUserLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error loading inquiry summary", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    setUserLoading(true);
+    axios
+      .get(`/buyer-hub/enquiry-summary`)
+      .then((response) => {
+        setUserEnquireSummary(response.data.data);
+        setUserLoading(false);
+      })
+      .catch((error) => {
+        console.log("error loading inquiry summary", error);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   setUserLoading(true);
-  //   axios
-  //     .get(`/buyer-hub/all-orders`)
-  //     .then((response) => {
-  //       setAllUserOrder(response.data.data);
-  //       setUserLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error loading all orders", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    setUserLoading(true);
+    axios
+      .get(`/buyer-hub/all-orders`)
+      .then((response) => {
+        setAllUserOrder(response.data.data);
+        setUserLoading(false);
+      })
+      .catch((error) => {
+        console.log("error loading all orders", error);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   setUserLoading(true);
-  //   axios
-  //     .get(`/buyer-hub/all-enquiries`)
-  //     .then((response) => {
-  //       setAllUserEnquire(response.data.data);
-  //       setUserLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error loading all inquires", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    setUserLoading(true);
+    axios
+      .get(`/buyer-hub/all-enquiries`)
+      .then((response) => {
+        setAllUserEnquire(response.data.data);
+        setUserLoading(false);
+      })
+      .catch((error) => {
+        console.log("error loading all inquires", error);
+      });
+  }, []);
 
   const value = {
     user,

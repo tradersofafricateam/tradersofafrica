@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
@@ -14,9 +14,11 @@ import { NewOrderModal } from "./NewOrderModal";
 import { ChatOrder } from "./ChatOrder";
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import { ChatInput } from "./ChatInput";
+import { axios } from "../../../../../components/baseUrl";
 
 const MessageCenter = () => {
   const { user } = useContext(GlobalContext);
+  const [messages, setMessages] = useState([]);
   const socket = useRef();
 
   const socketEvents = {
@@ -30,9 +32,20 @@ const MessageCenter = () => {
   useEffect(() => {
     if (user) {
       socket.current = io("http://localhost:8081");
-      socket.current.emit(socketEvents.addUser, user.id);
+      socket.current.emit(socketEvents.addUser, user.id, user.type);
     }
   }, [user]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          data: { data },
+        } = await axios.get("/message/receive-message");
+        console.log({ data });
+      } catch (error) {}
+    })();
+  }, []);
 
   const handleSendMsg = async (msg) => {
     try {
@@ -132,17 +145,17 @@ const MessageCenter = () => {
 
                       <div className="chat-msg sender">
                         <p>
-                          Very Random text between tofa sourcepro and the buyer
+                          Very Random text between tofa source pro and the buyer
                           trying to conclude a transaction, Very Random text
-                          between tofa sourcepro and the buyer trying
+                          between tofa source pro and the buyer trying
                         </p>
                         <p className="chat-timestamp">11:20 am</p>
                       </div>
                       <div className="chat-msg receiver">
                         <p>
-                          Very Random text between tofa sourcepro and the buyer
+                          Very Random text between tofa source pro and the buyer
                           trying to conclude a transaction, Very Random text
-                          between tofa sourcepro and the buyer trying to
+                          between tofa source pro and the buyer trying to
                           conclude a transaction.
                         </p>
                         <p className="chat-timestamp">11:25 am</p>

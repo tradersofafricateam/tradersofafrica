@@ -328,10 +328,6 @@ body {
   .card p {
     font-size: .9rem;
   }
-
-  .card img {
-    
-  }
   
   /* Force varying colors to simulate dynamic content */
   .info-cards .card:first-child {
@@ -390,6 +386,10 @@ body {
 
   .chat-wrap .chat-header .chat-icon {
     margin: 10px 0 0 25px;
+  }
+
+  .chat-icon:hover, .send-icon:hover {
+    cursor: pointer;
   }
 
   /* End of chat header */

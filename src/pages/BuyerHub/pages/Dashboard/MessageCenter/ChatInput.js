@@ -43,25 +43,21 @@ export const ChatInput = ({ handleSendMsg }) => {
             value={msg}
             placeholder="Type your message here..."
           ></textarea>
-          <Link to="/message-center">
-            <Iconly
-              className="chat-icon"
-              name="PaperUpload"
-              set="light"
-              primaryColor="#5C5C5C"
-              size="medium"
-            />
-          </Link>
-          <Link to="/message-center">
-            <Iconly
-              onClick={handleSendMessage}
-              className="send-icon ms-3"
-              name="Send"
-              set="bulk"
-              primaryColor="#5C5C5C"
-              size="medium"
-            />
-          </Link>
+          <Iconly
+            className="chat-icon"
+            name="PaperUpload"
+            set="light"
+            primaryColor="#5C5C5C"
+            size="medium"
+          />
+          <Iconly
+            onClick={handleSendMessage}
+            className="send-icon ms-3"
+            name="Send"
+            set="bulk"
+            primaryColor="#5C5C5C"
+            size="medium"
+          />
         </div>
       </form>
     </div>
