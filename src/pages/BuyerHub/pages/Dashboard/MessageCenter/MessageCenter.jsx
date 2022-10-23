@@ -3,6 +3,7 @@ import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
+import dayjs from "dayjs";
 import TrackImg from "../../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../../assets/img/orders-illus.png";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
@@ -19,6 +20,8 @@ import { axios } from "../../../../../components/baseUrl";
 const MessageCenter = () => {
   const { user } = useContext(GlobalContext);
   const [messages, setMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const scrollRef = useRef();
   const socket = useRef();
 
   const socketEvents = {
@@ -42,20 +45,45 @@ const MessageCenter = () => {
         const {
           data: { data },
         } = await axios.get("/message/receive-message");
-        console.log({ data });
-      } catch (error) {}
+        console.log(data);
+        setMessages(data);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on(socketEvents.receiveMessage, (msg) => {
+        setArrivalMessage({ fromSelf: false, message: msg, id: Date.now() });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  // useEffect(() => {
+  //   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  // }, [messages]);
 
   const handleSendMsg = async (msg) => {
     try {
       const payload = {
-        to: user.id,
         from: user.id,
         message: msg,
+        messageType: "MESSAGE",
       };
 
-      socket.current.emit("send-message", payload);
+      socket.current.emit(socketEvents.sendMessage, payload);
+
+      axios.post("/message/send-message", payload);
+
+      const msgs = [...messages];
+      msgs.push({ fromSelf: true, message: msg });
+      setMessages(msgs);
     } catch (error) {
       console.log(error);
     }
@@ -142,24 +170,22 @@ const MessageCenter = () => {
                   <div className="chat-area">
                     <div className="message-area">
                       <ChatOrder />
-
-                      <div className="chat-msg sender">
-                        <p>
-                          Very Random text between tofa source pro and the buyer
-                          trying to conclude a transaction, Very Random text
-                          between tofa source pro and the buyer trying
-                        </p>
-                        <p className="chat-timestamp">11:20 am</p>
-                      </div>
-                      <div className="chat-msg receiver">
-                        <p>
-                          Very Random text between tofa source pro and the buyer
-                          trying to conclude a transaction, Very Random text
-                          between tofa source pro and the buyer trying to
-                          conclude a transaction.
-                        </p>
-                        <p className="chat-timestamp">11:25 am</p>
-                      </div>
+                      {messages.map((message) => {
+                        return (
+                          <div
+                            className={`chat-msg ${
+                              message.fromSelf ? "sender" : "receiver"
+                            }`}
+                            key={message.id}
+                            ref={scrollRef}
+                          >
+                            <p>{message.message}</p>
+                            <p className="chat-timestamp">
+                              {dayjs(message.createdAt).format("hh:mm a")}
+                            </p>
+                          </div>
+                        );
+                      })}
                     </div>
 
                     <ChatInput handleSendMsg={handleSendMsg} />
