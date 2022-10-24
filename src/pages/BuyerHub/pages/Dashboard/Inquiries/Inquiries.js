@@ -1,16 +1,42 @@
-import React, { useMemo, useState, useContext } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom";
-import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
+import { axios } from "../../../../../components/baseUrl.jsx";
 
 import "../Dashboard.css";
-import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import PaginationComponent from "../components/Pagination";
 import SearchInput from "../components/SearchInput";
 
 const Inquiries = () => {
-  const { userEnquireSummary, allUserEnquire } = useContext(GlobalContext);
+  const [userEnquireSummary, setUserEnquireSummary] = useState("");
+  const [allUserEnquire, setAllUserEnquire] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/enquiry-summary`)
+      .then((response) => {
+        setUserEnquireSummary(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading inquiry summary", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/all-enquiries`)
+      .then((response) => {
+        setAllUserEnquire(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading all inquires", error);
+      });
+  }, []);
 
   const enquireSummary =
     userEnquireSummary.total_pending_enquiries +
@@ -45,7 +71,6 @@ const Inquiries = () => {
       } else if (computedInquiry.length > 0) {
         setNoMatch(false);
       }
-      console.log("search", search);
     } else {
       setNoMatch(false);
     }
@@ -57,6 +82,10 @@ const Inquiries = () => {
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
   }, [allUserEnquire, currentPage, search]);
+
+  if (loading) {
+    return <div className="loader mx-auto" align="center" id="loader"></div>;
+  }
 
   return (
     <div>
@@ -136,7 +165,7 @@ const Inquiries = () => {
           </div>
 
           <h1 className="section-title">All Inquiries</h1>
-          {allUserEnquire && allUserEnquire.length < 3 ? (
+          {allUserEnquire && allUserEnquire.length < 1 ? (
             <div className="empty-state">
               <h3>There are no inquiries</h3>
               <p>

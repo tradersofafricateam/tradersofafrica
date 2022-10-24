@@ -7,7 +7,7 @@ import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import axios from "axios";
 
 const Sidebar = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, userLoading, setUser } = useContext(GlobalContext);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -16,12 +16,17 @@ const Sidebar = () => {
     axios
       .get(`/auth/signout`)
       .then((response) => {
-        localStorage.removeItem("user");
+        setUser(null);
+        localStorage.setItem("user", false);
       })
       .catch((error) => {
         console.log(error.response.data);
       });
   };
+
+  if (userLoading) {
+    return <div className="loader mx-auto" align="center" id="loader"></div>;
+  }
 
   return (
     <>
