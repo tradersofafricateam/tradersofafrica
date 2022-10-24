@@ -75,6 +75,7 @@ const MessageCenter = () => {
         from: user.id,
         message: msg,
         messageType: "MESSAGE",
+        sender: user.type,
       };
 
       socket.current.emit(socketEvents.sendMessage, payload);
