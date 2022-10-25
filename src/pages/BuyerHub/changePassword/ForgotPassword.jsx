@@ -6,21 +6,26 @@ import { useNavigate } from "react-router-dom";
 import "../BuyerMain.css";
 import LogoWhite from "../../../assets/img/icons/logo-white.png";
 import { axios } from "../../../components/baseUrl";
-import { Modal } from "antd";
-import "antd/dist/antd.css";
+
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { Store } from "react-notifications-component";
+
+// import { Modal } from "antd";
+// import "antd/dist/antd.css";
 import { Iconly } from "react-iconly";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
+  // const [message, setMessage] = useState("");
+  // const [showMessage, setShowMessage] = useState(false);
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-  const handleCancel = () => {
-    setShowMessage(false);
-  };
+  // const handleCancel = () => {
+  //   setShowMessage(false);
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -32,15 +37,47 @@ export default function ForgotPassword() {
         forgotPassword
       );
       console.log(data);
-      setShowMessage(true);
-      setMessage(`A password reset link has been sent to ${email}`);
+      setEmail("");
+      Store.addNotification({
+        title: "Successful!",
+        message: `A password reset link has been sent to ${email}`,
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+      // setShowMessage(true);
+      // setMessage(`A password reset link has been sent to ${email}`);
     } catch (error) {
       console.log(error);
+      Store.addNotification({
+        title: "Failed!",
+        message: "Try Again.",
+        type: "danger",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
     }
   };
 
   return (
     <section className="w-100" id="password-page">
+      <ReactNotifications />
       <section className="row m-0 ">
         <div className="col-lg-6 d-none d-lg-block p-0">
           <div className="map-img">
@@ -53,10 +90,7 @@ export default function ForgotPassword() {
         <div className="col-lg-6 p-0">
           <main className="row auth-header" id="header-info">
             <div className="col-lg-6 col-3">
-              <button
-                className="back-btn d-flex"
-                onClick={() => navigate(-1)}
-              >
+              <button className="back-btn d-flex" onClick={() => navigate(-1)}>
                 <Iconly
                   className="me-2 auth-back-btn"
                   name="ChevronLeft"
@@ -69,7 +103,7 @@ export default function ForgotPassword() {
             </div>
             <div className="col-lg-6 col-9 return-to" id="header-text">
               <a href="/login" style={{ color: "rgb(201, 79, 5)" }}>
-                  Return to login
+                Return to login
               </a>
             </div>
           </main>
@@ -77,8 +111,9 @@ export default function ForgotPassword() {
             <div className="mt-3">
               <h2>Reset Password</h2>
               <p className="mt-1 mb-4">
-                Please enter the e-mail address associated with your account. We will send you a link to this e-mail address to reset
-                your password
+                Please enter the e-mail address associated with your account. We
+                will send you a link to this e-mail address to reset your
+                password
               </p>
             </div>
             <form onSubmit={handleSubmit} className="password-form">
@@ -93,6 +128,7 @@ export default function ForgotPassword() {
                   value={email}
                   onChange={handleEmail}
                   placeholder="Enter your email address"
+                  required
                 />
               </div>
 
@@ -105,14 +141,14 @@ export default function ForgotPassword() {
                   Reset Password
                 </button>
               </div>
-              <Modal
+              {/* <Modal
                 title=""
                 visible={showMessage ? true : false}
                 footer={null}
                 onCancel={handleCancel}
               >
                 {message}
-              </Modal>
+              </Modal> */}
             </form>
           </div>
         </div>

@@ -2,14 +2,16 @@ import React from "react";
 import { useState } from "react";
 import LogoWhite from "../../../assets/img/icons/logo-white.png";
 import "./password.css";
-import backIcon from "../../../assets/img/back-icon.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import "../BuyerMain.css";
 import { axios } from "../../../components/baseUrl";
-import Icon, { EyeOutlined } from "@ant-design/icons";
-import { Button, Modal } from "antd";
+import Icon from "@ant-design/icons";
+
 import "antd/dist/antd.css";
 import { Iconly } from "react-iconly";
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { Store } from "react-notifications-component";
 
 export default function ResetPassword() {
   const ShowPasswordIcon = (props) => {
@@ -37,8 +39,6 @@ export default function ResetPassword() {
   console.log(resetToken);
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [passwordSuccess, setPasswordSuccess] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
   const [linkExpire, setLinkExpire] = useState("");
   const [inputType, setInputType] = useState("password");
   const [confirmInputType, setConfirmInputType] = useState("password");
@@ -62,9 +62,6 @@ export default function ResetPassword() {
     confirmInputType === "password"
       ? setConfirmInputType("text")
       : setConfirmInputType("password");
-  };
-  const handleCancel = () => {
-    setShowMessage(false);
   };
   const navigate = useNavigate();
   const handleValidation = (evnt) => {
@@ -116,26 +113,50 @@ export default function ResetPassword() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (passwordInput.confirmPassword !== passwordInput.password) {
+      setConfirmPasswordError("Confirm password is not matched");
+    }
     try {
       const changePassword = {
-        password: passwordInput,
+        password: passwordInput.password,
       };
       const { data } = await axios.post(
         `/auth/reset-password/${resetToken}`,
         changePassword
       );
       console.log(data);
-      setShowMessage(true);
-      setPasswordSuccess(`Your Password have been updated successfully`);
+      setPasswordInput({
+        password: "",
+        confirmPassword: "",
+      });
+      Store.addNotification({
+        title: "Successful!",
+        message: `Your Password has been updated successfully`,
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+      setTimeout(() => {
+        navigate(`/login`);
+      }, 3800);
     } catch (error) {
       console.log(error);
-      setLinkExpire("Refresh Token Expire");
+      setLinkExpire("Your token has expired");
     }
   };
 
   return (
     <>
       <section className="w-100">
+        <ReactNotifications />
         <section className="row m-0">
           <div className="col-lg-6 d-none d-lg-block p-0">
             <div className="map-img">
@@ -161,6 +182,11 @@ export default function ResetPassword() {
                   />
                   <a href="#">Back</a>
                 </button>
+              </div>
+              <div className="col-lg-6 col-9 return-to" id="header-text">
+                <a href="/login" style={{ color: "rgb(201, 79, 5)" }}>
+                  Return to login
+                </a>
               </div>
             </main>
             <div className="password-content">
@@ -192,20 +218,20 @@ export default function ResetPassword() {
                     >
                       {inputType === "password" ? (
                         <Iconly
-                            className="mt-1 pt-1"
-                            name="Hide"
-                            set="light"
-                            size="medium"
-                            color="#5C5C5C"
-                          />
+                          className="mt-1 pt-1"
+                          name="Hide"
+                          set="light"
+                          size="medium"
+                          color="#5C5C5C"
+                        />
                       ) : (
                         <Iconly
-                            className="mt-1 pt-1"
-                            name="Show"
-                            set="light"
-                            size="medium"
-                            color="#5C5C5C"
-                          />
+                          className="mt-1 pt-1"
+                          name="Show"
+                          set="light"
+                          size="medium"
+                          color="#5C5C5C"
+                        />
                       )}
                     </span>
                   </div>
@@ -231,20 +257,20 @@ export default function ResetPassword() {
                     >
                       {confirmInputType === "password" ? (
                         <Iconly
-                            className="mt-1 pt-1"
-                            name="Hide"
-                            set="light"
-                            size="medium"
-                            color="#5C5C5C"
-                          />
+                          className="mt-1 pt-1"
+                          name="Hide"
+                          set="light"
+                          size="medium"
+                          color="#5C5C5C"
+                        />
                       ) : (
                         <Iconly
-                            className="mt-1 pt-1"
-                            name="Show"
-                            set="light"
-                            size="medium"
-                            color="#5C5C5C"
-                          />
+                          className="mt-1 pt-1"
+                          name="Show"
+                          set="light"
+                          size="medium"
+                          color="#5C5C5C"
+                        />
                       )}
                     </span>
                   </div>
@@ -255,22 +281,14 @@ export default function ResetPassword() {
                   <button className="btn btn-white button">
                     Change Password
                   </button>
-                  <div>
+                  {/* <div>
                     <p className="errorMessages">{linkExpire}</p>
-                  </div>
+                  </div> */}
                 </div>
               </form>
             </div>
           </div>
         </section>
-        <Modal
-          title=""
-          visible={showMessage ? true : false}
-          footer={null}
-          onCancel={handleCancel}
-        >
-          {passwordSuccess}
-        </Modal>
       </section>
     </>
   );

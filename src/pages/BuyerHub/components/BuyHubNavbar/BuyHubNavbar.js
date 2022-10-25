@@ -9,32 +9,51 @@ import Logo from "../../../../assets/img/logo.png";
 import ChevronDown from "../../../../assets/img/icons/chevron-down-icon.svg";
 
 const BuyHubNavbar = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const { user } = useContext(GlobalContext);
+  // const [currentUser, setCurrentUser] = useState(null);
+  const { user, userLoading, setUser } = useContext(GlobalContext);
+  console.log("user", user);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("user"));
-    if (currentUser) {
-      setCurrentUser(currentUser);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const currentUser = JSON.parse(localStorage.getItem("user"));
+  //   if (currentUser) {
+  //     setCurrentUser(currentUser);
+  //   }
+  // }, []);
 
   const handleSignOut = () => {
     axios
       .get(`/auth/signout`)
       .then((response) => {
-        setCurrentUser(null);
-        localStorage.removeItem("user");
+        console.log("logout", response.data);
+        setUser(null);
+        localStorage.setItem("user", false);
       })
       .catch((error) => {
         console.log(error.response.data);
       });
   };
 
+  if (userLoading) {
+    return (
+      <div
+        className="loader mx-auto"
+        align="center"
+        id="loader"
+        style={{
+          position: "absolute",
+          top: "calc(50% - 60px)",
+          left: "calc(50% - 60px)",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      ></div>
+    );
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light main-nav shadow-sm">
@@ -54,7 +73,7 @@ const BuyHubNavbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {currentUser ? (
+            {user ? (
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
                 {/* When user is logged in */}
                 <li className="nav-item">

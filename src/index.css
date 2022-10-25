@@ -5,6 +5,27 @@
   width: 120px;
   height: 120px;
   animation: spin 1s linear infinite;
+  position: absolute;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.loading {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #dc4d04;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 @keyframes spin {
@@ -14,4 +35,14 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.empty-state {
+  text-align: center;
+  align-items: center;
+}
+
+.empty-state > h3,
+p {
+  color: #282828;
 }

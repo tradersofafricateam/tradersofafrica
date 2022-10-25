@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./login.css";
 import backIcon from "../../assets/img/back-icon.svg";
 import LogoWhite from "../../assets/img/icons/logo-white.png";
@@ -10,6 +9,7 @@ import Icon, { EyeOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
 import { Iconly } from "react-iconly";
+import { GlobalContext } from "../../components/utils/GlobalState";
 
 export default function Login() {
   const ShowPasswordIcon = (props) => {
@@ -38,7 +38,6 @@ export default function Login() {
   const { buyerId, token } = useParams();
   const [error, setError] = useState({});
   const navigate = useNavigate();
-  const [user, setUser] = useState(false);
   // const location = useLocation();
   // const from = location.state?.from?.pathname || "/buy-commodities";
 
@@ -49,6 +48,9 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  const { setUser } = useContext(GlobalContext);
+
   const handlePasswordToggle = (e) => {
     inputType === "password" ? setInputType("text") : setInputType("password");
   };
@@ -79,8 +81,8 @@ export default function Login() {
       const {
         data: { data },
       } = await axios.post("/auth/signin-buyer", loginDetails);
-      localStorage.setItem("user", JSON.stringify(loginDetails.email));
-      console.log("login response", data);
+      setUser(data);
+      localStorage.setItem("user", true);
       navigate("/buy-commodities");
     } catch (err) {
       localStorage.setItem("user", false);

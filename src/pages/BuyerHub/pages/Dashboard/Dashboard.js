@@ -2,11 +2,10 @@ import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "./components/Sidebar";
 import { Link } from "react-router-dom";
+import { axios } from "./../../../../components/baseUrl.jsx";
 
 import TrackImg from "../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../assets/img/orders-illus.png";
-import ProductImgTable from "../../../../assets/img/products/p-img1.png";
-
 import "./Dashboard.css";
 
 import { GlobalContext } from "../../../../components/utils/GlobalState";
@@ -14,15 +13,52 @@ import PaginationComponent from "./components/Pagination";
 import SearchInput from "./components/SearchInput";
 
 const Dashboard = () => {
-  const {
-    user,
-    userLoading,
-    userOrderSummary,
-    userEnquireSummary,
-    allUserOrder,
-    allUserEnquire,
-  } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
   console.log("all orders", allUserOrder);
+
+  const [userOrderSummary, setUserOrderSummary] = useState("");
+  const [userEnquireSummary, setUserEnquireSummary] = useState("");
+  const [allUserOrder, setAllUserOrder] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/order-summary`)
+      .then((response) => {
+        setUserOrderSummary(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading order summary", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/enquiry-summary`)
+      .then((response) => {
+        setUserEnquireSummary(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading inquiry summary", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/all-orders`)
+      .then((response) => {
+        setAllUserOrder(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading all orders", error);
+      });
+  }, []);
 
   //summary for all orders and enquire
   const orderSummary =
@@ -46,6 +82,7 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const ITEMS_PER_PAGE = 10;
+  const [noMatch, setNoMatch] = useState(false);
 
   const ordersData = useMemo(() => {
     let computedOrders = allUserOrder;
@@ -60,6 +97,13 @@ const Dashboard = () => {
             .includes(search.toLowerCase()) ||
           order.status.toLowerCase().includes(search.toLowerCase())
       );
+      if (computedOrders.length < 1) {
+        setNoMatch(true);
+      } else if (computedOrders.length > 0) {
+        setNoMatch(false);
+      }
+    } else {
+      setNoMatch(false);
     }
 
     setTotalItems(computedOrders.length);
@@ -74,22 +118,8 @@ const Dashboard = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  if (userLoading) {
-    return (
-      <div
-        className="loader mx-auto"
-        align="center"
-        id="loader"
-        style={{
-          position: "absolute",
-          top: "calc(50% - 60px)",
-          left: "calc(50% - 60px)",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      ></div>
-    );
+  if (loading) {
+    return <div className="loader mx-auto" align="center" id="loader"></div>;
   }
   return (
     <div>
@@ -130,7 +160,6 @@ const Dashboard = () => {
         <main className="main">
           {user.lastLoggedIn === null && (
             <div className="info-cards">
-
               <div className="card">
                 <div>
                   <h2>Track it all!</h2>
@@ -141,7 +170,7 @@ const Dashboard = () => {
                 </div>
                 <img src={TrackImg} alt="..." />
               </div>
-              
+
               <div className="card">
                 <div>
                   <h2>Monitor Your Orders</h2>
@@ -162,7 +191,8 @@ const Dashboard = () => {
                 <h2>Total Orders</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{orderSummary}</h3>
+                  {orderSummary === NaN ? <h3>0</h3> : <h3>{orderSummary}</h3>}
+
                   <Link className="overview-card-link" to="/orders">
                     View all
                   </Link>
@@ -174,98 +204,125 @@ const Dashboard = () => {
                 <h2>Total Inquiries</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>{enquireSummary}</h3>
+                  {enquireSummary === NaN ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{enquireSummary}</h3>
+                  )}
                   <Link className="overview-card-link" to="/inquiries">
                     View all
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="overview-card">
+            {/* <div className="overview-card">
               <div>
                 <h2>Total Quotes</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <p>Detailed transaction history is on the order page</p>
                 <div class="d-flex justify-content-between mt-4">
                   <h3>5</h3>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <h1 className="section-title">Latest Orders</h1>
-          <div className="main-overview">
-            <div className="overview-card no-padding">
-              <div class="table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Product Info</th>
-                      <th scope="col">Product Cost</th>
-                      <th scope="col">Shipping Terms</th>
-                      <th scope="col">Payment Terms</th>
-                      <th scope="col">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {ordersData.map((orders, index) => (
-                      <tr key={index}>
-                        <td>
-                          <div className="d-flex">
-                            <div className="flex-shrink-0">
-                              <img
-                                className="table-product-img"
-                                src={orders.product.productImages[0].image}
-                                alt="product name"
-                              />
-                            </div>
-                            <div className="flex-grow-1 ms-3">
-                              <p>
-                                {orders.product.productName
-                                  ? Capitalize(orders.product.productName)
-                                  : ""}
-                              </p>
-                              <p className="table-order-no">
-                                Order {orders.orderNumber}
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          {orders.product.currency}{" "}
-                          {numberWithCommas(orders.cost)}
-                        </td>
-                        <td>{orders.shippingType}</td>
-                        <td>{orders.paymentTerm}</td>
-                        <td>
-                          {orders.status === "PENDING" && (
-                            <div className="text-warning ">Pending</div>
-                          )}
-                          {orders.status === "PROCESSING" && (
-                            <div className="text-primary ">Processing</div>
-                          )}
-                          {orders.status === "SHIPPED" && (
-                            <div className="text-info">Shipped</div>
-                          )}
-                          {orders.status === "DELIVERED" && (
-                            <div className="text-success">Delivery</div>
-                          )}
-                          {orders.status === "CANCELLED" && (
-                            <div className="text-danger">Cancelled</div>
-                          )}
-                        </td>
+          {allUserOrder && allUserOrder.length < 1 ? (
+            <div className="empty-state">
+              <h3>Welcome to your Dashboard</h3>
+              <p>
+                Access history to all your <Link to="/orders">Orders</Link> and{" "}
+                <Link to="/inquiries">Inquiries</Link> , chat a{" "}
+                <Link to="/message-center">SourcePro</Link>,{" "}
+                <Link to="/settings">
+                  edit your name, email and password here.
+                </Link>
+              </p>
+            </div>
+          ) : (
+            <div className="main-overview">
+              <div className="overview-card no-padding">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product Info</th>
+                        <th scope="col">Product Cost</th>
+                        <th scope="col">Shipping Terms</th>
+                        <th scope="col">Payment Terms</th>
+                        <th scope="col">Status</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {ordersData.map((orders, index) => (
+                        <tr key={index}>
+                          <td>
+                            <div className="d-flex">
+                              <div className="flex-shrink-0">
+                                <img
+                                  className="table-product-img"
+                                  src={orders.product.productImages[0].image}
+                                  alt="product name"
+                                />
+                              </div>
+                              <div className="flex-grow-1 ms-3">
+                                <p>
+                                  {orders.product.productName
+                                    ? Capitalize(orders.product.productName)
+                                    : ""}
+                                </p>
+                                <p className="table-order-no">
+                                  Order {orders.orderNumber}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            {orders.product.currency}{" "}
+                            {numberWithCommas(orders.cost)}
+                          </td>
+                          <td>{orders.shippingType}</td>
+                          <td>{orders.paymentTerm}</td>
+                          <td>
+                            {orders.status === "PENDING" && (
+                              <div className="text-warning ">Pending</div>
+                            )}
+                            {orders.status === "PROCESSING" && (
+                              <div className="text-primary ">Processing</div>
+                            )}
+                            {orders.status === "SHIPPED" && (
+                              <div className="text-info">Shipped</div>
+                            )}
+                            {orders.status === "DELIVERED" && (
+                              <div className="text-success">Delivery</div>
+                            )}
+                            {orders.status === "CANCELLED" && (
+                              <div className="text-danger">Cancelled</div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
-          <PaginationComponent
-            total={totalItems}
-            itemsPerPage={ITEMS_PER_PAGE}
-            currentPage={currentPage}
-            onPageChange={(page) => setCurrentPage(page)}
-          />
+          )}
+          {noMatch === true ? (
+            <div className="empty-state">
+              <h4>No results found</h4>
+              <p>
+                No order matched your criteria. Try searching for something else
+              </p>
+            </div>
+          ) : (
+            <PaginationComponent
+              total={totalItems}
+              itemsPerPage={ITEMS_PER_PAGE}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          )}
         </main>
       </div>
     </div>
