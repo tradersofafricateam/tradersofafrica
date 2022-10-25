@@ -9,20 +9,12 @@ import Logo from "../../../../assets/img/logo.png";
 import ChevronDown from "../../../../assets/img/icons/chevron-down-icon.svg";
 
 const BuyHubNavbar = () => {
-  // const [currentUser, setCurrentUser] = useState(null);
   const { user, userLoading, setUser } = useContext(GlobalContext);
   console.log("user", user);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
-
-  // useEffect(() => {
-  //   const currentUser = JSON.parse(localStorage.getItem("user"));
-  //   if (currentUser) {
-  //     setCurrentUser(currentUser);
-  //   }
-  // }, []);
 
   const handleSignOut = () => {
     axios
@@ -38,21 +30,7 @@ const BuyHubNavbar = () => {
   };
 
   if (userLoading) {
-    return (
-      <div
-        className="loader mx-auto"
-        align="center"
-        id="loader"
-        style={{
-          position: "absolute",
-          top: "calc(50% - 60px)",
-          left: "calc(50% - 60px)",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      ></div>
-    );
+    return <div className="loader mx-auto" align="center" id="loader"></div>;
   }
   return (
     <>

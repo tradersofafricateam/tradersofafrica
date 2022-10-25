@@ -17,8 +17,8 @@
   border: 5px solid #f3f3f3;
   border-top: 5px solid #dc4d04;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   animation: spin 1s linear infinite;
   position: absolute;
   top: calc(50% - 60px);
