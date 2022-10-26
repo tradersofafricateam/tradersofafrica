@@ -103,7 +103,14 @@ const TrendingProduct = ({ sectionTitle }) => {
                   })}
             </div>
           ) : (
-            <div className="loading mx-auto" align="center" id="loading"></div>
+            <div class="gooey">
+              <span class="dot"></span>
+              <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
           )}
         </div>
       </div>
