@@ -5,6 +5,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, p {
   
 * {
     font-family: 'Mulish', sans-serif; 
+    scroll-behavior: smooth;
 }
 
 .js-scroll {
@@ -133,17 +134,19 @@ input, select, textarea {
 }
 
 .product-card {
-    width: 238px;
+    width: 245px;
     overflow: hidden;
     margin-right: 30px;
     margin-bottom: 50px;
     flex: 0 0 auto;
     cursor: pointer;
-    opacity:.95;
+    background-color: rgba(205, 219, 227, 0.1);
+    border-radius: 8px;
 }
 
 .product-card:hover {
-    opacity:1;
+    background-color: #FFFFFF;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 8%);
 }
 
 .product-card:hover .product-card-info .product-name {
@@ -151,7 +154,7 @@ input, select, textarea {
 }
 
 .product-card .product-card-img {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     position: relative;
 }
 
@@ -168,6 +171,10 @@ input, select, textarea {
 .product-card .product-card-img img {
     height: 200px;
     border-radius: 6px 6px 0 0;
+}
+
+.product-card .product-card-info {
+    padding: 0 15px;
 }
 
 .product-card .product-card-info .product-name {
@@ -211,6 +218,31 @@ input, select, textarea {
 }
 
 /* End of Product Card */
+
+
+/* Paginantion */
+
+.pagination .page-item {
+    margin:0 10px;
+}
+
+.pagination .page-item .page-link{
+    border-radius: 4px!important;
+    border:none!important;
+    background-color: transparent;
+    font-size: .9rem;
+    font-weight: 500;
+    color: #7F8D96;
+}
+
+.pagination .page-item .page-link:hover {
+    color:#0083D3;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0083D3;
+    color: #FFFFFF;
+}
 
 
 

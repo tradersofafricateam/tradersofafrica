@@ -170,9 +170,9 @@ body {
     left: 50px;
   }
   
-  .sidenav__list-item:hover {
+  .sidenav-link:hover .sidenav__list-item {
     background-color: rgba(255, 255, 255, 0.05);
-    color: #FFFFFF!;
+    color: #FFFFFF;
     cursor: pointer;
   }
 
@@ -261,7 +261,7 @@ body {
   .overview-card table tbody tr td .table-product-img {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
 
   .overview-card table tbody tr td p {

@@ -4,6 +4,7 @@ import axios from "axios";
 
 import "../../../assets/styles/global.css";
 import "../pages/Details/Details.css";
+import { Iconly } from "react-iconly";
 
 const TrendingProduct = ({ sectionTitle }) => {
   const [product, setProduct] = useState([]);
@@ -29,6 +30,12 @@ const TrendingProduct = ({ sectionTitle }) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
+  const ref = React.useRef(null);
+
+  const scroll = (scrollOffset) => {
+    ref.current.scrollLeft += scrollOffset;
+  };
+
   // if (loading) {
   //   return <div className="loader mx-auto" align="center" id="loader"></div>;
   // }
@@ -41,14 +48,13 @@ const TrendingProduct = ({ sectionTitle }) => {
             <h1>{sectionTitle}</h1>
           </div>
           <div className="col-lg-6" align="right">
-            <Link className="subtitle" to="/">
-              View more
-            </Link>
+              <Iconly onClick={() => scroll(-1070)} className="scroll-icon me-4" name="ChevronLeftCircle" set="two-tone" size="large" color="#282828" />
+              <Iconly onClick={() => scroll(1070)} className="scroll-icon" name="ChevronRightCircle" set="two-tone" size="large" color="#282828" />
           </div>
         </div>
         <div className="row main-container">
           {!loading ? (
-            <div className="p-container">
+            <div className="p-container" ref={ref}>
               {product &&
                 product
                   .map((item) => ({ item, sort: Math.random() }))

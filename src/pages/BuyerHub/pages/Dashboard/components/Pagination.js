@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState, useMemo } from "react";
 import Pagination from "react-bootstrap/Pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Iconly } from "react-iconly";
 
 const PaginationComponent = ({
   total = 0,
@@ -36,18 +37,15 @@ const PaginationComponent = ({
   if (totalPages === 0) return null;
 
   return (
-    <Pagination className="pagination justify-content-center">
-      <Pagination.Prev
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      />
+    <Pagination className="pagination justify-content-left">
+      <Iconly onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} className="mt-1 pt-1" name="ChevronLeft" set="light" size="medium" color="#0B2239" />
       {paginationItems}
-      <Pagination.Next
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      />
+      <Iconly onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} className="mt-1 pt-1" name="ChevronRight" set="light" size="medium" color="#0B2239" />
     </Pagination>
   );
 };
 
 export default PaginationComponent;
+
+
+
