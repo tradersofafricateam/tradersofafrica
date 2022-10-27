@@ -160,21 +160,7 @@ const BuyerHome = () => {
   // };
 
   if (userLoading) {
-    return (
-      <div
-        className="loader mx-auto"
-        align="center"
-        id="loader"
-        style={{
-          position: "absolute",
-          top: "calc(50% - 60px)",
-          left: "calc(50% - 60px)",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      ></div>
-    );
+    return <div className="loader mx-auto" align="center" id="loader"></div>;
   }
   return (
     <div>

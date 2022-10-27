@@ -2,10 +2,7 @@ import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
-
-import TrackImg from "../../../../../assets/img/track-illus.png";
-import OrdersImg from "../../../../../assets/img/orders-illus.png";
-import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
+import { axios } from "../../../../../components/baseUrl.jsx";
 
 import "../Dashboard.css";
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
@@ -19,9 +16,38 @@ const Orders = () => {
   const ITEMS_PER_PAGE = 10;
   const [noMatch, setNoMatch] = useState(false);
 
-  const { userLoading, userOrderSummary, allUserOrder } = useContext(
-    GlobalContext
-  );
+  // const { userLoading, userOrderSummary, allUserOrder } = useContext(
+  //   GlobalContext
+  // );
+  const [userOrderSummary, setUserOrderSummary] = useState("");
+  const [allUserOrder, setAllUserOrder] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/order-summary`)
+      .then((response) => {
+        setUserOrderSummary(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading order summary", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/all-orders`)
+      .then((response) => {
+        setAllUserOrder(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading all orders", error);
+      });
+  }, []);
   console.log("order page", allUserOrder);
 
   const orderSummary =
@@ -70,22 +96,8 @@ const Orders = () => {
     );
   }, [allUserOrder, currentPage, search, noMatch]);
 
-  if (userLoading) {
-    return (
-      <div
-        className="loader mx-auto"
-        align="center"
-        id="loader"
-        style={{
-          position: "absolute",
-          top: "calc(50% - 60px)",
-          left: "calc(50% - 60px)",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      ></div>
-    );
+  if (loading) {
+    return <div className="loader mx-auto" align="center" id="loader"></div>;
   }
   return (
     <div>
@@ -128,7 +140,11 @@ const Orders = () => {
               <div>
                 <h2>Total Orders</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  {orderSummary === NaN ? <h3>0</h3> : <h3>{orderSummary}</h3>}
+                  {orderSummary === NaN || null ? (
+                    <h3>0</h3>
+                  ) : (
+                    <h3>{orderSummary}</h3>
+                  )}
                 </div>
               </div>
             </div>
@@ -136,7 +152,7 @@ const Orders = () => {
               <div>
                 <h2>Pending Orders</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  {userOrderSummary.total_pending_orders === NaN ? (
+                  {userOrderSummary.total_pending_orders < 1 ? (
                     <h3>0</h3>
                   ) : (
                     <h3>{userOrderSummary.total_pending_orders}</h3>
@@ -148,7 +164,7 @@ const Orders = () => {
               <div>
                 <h2>Delivered Orders</h2>
                 <div class="d-flex justify-content-between mt-4">
-                  {userOrderSummary.total_delivered_orders === NaN ? (
+                  {userOrderSummary.total_delivered_orders < 1 ? (
                     <h3>0</h3>
                   ) : (
                     <h3>{userOrderSummary.total_delivered_orders}</h3>

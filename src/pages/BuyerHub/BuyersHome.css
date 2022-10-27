@@ -139,6 +139,10 @@
     color: #FFFFFF;
 }
 
+.scroll-icon {
+    cursor: pointer;
+}
+
 
 @media (max-width: 768px) {
 

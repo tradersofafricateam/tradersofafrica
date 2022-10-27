@@ -2,11 +2,10 @@ import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "./components/Sidebar";
 import { Link } from "react-router-dom";
+import { axios } from "./../../../../components/baseUrl.jsx";
 
 import TrackImg from "../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../assets/img/orders-illus.png";
-import ProductImgTable from "../../../../assets/img/products/p-img1.png";
-
 import "./Dashboard.css";
 
 import { GlobalContext } from "../../../../components/utils/GlobalState";
@@ -14,15 +13,52 @@ import PaginationComponent from "./components/Pagination";
 import SearchInput from "./components/SearchInput";
 
 const Dashboard = () => {
-  const {
-    user,
-    userLoading,
-    userOrderSummary,
-    userEnquireSummary,
-    allUserOrder,
-    allUserEnquire,
-  } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
   console.log("all orders", allUserOrder);
+
+  const [userOrderSummary, setUserOrderSummary] = useState("");
+  const [userEnquireSummary, setUserEnquireSummary] = useState("");
+  const [allUserOrder, setAllUserOrder] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/order-summary`)
+      .then((response) => {
+        setUserOrderSummary(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading order summary", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/enquiry-summary`)
+      .then((response) => {
+        setUserEnquireSummary(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading inquiry summary", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/buyer-hub/all-orders`)
+      .then((response) => {
+        setAllUserOrder(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error loading all orders", error);
+      });
+  }, []);
 
   //summary for all orders and enquire
   const orderSummary =
@@ -82,7 +118,7 @@ const Dashboard = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  if (userLoading) {
+  if (loading) {
     return <div className="loader mx-auto" align="center" id="loader"></div>;
   }
   return (
@@ -179,15 +215,15 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="overview-card">
+            {/* <div className="overview-card">
               <div>
                 <h2>Total Quotes</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <p>Detailed transaction history is on the order page</p>
                 <div class="d-flex justify-content-between mt-4">
                   <h3>5</h3>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <h1 className="section-title">Latest Orders</h1>
@@ -258,7 +294,7 @@ const Dashboard = () => {
                               <div className="text-info">Shipped</div>
                             )}
                             {orders.status === "DELIVERED" && (
-                              <div className="text-success">Delivery</div>
+                              <div className="text-success">Delivered</div>
                             )}
                             {orders.status === "CANCELLED" && (
                               <div className="text-danger">Cancelled</div>
