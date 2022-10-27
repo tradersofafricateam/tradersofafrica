@@ -56,7 +56,7 @@ const MessageCenter = () => {
   useEffect(() => {
     if (socket.current) {
       socket.current.on(socketEvents.receiveMessage, (msg) => {
-        setArrivalMessage({ fromSelf: false, message: msg, id: Date.now() });
+        setArrivalMessage({ fromSelf: false, message: msg });
       });
     }
   }, []);
@@ -65,11 +65,12 @@ const MessageCenter = () => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
 
-  // useEffect(() => {
-  //   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  // }, [messages]);
+  useEffect(() => {
+    if (scrollRef.current)
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-  const handleSendMsg = async (msg) => {
+  const handleSendMsg = (msg) => {
     try {
       const payload = {
         from: user.id,
@@ -171,13 +172,13 @@ const MessageCenter = () => {
                   <div className="chat-area">
                     <div className="message-area">
                       <ChatOrder />
-                      {messages.map((message) => {
+                      {messages.map((message, index) => {
                         return (
                           <div
                             className={`chat-msg ${
                               message.fromSelf ? "sender" : "receiver"
                             }`}
-                            key={message.id}
+                            key={index}
                             ref={scrollRef}
                           >
                             <p>{message.message}</p>

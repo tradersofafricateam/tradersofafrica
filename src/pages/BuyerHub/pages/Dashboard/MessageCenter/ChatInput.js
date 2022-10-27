@@ -15,6 +15,8 @@ export const ChatInput = ({ handleSendMsg }) => {
     if (msg.length > 0) {
       handleSendMsg(msg);
       setMsg("");
+      const chatInput = document.querySelector("#chatInput");
+      chatInput.focus();
     }
   };
   return (
@@ -38,6 +40,7 @@ export const ChatInput = ({ handleSendMsg }) => {
       <form className="chat-form">
         <div className="chat-input-area d-flex justify-content-between">
           <textarea
+            id="chatInput"
             class="form-control"
             onChange={handleSetMessage}
             value={msg}
