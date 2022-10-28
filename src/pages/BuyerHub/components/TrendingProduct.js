@@ -48,8 +48,8 @@ const TrendingProduct = ({ sectionTitle }) => {
             <h1>{sectionTitle}</h1>
           </div>
           <div className="col-lg-6" align="right">
-              <Iconly onClick={() => scroll(-1070)} className="scroll-icon me-4" name="ChevronLeftCircle" set="two-tone" size="large" color="#282828" />
-              <Iconly onClick={() => scroll(1070)} className="scroll-icon" name="ChevronRightCircle" set="two-tone" size="large" color="#282828" />
+              <Iconly onClick={() => scroll(-275)} className="scroll-icon me-4" name="ChevronLeftCircle" set="two-tone" size="large" color="#282828" />
+              <Iconly onClick={() => scroll(275)} className="scroll-icon" name="ChevronRightCircle" set="two-tone" size="large" color="#282828" />
           </div>
         </div>
         <div className="row main-container">
