@@ -291,9 +291,6 @@ export default function ResetPassword() {
                       </div>
                     )}
                   </button>
-                  {/* <div>
-                    <p className="errorMessages">{linkExpire}</p>
-                  </div> */}
                 </div>
               </form>
             </div>
