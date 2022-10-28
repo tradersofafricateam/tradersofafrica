@@ -18,6 +18,7 @@ import { Iconly } from "react-iconly";
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   // const [message, setMessage] = useState("");
   // const [showMessage, setShowMessage] = useState(false);
   const handleEmail = (e) => {
@@ -27,6 +28,7 @@ export default function ForgotPassword() {
   //   setShowMessage(false);
   // };
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const forgotPassword = {
@@ -56,6 +58,7 @@ export default function ForgotPassword() {
       // setShowMessage(true);
       // setMessage(`A password reset link has been sent to ${email}`);
     } catch (error) {
+      setLoading(false);
       console.log(error);
       Store.addNotification({
         title: "Failed!",
@@ -138,17 +141,16 @@ export default function ForgotPassword() {
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
-                  Reset Password
+                  {!loading ? (
+                    <span> Reset Password</span>
+                  ) : (
+                    <div className="login-btn">
+                      <span className="loading"></span>
+                      <span> Reset</span>
+                    </div>
+                  )}
                 </button>
               </div>
-              {/* <Modal
-                title=""
-                visible={showMessage ? true : false}
-                footer={null}
-                onCancel={handleCancel}
-              >
-                {message}
-              </Modal> */}
             </form>
           </div>
         </div>

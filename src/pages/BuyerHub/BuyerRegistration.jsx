@@ -44,6 +44,7 @@ export default function BuyerRegistration() {
   const [customError, setCustomError] = useState("");
   const navigate = useNavigate();
   const [inputType, setInputType] = useState("password");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setRegisterDetail({ ...registerDetail, [e.target.name]: e.target.value });
@@ -54,6 +55,7 @@ export default function BuyerRegistration() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       console.log(registerDetail);
@@ -71,6 +73,7 @@ export default function BuyerRegistration() {
       console.log(data);
       navigate(`/verify-email/${data.email}`);
     } catch (error) {
+      setLoading(true);
       if (error.response.data.errors[0].field) {
         console.log(error.response.data.errors);
         setFormattedErrors(
@@ -112,10 +115,7 @@ export default function BuyerRegistration() {
         <div className="col-lg-6 sign-up" id="buyer-section">
           <main className="row auth-header" id="header-info">
             <div className="col-lg-6 col-3">
-              <button
-                className="back-btn d-flex"
-                onClick={() => navigate(-1)}
-              >
+              <button className="back-btn d-flex" onClick={() => navigate(-1)}>
                 <Iconly
                   className="me-2 auth-back-btn"
                   name="ChevronLeft"
@@ -226,9 +226,19 @@ export default function BuyerRegistration() {
               )}
               {customError && <p className="errors">{customError}</p>}
 
-              <div className="mt-3">
-                <button type="submit" className="btn btn-danger button">
-                  Register
+              <div className="mt-3 login-btn">
+                <button
+                  type="submit"
+                  className="login-btn btn btn-danger button"
+                >
+                  {!loading ? (
+                    <span>Register</span>
+                  ) : (
+                    <div className="login-btn">
+                      <span className="loading"></span>
+                      <span> Register</span>
+                    </div>
+                  )}
                 </button>
               </div>
             </form>

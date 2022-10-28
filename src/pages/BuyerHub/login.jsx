@@ -38,6 +38,7 @@ export default function Login() {
   const { buyerId, token } = useParams();
   const [error, setError] = useState({});
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   // const location = useLocation();
   // const from = location.state?.from?.pathname || "/buy-commodities";
 
@@ -72,6 +73,7 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const loginDetails = {
@@ -85,6 +87,7 @@ export default function Login() {
       localStorage.setItem("user", true);
       navigate("/buy-commodities");
     } catch (err) {
+      setLoading(false);
       localStorage.setItem("user", false);
       if (err.response.data.errors[0].field) {
         setError(
@@ -228,9 +231,19 @@ export default function Login() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-3">
-                    <button type="submit" className="btn btn-danger button">
-                      Login
+                  <div className="mt-3 login-btn">
+                    <button
+                      type="submit"
+                      className="login-btn btn btn-danger button"
+                    >
+                      {!loading ? (
+                        <span>Login</span>
+                      ) : (
+                        <div className="login-btn">
+                          <span className="loading"></span>
+                          <span>Login</span>
+                        </div>
+                      )}
                     </button>
                   </div>
                 </form>
