@@ -15,6 +15,11 @@ const Orders = () => {
   const [search, setSearch] = useState("");
   const ITEMS_PER_PAGE = 10;
   const [noMatch, setNoMatch] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = (event) => {
+    setIsActive((current) => !current);
+  };
 
   // const { userLoading, userOrderSummary, allUserOrder } = useContext(
   //   GlobalContext
@@ -102,8 +107,16 @@ const Orders = () => {
   return (
     <div>
       <div className="grid-container">
-        <div className="menu-icon">
+        {/* <div className="menu-icon">
           <i className="fas fa-bars header__menu"></i>
+        </div> */}
+        <div
+          className={isActive ? "media-menuu-icon" : "menuu-icon"}
+          onClick={handleClick}
+        >
+          <div className="line line1"></div>
+          <div className="line line2"></div>
+          <div className="line line3"></div>
         </div>
 
         <header className="header">
@@ -132,7 +145,7 @@ const Orders = () => {
           </div>
         </header>
 
-        <Sidebar />
+        <Sidebar isActive={isActive} />
 
         <main className="main">
           <div className="main-overview">

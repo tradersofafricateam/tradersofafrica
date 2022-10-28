@@ -11,6 +11,11 @@ const Inquiries = () => {
   const [userEnquireSummary, setUserEnquireSummary] = useState("");
   const [allUserEnquire, setAllUserEnquire] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = (event) => {
+    setIsActive((current) => !current);
+  };
 
   useEffect(() => {
     axios
@@ -90,8 +95,16 @@ const Inquiries = () => {
   return (
     <div>
       <div className="grid-container">
-        <div className="menu-icon">
+        {/* <div className="menu-icon">
           <i className="fas fa-bars header__menu"></i>
+        </div> */}
+        <div
+          className={isActive ? "media-menuu-icon" : "menuu-icon"}
+          onClick={handleClick}
+        >
+          <div className="line line1"></div>
+          <div className="line line2"></div>
+          <div className="line line3"></div>
         </div>
 
         <header className="header">
@@ -119,7 +132,7 @@ const Inquiries = () => {
           </div>
         </header>
 
-        <Sidebar />
+        <Sidebar isActive={isActive} />
 
         <main className="main">
           <div className="main-overview">
