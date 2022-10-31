@@ -39,7 +39,7 @@ const MessageCenter = () => {
 
   useEffect(() => {
     if (user) {
-      socket.current = io("http://localhost:8081");
+      socket.current = io("http://localhost", { withCredentials: true });
       socket.current.emit(socketEvents.addUser, user.id, user.type);
     }
   }, [user]);
