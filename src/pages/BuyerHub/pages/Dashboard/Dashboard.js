@@ -11,6 +11,7 @@ import "./Dashboard.css";
 import { GlobalContext } from "../../../../components/utils/GlobalState";
 import PaginationComponent from "./components/Pagination";
 import SearchInput from "./components/SearchInput";
+import CardSkeleton from "../CardSkeleton";
 
 const Dashboard = () => {
   const { user } = useContext(GlobalContext);
@@ -124,7 +125,7 @@ const Dashboard = () => {
   }
 
   if (loading) {
-    return <div className="loader mx-auto" align="center" id="loader"></div>;
+    return <CardSkeleton />;
   }
   return (
     <div>

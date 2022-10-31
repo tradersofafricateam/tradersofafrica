@@ -16,6 +16,7 @@ import "./Details.css";
 import { GlobalContext } from "../../../../components/utils/GlobalState";
 import TrendingProduct from "../../components/TrendingProduct";
 import CommodityInsight from "../../components/CommodityInsight";
+import CardSkeleton from "../CardSkeleton";
 
 const Details = () => {
   const { user, userLoading } = useContext(GlobalContext);
@@ -147,21 +148,7 @@ const Details = () => {
   }, [productId]);
 
   if (isLoading || userLoading) {
-    return (
-      <div
-        className="loader mx-auto"
-        align="center"
-        id="loader"
-        style={{
-          position: "absolute",
-          top: "calc(50% - 60px)",
-          left: "calc(50% - 60px)",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      ></div>
-    );
+    return <CardSkeleton />;
   }
   return (
     <div>

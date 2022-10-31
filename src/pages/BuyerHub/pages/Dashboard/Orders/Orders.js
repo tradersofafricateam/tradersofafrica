@@ -8,6 +8,7 @@ import "../Dashboard.css";
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import SearchInput from "../components/SearchInput";
 import PaginationComponent from "../components/Pagination";
+import CardSkeleton from "../../CardSkeleton";
 
 const Orders = () => {
   const [totalItems, setTotalItems] = useState(0);
@@ -102,7 +103,7 @@ const Orders = () => {
   }, [allUserOrder, currentPage, search, noMatch]);
 
   if (loading) {
-    return <div className="loader mx-auto" align="center" id="loader"></div>;
+    return <CardSkeleton />;
   }
   return (
     <div>

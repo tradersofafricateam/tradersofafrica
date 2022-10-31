@@ -6,6 +6,7 @@ import { axios } from "../../../../../components/baseUrl.jsx";
 import "../Dashboard.css";
 import PaginationComponent from "../components/Pagination";
 import SearchInput from "../components/SearchInput";
+import CardSkeleton from "../../CardSkeleton";
 
 const Inquiries = () => {
   const [userEnquireSummary, setUserEnquireSummary] = useState("");
@@ -89,7 +90,7 @@ const Inquiries = () => {
   }, [allUserEnquire, currentPage, search]);
 
   if (loading) {
-    return <div className="loader mx-auto" align="center" id="loader"></div>;
+    return <CardSkeleton />;
   }
 
   return (

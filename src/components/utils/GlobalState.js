@@ -9,6 +9,8 @@ export const GlobalContext = createContext();
 const GlobalState = ({ children }) => {
   const [userLoading, setUserLoading] = useState(false);
   const [user, setUser] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState([]);
 
   const getUser = () => {
     axios
@@ -23,6 +25,21 @@ const GlobalState = ({ children }) => {
       });
   };
 
+  const getData = async () => {
+    try {
+      axios.get("/product").then((response) => {
+        setProduct(response.data.data);
+        setLoading(false);
+      });
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("user");
     if (isLoggedIn) {
@@ -35,6 +52,7 @@ const GlobalState = ({ children }) => {
     user,
     setUser,
     userLoading,
+    loading,
   };
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>

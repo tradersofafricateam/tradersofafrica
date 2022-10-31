@@ -43,8 +43,8 @@ const Sidebar = ({ isActive }) => {
                 {user.fullName.charAt(0).toUpperCase()}
               </div>
               <div className="flex-grow-1 ms-3">
-                {user.fullName.length > 12 ? (
-                  <p>{Capitalize(user.fullName.slice(0, 12))}...</p>
+                {user.fullName.length > 15 ? (
+                  <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
                 ) : (
                   <p>{Capitalize(user.fullName)}</p>
                 )}

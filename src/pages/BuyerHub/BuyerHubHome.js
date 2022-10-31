@@ -6,6 +6,8 @@ import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import Select from "react-select";
 import countryList from "react-select-country-list";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { GlobalContext } from "../../components/utils/GlobalState";
 
@@ -13,10 +15,11 @@ import Banner from "../../assets/img/b-home-bn2.png";
 
 import "./BuyersHome.css";
 import TrendingProduct from "./components/TrendingProduct";
+import CardSkeleton from "./pages/CardSkeleton";
 
 const BuyerHome = () => {
   const [country, setCountry] = useState("");
-  const { userLoading } = useContext(GlobalContext);
+  const { userLoading, loading } = useContext(GlobalContext);
   const options = useMemo(() => countryList().getData(), []);
   const [inquiry, setInquiry] = useState({
     productName: "",
@@ -159,9 +162,10 @@ const BuyerHome = () => {
   //   }
   // };
 
-  if (userLoading) {
-    return <div className="loader mx-auto" align="center" id="loader"></div>;
+  if (userLoading || loading) {
+    return <CardSkeleton />;
   }
+
   return (
     <div>
       <ReactNotifications />

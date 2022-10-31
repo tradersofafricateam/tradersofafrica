@@ -39,7 +39,9 @@ const MessageCenter = () => {
 
   useEffect(() => {
     if (user) {
-      socket.current = io("http://localhost", { withCredentials: true });
+      socket.current = io(
+        "http://ec2-18-221-181-52.us-east-2.compute.amazonaws.com"
+      );
       socket.current.emit(socketEvents.addUser, user.id, user.type);
     }
   }, [user]);

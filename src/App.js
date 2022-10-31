@@ -24,39 +24,50 @@ import EmailVerification from "./pages/BuyerHub/emailVerification";
 import ProtectedRoutes from "./components/utils/ProtectedRoutes";
 import GlobalState from "./components/utils/GlobalState";
 
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
 function App() {
   return (
     <GlobalState>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} exact />
-          <Route path="/our-story" element={<Story />} exact />
-          <Route path="/what-we-do" element={<Wedo />} exact />
-          <Route path="/our-impact" element={<Impact />} exact />
-          <Route path="/market-intelligence" element={<Market />} exact />
-          <Route path="/contact" element={<Contact />} exact />
-          <Route path="/academy" element={<Academy />} exact />
-          <Route path="/buy-commodities" element={<BuyerHome />} exact></Route>
-          <Route exact path="/registration" element={<BuyerRegistration />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login/:buyerId/:token" element={<Login />} />
-          <Route
-            path="/passwordreset/:resetToken"
-            element={<ResetPassword />}
-          />
-          <Route exact path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/verify-email/:email" element={<EmailVerification />} />
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/dashboard" element={<Dashboard />} exact />
-            <Route path="/order-info" element={<OrderInfo />} exact />
-            <Route path="/message-center" element={<MessageCenter />} exact />
-            <Route path="/orders" element={<Order />} exact />
-            <Route path="/details/:productId" element={<Details />} exact />
-            <Route path="/inquiries" element={<Inquiries />} exact />
-            <Route path="/settings" element={<UserSettings />} exact />
-          </Route>
-        </Routes>
-      </Router>
+      <SkeletonTheme baseColor="#dddddd" highlightColor="#ffffff">
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} exact />
+            <Route path="/our-story" element={<Story />} exact />
+            <Route path="/what-we-do" element={<Wedo />} exact />
+            <Route path="/our-impact" element={<Impact />} exact />
+            <Route path="/market-intelligence" element={<Market />} exact />
+            <Route path="/contact" element={<Contact />} exact />
+            <Route path="/academy" element={<Academy />} exact />
+            <Route
+              path="/buy-commodities"
+              element={<BuyerHome />}
+              exact
+            ></Route>
+            <Route exact path="/registration" element={<BuyerRegistration />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/login/:buyerId/:token" element={<Login />} />
+            <Route
+              path="/passwordreset/:resetToken"
+              element={<ResetPassword />}
+            />
+            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+            <Route
+              path="/verify-email/:email"
+              element={<EmailVerification />}
+            />
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/dashboard" element={<Dashboard />} exact />
+              <Route path="/order-info" element={<OrderInfo />} exact />
+              <Route path="/message-center" element={<MessageCenter />} exact />
+              <Route path="/orders" element={<Order />} exact />
+              <Route path="/details/:productId" element={<Details />} exact />
+              <Route path="/inquiries" element={<Inquiries />} exact />
+              <Route path="/settings" element={<UserSettings />} exact />
+            </Route>
+          </Routes>
+        </Router>
+      </SkeletonTheme>
     </GlobalState>
   );
 }
