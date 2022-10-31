@@ -30,7 +30,10 @@ export const NewOrderModal = () => {
             <div className="row">
               <div className="col-lg-12">
                 <form className="w-100">
-                  <p className="mb-5">Send an order request, our agents will help you draft your order</p>
+                  <p className="mb-5">
+                    Send an order request, our agents will help you draft your
+                    order
+                  </p>
                   <button className="mt-3">Send Order Request</button>
                 </form>
               </div>

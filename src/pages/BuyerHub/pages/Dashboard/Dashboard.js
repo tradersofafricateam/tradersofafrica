@@ -14,12 +14,16 @@ import SearchInput from "./components/SearchInput";
 
 const Dashboard = () => {
   const { user } = useContext(GlobalContext);
-  console.log("all orders", allUserOrder);
 
   const [userOrderSummary, setUserOrderSummary] = useState("");
   const [userEnquireSummary, setUserEnquireSummary] = useState("");
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = (event) => {
+    setIsActive((current) => !current);
+  };
 
   useEffect(() => {
     axios
@@ -60,6 +64,7 @@ const Dashboard = () => {
       });
   }, []);
 
+  console.log("all orders", allUserOrder);
   //summary for all orders and enquire
   const orderSummary =
     userOrderSummary.total_delivered_orders +
@@ -124,8 +129,16 @@ const Dashboard = () => {
   return (
     <div>
       <div className="grid-container">
-        <div className="menu-icon">
+        {/* <div className="menu-icon">
           <i className="fas fa-bars header__menu"></i>
+        </div> */}
+        <div
+          className={isActive ? "media-menuu-icon" : "menuu-icon"}
+          onClick={handleClick}
+        >
+          <div className="line line1"></div>
+          <div className="line line2"></div>
+          <div className="line line3"></div>
         </div>
 
         <header className="header">
@@ -155,7 +168,7 @@ const Dashboard = () => {
           </div>
         </header>
 
-        <Sidebar />
+        <Sidebar isActive={isActive} />
 
         <main className="main">
           {user.lastLoggedIn === null && (

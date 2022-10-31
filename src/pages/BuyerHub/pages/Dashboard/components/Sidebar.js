@@ -6,7 +6,7 @@ import "../Dashboard.css";
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import axios from "axios";
 
-const Sidebar = () => {
+const Sidebar = ({ isActive }) => {
   const { user, userLoading, setUser } = useContext(GlobalContext);
 
   const Capitalize = (str) => {
@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className="sidenav position-fixed">
+      <aside className={isActive ? "media-sidenav" : "sidenav"}>
         <div className="sidenav__close-icon">
           <i className="fas fa-times sidenav__brand-close"></i>
         </div>
@@ -43,7 +43,11 @@ const Sidebar = () => {
                 {user.fullName.charAt(0).toUpperCase()}
               </div>
               <div className="flex-grow-1 ms-3">
-                <p>{Capitalize(user.fullName)}</p>
+                {user.fullName.length > 12 ? (
+                  <p>{Capitalize(user.fullName.slice(0, 12))}...</p>
+                ) : (
+                  <p>{Capitalize(user.fullName)}</p>
+                )}
               </div>
             </div>
           ) : (
@@ -67,7 +71,7 @@ const Sidebar = () => {
           </Link>
 
           <Link className="sidenav-link" to="/orders">
-          <li className="sidenav__list-item">
+            <li className="sidenav__list-item">
               <Iconly
                 className="list_icon"
                 name="Paper"
@@ -127,7 +131,6 @@ const Sidebar = () => {
               Logout
             </li>
           </Link>
-
         </ul>
 
         <ul class="sidenav__list mt-auto">

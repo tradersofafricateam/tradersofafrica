@@ -35,6 +35,7 @@ export default function ResetPassword() {
       />
     </svg>
   );
+  const [loading, setLoading] = useState(false);
   const { resetToken } = useParams();
   console.log(resetToken);
   const [passwordError, setPasswordError] = useState("");
@@ -112,6 +113,7 @@ export default function ResetPassword() {
     }
   };
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     if (passwordInput.confirmPassword !== passwordInput.password) {
       setConfirmPasswordError("Confirm password is not matched");
@@ -148,6 +150,7 @@ export default function ResetPassword() {
         navigate(`/login`);
       }, 3800);
     } catch (error) {
+      setLoading(false);
       console.log(error);
       setLinkExpire("Your token has expired");
     }
@@ -279,11 +282,15 @@ export default function ResetPassword() {
 
                 <div className=" mt-4">
                   <button className="btn btn-white button">
-                    Change Password
+                    {!loading ? (
+                      <span>Change Password</span>
+                    ) : (
+                      <div className="login-btn">
+                        <span className="loading"></span>
+                        <span>Submit</span>
+                      </div>
+                    )}
                   </button>
-                  {/* <div>
-                    <p className="errorMessages">{linkExpire}</p>
-                  </div> */}
                 </div>
               </form>
             </div>
