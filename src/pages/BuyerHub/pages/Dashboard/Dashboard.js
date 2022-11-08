@@ -24,6 +24,7 @@ const Dashboard = () => {
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
+    console.log("isActive", isActive);
   };
 
   useEffect(() => {

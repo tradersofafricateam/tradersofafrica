@@ -6,7 +6,6 @@ import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import Select from "react-select";
 import countryList from "react-select-country-list";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import { GlobalContext } from "../../components/utils/GlobalState";
@@ -20,6 +19,8 @@ import CardSkeleton from "./pages/CardSkeleton";
 const BuyerHome = () => {
   const [country, setCountry] = useState("");
   const { userLoading, loading } = useContext(GlobalContext);
+  const [banner, setBanner] = useState();
+  const [bannerLoader, setBannerLoader] = useState(true);
   const options = useMemo(() => countryList().getData(), []);
   const [inquiry, setInquiry] = useState({
     productName: "",
@@ -32,6 +33,22 @@ const BuyerHome = () => {
   //   name: "",
   //   email: "",
   // });
+
+  const getBanner = async () => {
+    try {
+      axios.get("/banner").then((response) => {
+        setBanner(response.data.data);
+        setBannerLoader(false);
+      });
+    } catch (error) {
+      setBannerLoader(false);
+      console.log("error loading banner", error.response.data.erros);
+    }
+  };
+
+  useEffect(() => {
+    getBanner();
+  }, []);
 
   const sectionTitle = "Trending Products";
   const newlyAddedProducts = "Newly Added Products";
@@ -106,6 +123,12 @@ const BuyerHome = () => {
     }
   };
 
+  // const filteredBanner = banner.filter(
+  //   (bann) => bann.section == "Hero Section Banner"
+  // );
+
+  // console.log("filteredBanner", filteredBanner);
+
   // const handleChange = (e) => {
   //   setSubscribeToNewsletter({
   //     ...subscribeToNewsletter,
@@ -162,7 +185,7 @@ const BuyerHome = () => {
   //   }
   // };
 
-  if (userLoading || loading) {
+  if (userLoading || loading || bannerLoader) {
     return <CardSkeleton />;
   }
 

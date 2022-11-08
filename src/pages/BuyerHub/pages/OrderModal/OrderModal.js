@@ -250,7 +250,7 @@ const OrderModal = () => {
                 {/* {productInfo.productName
                   ? Capitalize(productInfo.productName)
                   : ""} */}
-                  Place order now
+                Place order now
               </h5>
               <button
                 type="button"
