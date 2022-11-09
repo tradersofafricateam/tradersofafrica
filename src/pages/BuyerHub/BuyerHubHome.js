@@ -18,7 +18,8 @@ import CardSkeleton from "./pages/CardSkeleton";
 
 const BuyerHome = () => {
   const [country, setCountry] = useState("");
-  const { userLoading, loading } = useContext(GlobalContext);
+  const { userLoading } = useContext(GlobalContext);
+  const [loading, setLoading] = useState(true);
   const [banner, setBanner] = useState();
   const [bannerLoader, setBannerLoader] = useState(true);
   const options = useMemo(() => countryList().getData(), []);
@@ -34,21 +35,35 @@ const BuyerHome = () => {
   //   email: "",
   // });
 
-  const getBanner = async () => {
+  const getData = async () => {
     try {
-      axios.get("/banner").then((response) => {
-        setBanner(response.data.data);
-        setBannerLoader(false);
+      axios.get("/product").then((response) => {
+        setLoading(false);
       });
     } catch (error) {
-      setBannerLoader(false);
-      console.log("error loading banner", error.response.data.erros);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getBanner();
+    getData();
   }, []);
+
+  // const getBanner = async () => {
+  //   try {
+  //     axios.get("/banner").then((response) => {
+  //       setBanner(response.data.data);
+  //       setBannerLoader(false);
+  //     });
+  //   } catch (error) {
+  //     setBannerLoader(false);
+  //     console.log("error loading banner", error.response.data.erros);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getBanner();
+  // }, []);
 
   const sectionTitle = "Trending Products";
   const newlyAddedProducts = "Newly Added Products";
@@ -185,7 +200,7 @@ const BuyerHome = () => {
   //   }
   // };
 
-  if (userLoading || loading || bannerLoader) {
+  if (userLoading || loading) {
     return <CardSkeleton />;
   }
 
