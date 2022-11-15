@@ -20,7 +20,7 @@ const BuyerHome = () => {
   const [country, setCountry] = useState("");
   const { userLoading } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
-  const [banner, setBanner] = useState();
+  const [banner, setBanner] = useState([]);
   const [bannerLoader, setBannerLoader] = useState(true);
   const options = useMemo(() => countryList().getData(), []);
   const [inquiry, setInquiry] = useState({
@@ -49,24 +49,21 @@ const BuyerHome = () => {
     getData();
   }, []);
 
-  // const getBanner = async () => {
-  //   try {
-  //     axios.get("/banner").then((response) => {
-  //       setBanner(response.data.data);
-  //       setBannerLoader(false);
-  //     });
-  //   } catch (error) {
-  //     setBannerLoader(false);
-  //     console.log("error loading banner", error.response.data.erros);
-  //   }
-  // };
+  const getBanner = async () => {
+    try {
+      axios.get("/banner").then((response) => {
+        setBanner(response.data.data);
+        setBannerLoader(false);
+      });
+    } catch (error) {
+      setBannerLoader(false);
+      console.log("error loading banner", error.response.data.erros);
+    }
+  };
 
-  // useEffect(() => {
-  //   getBanner();
-  // }, []);
-
-  const sectionTitle = "Trending Products";
-  const newlyAddedProducts = "Newly Added Products";
+  useEffect(() => {
+    getBanner();
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -138,11 +135,11 @@ const BuyerHome = () => {
     }
   };
 
-  // const filteredBanner = banner.filter(
-  //   (bann) => bann.section == "Hero Section Banner"
-  // );
+  const filteredBanner = banner.filter(
+    (bann) => bann.section === "Hero Section Banner"
+  );
 
-  // console.log("filteredBanner", filteredBanner);
+  console.log("filteredBanner", filteredBanner);
 
   // const handleChange = (e) => {
   //   setSubscribeToNewsletter({
@@ -189,6 +186,7 @@ const BuyerHome = () => {
   //       insert: "top",
   //       container: "top-right",
   //       animationIn: ["animate__animated", "animate__fadeIn"],
+
   //       animationOut: ["animate__animated", "animate__fadeOut"],
   //       dismiss: {
   //         duration: 5000,
@@ -208,7 +206,6 @@ const BuyerHome = () => {
     <div>
       <ReactNotifications />
       <BuyHubNavbar />
-
       {/* Hero Section */}
       <section id="b-hero-section">
         <div
@@ -231,8 +228,7 @@ const BuyerHome = () => {
       </section>
 
       {/* Trending Products */}
-      <TrendingProduct sectionTitle={sectionTitle} />
-
+      <TrendingProduct sectionTitle="Trending Products" />
       {/* Feature Advert Space */}
       <section id="ad-space">
         <div className="container">
@@ -254,7 +250,6 @@ const BuyerHome = () => {
           </div>
         </div>
       </section>
-
       {/* Inquiry Modal */}
       <div
         className="modal fade place-order-modal"
@@ -394,10 +389,8 @@ const BuyerHome = () => {
           </div>
         </div>
       </div>
-
       {/* Trending Products */}
-      <TrendingProduct sectionTitle={newlyAddedProducts} />
-
+      <TrendingProduct sectionTitle="Newly Added Products" />
       {/* Newsletter Space */}
       {/* <section id="ad-space">
         <div className="container">
@@ -432,7 +425,6 @@ const BuyerHome = () => {
           </div>
         </div>
       </section> */}
-
       <Footer />
     </div>
   );

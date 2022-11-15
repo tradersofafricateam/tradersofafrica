@@ -73,7 +73,7 @@ export default function BuyerRegistration() {
       console.log(data);
       navigate(`/verify-email/${data.email}`);
     } catch (error) {
-      setLoading(true);
+      setLoading(false);
       if (error.response.data.errors[0].field) {
         console.log(error.response.data.errors);
         setFormattedErrors(
