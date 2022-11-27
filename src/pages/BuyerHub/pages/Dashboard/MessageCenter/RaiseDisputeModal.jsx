@@ -1,6 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { axios } from "../../../../../components/baseUrl";
+import { ReactNotifications, Store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 export const RaiseDisputeModal = () => {
+  const navigate = useNavigate();
+  const [createDispute, setCreateDispute] = useState({
+    subject: "",
+    complaint: "",
+  });
+
+  const handleChange = (e) => {
+    setCreateDispute({
+      ...createDispute,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const disputeCreate = {
+        subject: createDispute.subject,
+        complaint: createDispute.complaint,
+      };
+      const { data } = await axios.post("/dispute", disputeCreate);
+      console.log(data);
+      setCreateDispute({
+        subject: "",
+        complaint: "",
+      });
+
+      Store.addNotification({
+        title: "Success!",
+        message: "You have successfully created a dispute",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 5500);
+      navigate("/message-center");
+    } catch (error) {
+      console.log(error.response.data.errors);
+      Store.addNotification({
+        title: "Failed!",
+        message: "Try Again.",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    }
+  };
   return (
     <div
       className="modal fade place-order-modal"
@@ -9,6 +79,7 @@ export const RaiseDisputeModal = () => {
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
+      <ReactNotifications />
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
           <div className="modal-header">
@@ -25,12 +96,15 @@ export const RaiseDisputeModal = () => {
           <div className="modal-body">
             <div className="row">
               <div className="col-lg-12">
-                <form className="w-100">
+                <form className="w-100" onSubmit={handleSubmit}>
                   <div class="mb-3">
                     <label for="exampleInputEmail1">Dispute Type</label>
                     <select
                       className="form-select"
                       aria-label="Default select example"
+                      name="subject"
+                      value={createDispute.subject}
+                      onChange={handleChange}
                     >
                       <option selected>Select Dispute Type</option>
                       <option value="1">Cashew</option>
@@ -46,6 +120,9 @@ export const RaiseDisputeModal = () => {
                       id=""
                       rows="3"
                       placeholder=""
+                      name="complaint"
+                      value={createDispute.complaint}
+                      onChange={handleChange}
                     ></textarea>
                   </div>
 
@@ -54,7 +131,9 @@ export const RaiseDisputeModal = () => {
                     agent to continue
                   </p>
 
-                  <button className="mt-3">Submit Dispute</button>
+                  <button className="mt-3" type="submit">
+                    Submit Dispute
+                  </button>
                 </form>
               </div>
             </div>

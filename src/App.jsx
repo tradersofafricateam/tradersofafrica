@@ -28,9 +28,9 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {
   return (
-    <GlobalState>
-      <SkeletonTheme baseColor="#dddddd" highlightColor="#ffffff">
-        <Router>
+    <SkeletonTheme baseColor="#dddddd" highlightColor="#ffffff">
+      <Router>
+        <GlobalState>
           <Routes>
             <Route path="/" element={<Home />} exact />
             <Route path="/our-story" element={<Story />} exact />
@@ -66,9 +66,9 @@ function App() {
               <Route path="/settings" element={<UserSettings />} exact />
             </Route>
           </Routes>
-        </Router>
-      </SkeletonTheme>
-    </GlobalState>
+        </GlobalState>
+      </Router>
+    </SkeletonTheme>
   );
 }
 

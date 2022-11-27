@@ -86,6 +86,7 @@ export default function Login() {
       setUser(data);
       localStorage.setItem("user", true);
       navigate("/buy-commodities");
+      // navigate(from, { replace: true });
     } catch (err) {
       setLoading(false);
       localStorage.setItem("user", false);

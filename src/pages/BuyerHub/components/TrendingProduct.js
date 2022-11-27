@@ -15,6 +15,7 @@ const TrendingProduct = ({ sectionTitle }) => {
       axios.get("/product").then((response) => {
         setProduct(response.data.data);
         setLoading(false);
+        console.log("response", response);
       });
     } catch (error) {
       setLoading(false);
@@ -35,10 +36,6 @@ const TrendingProduct = ({ sectionTitle }) => {
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
   };
-
-  // if (loading) {
-  //   return <div className="loader mx-auto" align="center" id="loader"></div>;
-  // }
 
   return (
     <section id="b-trending">
@@ -110,7 +107,9 @@ const TrendingProduct = ({ sectionTitle }) => {
                           <p className="product-spec-sum">
                             <span>Available Specs:</span>
                             <br />
-                            Dried, Moisture 8%, Dark Red colour
+                            {Capitalize(
+                              Object.entries(item.productSpecification)[0][1]
+                            )}
                           </p>
                           <p className="product-link">View Product</p>
                         </div>

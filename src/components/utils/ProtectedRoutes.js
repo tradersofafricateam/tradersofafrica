@@ -4,6 +4,7 @@ import { Outlet, useNavigate, Navigate, useLocation } from "react-router-dom";
 
 const ProtectedRoutes = () => {
   const navigate = useNavigate();
+  // const location = useLocation();
 
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -12,7 +13,7 @@ const ProtectedRoutes = () => {
       .get(`/auth/current-user`)
       .then((response) => {
         setCurrentUser(response.data.currentUser);
-        console.log("this is from protected route", response.data.currentUser);
+
         // if (!currentUser) {
         //   navigate("/login");
         // }
@@ -28,6 +29,12 @@ const ProtectedRoutes = () => {
   } else {
     return null;
   }
+
+  // if(currentUser) {
+  //   return <Outlet/>
+  // } else {
+  //   return <Navigate to="/login" state={{from: location}} replace />
+  // }
 };
 
 export default ProtectedRoutes;
