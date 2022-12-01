@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Iconly } from "react-iconly";
-import { Link } from "react-router-dom";
 
 export const ChatInput = ({ handleSendMsg }) => {
   const [msg, setMsg] = useState("");

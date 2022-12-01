@@ -4,8 +4,6 @@ import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import dayjs from "dayjs";
-import TrackImg from "../../../../../assets/img/track-illus.png";
-import OrdersImg from "../../../../../assets/img/orders-illus.png";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
 
 import "../Dashboard.css";
@@ -188,6 +186,18 @@ const MessageCenter = () => {
                     <div className="message-area">
                       <ChatOrder />
                       {messages.map((message, index) => {
+                        if (message.message == "START_NEW_ORDER") {
+                          return (
+                            <div className="chat-order-request-msg sender">
+                              <div class="order-msg">
+                                <h2>Start Order</h2>
+                              </div>
+                              <p className="chat-timestamp">
+                                {dayjs(message.createdAt).format("hh:mm a")}
+                              </p>
+                            </div>
+                          );
+                        }
                         return (
                           <div
                             className={`chat-msg ${
@@ -212,7 +222,7 @@ const MessageCenter = () => {
             </div>
 
             {/* New Order Modal */}
-            <NewOrderModal />
+            <NewOrderModal handleSendMsg={handleSendMsg} />
             {/* End of New Order MOdal */}
 
             {/* Raise Dispute Modal */}
