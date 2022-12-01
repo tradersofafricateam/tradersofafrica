@@ -85,12 +85,10 @@ const OrderModal = () => {
       setForeignOrderDetails({
         quantity: 1,
         countryOfOrigin: "",
-        address: "",
         paymentTerm: "",
-        grade: "",
         cost: "",
         productRequirement: "",
-        specification: "",
+        shipping: "",
         port: "",
       });
 
