@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import { axios } from "../../../components/baseUrl";
 
 const Capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 const CommodityInsight = ({ productInfo }) => {
+  const [commodityId, setCommodityId] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  console.log("productInfo", productInfo);
   const addClassToPath = (country) => {
     const filteredCountry = productInfo.CountryTraded
       ? productInfo.CountryTraded.filter(
@@ -19,6 +24,26 @@ const CommodityInsight = ({ productInfo }) => {
       return "";
     }
   };
+
+  const getInfo = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(`/commodity`);
+      setCommodityId(data.data);
+      console.log("commodity insight", data.data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  const filteredCommodityId = commodityId.filter((commodity) => {
+    return commodity.id === productInfo.commodityTag;
+  });
 
   return (
     <div>
@@ -34,45 +59,16 @@ const CommodityInsight = ({ productInfo }) => {
 
                 <div className="row">
                   <div className="col-lg-7 data">
-                    <ReactReadMoreReadLess
-                      charLimit={400}
-                      readMoreText={"Read more"}
-                      readLessText={"Read less"}
-                      readMoreStyle={{
-                        textDecoration: "underline",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                      }}
-                      readLessStyle={{
-                        textDecoration: "underline",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Tridge has developed partnerships with Vietnam’s top
-                      suppliers to provide high-quality cashew nuts to markets
-                      worldwide. Vietnam has been producing cashews throughout
-                      the country since the early 1980s. Cashew nuts are grown
-                      in various regions in Vietnam, including Binh Phuoc, Dak
-                      Nong, Dong Nai, Binh Duong provinces. Particularly, Binh
-                      Phuoc province is known as the leading region for the
-                      growth of cashew nuts, constituting over 50% of the entire
-                      cashew nuts production in Vietnam. Tridge can provide two
-                      types of cashew nuts for export: kernel and processed
-                      nuts. With kernel cashew nuts, there are various sizes
-                      ranging from W180 to W500. For processed nuts,
-                      salt-roasted cashew is most popular. Moreover, Tridge can
-                      provide organic cashew kernel, which is gaining popularity
-                      in the market. he cashew nuts in Vietnam are based on
-                      size, color, and degree of rupture. Moreover, Tridge can
-                      provide organic cashew kernel, which is gaining popularity
-                      in the market. he cashew nuts in Vietnam are based on
-                      size, color, and degree of rupture Tridge can provide two
-                      types of cashew nuts for export: kernel and processed
-                      nuts. With kernel cashew nuts, there are various sizes
-                      ranging from W180 to W500. For processed nuts,
-                      salt-roasted cashew is most popular.
-                    </ReactReadMoreReadLess>
+                    {filteredCommodityId.map((commodityInsight, index) => (
+                      <div
+                        className="briefHistory"
+                        dangerouslySetInnerHTML={{
+                          __html: commodityInsight.briefHistory
+                            .split("&lt;")
+                            .join("<"),
+                        }}
+                      ></div>
+                    ))}
                   </div>
                   <div
                     style={{ backgroundColor: "transparent" }}
@@ -101,8 +97,7 @@ const CommodityInsight = ({ productInfo }) => {
                           <g id="g3248">
                             <path
                               id="Aegypten"
-                              className={`cls-1 ${addClassToPath("Egypt") ||
-                                addClassToPath("brazil")}`}
+                              className={`cls-1 ${addClassToPath("Egypt")}`}
                               d="M695.53,256.77l132-3.94,4.25,4.2,8.71-1.1.9-7.35,9.66-2.67,2.05-9.06,4.24,1.4,5.34-5.57-2.89-14.26,4.62.17-11.23-10-30.81-50.9-.14-6.17a41.76,41.76,0,0,1-16-18.3l-.28-4.74-4.65-3.39,1.21-7.52L816.36,136c1.23,1.42-.16,2.45,1,4,3.61,5,9.82,10,13.49,13,1.87-.63,4.06-.18,5-4l3.6-24-16.19-33c-10.94,7.65-21.88,10.71-32.81-.68L777,92.4c-3,1.31-6.3,3.31-8.07.11l-21.56,12.6-35.72-8c-5.36-1.1-11.09-2.92-15.52-2.14-4.54,2.77-7.77.63-11-1.52-1.84,3.19-3.78,6.42-2,8.3l1.44,13c-3.16,5.09-6.08,10.32,3.91,22.32l7,119.65Z"
                             />
                             <g id="Aequatorialguinea">
@@ -151,7 +146,7 @@ const CommodityInsight = ({ productInfo }) => {
                             />
                             <path
                               id="Botsuana"
-                              className={`cls-1 ${addClassToPath("botsuana")}`}
+                              className={`cls-1 ${addClassToPath("botswana")}`}
                               d="M699,927.18l-10.63,6c-10.49.06-11.14,6.23-15.07,9.55l-3-8.31-39.73,3.48-2.26,61.54L612.11,999l-1.1,44.42c4.44,5.45,10.45,11.39,13.46,15.37s1.06,11.43-1.79,18.48a34.79,34.79,0,0,0,23.09,1.53c1.12-3,2.67-5.15,4.71-6.31,3.29-1.88,6-4.29,7-8.22l9.9-8.26c6.1.53,10.8,3,15.56,6.44,10.09.14,16.09-1.69,20.28-3.82l1.95-9.3,58.1-46.43c-7.32-5.31-11-4.1-15.14-5.08s-9.4-8.46-8-21.31c-4-.8-6.61-3-8.82-5.65-2.53-4.24-5.83-3.83-8.77-5.61C718,959,709.61,950.82,709,945.93c-.31-2.37-1.56-2.25-3.34-4.89-2-3-4.75-10.12-6.6-13.86Z"
                             />
                             <path
@@ -163,7 +158,7 @@ const CommodityInsight = ({ productInfo }) => {
                               id="Burkina_Faso"
                               data-name="Burkina Faso"
                               className={`cls-1 ${addClassToPath(
-                                "burkina faso"
+                                "Burkina Faso"
                               )}`}
                               d="M238.75,466.59c-3.18-.43-4.3-4.71-6.91-7.18-5.13-4.86-14.82-1.25-22.55,3.52-9.42-4.7-10.7-8.94-12.43-12.85,1.88-5.08.6-11.75,3.16-17.15,2.28-4.83,6.25-9.29,13.21-13.12l8.5-17.82c7.29-2.41,13.92-3.33,19.63-5.34,5.49-1.94,10.44-5.11,13.45-9.15,10.89-6.72,24.4-15.34,32.74-13.21-.11,2.74-.12,5.46,1.56,7.84,2.83,1.92,2.23,5.1,1.65,8.28L307.58,413l6.41,2.13c.94-1.06,5.51-6.71,7.76,5.74l3.82.81-7.36,12.42-10.43-.56-10,7.84-15.11-1.8c-8.68-.15-9.48,1.54-13.18,2.56l-33.53-1,2.82,25.39Z"
                             />

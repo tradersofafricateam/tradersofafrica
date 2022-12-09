@@ -167,7 +167,7 @@ const BuyHubNavbar = () => {
                 <li className="nav-item">
                   <Link
                     className="nav-link btn btn-danger nav-btn text-white"
-                    to="/"
+                    to="/registration"
                     role="button"
                   >
                     Sign Up

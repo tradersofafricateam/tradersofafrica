@@ -139,7 +139,7 @@ const Details = () => {
       setCurrentImage(mainImage);
       setIsLoading(false);
     } catch (error) {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 

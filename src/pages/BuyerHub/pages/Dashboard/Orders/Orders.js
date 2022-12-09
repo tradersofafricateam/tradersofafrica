@@ -204,55 +204,57 @@ const Orders = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {ordersData.map((orders) => (
-                        <tr>
-                          <td>
-                            <div className="d-flex">
-                              <div className="flex-shrink-0">
-                                <img
-                                  className="table-product-img"
-                                  src={orders.product.productImages[0].image}
-                                  alt="Product name"
-                                />
+                      {ordersData &&
+                        ordersData.map((orders) => (
+                          <tr>
+                            <td>
+                              <div className="d-flex">
+                                <div className="flex-shrink-0">
+                                  {/* <img
+                                    className="table-product-img"
+                                    src={
+                                      orders.product.productImages[0] &&
+                                      orders.product.productImages[0].image
+                                    }
+                                    alt="Product name"
+                                  /> */}
+                                </div>
+                                <div className="flex-grow-1 ms-3">
+                                  <p>
+                                    {" "}
+                                    {/* {orders.product.productName
+                                      ? Capitalize(orders.product.productName)
+                                      : ""} */}
+                                    Nkiru
+                                  </p>
+                                  <p className="table-order-no">
+                                    Order {orders.orderNumber}
+                                  </p>
+                                </div>
                               </div>
-                              <div className="flex-grow-1 ms-3">
-                                <p>
-                                  {" "}
-                                  {orders.product.productName
-                                    ? Capitalize(orders.product.productName)
-                                    : ""}
-                                </p>
-                                <p className="table-order-no">
-                                  Order {orders.orderNumber}
-                                </p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            {orders.product.currency}{" "}
-                            {numberWithCommas(orders.cost)}
-                          </td>
-                          <td>{orders.shippingType}</td>
-                          <td>{orders.paymentTerm}</td>
-                          <td>
-                            {orders.status === "PENDING" && (
-                              <div className="text-warning ">Pending</div>
-                            )}
-                            {orders.status === "PROCESSING" && (
-                              <div className="text-primary ">Processing</div>
-                            )}
-                            {orders.status === "SHIPPED" && (
-                              <div className="text-info">Shipped</div>
-                            )}
-                            {orders.status === "DELIVERED" && (
-                              <div className="text-success">Delivery</div>
-                            )}
-                            {orders.status === "CANCELLED" && (
-                              <div className="text-danger">Cancelled</div>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
+                            </td>
+                            <td>$ {numberWithCommas(orders.cost)}</td>
+                            <td>{orders.shippingType}</td>
+                            <td>{orders.paymentTerm}</td>
+                            <td>
+                              {orders.status === "PENDING" && (
+                                <div className="text-warning ">Pending</div>
+                              )}
+                              {orders.status === "PROCESSING" && (
+                                <div className="text-primary ">Processing</div>
+                              )}
+                              {orders.status === "SHIPPED" && (
+                                <div className="text-info">Shipped</div>
+                              )}
+                              {orders.status === "DELIVERED" && (
+                                <div className="text-success">Delivery</div>
+                              )}
+                              {orders.status === "CANCELLED" && (
+                                <div className="text-danger">Cancelled</div>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
