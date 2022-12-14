@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, useMemo } from "react";
+import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import BuyHubNavbar from "./components/BuyHubNavbar/BuyHubNavbar";
 import { axios } from "../../components/baseUrl";
@@ -6,17 +7,24 @@ import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import Select from "react-select";
 import countryList from "react-select-country-list";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { GlobalContext } from "../../components/utils/GlobalState";
 
 import Banner from "../../assets/img/b-home-bn2.png";
+import { Iconly } from "react-iconly";
 
 import "./BuyersHome.css";
 import TrendingProduct from "./components/TrendingProduct";
+import CardSkeleton from "./pages/CardSkeleton";
 
 const BuyerHome = () => {
   const [country, setCountry] = useState("");
   const { userLoading } = useContext(GlobalContext);
+  const [loading, setLoading] = useState(true);
+  const [banner, setBanner] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [bannerLoader, setBannerLoader] = useState(true);
   const options = useMemo(() => countryList().getData(), []);
   const [inquiry, setInquiry] = useState({
     productName: "",
@@ -25,13 +33,47 @@ const BuyerHome = () => {
     termsOfTrade: "",
     paymentTerms: "",
   });
-  // const [subscribeToNewsletter, setSubscribeToNewsletter] = useState({
-  //   name: "",
-  //   email: "",
-  // });
 
-  const sectionTitle = "Trending Products";
-  const newlyAddedProducts = "Newly Added Products";
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const getData = async () => {
+    try {
+      axios.get("/product").then((response) => {
+        setProduct(response.data.data);
+        setLoading(false);
+      });
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const ref = React.useRef(null);
+
+  const scroll = (scrollOffset) => {
+    ref.current.scrollLeft += scrollOffset;
+  };
+
+  const getBanner = async () => {
+    try {
+      axios.get("/banner").then((response) => {
+        setBanner(response.data.data);
+        setBannerLoader(false);
+      });
+    } catch (error) {
+      setBannerLoader(false);
+      console.log("error loading banner", error.response.data.erros);
+    }
+  };
+
+  useEffect(() => {
+    getBanner();
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -103,70 +145,20 @@ const BuyerHome = () => {
     }
   };
 
-  // const handleChange = (e) => {
-  //   setSubscribeToNewsletter({
-  //     ...subscribeToNewsletter,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
+  const filteredBanner = banner.filter(
+    (bann) => bann.section === "Hero Section Banner"
+  );
 
-  // const handleSubmitSubscriber = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const createSubscriber = {
-  //       fullName: subscribeToNewsletter.name,
-  //       email: subscribeToNewsletter.email,
-  //     };
-  //     const { data } = await axios.post("/auth/news-letter", createSubscriber);
-  //     console.log(data);
-  //     setSubscribeToNewsletter({
-  //       name: "",
-  //       email: "",
-  //     });
+  console.log("filteredBanner", filteredBanner);
 
-  //     Store.addNotification({
-  //       title: "Success!",
-  //       message: "You have successfully subscribed to Tofa's Newsletter",
-  //       type: "success",
-  //       insert: "top",
-  //       container: "top-right",
-  //       animationIn: ["animate__animated", "animate__fadeIn"],
-  //       animationOut: ["animate__animated", "animate__fadeOut"],
-  //       dismiss: {
-  //         duration: 5000,
-  //         onScreen: true,
-  //       },
-  //       isMobile: true,
-  //       breakpoint: 768,
-  //     });
-  //   } catch (error) {
-  //     console.log(error.response.data.errors);
-  //     Store.addNotification({
-  //       title: "Failed!",
-  //       message: "Try Again.",
-  //       type: "danger",
-  //       insert: "top",
-  //       container: "top-right",
-  //       animationIn: ["animate__animated", "animate__fadeIn"],
-  //       animationOut: ["animate__animated", "animate__fadeOut"],
-  //       dismiss: {
-  //         duration: 5000,
-  //         onScreen: true,
-  //       },
-  //       isMobile: true,
-  //       breakpoint: 768,
-  //     });
-  //   }
-  // };
-
-  if (userLoading) {
-    return <div className="loader mx-auto" align="center" id="loader"></div>;
+  if (userLoading || loading) {
+    return <CardSkeleton />;
   }
+
   return (
     <div>
       <ReactNotifications />
       <BuyHubNavbar />
-
       {/* Hero Section */}
       <section id="b-hero-section">
         <div
@@ -189,7 +181,86 @@ const BuyerHome = () => {
       </section>
 
       {/* Trending Products */}
-      <TrendingProduct sectionTitle={sectionTitle} />
+      <section id="b-trending">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
+              <h1>Trending Products</h1>
+            </div>
+            <div className="col-lg-6" align="right">
+              <Iconly
+                onClick={() => scroll(-1070)}
+                className="scroll-icon me-4"
+                name="ChevronLeftCircle"
+                set="two-tone"
+                size="large"
+                color="#282828"
+              />
+              <Iconly
+                onClick={() => scroll(1070)}
+                className="scroll-icon"
+                name="ChevronRightCircle"
+                set="two-tone"
+                size="large"
+                color="#282828"
+              />
+            </div>
+          </div>
+          <div className="row main-container">
+            <div className="p-container" ref={ref}>
+              {product &&
+                product.map((item) => {
+                  return (
+                    <Link
+                      className="link"
+                      to={`/details/${item.id}`}
+                      key={item.id}
+                    >
+                      <div className="product-card">
+                        <div className="product-card-img">
+                          <img
+                            src={
+                              item.productImages &&
+                              item.productImages.filter(
+                                (image) => image.isMain === true
+                              )[0].image
+                            }
+                            className="img-fluid product-img"
+                            alt="..."
+                            style={{
+                              width: "100%",
+
+                              objectFit: "cover",
+                            }}
+                          />
+                          <span className="badge bg-success">Updated</span>
+                        </div>
+                        <div className="product-card-info">
+                          <h2 className="product-name">
+                            {item && Capitalize(item.productName)}
+                          </h2>
+                          <h3 className="product-price">
+                            <span className="p-currency">{item.currency}</span>{" "}
+                            {item.minPricePerUnit} - {item.maxPricePerUnit}{" "}
+                            <span className="p-unit">/ MT</span>
+                          </h3>
+                          <p className="product-spec-sum">
+                            <span>Available Specs:</span>
+                            <br />
+                            {Capitalize(
+                              Object.entries(item.productSpecification)[0][1]
+                            )}
+                          </p>
+                          <p className="product-link">View Product</p>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Feature Advert Space */}
       <section id="ad-space">
@@ -212,7 +283,6 @@ const BuyerHome = () => {
           </div>
         </div>
       </section>
-
       {/* Inquiry Modal */}
       <div
         className="modal fade place-order-modal"
@@ -352,10 +422,8 @@ const BuyerHome = () => {
           </div>
         </div>
       </div>
-
       {/* Trending Products */}
-      <TrendingProduct sectionTitle={newlyAddedProducts} />
-
+      <TrendingProduct sectionTitle="Newly Added Products" />
       {/* Newsletter Space */}
       {/* <section id="ad-space">
         <div className="container">
@@ -390,7 +458,6 @@ const BuyerHome = () => {
           </div>
         </div>
       </section> */}
-
       <Footer />
     </div>
   );

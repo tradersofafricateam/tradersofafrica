@@ -18,7 +18,7 @@
   opacity: 0.8;
 }
 
-.loader {
+/* .loader {
   border: 10px solid #f3f3f3;
   border-top: 10px solid #dc4d04;
   border-radius: 50%;
@@ -31,7 +31,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-}
+} */
 
 .login-btn {
   position: relative;

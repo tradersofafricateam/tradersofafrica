@@ -2,9 +2,13 @@ import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
-export const NewOrderModal = () => {
+export const NewOrderModal = ({ handleSendMsg }) => {
   const [country, setCountry] = useState("");
   const options = useMemo(() => countryList().getData(), []);
+
+  const handleClick = () => {
+    handleSendMsg("START_NEW_ORDER");
+  };
   return (
     <div
       className="modal fade place-order-modal"
@@ -34,7 +38,9 @@ export const NewOrderModal = () => {
                     Send an order request, our agents will help you draft your
                     order
                   </p>
-                  <button className="mt-3">Send Order Request</button>
+                  <button onClick={handleClick} className="mt-3">
+                    Send Order Request
+                  </button>
                 </form>
               </div>
             </div>

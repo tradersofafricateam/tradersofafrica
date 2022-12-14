@@ -10,7 +10,6 @@ import ChevronDown from "../../../../assets/img/icons/chevron-down-icon.svg";
 
 const BuyHubNavbar = () => {
   const { user, userLoading, setUser } = useContext(GlobalContext);
-  console.log("user", user);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -29,9 +28,6 @@ const BuyHubNavbar = () => {
       });
   };
 
-  if (userLoading) {
-    return <div className="loader mx-auto" align="center" id="loader"></div>;
-  }
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light main-nav shadow-sm">
@@ -171,7 +167,7 @@ const BuyHubNavbar = () => {
                 <li className="nav-item">
                   <Link
                     className="nav-link btn btn-danger nav-btn text-white"
-                    to="/"
+                    to="/registration"
                     role="button"
                   >
                     Sign Up

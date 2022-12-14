@@ -4,8 +4,6 @@ import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import dayjs from "dayjs";
-import TrackImg from "../../../../../assets/img/track-illus.png";
-import OrdersImg from "../../../../../assets/img/orders-illus.png";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
 
 import "../Dashboard.css";
@@ -39,7 +37,9 @@ const MessageCenter = () => {
 
   useEffect(() => {
     if (user) {
-      socket.current = io("http://localhost", { withCredentials: true });
+      socket.current = io(
+        "http://ec2-18-221-181-52.us-east-2.compute.amazonaws.com"
+      );
       socket.current.emit(socketEvents.addUser, user.id, user.type);
     }
   }, [user]);
@@ -194,7 +194,14 @@ const MessageCenter = () => {
                             key={index}
                             ref={scrollRef}
                           >
-                            <p>{message.message}</p>
+                            {" "}
+                            {message.message === "START_NEW_ORDER" ? (
+                              <div class="order-msg">
+                                <h2>Start Order</h2>
+                              </div>
+                            ) : (
+                              <p>{message.message}</p>
+                            )}
                             <p className="chat-timestamp">
                               {dayjs(message.createdAt).format("hh:mm a")}
                             </p>
@@ -210,7 +217,7 @@ const MessageCenter = () => {
             </div>
 
             {/* New Order Modal */}
-            <NewOrderModal />
+            <NewOrderModal handleSendMsg={handleSendMsg} />
             {/* End of New Order MOdal */}
 
             {/* Raise Dispute Modal */}
