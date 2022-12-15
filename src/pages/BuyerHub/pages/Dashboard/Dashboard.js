@@ -203,6 +203,15 @@ const Dashboard = () => {
           <div className="main-overview">
             <div className="overview-card">
               <div>
+                <h2>Total Transactions</h2>
+                {/* <p>Detailed transaction history is on the order page</p> */}
+                <div class="d-flex justify-content-between mt-4">
+                  <h3>$600,000</h3>
+                </div>
+              </div>
+            </div>
+            <div className="overview-card">
+              <div>
                 <h2>Total Orders</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
                 <div class="d-flex justify-content-between mt-4">
@@ -230,15 +239,6 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="overview-card">
-              <div>
-                <h2>Total Quotes</h2>
-                <p>Detailed transaction history is on the order page</p>
-                <div class="d-flex justify-content-between mt-4">
-                  <h3>5</h3>
-                </div>
-              </div>
-            </div> */}
           </div>
 
           <h1 className="section-title">Latest Orders</h1>
