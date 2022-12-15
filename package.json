@@ -6,6 +6,10 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ant-design/react-slick": "^0.29.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.0",
     "@react-bootstrap/pagination": "^1.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",

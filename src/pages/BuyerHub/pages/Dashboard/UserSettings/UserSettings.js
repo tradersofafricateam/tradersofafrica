@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
 
 import TrackImg from "../../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../../assets/img/orders-illus.png";
 import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
 
 import "../Dashboard.css";
+import "./UserSettings.css";
 
 const UserSettings = () => {
   const [isActive, setIsActive] = useState(false);
@@ -68,7 +70,82 @@ const UserSettings = () => {
 
         <main className="main">
           <div className="main-overview">
-            <div className="overview-card"></div>
+            <div className="overview-card">
+              <div className="seller-setting-form">
+                <form>
+                  <div className="seller-setting-formgroup">
+                    <div className="form-group-right">
+                      <div className="form-group">
+                        <label>Full Name</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="fullname"
+                          placeholder="Erhuan Abhe"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Country</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="country"
+                          placeholder="Nigeria"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Phone Number</label>
+                        <input
+                          className="form-control"
+                          type="number"
+                          id="phonenumber"
+                          placeholder="+234-567-890-123"
+                        />
+                      </div>
+
+                      <div className="form-group password">
+                        <label>Current password</label>
+                        <input
+                          className="form-control"
+                          type="password"
+                          id="text"
+                          placeholder="Enter current password"
+                        />
+                      </div>
+                      <div className="form-group password">
+                        <label>New password</label>
+                        <input
+                          className="form-control"
+                          type="password"
+                          id="text"
+                          placeholder="Enter new password"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="seller-footer">
+                    <div className="seller-seting-submit">
+                      <button
+                        type="submit"
+                        className="btn btn-primary changepassword"
+                      >
+                        Change Password
+                      </button>
+                      <button
+                        type="submit"
+                        className="btn btn-primary savechanges"
+                      >
+                        Save Changes
+                      </button>
+                    </div>
+                    <div className="seller-seting-joindate">
+                      <p>Joined Since</p>
+                      <p>March 15th 2019</p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </main>
       </div>

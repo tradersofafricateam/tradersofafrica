@@ -1,0 +1,81 @@
+.seller-setting-form {
+  margin: 30px 0;
+}
+.seller-setting-formgroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 100px;
+}
+.form-group-right,
+.form-group-left {
+  padding: 0 10px;
+}
+.seller-setting-form .form-group {
+  margin: 20px 0;
+}
+.seller-setting-form input {
+  padding: 10px 10px;
+  width: 292px;
+}
+.seller-setting-form textarea {
+  padding: 10px 10px;
+  width: 322px;
+}
+.password input {
+  padding: 10px 10px;
+  width: 200px;
+}
+
+.changepassword {
+  margin-right: 20px;
+  background: #dd4f05 !important;
+  border: none;
+}
+.seller-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.seller-seting-submit,
+.seller-seting-joindate {
+  width: 50%;
+}
+
+.savechanges {
+  border: 1px solid !important;
+  color: #dd4f05 !important;
+  background-color: #fff !important;
+  width: 180px;
+}
+.address {
+  height: 54px;
+}
+
+.seller-seting-joindate p {
+  font-weight: 700;
+  color: #1b2631;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 20px 0px 0px 50px;
+}
+.seller-seting-joindate {
+  display: flex;
+}
+
+@media only screen and (max-width: 1024px) {
+  .seller-setting-formgroup {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 50px;
+  }
+  .seller-footer {
+    display: grid;
+    grid-gap: 20px;
+  }
+  .seller-seting-joindate p {
+    margin: 0 10px;
+  }
+  .seller-seting-submit button {
+    margin: 10px;
+  }
+}
