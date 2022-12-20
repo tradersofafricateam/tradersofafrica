@@ -44,7 +44,7 @@ export default function EmailVerification({ registerDetail }) {
         message: "Try Again.",
         type: "danger",
         insert: "top",
-        container: "top-left",
+        container: "top-right",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
