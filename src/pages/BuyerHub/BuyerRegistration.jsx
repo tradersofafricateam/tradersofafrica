@@ -58,8 +58,6 @@ export default function BuyerRegistration() {
     setLoading(true);
     e.preventDefault();
     try {
-      console.log(registerDetail);
-      console.log(phoneValue);
       const buyerRegistration = {
         fullName: registerDetail.fullname,
         email: registerDetail.email,
