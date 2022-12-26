@@ -1,24 +1,136 @@
 import React, { useState } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-
-import TrackImg from "../../../../../assets/img/track-illus.png";
-import OrdersImg from "../../../../../assets/img/orders-illus.png";
-import ProductImgTable from "../../../../../assets/img/products/p-img1.png";
-
 import "../Dashboard.css";
 import "./UserSettings.css";
+import { axios } from "../../../../../components/baseUrl.jsx";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { Store } from "react-notifications-component";
 
 const UserSettings = () => {
   const [isActive, setIsActive] = useState(false);
+  const [inputType, setInputType] = useState("password");
+  const [formattedErrors, setFormattedErrors] = useState({});
+  const [customError, setCustomError] = useState("");
+  const [editPhoneNumber, setEditPhoneNumber] = useState("");
+  const [editProfile, setEditProfile] = useState({
+    fullName: "",
+    country: "",
+  });
+  const [editPassword, setEditPassword] = useState({
+    currentPassword: "",
+    newPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
+  };
+  const handlePasswordChange = (e) => {
+    setEditPassword({ ...editPassword, [e.target.name]: e.target.value });
+  };
+
+  const handlePasswordToggle = (e) => {
+    inputType === "password" ? setInputType("text") : setInputType("password");
+  };
+
+  const handleEditProfile = async (e) => {
+    e.preventDefault();
+    try {
+      const editUserDetails = {
+        fullName: editProfile.fullName,
+        country: editProfile.country,
+        phoneNumber: editPhoneNumber,
+      };
+      const {
+        data: { data },
+      } = await axios.post(`/buyer-hub/profile`, editUserDetails);
+      console.log("editUserDetails", data);
+      Store.addNotification({
+        title: "Successful!",
+        message: `Your profile has been successful updated`,
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    } catch (error) {
+      console.log(error.response.data.errors);
+      Store.addNotification({
+        title: "Failed!",
+        message: "Try Again.",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    }
+  };
+
+  const handleUserPasswordChange = async (e) => {
+    e.preventDefault();
+    try {
+      const editUserPassword = {
+        oldPassword: editPassword.currentPassword,
+        newPassword: editPassword.newPassword,
+      };
+      const {
+        data: { data },
+      } = await axios.post(`/buyer-hub/password`, editUserPassword);
+      console.log("editUserPassword", data);
+      Store.addNotification({
+        title: "Successful!",
+        message: `Your password has been successfully changed.`,
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    } catch (error) {
+      if (error.response.data.errors[0].field) {
+        console.log(error.response.data.errors);
+        setFormattedErrors(
+          error.response.data.errors.reduce(function(obj, err) {
+            obj[err.field] = err.message;
+            return obj;
+          }, {})
+        );
+      } else {
+        console.log(error.response.data.errors[0].message);
+        setCustomError(error.response.data.errors[0].message);
+      }
+    }
+  };
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
   return (
     <div>
+      <ReactNotifications />
       <div className="grid-container">
         {/* <div className="menu-icon">
           <i className="fas fa-bars header__menu"></i>
@@ -81,7 +193,10 @@ const UserSettings = () => {
                           className="form-control"
                           type="text"
                           id="fullname"
-                          placeholder="Erhuan Abhe"
+                          name="fullName"
+                          value={editProfile.fullName}
+                          onChange={handleChange}
+                          placeholder="Enter full name"
                         />
                       </div>
                       <div className="form-group">
@@ -90,50 +205,117 @@ const UserSettings = () => {
                           className="form-control"
                           type="text"
                           id="country"
-                          placeholder="Nigeria"
+                          name="country"
+                          value={editProfile.country}
+                          onChange={handleChange}
+                          placeholder="Enter country"
                         />
                       </div>
                       <div className="form-group">
                         <label>Phone Number</label>
-                        <input
+                        <PhoneInput
+                          name="editPhoneNumber"
                           className="form-control"
-                          type="number"
-                          id="phonenumber"
-                          placeholder="+234-567-890-123"
+                          defaultCountry="NG"
+                          value={editPhoneNumber}
+                          onChange={setEditPhoneNumber}
+                          placeholder="+123909989898"
                         />
                       </div>
-
-                      <div className="form-group password">
-                        <label>Current password</label>
-                        <input
-                          className="form-control"
-                          type="password"
-                          id="text"
-                          placeholder="Enter current password"
-                        />
+                      <div className="mt-3">
+                        <label htmlFor="password" className="form-label">
+                          Current password
+                        </label>
+                        <div className="passwordToggle form-control input">
+                          <input
+                            className="password-input"
+                            placeholder="Enter current password"
+                            type={inputType}
+                            name="currentPassword"
+                            value={editPassword.currentPassword}
+                            onChange={handlePasswordChange}
+                          />
+                          <span
+                            className={"password-icon"}
+                            onClick={handlePasswordToggle}
+                          >
+                            {inputType === "password" ? (
+                              <Iconly
+                                className="mt-1 pt-1"
+                                name="Hide"
+                                set="light"
+                                size="medium"
+                                color="#5C5C5C"
+                              />
+                            ) : (
+                              <Iconly
+                                className="mt-1 pt-1"
+                                name="Show"
+                                set="light"
+                                size="medium"
+                                color="#5C5C5C"
+                              />
+                            )}
+                          </span>
+                        </div>
                       </div>
-                      <div className="form-group password">
-                        <label>New password</label>
-                        <input
-                          className="form-control"
-                          type="password"
-                          id="text"
-                          placeholder="Enter new password"
-                        />
+                      {formattedErrors.oldPassword && (
+                        <p className="errors">{formattedErrors.oldPassword}</p>
+                      )}
+                      <div className="mt-3">
+                        <label htmlFor="password" className="form-label">
+                          New password
+                        </label>
+                        <div className="passwordToggle form-control input">
+                          <input
+                            className="password-input"
+                            type={inputType}
+                            placeholder="Enter new password"
+                            name="newPassword"
+                            value={editPassword.newPassword}
+                            onChange={handlePasswordChange}
+                          />
+                          <span
+                            className={"password-icon"}
+                            onClick={handlePasswordToggle}
+                          >
+                            {inputType === "password" ? (
+                              <Iconly
+                                className="mt-1 pt-1"
+                                name="Hide"
+                                set="light"
+                                size="medium"
+                                color="#5C5C5C"
+                              />
+                            ) : (
+                              <Iconly
+                                className="mt-1 pt-1"
+                                name="Show"
+                                set="light"
+                                size="medium"
+                                color="#5C5C5C"
+                              />
+                            )}
+                          </span>
+                        </div>
                       </div>
+                      {formattedErrors.newPassword && (
+                        <p className="errors">{formattedErrors.newPassword}</p>
+                      )}
+                      {customError && <p className="errors">{customError}</p>}
                     </div>
                   </div>
                   <div className="seller-footer">
-                    <div className="seller-seting-submit">
+                    <div className="seller-seting-submit mx-2">
                       <button
-                        type="submit"
-                        className="btn btn-primary changepassword"
+                        onClick={handleUserPasswordChange}
+                        className="btn btn-primary changepassword my-4"
                       >
                         Change Password
                       </button>
                       <button
-                        type="submit"
-                        className="btn btn-primary savechanges"
+                        onClick={handleEditProfile}
+                        className="btn btn-primary savechanges my-4"
                       >
                         Save Changes
                       </button>

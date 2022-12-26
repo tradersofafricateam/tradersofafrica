@@ -177,6 +177,7 @@ export default function BuyerRegistration() {
                   value={phoneValue}
                   name="phoneValue"
                   className="form-control input"
+                  defaultCountry="NG"
                 />
               </div>
               {formattedErrors.phoneNumber && (
