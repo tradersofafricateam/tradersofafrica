@@ -77,10 +77,22 @@ const UserSettings = () => {
         breakpoint: 768,
       });
     } catch (error) {
+      if (error.response.data.errors[0].field) {
+        console.log(error.response.data.errors);
+        setFormattedErrors(
+          error.response.data.errors.reduce(function(obj, err) {
+            obj[err.field] = err.message;
+            return obj;
+          }, {})
+        );
+      } else {
+        console.log(error.response.data.errors[0].message);
+        setCustomError(error.response.data.errors[0].message);
+      }
       console.log(error.response.data.errors);
       Store.addNotification({
         title: "Failed!",
-        message: "Try Again.",
+        message: error.response.data.errors[0].message,
         type: "danger",
         insert: "top",
         container: "top-right",
@@ -135,6 +147,21 @@ const UserSettings = () => {
         console.log(error.response.data.errors[0].message);
         setCustomError(error.response.data.errors[0].message);
       }
+      Store.addNotification({
+        title: "Order Failed!",
+        message: err.response.data.errors[0].message,
+        type: "danger",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
     }
   };
 
@@ -313,9 +340,10 @@ const UserSettings = () => {
                         </div>
                       </div>
                       {formattedErrors.newPassword && (
-                        <p className="errors">{formattedErrors.newPassword}</p>
+                        <p className="errors" style={{ color: "red" }}>
+                          {formattedErrors.newPassword}
+                        </p>
                       )}
-                      {customError && <p className="errors">{customError}</p>}
                     </div>
                   </div>
                   <div className="seller-footer">
