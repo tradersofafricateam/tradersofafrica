@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import "../Dashboard.css";
@@ -15,6 +15,7 @@ const UserSettings = () => {
   const [inputType, setInputType] = useState("password");
   const [formattedErrors, setFormattedErrors] = useState({});
   const [customError, setCustomError] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [editPhoneNumber, setEditPhoneNumber] = useState("");
   const [editProfile, setEditProfile] = useState({
     fullName: "",
@@ -24,6 +25,18 @@ const UserSettings = () => {
     currentPassword: "",
     newPassword: "",
   });
+
+  useEffect(() => {
+    const accountCreated = JSON.parse(localStorage.getItem("joinedAt"));
+    if (accountCreated) {
+      setCreatedAt(accountCreated);
+    }
+  }, []);
+
+  const convertDateFormat = (oldDate) => {
+    let date = new Date(oldDate).toString().split(" ");
+    return date[2] + " " + date[1] + "," + " " + date[3];
+  };
 
   const handleChange = (e) => {
     setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
@@ -322,7 +335,7 @@ const UserSettings = () => {
                     </div>
                     <div className="seller-seting-joindate">
                       <p>Joined Since</p>
-                      <p>March 15th 2019</p>
+                      <p>{convertDateFormat(createdAt)}</p>
                     </div>
                   </div>
                 </form>

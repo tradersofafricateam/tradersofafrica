@@ -18,6 +18,7 @@ const Sidebar = ({ isActive }) => {
       .then((response) => {
         setUser(null);
         localStorage.setItem("user", false);
+        localStorage.removeItem("joinedAt");
       })
       .catch((error) => {
         console.log(error.response.data);
