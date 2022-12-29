@@ -25,6 +25,8 @@ const Details = () => {
   const [currentImage, setCurrentImage] = useState({});
   const [country, setCountry] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [customError, setCustomError] = useState("");
+  const [formErrors, setFormErrors] = useState({});
   const { productId } = useParams();
   const productInterest = "You might be interested in";
 
@@ -107,11 +109,23 @@ const Details = () => {
         isMobile: true,
         breakpoint: 768,
       });
-    } catch (error) {
-      console.log(error.response.data.errors);
+    } catch (err) {
+      if (err.response.data.errors[0].field) {
+        console.log(err.response.data.errors);
+        setFormErrors(
+          err.response.data.errors.reduce(function(obj, err) {
+            obj[err.field] = err.message;
+            return obj;
+          }, {})
+        );
+      } else {
+        console.log(err.response.data.errors[0].message);
+        setCustomError(err.response.data.errors[0].message);
+      }
+
       Store.addNotification({
         title: "Order Failed!",
-        message: "Try Again.",
+        message: err.response.data.errors[0].message,
         type: "danger",
         insert: "top",
         container: "top-left",
@@ -502,6 +516,12 @@ const Details = () => {
                               />
                             </div>
                           </div>
+                          <p
+                            className="errors"
+                            style={{ color: "red", fontSize: "11px" }}
+                          >
+                            {customError && customError}
+                          </p>
 
                           <button className="mt-3" type="submit">
                             Submit Inquiry
