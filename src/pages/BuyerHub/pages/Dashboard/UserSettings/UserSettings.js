@@ -149,7 +149,7 @@ const UserSettings = () => {
       }
       Store.addNotification({
         title: "Order Failed!",
-        message: err.response.data.errors[0].message,
+        message: error.response.data.errors[0].message,
         type: "danger",
         insert: "top",
         container: "top-left",
