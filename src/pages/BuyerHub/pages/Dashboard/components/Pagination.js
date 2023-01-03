@@ -38,14 +38,27 @@ const PaginationComponent = ({
 
   return (
     <Pagination className="pagination justify-content-left">
-      <Iconly onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} className="mt-1 pt-1" name="ChevronLeft" set="light" size="medium" color="#0B2239" />
+      <Iconly
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="mt-1 pt-1"
+        name="ChevronLeft"
+        set="light"
+        size="medium"
+        color="#0B2239"
+      />
       {paginationItems}
-      <Iconly onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} className="mt-1 pt-1" name="ChevronRight" set="light" size="medium" color="#0B2239" />
+      <Iconly
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="mt-1 pt-1"
+        name="ChevronRight"
+        set="light"
+        size="medium"
+        color="#0B2239"
+      />
     </Pagination>
   );
 };
 
 export default PaginationComponent;
-
-
-

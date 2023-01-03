@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import "./emailVerification.css";
 import { axios } from "../../components/baseUrl";
-import { Button, Modal } from "antd";
-import "antd/dist/antd.css";
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { Store } from "react-notifications-component";
 
 export default function EmailVerification({ registerDetail }) {
   const [message, setMessage] = useState("");
@@ -21,15 +22,44 @@ export default function EmailVerification({ registerDetail }) {
       await axios.post(`/auth/resend-email-verification`, {
         email: email,
       });
-      setShowMessage(true);
-      setMessage(`A verification link has been resent to ${email}`);
+      Store.addNotification({
+        title: "Successful!",
+        message: `A verification link has been resent to ${email}. To continue, please check your inbox and verify your email address.`,
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
     } catch (error) {
       console.log(error);
+      Store.addNotification({
+        title: "Failed!",
+        message: "Try Again.",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
     }
   };
 
   return (
     <section>
+      <ReactNotifications />
       <div className="verify-email">
         <h3> Thank you for signing up</h3>
         <p>
@@ -52,17 +82,6 @@ export default function EmailVerification({ registerDetail }) {
           </button>
         </p>
       </div>
-      <Modal
-        title=""
-        visible={showMessage ? true : false}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        {message}
-        <p>
-          To continue, please check your inbox and verify your email address.
-        </p>
-      </Modal>
     </section>
   );
 }

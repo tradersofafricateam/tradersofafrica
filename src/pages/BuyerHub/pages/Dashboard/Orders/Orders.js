@@ -233,7 +233,7 @@ const Orders = () => {
                                 </div>
                               </div>
                             </td>
-                            <td>$ {numberWithCommas(orders.cost)}</td>
+                            <td>USD {numberWithCommas(orders.cost)}</td>
                             <td>{orders.shippingType}</td>
                             <td>{orders.paymentTerm}</td>
                             <td>

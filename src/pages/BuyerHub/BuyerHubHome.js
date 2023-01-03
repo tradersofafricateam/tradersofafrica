@@ -25,6 +25,8 @@ const BuyerHome = () => {
   const [banner, setBanner] = useState([]);
   const [product, setProduct] = useState([]);
   const [bannerLoader, setBannerLoader] = useState(true);
+  const [customError, setCustomError] = useState("");
+  const [formErrors, setFormErrors] = useState({});
   const options = useMemo(() => countryList().getData(), []);
   const [inquiry, setInquiry] = useState({
     productName: "",
@@ -125,11 +127,23 @@ const BuyerHome = () => {
       setTimeout(() => {
         window.location.reload();
       }, 1800);
-    } catch (error) {
-      console.log(error.response.data.errors);
+    } catch (err) {
+      if (err.response.data.errors[0].field) {
+        console.log(err.response.data.errors);
+        setFormErrors(
+          err.response.data.errors.reduce(function(obj, err) {
+            obj[err.field] = err.message;
+            return obj;
+          }, {})
+        );
+      } else {
+        console.log(err.response.data.errors[0].message);
+        setCustomError(err.response.data.errors[0].message);
+      }
+
       Store.addNotification({
         title: "Order Failed!",
-        message: "Try Again.",
+        message: err.response.data.errors[0].message,
         type: "danger",
         insert: "top",
         container: "top-left",

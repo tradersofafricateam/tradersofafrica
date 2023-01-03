@@ -22,6 +22,7 @@ const BuyHubNavbar = () => {
         console.log("logout", response.data);
         setUser(null);
         localStorage.setItem("user", false);
+        localStorage.removeItem("joinedAt");
       })
       .catch((error) => {
         console.log(error.response.data);

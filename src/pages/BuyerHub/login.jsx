@@ -85,6 +85,7 @@ export default function Login() {
       } = await axios.post("/auth/signin-buyer", loginDetails);
       setUser(data);
       localStorage.setItem("user", true);
+      localStorage.setItem("joinedAt", JSON.stringify(data.createdAt));
       navigate("/buy-commodities");
       // navigate(from, { replace: true });
     } catch (err) {

@@ -15,6 +15,8 @@ const OrderModal = () => {
   const [isLoading, setIsLoading] = useState(true);
   // const { user } = useContext(GlobalContext);
   const [priceSelected, setPriceSelected] = useState("");
+  const [customError, setCustomError] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -112,11 +114,23 @@ const OrderModal = () => {
         window.location.reload();
       }, 2000);
       navigate(`/details/${productId}`);
-    } catch (error) {
-      console.log(error.response.data.errors);
+    } catch (err) {
+      if (err.response.data.errors[0].field) {
+        console.log(err.response.data.errors);
+        setFormErrors(
+          err.response.data.errors.reduce(function(obj, err) {
+            obj[err.field] = err.message;
+            return obj;
+          }, {})
+        );
+      } else {
+        console.log(err.response.data.errors[0].message);
+        setCustomError(err.response.data.errors[0].message);
+      }
+
       Store.addNotification({
         title: "Order Failed!",
-        message: "Try Again.",
+        message: err.response.data.errors[0].message,
         type: "danger",
         insert: "top",
         container: "top-left",

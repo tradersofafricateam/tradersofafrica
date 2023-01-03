@@ -538,6 +538,7 @@ body {
   font-weight: 400;
   margin: 0;
   padding: 0;
+  word-wrap: break-word;
 }
 
 .chat-wrap .chat-area .message-area .chat-order-request-msg .chat-timestamp {

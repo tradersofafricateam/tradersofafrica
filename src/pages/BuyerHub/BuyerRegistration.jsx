@@ -58,8 +58,6 @@ export default function BuyerRegistration() {
     setLoading(true);
     e.preventDefault();
     try {
-      console.log(registerDetail);
-      console.log(phoneValue);
       const buyerRegistration = {
         fullName: registerDetail.fullname,
         email: registerDetail.email,
@@ -179,6 +177,7 @@ export default function BuyerRegistration() {
                   value={phoneValue}
                   name="phoneValue"
                   className="form-control input"
+                  defaultCountry="NG"
                 />
               </div>
               {formattedErrors.phoneNumber && (
