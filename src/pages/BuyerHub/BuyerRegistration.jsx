@@ -95,10 +95,6 @@ export default function BuyerRegistration() {
     }
   };
 
-  useEffect(() => {
-    console.log("rerendered");
-  }, [formattedErrors]);
-
   return (
     <section className="w-100" id="buyer-page">
       <div className="row g-0 m-0">
