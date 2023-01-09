@@ -79,11 +79,9 @@ const OrderModal = () => {
         port: foreignOrderDetails.port,
         productRequirement: foreignOrderDetails.productRequirement,
       };
-      console.log("foreign order data being sent out", createForeignOrder);
       const {
         data: { data },
       } = await axios.post("/order/foreign", createForeignOrder);
-      console.log("create product reponse", data);
       setForeignOrderDetails({
         quantity: 1,
         countryOfOrigin: "",
@@ -104,7 +102,7 @@ const OrderModal = () => {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 1500,
+          duration: 5000,
           onScreen: true,
         },
         isMobile: true,
@@ -112,7 +110,7 @@ const OrderModal = () => {
       });
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 5800);
       navigate(`/details/${productId}`);
     } catch (err) {
       if (err.response.data.errors[0].field) {
@@ -137,7 +135,7 @@ const OrderModal = () => {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 3000,
+          duration: 5000,
           onScreen: true,
         },
         isMobile: true,

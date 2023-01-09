@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Iconly } from "react-iconly";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GlobalContext } from "../../../../components/utils/GlobalState";
 
@@ -9,7 +8,7 @@ import Logo from "../../../../assets/img/logo.png";
 import ChevronDown from "../../../../assets/img/icons/chevron-down-icon.svg";
 
 const BuyHubNavbar = () => {
-  const { user, userLoading, setUser } = useContext(GlobalContext);
+  const { user, setUser } = useContext(GlobalContext);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -19,13 +18,12 @@ const BuyHubNavbar = () => {
     axios
       .get(`/auth/signout`)
       .then((response) => {
-        console.log("logout", response.data);
         setUser(null);
         localStorage.setItem("user", false);
         localStorage.removeItem("joinedAt");
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error);
       });
   };
 

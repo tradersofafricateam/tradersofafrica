@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { axios } from "../../../../../components/baseUrl.jsx";
 
 import "../Dashboard.css";
-import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import SearchInput from "../components/SearchInput";
 import PaginationComponent from "../components/Pagination";
 import CardSkeleton from "../../CardSkeleton";
+import OrderInfo from "../OrderInfo/OrderInfo";
 
 const Orders = () => {
   const [totalItems, setTotalItems] = useState(0);
@@ -17,17 +17,29 @@ const Orders = () => {
   const ITEMS_PER_PAGE = 10;
   const [noMatch, setNoMatch] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [orderInfo, setOrderInfo] = useState({});
+
+  const [userOrderSummary, setUserOrderSummary] = useState("");
+  const [allUserOrder, setAllUserOrder] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [orderLoad, setOrderLoad] = useState(true);
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
 
-  // const { userLoading, userOrderSummary, allUserOrder } = useContext(
-  //   GlobalContext
-  // );
-  const [userOrderSummary, setUserOrderSummary] = useState("");
-  const [allUserOrder, setAllUserOrder] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const viewOrderInfo = async (orderId) => {
+    await axios
+      .get(`/order/${orderId}`)
+      .then((response) => {
+        setOrderInfo(response.data.data);
+        setOrderLoad(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setOrderLoad(false);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -38,7 +50,7 @@ const Orders = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log("error loading order summary", error);
+        console.log(error);
       });
   }, []);
 
@@ -51,10 +63,9 @@ const Orders = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log("error loading all orders", error);
+        console.log(error);
       });
   }, []);
-  console.log("order page", allUserOrder);
 
   const orderSummary =
     userOrderSummary.total_delivered_orders +
@@ -119,7 +130,6 @@ const Orders = () => {
           <div className="line line2"></div>
           <div className="line line3"></div>
         </div>
-
         <header className="header">
           <div className="header__message">
             <h2>My Orders</h2>
@@ -145,9 +155,7 @@ const Orders = () => {
             </div>
           </div>
         </header>
-
         <Sidebar isActive={isActive} />
-
         <main className="main">
           <div className="main-overview">
             <div className="overview-card">
@@ -201,6 +209,7 @@ const Orders = () => {
                         <th scope="col">Shipping Terms</th>
                         <th scope="col">Payment Terms</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -222,10 +231,9 @@ const Orders = () => {
                                 <div className="flex-grow-1 ms-3">
                                   <p>
                                     {" "}
-                                    {/* {orders.product.productName
+                                    {orders.product
                                       ? Capitalize(orders.product.productName)
-                                      : ""} */}
-                                    Nkiru
+                                      : " "}
                                   </p>
                                   <p className="table-order-no">
                                     Order {orders.orderNumber}
@@ -252,6 +260,18 @@ const Orders = () => {
                               {orders.status === "CANCELLED" && (
                                 <div className="text-danger">Cancelled</div>
                               )}
+                            </td>
+                            <td>
+                              {" "}
+                              <p
+                                className="text-primary "
+                                data-bs-toggle="modal"
+                                data-bs-target="#vieworderModal"
+                                onClick={(e) => viewOrderInfo(orders.id)}
+                                style={{ cursor: "pointer" }}
+                              >
+                                View
+                              </p>
                             </td>
                           </tr>
                         ))}
@@ -287,6 +307,7 @@ const Orders = () => {
             />
           )}
         </main>
+        <OrderInfo orderInfo={orderInfo} Capitalize={Capitalize} />
       </div>
     </div>
   );

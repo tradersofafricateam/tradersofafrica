@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState, useMemo } from "react";
 import Pagination from "react-bootstrap/Pagination";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Iconly } from "react-iconly";
 
 const PaginationComponent = ({

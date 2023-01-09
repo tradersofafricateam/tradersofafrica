@@ -25,8 +25,6 @@ const BuyerHome = () => {
   const [banner, setBanner] = useState([]);
   const [product, setProduct] = useState([]);
   const [bannerLoader, setBannerLoader] = useState(true);
-  const [customError, setCustomError] = useState("");
-  const [formErrors, setFormErrors] = useState({});
   const options = useMemo(() => countryList().getData(), []);
   const [inquiry, setInquiry] = useState({
     productName: "",
@@ -69,7 +67,7 @@ const BuyerHome = () => {
       });
     } catch (error) {
       setBannerLoader(false);
-      console.log("error loading banner", error.response.data.erros);
+      console.log(error);
     }
   };
 
@@ -96,11 +94,9 @@ const BuyerHome = () => {
         termsOfTrade: inquiry.termsOfTrade,
         paymentTerms: inquiry.paymentTerms,
       };
-      console.log("inquiry sending", createInquiry);
       const {
         data: { data },
       } = await axios.post("/rfq", createInquiry);
-      console.log("inquiry created", data);
       setInquiry({
         productName: "",
         productDescription: "",
@@ -118,7 +114,7 @@ const BuyerHome = () => {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 1500,
+          duration: 5000,
           onScreen: true,
         },
         isMobile: true,
@@ -126,23 +122,10 @@ const BuyerHome = () => {
       });
       setTimeout(() => {
         window.location.reload();
-      }, 1800);
+      }, 5800);
     } catch (err) {
-      if (err.response.data.errors[0].field) {
-        console.log(err.response.data.errors);
-        setFormErrors(
-          err.response.data.errors.reduce(function(obj, err) {
-            obj[err.field] = err.message;
-            return obj;
-          }, {})
-        );
-      } else {
-        console.log(err.response.data.errors[0].message);
-        setCustomError(err.response.data.errors[0].message);
-      }
-
       Store.addNotification({
-        title: "Order Failed!",
+        title: "Inquiry Failed!",
         message: err.response.data.errors[0].message,
         type: "danger",
         insert: "top",
@@ -150,7 +133,7 @@ const BuyerHome = () => {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 3000,
+          duration: 5000,
           onScreen: true,
         },
         isMobile: true,
@@ -162,8 +145,6 @@ const BuyerHome = () => {
   const filteredBanner = banner.filter(
     (bann) => bann.section === "Hero Section Banner"
   );
-
-  console.log("filteredBanner", filteredBanner);
 
   if (userLoading || loading) {
     return <CardSkeleton />;

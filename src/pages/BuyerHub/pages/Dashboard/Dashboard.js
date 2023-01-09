@@ -24,7 +24,6 @@ const Dashboard = () => {
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
-    console.log("isActive", isActive);
   };
 
   useEffect(() => {
@@ -36,7 +35,7 @@ const Dashboard = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log("error loading order summary", error);
+        console.log(error);
       });
   }, []);
 
@@ -49,7 +48,7 @@ const Dashboard = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log("error loading inquiry summary", error);
+        console.log(error);
       });
   }, []);
 
@@ -62,11 +61,10 @@ const Dashboard = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log("error loading all orders", error);
+        console.log(error);
       });
   }, []);
 
-  console.log("all orders", allUserOrder);
   //summary for all orders and enquire
   const orderSummary =
     userOrderSummary.total_delivered_orders +
@@ -201,15 +199,15 @@ const Dashboard = () => {
 
           <h1 className="section-title">Activity Summary</h1>
           <div className="main-overview">
-            <div className="overview-card">
+            {/* <div className="overview-card">
               <div>
                 <h2>Total Transactions</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <p>Detailed transaction history is on the order page</p>
                 <div class="d-flex justify-content-between mt-4">
                   <h3>$600,000</h3>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="overview-card">
               <div>
                 <h2>Total Orders</h2>
@@ -273,16 +271,16 @@ const Dashboard = () => {
                         <tr key={index}>
                           <td>
                             <div className="d-flex">
-                              <div className="flex-shrink-0">
+                              {/* <div className="flex-shrink-0">
                                 <img
                                   className="table-product-img"
                                   src={orders.product.productImages[0].image}
                                   alt="product name"
                                 />
-                              </div>
+                              </div> */}
                               <div className="flex-grow-1 ms-3">
                                 <p>
-                                  {orders.product.productName
+                                  {orders.product
                                     ? Capitalize(orders.product.productName)
                                     : ""}
                                 </p>
@@ -292,10 +290,7 @@ const Dashboard = () => {
                               </div>
                             </div>
                           </td>
-                          <td>
-                            {orders.product.currency}{" "}
-                            {numberWithCommas(orders.cost)}
-                          </td>
+                          <td>USD {numberWithCommas(orders.cost)}</td>
                           <td>{orders.shippingType}</td>
                           <td>{orders.paymentTerm}</td>
                           <td>

@@ -5,7 +5,7 @@ const ViewOrderModal = () => {
   return (
     <div
       className="modal fade place-order-modal"
-      id="vieworderModal"
+      // id="vieworderModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"

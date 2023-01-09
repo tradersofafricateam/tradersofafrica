@@ -57,10 +57,10 @@ const UserSettings = () => {
         country: editProfile.country,
         phoneNumber: editPhoneNumber,
       };
-      const {
-        data: { data },
-      } = await axios.post(`/buyer-hub/profile`, editUserDetails);
-      console.log("editUserDetails", data);
+
+      console.log("editUserDetails", editUserDetails);
+      const { data } = await axios.post(`/buyer-hub/profile`, editUserDetails);
+
       Store.addNotification({
         title: "Successful!",
         message: `Your profile has been successful updated`,

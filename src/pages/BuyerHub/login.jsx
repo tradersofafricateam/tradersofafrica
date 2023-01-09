@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./login.css";
-import backIcon from "../../assets/img/back-icon.svg";
 import LogoWhite from "../../assets/img/icons/logo-white.png";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import "../BuyerHub/BuyerMain.css";
