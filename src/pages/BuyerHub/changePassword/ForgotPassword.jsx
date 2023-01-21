@@ -10,23 +10,16 @@ import { axios } from "../../../components/baseUrl";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { Store } from "react-notifications-component";
-
-// import { Modal } from "antd";
-// import "antd/dist/antd.css";
 import { Iconly } from "react-iconly";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [message, setMessage] = useState("");
-  // const [showMessage, setShowMessage] = useState(false);
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-  // const handleCancel = () => {
-  //   setShowMessage(false);
-  // };
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -38,7 +31,7 @@ export default function ForgotPassword() {
         `/auth/forgot-password`,
         forgotPassword
       );
-      console.log(data);
+      setLoading(false);
       setEmail("");
       Store.addNotification({
         title: "Successful!",
@@ -55,21 +48,19 @@ export default function ForgotPassword() {
         isMobile: true,
         breakpoint: 768,
       });
-      // setShowMessage(true);
-      // setMessage(`A password reset link has been sent to ${email}`);
     } catch (error) {
       setLoading(false);
       console.log(error);
       Store.addNotification({
         title: "Failed!",
-        message: "Try Again.",
+        message: error.response.data.errors[0].message,
         type: "danger",
         insert: "top",
         container: "top-left",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 3000,
+          duration: 5000,
           onScreen: true,
         },
         isMobile: true,
@@ -136,20 +127,27 @@ export default function ForgotPassword() {
               </div>
 
               <div className=" mt-4">
-                <button
-                  className="btn btn-white button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  {!loading ? (
-                    <span> Reset Password</span>
-                  ) : (
-                    <div className="login-btn">
-                      <span className="loading"></span>
-                      <span> Reset</span>
-                    </div>
-                  )}
-                </button>
+                {!loading ? (
+                  <button
+                    className="btn btn-white button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Reset Password
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-white button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                )}
               </div>
             </form>
           </div>

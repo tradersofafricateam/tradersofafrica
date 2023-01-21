@@ -12,6 +12,8 @@ import { Store } from "react-notifications-component";
 
 const UserSettings = () => {
   const [isActive, setIsActive] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [passLoader, setPassLoader] = useState(false);
   const [inputType, setInputType] = useState("password");
   const [formattedErrors, setFormattedErrors] = useState({});
   const [customError, setCustomError] = useState("");
@@ -51,6 +53,7 @@ const UserSettings = () => {
 
   const handleEditProfile = async (e) => {
     e.preventDefault();
+    setLoader(true);
     try {
       const editUserDetails = {
         fullName: editProfile.fullName,
@@ -58,9 +61,8 @@ const UserSettings = () => {
         phoneNumber: editPhoneNumber,
       };
 
-      console.log("editUserDetails", editUserDetails);
       const { data } = await axios.post(`/buyer-hub/profile`, editUserDetails);
-
+      setLoader(false);
       Store.addNotification({
         title: "Successful!",
         message: `Your profile has been successful updated`,
@@ -77,6 +79,7 @@ const UserSettings = () => {
         breakpoint: 768,
       });
     } catch (error) {
+      setLoader(false);
       if (error.response.data.errors[0].field) {
         console.log(error.response.data.errors);
         setFormattedErrors(
@@ -110,6 +113,7 @@ const UserSettings = () => {
 
   const handleUserPasswordChange = async (e) => {
     e.preventDefault();
+    setPassLoader(true);
     try {
       const editUserPassword = {
         oldPassword: editPassword.currentPassword,
@@ -118,7 +122,7 @@ const UserSettings = () => {
       const {
         data: { data },
       } = await axios.post(`/buyer-hub/password`, editUserPassword);
-      console.log("editUserPassword", data);
+      setLoader(false);
       Store.addNotification({
         title: "Successful!",
         message: `Your password has been successfully changed.`,
@@ -135,6 +139,7 @@ const UserSettings = () => {
         breakpoint: 768,
       });
     } catch (error) {
+      setLoader(false);
       if (error.response.data.errors[0].field) {
         console.log(error.response.data.errors);
         setFormattedErrors(
@@ -148,11 +153,11 @@ const UserSettings = () => {
         setCustomError(error.response.data.errors[0].message);
       }
       Store.addNotification({
-        title: "Order Failed!",
+        title: "Failed!",
         message: error.response.data.errors[0].message,
         type: "danger",
         insert: "top",
-        container: "top-left",
+        container: "top-right",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
@@ -348,18 +353,38 @@ const UserSettings = () => {
                   </div>
                   <div className="seller-footer">
                     <div className="seller-seting-submit mx-2">
-                      <button
-                        onClick={handleUserPasswordChange}
-                        className="btn btn-primary changepassword my-4"
-                      >
-                        Change Password
-                      </button>
-                      <button
-                        onClick={handleEditProfile}
-                        className="btn btn-primary savechanges my-4"
-                      >
-                        Save Changes
-                      </button>
+                      {!passLoader ? (
+                        <button
+                          onClick={handleUserPasswordChange}
+                          className="btn btn-primary changepassword my-4"
+                        >
+                          Change Password
+                        </button>
+                      ) : (
+                        <button className="btn btn-primary changepassword my-4">
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      )}
+                      {!loader ? (
+                        <button
+                          onClick={handleEditProfile}
+                          className="btn btn-primary savechanges my-4"
+                        >
+                          Save Changes
+                        </button>
+                      ) : (
+                        <button className="btn btn-primary savechanges my-4">
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      )}
                     </div>
                     <div className="seller-seting-joindate">
                       <p>Joined Since</p>

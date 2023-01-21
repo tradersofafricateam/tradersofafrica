@@ -22,6 +22,7 @@ const Orders = () => {
   const [userOrderSummary, setUserOrderSummary] = useState("");
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [allLoading, setAllLoading] = useState(true);
   const [orderLoad, setOrderLoad] = useState(true);
 
   const handleClick = (event) => {
@@ -59,10 +60,10 @@ const Orders = () => {
       .get(`/buyer-hub/all-orders`)
       .then((response) => {
         setAllUserOrder(response.data.data);
-        setLoading(false);
+        setAllLoading(false);
       })
       .catch((error) => {
-        setLoading(false);
+        setAllLoading(false);
         console.log(error);
       });
   }, []);
@@ -113,7 +114,7 @@ const Orders = () => {
     );
   }, [allUserOrder, currentPage, search, noMatch]);
 
-  if (loading) {
+  if (loading || allLoading) {
     return <CardSkeleton />;
   }
   return (

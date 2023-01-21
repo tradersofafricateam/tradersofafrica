@@ -8,15 +8,10 @@ import { Store } from "react-notifications-component";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
-import ProductImg3 from "../../../../assets/img/products/p-img3.png";
-
 const OrderModal = () => {
   const [productInfo, setProductInfo] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  // const { user } = useContext(GlobalContext);
+  const [loader, setLoader] = useState(false);
   const [priceSelected, setPriceSelected] = useState("");
-  const [customError, setCustomError] = useState("");
-  const [formErrors, setFormErrors] = useState({});
 
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -66,8 +61,8 @@ const OrderModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoader(true);
     try {
-      console.log(country.label);
       const createForeignOrder = {
         productID: productInfo.id,
         quantity: foreignOrderDetails.quantity,
@@ -82,6 +77,7 @@ const OrderModal = () => {
       const {
         data: { data },
       } = await axios.post("/order/foreign", createForeignOrder);
+      setLoader(false);
       setForeignOrderDetails({
         quantity: 1,
         countryOfOrigin: "",
@@ -113,19 +109,7 @@ const OrderModal = () => {
       }, 5800);
       navigate(`/details/${productId}`);
     } catch (err) {
-      if (err.response.data.errors[0].field) {
-        console.log(err.response.data.errors);
-        setFormErrors(
-          err.response.data.errors.reduce(function(obj, err) {
-            obj[err.field] = err.message;
-            return obj;
-          }, {})
-        );
-      } else {
-        console.log(err.response.data.errors[0].message);
-        setCustomError(err.response.data.errors[0].message);
-      }
-
+      setLoader(false);
       Store.addNotification({
         title: "Order Failed!",
         message: err.response.data.errors[0].message,
@@ -148,11 +132,8 @@ const OrderModal = () => {
     try {
       const { data } = await axios.get(`/product/${productId}`);
       setProductInfo(data.data);
-      console.log(data.data, "modal specific product");
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
     }
   };
 
@@ -355,9 +336,19 @@ const OrderModal = () => {
                       ""
                     ) : (
                       <div className="col-lg-12">
-                        <button type="submit" className="mt-3">
-                          Place Order
-                        </button>
+                        {!loader ? (
+                          <button type="submit" className="mt-3">
+                            Place Order
+                          </button>
+                        ) : (
+                          <button type="submit" className="mt-3">
+                            <span
+                              className="spinner-border spinner-border-sm"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                          </button>
+                        )}
                       </div>
                     )}
                   </form>

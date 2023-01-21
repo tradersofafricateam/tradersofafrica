@@ -6,22 +6,17 @@ import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { Store } from "react-notifications-component";
 
-export default function EmailVerification({ registerDetail }) {
-  const [message, setMessage] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
-  //   const [open, setOpen] = useState(false);
+export default function EmailVerification() {
+  const [loader, setLoader] = useState(false);
   const { email } = useParams();
-  console.log(email);
-
-  const handleCancel = () => {
-    setShowMessage(false);
-  };
 
   const handleEmail = async () => {
+    setLoader(true);
     try {
       await axios.post(`/auth/resend-email-verification`, {
         email: email,
       });
+      setLoader(false);
       Store.addNotification({
         title: "Successful!",
         message: `A verification link has been resent to ${email}. To continue, please check your inbox and verify your email address.`,
@@ -38,6 +33,7 @@ export default function EmailVerification({ registerDetail }) {
         breakpoint: 768,
       });
     } catch (error) {
+      setLoader(false);
       console.log(error);
       Store.addNotification({
         title: "Failed!",
@@ -73,13 +69,22 @@ export default function EmailVerification({ registerDetail }) {
 
         <p>
           Didn’t receive the email?{" "}
-          <button
-            className="btn btn-light"
-            onClick={() => handleEmail(email)}
-            href=""
-          >
-            Resend email
-          </button>
+          {!loader ? (
+            <button
+              className="btn btn-light"
+              onClick={() => handleEmail(email)}
+            >
+              Resend email
+            </button>
+          ) : (
+            <button className="btn btn-light">
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            </button>
+          )}
         </p>
       </div>
     </section>

@@ -27,6 +27,11 @@ const MessageCenter = () => {
     setIsActive((current) => !current);
   };
 
+  const convertDateFormat = (oldDate) => {
+    let date = new Date(oldDate).toString().split(" ");
+    return date[2] + " " + date[1] + "," + " " + date[3];
+  };
+
   const socketEvents = {
     connection: "connection",
     addUser: "add-user",
@@ -50,7 +55,6 @@ const MessageCenter = () => {
         const {
           data: { data },
         } = await axios.get("/message/receive-message");
-        console.log(data);
         setMessages(data);
       } catch (error) {
         console.log(error);
@@ -164,7 +168,6 @@ const MessageCenter = () => {
                       </div>
                       <div className="flex-grow-1 ms-3">
                         <h2>TOFA SourcePro</h2>
-                        <p>Salami Johnson</p>
                       </div>
                     </div>
                     <div className="chat-action">
@@ -203,7 +206,8 @@ const MessageCenter = () => {
                               <p>{message.message}</p>
                             )}
                             <p className="chat-timestamp">
-                              {dayjs(message.createdAt).format("hh:mm a")}
+                              {dayjs(message.createdAt).format("hh:mm a")}{" "}
+                              {/* {convertDateFormat(message.createdAt)} */}
                             </p>
                           </div>
                         );

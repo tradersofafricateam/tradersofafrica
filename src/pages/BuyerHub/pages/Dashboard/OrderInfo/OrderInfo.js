@@ -1,10 +1,18 @@
-import React from "react";
-// import { confirmAlert } from "react-confirm-alert";
-// import "react-confirm-alert/src/react-confirm-alert.css";
-// import { ReactNotifications } from "react-notifications-component";
-// import "react-notifications-component/dist/theme.css";
+import React, { useState } from "react";
+import { axios } from "../../../../../components/baseUrl";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { Store } from "react-notifications-component";
+import { useNavigate } from "react-router-dom";
 
 const ViewOrderModal = ({ orderInfo, Capitalize }) => {
+  const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
+  const [file, setFile] = useState();
+  const [fileLoader, setFileLoader] = useState(false);
+
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -14,64 +22,106 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
     return date[2] + " " + date[1] + "," + " " + date[3];
   };
 
-  //   const submit = (e) => {
-  //     confirmAlert({
-  //       title: "Confirm Order",
-  //       message: "Are you sure you're ok with Order details?",
-  //       buttons: [
-  //         {
-  //           label: "Yes",
-  //           onClick: (e) => handleSubmit(e),
-  //         },
-  //         {
-  //           label: "No",
-  //         },
-  //       ],
-  //     });
-  //   };
+  function handleChange(event) {
+    setFile(event.target.files[0]);
+  }
 
-  //   const handleAprrove = (productId) => {
-  //   axios
-  //   .delete(`/order/approve/${productId}`)
-  //   .then((response) => {
-  //     Store.addNotification({
-  //       title: "Successful!",
-  //       message: "You have successfully deleted this product",
-  //       type: "success",
-  //       insert: "top",
-  //       container: "top-right",
-  //       animationIn: ["animate__animated", "animate__fadeIn"],
-  //       animationOut: ["animate__animated", "animate__fadeOut"],
-  //       dismiss: {
-  //         duration: 5000,
-  //         onScreen: true,
-  //       },
-  //       isMobile: true,
-  //       breakpoint: 768,
-  //     });
-  //     setTimeout(() => {
-  //       Navigate(-1);
-  //     }, 5800);
-  //   })
-  //   .catch((error) => {
-  //     console.log("error", error);
-  //     Store.addNotification({
-  //       title: "Failed, Try again!",
-  //       message: error.response.data.errors[0].message,
-  //       type: "danger",
-  //       insert: "top",
-  //       container: "top-right",
-  //       animationIn: ["animate__animated", "animate__fadeIn"],
-  //       animationOut: ["animate__animated", "animate__fadeOut"],
-  //       dismiss: {
-  //         duration: 5000,
-  //         onScreen: true,
-  //       },
-  //       isMobile: true,
-  //       breakpoint: 768,
-  //     });
-  //   });
-  // };
+  function handleSubmit(e) {
+    e.preventDefault();
+    setFileLoader(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    // formData.append("fileName", file.name);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    axios
+      .post(`/order/image/${orderInfo.id}`, formData, config)
+      .then((response) => {
+        console.log(response.data);
+        setFileLoader(false);
+        Store.addNotification({
+          title: "Successful!",
+          message: "You have successfully uploaded your payment receipt",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+          isMobile: true,
+          breakpoint: 768,
+        });
+      })
+      .catch((error) => {
+        setFileLoader(false);
+        console.log("error", error);
+        Store.addNotification({
+          title: "Failed, Try again!",
+          message: error.response.data.errors[0].message,
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+          isMobile: true,
+          breakpoint: 768,
+        });
+      });
+  }
+
+  console.log("orderInfo", orderInfo);
+
+  const handleApproval = async () => {
+    try {
+      setLoader(true);
+      const { data } = await axios.get(`/order/approve/${orderInfo.id}`);
+      setLoader(false);
+      console.log("response", data);
+      Store.addNotification({
+        title: "Successful!",
+        message: "You have successfully approved this order",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    } catch (error) {
+      setLoader(false);
+      console.log("error", error);
+      Store.addNotification({
+        title: "Failed, Try again!",
+        message: error.response.data.errors[0].message,
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    }
+  };
 
   return (
     <div
@@ -81,6 +131,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
+      <ReactNotifications />
       <div className="modal-dialog modal-xl">
         <div className="modal-content">
           <div className="modal-header">
@@ -158,15 +209,128 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
 
                     <div className="line"></div>
                   </div>
+                  <div className="order-history">
+                    <h5 className="modal-sub-title">Order history</h5>
+                    <div className="order-history-details-ctn">
+                      <div className="order-circle"></div>
+                      <div className="order-history-details">
+                        <h6>Order Placed</h6>
+                        <p>
+                          Placed Order for{" "}
+                          {orderInfo.quantityOrdered &&
+                            numberWithCommas(orderInfo.quantityOrdered)}
+                          MT of{" "}
+                          {orderInfo.product
+                            ? Capitalize(orderInfo.product.productName)
+                            : " "}{" "}
+                          to be delivered to {orderInfo && orderInfo.country}.
+                        </p>
+                        <form className="m-0" onSubmit={handleSubmit}>
+                          <div className="d-flex upload-di">
+                            <label htmlFor="uploadImage">
+                              <p className="my-0">Upload payment receipt</p>
+                            </label>
+                            <input
+                              type="file"
+                              id="uploadImage"
+                              onChange={handleChange}
+                              className="m-0"
+                            />
+                          </div>
+                          {!fileLoader ? (
+                            <button type="submit">upload</button>
+                          ) : (
+                            <button>
+                              <span
+                                className="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                            </button>
+                          )}
+                        </form>
+                      </div>
+                    </div>
+                    <div className="order-history-details-ctn">
+                      <div className="order-circle"></div>
+                      <div className="order-history-details">
+                        <h6>Payment Successful</h6>
+                        <p>
+                          Uploaded and processed requirements in the payment
+                          type of {orderInfo && orderInfo.paymentTerm} with the
+                          supplier and it has been confirmed
+                        </p>
+                      </div>
+                    </div>
+                    <div className="order-history-details-ctn">
+                      <div className="order-circle"></div>
+                      <div className="order-history-details">
+                        <h6>Order Processed</h6>
+                        <p>
+                          Order for{" "}
+                          {orderInfo.quantityOrdered &&
+                            numberWithCommas(orderInfo.quantityOrdered)}
+                          MT of{" "}
+                          {orderInfo.product
+                            ? Capitalize(orderInfo.product.productName)
+                            : " "}{" "}
+                          has been shipped
+                        </p>
+                      </div>
+                    </div>
+                    <div className="order-history-details-ctn">
+                      <div className="order-circle"></div>
+                      <div className="order-history-details">
+                        <h6>Order Shipped</h6>
+                        <p>
+                          Order for{" "}
+                          {orderInfo.quantityOrdered &&
+                            numberWithCommas(orderInfo.quantityOrdered)}
+                          MT of{" "}
+                          {orderInfo.product
+                            ? Capitalize(orderInfo.product.productName)
+                            : " "}{" "}
+                          has been shipped
+                        </p>
+                      </div>
+                    </div>
+                    <div className="order-history-details-ctn">
+                      <div className="order-circle"></div>
+                      <div className="order-history-details">
+                        <h6>Order Delivered</h6>
+                        <p>
+                          Order for{" "}
+                          {orderInfo.quantityOrdered &&
+                            numberWithCommas(orderInfo.quantityOrdered)}
+                          MT of{" "}
+                          {orderInfo.product
+                            ? Capitalize(orderInfo.product.productName)
+                            : " "}{" "}
+                          has been delivered to {orderInfo && orderInfo.country}
+                          .
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              {/* {!orderInfo.buyerApproved ? (
+              {!orderInfo.buyerApproved && (
                 <div className="col-lg-12">
-                  <button className="mt-3" >Approve Order</button>
+                  {!loader ? (
+                    <button className="mt-3" onClick={handleApproval}>
+                      Approve Order
+                    </button>
+                  ) : (
+                    <button className="mt-3" onClick={handleApproval}>
+                      <span
+                        className="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  )}
                 </div>
-              ) : (
-                ""
-              )} */}
+              )}
             </div>
           </div>
         </div>

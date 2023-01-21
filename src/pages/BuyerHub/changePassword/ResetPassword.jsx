@@ -126,7 +126,7 @@ export default function ResetPassword() {
         `/auth/reset-password/${resetToken}`,
         changePassword
       );
-      console.log(data);
+      setLoading(false);
       setPasswordInput({
         password: "",
         confirmPassword: "",
@@ -140,7 +140,7 @@ export default function ResetPassword() {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 3000,
+          duration: 5000,
           onScreen: true,
         },
         isMobile: true,
@@ -148,11 +148,25 @@ export default function ResetPassword() {
       });
       setTimeout(() => {
         navigate(`/login`);
-      }, 3800);
+      }, 5800);
     } catch (error) {
       setLoading(false);
       console.log(error);
-      setLinkExpire("Your token has expired");
+      Store.addNotification({
+        title: "Failed!",
+        message: error.response.data.errors[0].message,
+        type: "danger",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
     }
   };
 
@@ -281,16 +295,19 @@ export default function ResetPassword() {
                 </div>
 
                 <div className=" mt-4">
-                  <button className="btn btn-white button">
-                    {!loading ? (
-                      <span>Change Password</span>
-                    ) : (
-                      <div className="login-btn">
-                        <span className="loading"></span>
-                        <span>Submit</span>
-                      </div>
-                    )}
-                  </button>
+                  {!loading ? (
+                    <button className="btn btn-white button">
+                      Change Password
+                    </button>
+                  ) : (
+                    <button className="btn btn-white button">
+                      <span
+                        className="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  )}
                 </div>
               </form>
             </div>

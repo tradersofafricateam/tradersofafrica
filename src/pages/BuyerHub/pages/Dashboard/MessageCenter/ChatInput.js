@@ -10,7 +10,6 @@ export const ChatInput = ({ handleSendMsg }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    console.log("passed here");
     if (msg.length > 0) {
       handleSendMsg(msg);
       setMsg("");
@@ -44,6 +43,9 @@ export const ChatInput = ({ handleSendMsg }) => {
             onChange={handleSetMessage}
             value={msg}
             placeholder="Type your message here..."
+            onKeyDown={(event) => {
+              event.key === "Enter" && handleSendMessage(event);
+            }}
           ></textarea>
           <Iconly
             className="chat-icon"

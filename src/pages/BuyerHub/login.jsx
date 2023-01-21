@@ -82,6 +82,7 @@ export default function Login() {
       const {
         data: { data },
       } = await axios.post("/auth/signin-buyer", loginDetails);
+      setLoading(false);
       setUser(data);
       localStorage.setItem("user", true);
       localStorage.setItem("joinedAt", JSON.stringify(data.createdAt));
@@ -233,19 +234,25 @@ export default function Login() {
                     </div>
                   </div>
                   <div className="mt-3 login-btn">
-                    <button
-                      type="submit"
-                      className="login-btn btn btn-danger button"
-                    >
-                      {!loading ? (
-                        <span>Login</span>
-                      ) : (
-                        <div className="login-btn">
-                          <span className="loading"></span>
-                          <span>Login</span>
-                        </div>
-                      )}
-                    </button>
+                    {!loading ? (
+                      <button
+                        type="submit"
+                        className="login-btn btn btn-danger button"
+                      >
+                        Login
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="login-btn btn btn-danger button"
+                      >
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                      </button>
+                    )}
                   </div>
                 </form>
               </section>

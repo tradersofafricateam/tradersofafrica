@@ -67,8 +67,7 @@ export default function BuyerRegistration() {
       const {
         data: { data },
       } = await axios.post(`/auth/register-buyer`, buyerRegistration);
-
-      console.log(data);
+      setLoading(false);
       navigate(`/verify-email/${data.email}`);
     } catch (error) {
       setLoading(false);
@@ -80,12 +79,6 @@ export default function BuyerRegistration() {
             return obj;
           }, {})
         );
-        // setFormErrors(
-        //   err.response.data.errors.reduce(function(obj, err) {
-        //     obj[err.field] = err.message;
-        //     return obj;
-        //   }, {})
-        // );
       } else {
         console.log(error.response.data.errors[0].message);
         setCustomError(error.response.data.errors[0].message);
@@ -222,19 +215,25 @@ export default function BuyerRegistration() {
               {customError && <p className="errors">{customError}</p>}
 
               <div className="mt-3 login-btn">
-                <button
-                  type="submit"
-                  className="login-btn btn btn-danger button"
-                >
-                  {!loading ? (
-                    <span>Register</span>
-                  ) : (
-                    <div className="login-btn">
-                      <span className="loading"></span>
-                      <span> Register</span>
-                    </div>
-                  )}
-                </button>
+                {!loading ? (
+                  <button
+                    type="submit"
+                    className="login-btn btn btn-danger button"
+                  >
+                    Register
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="login-btn btn btn-danger button"
+                  >
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                )}
               </div>
             </form>
           </section>

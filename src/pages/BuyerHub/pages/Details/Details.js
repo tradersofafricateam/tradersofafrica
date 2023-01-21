@@ -25,6 +25,7 @@ const Details = () => {
   const [currentImage, setCurrentImage] = useState({});
   const [country, setCountry] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [customError, setCustomError] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const { productId } = useParams();
@@ -73,6 +74,7 @@ const Details = () => {
 
   const handleInquirySubmit = async (e) => {
     e.preventDefault();
+    setLoader(true);
     try {
       const createInquiry = {
         productName: productInfo.productName,
@@ -82,11 +84,10 @@ const Details = () => {
         termsOfTrade: inquiry.termsOfTrade,
         paymentTerms: inquiry.paymentTerms,
       };
-      console.log("inquiry sending", createInquiry);
       const {
         data: { data },
       } = await axios.post("/rfq", createInquiry);
-      console.log("inquiry created", data);
+      setLoader(false);
       setInquiry({
         productDescription: "",
         quantityRequired: "1",
@@ -110,6 +111,7 @@ const Details = () => {
         breakpoint: 768,
       });
     } catch (err) {
+      setLoader(false);
       if (err.response.data.errors[0].field) {
         console.log(err.response.data.errors);
         setFormErrors(
@@ -124,7 +126,7 @@ const Details = () => {
       }
 
       Store.addNotification({
-        title: "Order Failed!",
+        title: "Failed!",
         message: err.response.data.errors[0].message,
         type: "danger",
         insert: "top",
@@ -132,7 +134,7 @@ const Details = () => {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 3000,
+          duration: 5000,
           onScreen: true,
         },
         isMobile: true,
@@ -522,10 +524,19 @@ const Details = () => {
                           >
                             {customError && customError}
                           </p>
-
-                          <button className="mt-3" type="submit">
-                            Submit Inquiry
-                          </button>
+                          {!loader ? (
+                            <button className="mt-3" type="submit">
+                              Submit Inquiry
+                            </button>
+                          ) : (
+                            <button className="mt-3" type="submit">
+                              <span
+                                className="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                            </button>
+                          )}
                         </form>
                       </div>
                     </div>

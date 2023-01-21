@@ -22,6 +22,7 @@ const BuyerHome = () => {
   const [country, setCountry] = useState("");
   const { userLoading } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [banner, setBanner] = useState([]);
   const [product, setProduct] = useState([]);
   const [bannerLoader, setBannerLoader] = useState(true);
@@ -85,6 +86,7 @@ const BuyerHome = () => {
 
   const handleInquirySubmit = async (e) => {
     e.preventDefault();
+    setLoader(true);
     try {
       const createInquiry = {
         productName: inquiry.productName,
@@ -97,6 +99,7 @@ const BuyerHome = () => {
       const {
         data: { data },
       } = await axios.post("/rfq", createInquiry);
+      setLoader(false);
       setInquiry({
         productName: "",
         productDescription: "",
@@ -124,6 +127,7 @@ const BuyerHome = () => {
         window.location.reload();
       }, 5800);
     } catch (err) {
+      setLoader(false);
       Store.addNotification({
         title: "Inquiry Failed!",
         message: err.response.data.errors[0].message,
@@ -406,10 +410,19 @@ const BuyerHome = () => {
                         />
                       </div>
                     </div>
-
-                    <button className="mt-3" type="submit">
-                      Submit Inquiry
-                    </button>
+                    {!loader ? (
+                      <button className="mt-3" type="submit">
+                        Submit Inquiry
+                      </button>
+                    ) : (
+                      <button className="mt-3" type="submit">
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                      </button>
+                    )}
                   </form>
                 </div>
               </div>
