@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Iconly } from "react-iconly";
 import Footer from "../../../../components/Footer/Footer";
 import BuyHubNavbar from "../../components/BuyHubNavbar/BuyHubNavbar";
@@ -29,6 +29,7 @@ const Details = () => {
   const [customError, setCustomError] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const { productId } = useParams();
+  const navigate = useNavigate();
   const productInterest = "You might be interested in";
 
   const [inquiry, setInquiry] = useState({
@@ -112,6 +113,9 @@ const Details = () => {
       });
     } catch (err) {
       setLoader(false);
+      if (!err.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       if (err.response.data.errors[0].field) {
         console.log(err.response.data.errors);
         setFormErrors(

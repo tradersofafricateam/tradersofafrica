@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "./components/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { axios } from "./../../../../components/baseUrl.jsx";
 
 import TrackImg from "../../../../assets/img/track-illus.png";
@@ -15,11 +15,11 @@ import CardSkeleton from "../CardSkeleton";
 
 const Dashboard = () => {
   const { user } = useContext(GlobalContext);
-
-  const [userOrderSummary, setUserOrderSummary] = useState("");
-  const [userEnquireSummary, setUserEnquireSummary] = useState("");
+  const navigate = useNavigate();
   const [allUserOrder, setAllUserOrder] = useState([]);
+  const [activity, setActivity] = useState({});
   const [loading, setLoading] = useState(true);
+  const [activityLoading, setActivityLoading] = useState(true);
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (event) => {
@@ -28,27 +28,17 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`/buyer-hub/order-summary`)
+      .get(`/buyer-hub/activity-summary`)
       .then((response) => {
-        setUserOrderSummary(response.data.data);
-        setLoading(false);
+        setActivity(response.data.data);
+        setActivityLoading(false);
       })
       .catch((error) => {
-        setLoading(false);
+        setActivityLoading(false);
         console.log(error);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`/buyer-hub/enquiry-summary`)
-      .then((response) => {
-        setUserEnquireSummary(response.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error);
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
       });
   }, []);
 
@@ -62,21 +52,11 @@ const Dashboard = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
       });
   }, []);
-
-  //summary for all orders and enquire
-  const orderSummary =
-    userOrderSummary.total_delivered_orders +
-    userOrderSummary.total_pending_orders +
-    userOrderSummary.total_shipped_orders +
-    userOrderSummary.total_confirmed_orders +
-    userOrderSummary.total_cancelled_orders;
-
-  const enquireSummary =
-    userEnquireSummary.total_pending_enquiries +
-    userEnquireSummary.total_received_quote +
-    userEnquireSummary.total_sent_enquiries;
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -123,7 +103,7 @@ const Dashboard = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  if (loading) {
+  if (loading || activityLoading) {
     return <CardSkeleton />;
   }
   return (
@@ -199,21 +179,27 @@ const Dashboard = () => {
 
           <h1 className="section-title">Activity Summary</h1>
           <div className="main-overview">
-            {/* <div className="overview-card">
+            <div className="overview-card">
               <div>
                 <h2>Total Transactions</h2>
                 <p>Detailed transaction history is on the order page</p>
                 <div class="d-flex justify-content-between mt-4">
-                  <h3>$600,000</h3>
+                  <h3>
+                    {activity.total_transactions &&
+                      numberWithCommas(activity.total_transactions)}
+                  </h3>
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className="overview-card">
               <div>
                 <h2>Total Orders</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
                 <div class="d-flex justify-content-between mt-4">
-                  {orderSummary === NaN ? <h3>0</h3> : <h3>{orderSummary}</h3>}
+                  <h3>
+                    {activity.total_number_of_orders &&
+                      numberWithCommas(activity.total_number_of_orders)}
+                  </h3>
 
                   <Link className="overview-card-link" to="/orders">
                     View all
@@ -226,11 +212,11 @@ const Dashboard = () => {
                 <h2>Total Inquiries</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
                 <div class="d-flex justify-content-between mt-4">
-                  {enquireSummary === NaN ? (
-                    <h3>0</h3>
-                  ) : (
-                    <h3>{enquireSummary}</h3>
-                  )}
+                  <h3>
+                    {activity.total_number_of_enquiries &&
+                      numberWithCommas(activity.total_number_of_enquiries)}
+                  </h3>
+
                   <Link className="overview-card-link" to="/inquiries">
                     View all
                   </Link>

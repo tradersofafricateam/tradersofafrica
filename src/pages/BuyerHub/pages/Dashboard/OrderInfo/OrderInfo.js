@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { axios } from "../../../../../components/baseUrl";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { Store } from "react-notifications-component";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const ViewOrderModal = ({ orderInfo, Capitalize }) => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState({});
   const [fileLoader, setFileLoader] = useState(false);
+
+  console.log("orderInfo", orderInfo);
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -26,70 +26,25 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
     setFile(event.target.files[0]);
   }
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFileLoader(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    // formData.append("fileName", file.name);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    axios
-      .post(`/order/image/${orderInfo.id}`, formData, config)
-      .then((response) => {
-        console.log(response.data);
-        setFileLoader(false);
-        Store.addNotification({
-          title: "Successful!",
-          message: "You have successfully uploaded your payment receipt",
-          type: "success",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-          isMobile: true,
-          breakpoint: 768,
-        });
-      })
-      .catch((error) => {
-        setFileLoader(false);
-        console.log("error", error);
-        Store.addNotification({
-          title: "Failed, Try again!",
-          message: error.response.data.errors[0].message,
-          type: "danger",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-          isMobile: true,
-          breakpoint: 768,
-        });
-      });
-  }
-
-  console.log("orderInfo", orderInfo);
-
-  const handleApproval = async () => {
     try {
-      setLoader(true);
-      const { data } = await axios.get(`/order/approve/${orderInfo.id}`);
-      setLoader(false);
-      console.log("response", data);
+      const formData = new FormData();
+      formData.append("file", file);
+      const { data: result } = await axios.post(
+        `/order/image/${orderInfo.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setFileLoader(false);
       Store.addNotification({
         title: "Successful!",
-        message: "You have successfully approved this order",
+        message: "You have successfully uploaded your payment receipt",
         type: "success",
         insert: "top",
         container: "top-right",
@@ -103,8 +58,11 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
         breakpoint: 768,
       });
     } catch (error) {
-      setLoader(false);
+      setFileLoader(false);
       console.log("error", error);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       Store.addNotification({
         title: "Failed, Try again!",
         message: error.response.data.errors[0].message,
@@ -123,11 +81,79 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
     }
   };
 
+  const handleApproval = async () => {
+    try {
+      setLoader(true);
+      const { data } = await axios.get(`/order/approve/${orderInfo.id}`);
+      setLoader(false);
+      Store.addNotification({
+        title: "Successful!",
+        message: "You have successfully approved this order",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    } catch (error) {
+      setLoader(false);
+      console.log("error", error);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
+      Store.addNotification({
+        title: "Failed, Try again!",
+        message: error.response.data.errors[0].message,
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    }
+  };
+
+  console.log(
+    "orderInfo.paymentReceipt.id",
+    orderInfo.paymentReceipt && orderInfo.paymentReceipt.id
+  );
+
+  // if (orderLoad) {
+  //   <div
+  //     className="modal fade place-order-modal"
+  //     id="vieworderModal"
+  //     tabindex="-1"
+  //     aria-labelledby="exampleModalLabel"
+  //     aria-hidden="true"
+  //   >
+  //     <div className="gooey">
+  //       <span className="dot"></span>
+  //       <div className="dots">
+  //         <span></span>
+  //         <span></span>
+  //         <span></span>
+  //       </div>
+  //     </div>
+  //   </div>;
+  // }
+
   return (
     <div
       className="modal fade place-order-modal"
       id="vieworderModal"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
@@ -148,7 +174,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
                 <h5 className="modal-sub-title">Order Summary</h5>
                 <div className="order-summary">
                   <div className="os-details">
-                    <table class="table table-borderless">
+                    <table className="table table-borderless">
                       <tr>
                         <td className="osd-title">Product Name:</td>
                         <td>
@@ -209,109 +235,312 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
 
                     <div className="line"></div>
                   </div>
-                  <div className="order-history">
-                    <h5 className="modal-sub-title">Order history</h5>
-                    <div className="order-history-details-ctn">
-                      <div className="order-circle"></div>
-                      <div className="order-history-details">
-                        <h6>Order Placed</h6>
-                        <p>
-                          Placed Order for{" "}
-                          {orderInfo.quantityOrdered &&
-                            numberWithCommas(orderInfo.quantityOrdered)}
-                          MT of{" "}
-                          {orderInfo.product
-                            ? Capitalize(orderInfo.product.productName)
-                            : " "}{" "}
-                          to be delivered to {orderInfo && orderInfo.country}.
-                        </p>
-                        <form className="m-0" onSubmit={handleSubmit}>
-                          <div className="d-flex upload-di">
-                            <label htmlFor="uploadImage">
-                              <p className="my-0">Upload payment receipt</p>
-                            </label>
-                            <input
-                              type="file"
-                              id="uploadImage"
-                              onChange={handleChange}
-                              className="m-0"
-                            />
-                          </div>
-                          {!fileLoader ? (
-                            <button type="submit">upload</button>
+                  {orderInfo.status === "PENDING" && (
+                    <div className="order-history">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Placed</h6>
+                          <p>
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+
+                          {orderInfo.paymentReceipt ? (
+                            <a
+                              href={orderInfo.paymentReceipt.image}
+                              target="_blank"
+                            >
+                              View receipt
+                            </a>
                           ) : (
-                            <button>
-                              <span
-                                className="spinner-border spinner-border-sm"
-                                role="status"
-                                aria-hidden="true"
-                              ></span>
-                            </button>
+                            <form className="m-0" onSubmit={handleSubmit}>
+                              <div className="d-flex upload-di">
+                                <label htmlFor="uploadImage">
+                                  <p className="my-0">
+                                    Upload payment receipt{" "}
+                                    <span>
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                      >
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l4.65-4.65c.2-.2.51-.2.71 0L17 13h-3z" />
+                                      </svg>
+                                    </span>
+                                  </p>
+                                </label>
+                                {file && file.name}
+                                <input
+                                  type="file"
+                                  id="uploadImage"
+                                  name="file"
+                                  onChange={handleChange}
+                                  className="m-0"
+                                />
+                              </div>
+                              {!fileLoader ? (
+                                <button type="submit">upload</button>
+                              ) : (
+                                <button>
+                                  <span
+                                    className="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                </button>
+                              )}
+                            </form>
                           )}
-                        </form>
+                        </div>
                       </div>
                     </div>
-                    <div className="order-history-details-ctn">
-                      <div className="order-circle"></div>
-                      <div className="order-history-details">
-                        <h6>Payment Successful</h6>
-                        <p>
-                          Uploaded and processed requirements in the payment
-                          type of {orderInfo && orderInfo.paymentTerm} with the
-                          supplier and it has been confirmed
-                        </p>
+                  )}
+                  {orderInfo.status === "PROCESSING" && (
+                    <div className="order-history">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Placed</h6>
+                          <p>
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+
+                          {orderInfo.paymentReceipt && (
+                            <a
+                              href={orderInfo.paymentReceipt.image}
+                              target="_blank"
+                            >
+                              View receipt
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Payment Successful</h6>
+                          <p>
+                            Uploaded and processed requirements in the payment
+                            type of {orderInfo && orderInfo.paymentTerm} with
+                            TOFA has been confirmed
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Processing</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been proccessed and ready for shipping.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <div className="order-history-details-ctn">
-                      <div className="order-circle"></div>
-                      <div className="order-history-details">
-                        <h6>Order Processed</h6>
-                        <p>
-                          Order for{" "}
-                          {orderInfo.quantityOrdered &&
-                            numberWithCommas(orderInfo.quantityOrdered)}
-                          MT of{" "}
-                          {orderInfo.product
-                            ? Capitalize(orderInfo.product.productName)
-                            : " "}{" "}
-                          has been shipped
-                        </p>
+                  )}
+                  {orderInfo.status === "SHIPPED" && (
+                    <div className="order-history">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Placed</h6>
+                          <p>
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+
+                          {orderInfo.paymentReceipt && (
+                            <a
+                              href={orderInfo.paymentReceipt.image}
+                              target="_blank"
+                            >
+                              View receipt
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Payment Successful</h6>
+                          <p>
+                            Uploaded and processed requirements in the payment
+                            type of {orderInfo && orderInfo.paymentTerm} with
+                            TOFA has been confirmed
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Processed</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been processed
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Shipped</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been shipped
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <div className="order-history-details-ctn">
-                      <div className="order-circle"></div>
-                      <div className="order-history-details">
-                        <h6>Order Shipped</h6>
-                        <p>
-                          Order for{" "}
-                          {orderInfo.quantityOrdered &&
-                            numberWithCommas(orderInfo.quantityOrdered)}
-                          MT of{" "}
-                          {orderInfo.product
-                            ? Capitalize(orderInfo.product.productName)
-                            : " "}{" "}
-                          has been shipped
-                        </p>
+                  )}
+                  {orderInfo.status === "DELIVERED" && (
+                    <div className="order-history">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Placed</h6>
+                          <p>
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+
+                          {orderInfo.paymentReceipt && (
+                            <a
+                              href={orderInfo.paymentReceipt.image}
+                              target="_blank"
+                            >
+                              View receipt
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Payment Successful</h6>
+                          <p>
+                            Uploaded and processed requirements in the payment
+                            type of {orderInfo && orderInfo.paymentTerm} with
+                            TOFA has been confirmed
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Processed</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been shipped
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Shipped</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been shipped
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Delivered</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been delivered to{" "}
+                            {orderInfo && orderInfo.country}.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <div className="order-history-details-ctn">
-                      <div className="order-circle"></div>
-                      <div className="order-history-details">
-                        <h6>Order Delivered</h6>
-                        <p>
-                          Order for{" "}
-                          {orderInfo.quantityOrdered &&
-                            numberWithCommas(orderInfo.quantityOrdered)}
-                          MT of{" "}
-                          {orderInfo.product
-                            ? Capitalize(orderInfo.product.productName)
-                            : " "}{" "}
-                          has been delivered to {orderInfo && orderInfo.country}
-                          .
-                        </p>
+                  )}
+                  {orderInfo.status === "CANCELLED" && (
+                    <div className="order-history">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h3>Order Cancelled</h3>
+                          <p>
+                            If you didn't request your order to be cancelled,
+                            contact us <Link to=""> here</Link> to get full
+                            details.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
               {!orderInfo.buyerApproved && (

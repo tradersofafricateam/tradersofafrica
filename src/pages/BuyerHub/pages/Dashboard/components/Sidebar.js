@@ -58,7 +58,7 @@ const Sidebar = ({ isActive }) => {
 
         <h2 className="sidenav_title">Dashboard</h2>
 
-        <ul class="sidenav__list">
+        <ul className="sidenav__list">
           <Link className="sidenav-link" to="/dashboard">
             <li className="sidenav__list-item">
               <Iconly
@@ -134,7 +134,7 @@ const Sidebar = ({ isActive }) => {
           </Link>
         </ul>
 
-        <ul class="sidenav__list mt-auto">
+        <ul className="sidenav__list mt-auto">
           <Link className="sidenav-link" to="/buy-commodities">
             <li className="sidenav__list-item">
               <Iconly

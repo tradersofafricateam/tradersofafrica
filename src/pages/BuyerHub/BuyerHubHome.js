@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import BuyHubNavbar from "./components/BuyHubNavbar/BuyHubNavbar";
 import { axios } from "../../components/baseUrl";
@@ -27,6 +27,7 @@ const BuyerHome = () => {
   const [product, setProduct] = useState([]);
   const [bannerLoader, setBannerLoader] = useState(true);
   const options = useMemo(() => countryList().getData(), []);
+  const navigate = useNavigate();
   const [inquiry, setInquiry] = useState({
     productName: "",
     productDescription: "",
@@ -47,6 +48,10 @@ const BuyerHome = () => {
       });
     } catch (error) {
       setLoading(false);
+      console.log("error", error);
+      // if (!error.response.data.errors) {
+      //   return navigate(`/no-connection`);
+      // }
     }
   };
 
@@ -69,6 +74,9 @@ const BuyerHome = () => {
     } catch (error) {
       setBannerLoader(false);
       console.log(error);
+      // if (!error.response.data.errors) {
+      //   return navigate(`/no-connection`);
+      // }
     }
   };
 
@@ -128,6 +136,9 @@ const BuyerHome = () => {
       }, 5800);
     } catch (err) {
       setLoader(false);
+      if (!err.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       Store.addNotification({
         title: "Inquiry Failed!",
         message: err.response.data.errors[0].message,

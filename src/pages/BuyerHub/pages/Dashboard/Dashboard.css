@@ -489,7 +489,7 @@ body {
 }
 
 .chat-wrap .chat-area .message-area .chat-order-request-msg {
-  max-width: 45%;
+  max-width: 80%;
   background-color: #ffffff !important;
   padding: 30px;
   border-radius: 16px 16px 0px 16px !important;
@@ -523,7 +523,7 @@ body {
 }
 
 .chat-wrap .chat-area .message-area .chat-msg {
-  max-width: 45% !important;
+  max-width: 80% !important;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
@@ -678,6 +678,11 @@ body {
 
 .order-history-details {
   padding-bottom: 10px;
+  width: 100%;
+}
+
+.order-history-details > p {
+  word-wrap: break-word;
 }
 
 .order-history-details h6 {
@@ -686,6 +691,7 @@ body {
 
 .order-history-details label {
   width: max-content;
+  cursor: pointer;
 }
 
 .order-history-details label p {
@@ -699,9 +705,9 @@ body {
   border: none;
 }
 
-/* .order-history-details input {
+.order-history-details input {
   visibility: hidden !important;
-} */
+}
 
 /* end of order info */
 
@@ -759,5 +765,13 @@ body {
 
   .order-summary .order-history {
     width: 50% !important;
+  }
+
+  .chat-wrap .chat-area .message-area .chat-msg {
+    max-width: 55% !important;
+  }
+
+  .chat-wrap .chat-area .message-area .chat-order-request-msg {
+    max-width: 55%;
   }
 }

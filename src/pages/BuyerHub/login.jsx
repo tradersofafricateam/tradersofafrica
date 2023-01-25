@@ -9,6 +9,9 @@ import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
 import { Iconly } from "react-iconly";
 import { GlobalContext } from "../../components/utils/GlobalState";
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { Store } from "react-notifications-component";
 
 export default function Login() {
   const ShowPasswordIcon = (props) => {
@@ -91,6 +94,10 @@ export default function Login() {
     } catch (err) {
       setLoading(false);
       localStorage.setItem("user", false);
+      if (!err.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
+
       if (err.response.data.errors[0].field) {
         setError(
           err.response.data.errors.reduce(function(obj, err) {
@@ -108,6 +115,7 @@ export default function Login() {
   return (
     <>
       <div className="section-body">
+        <ReactNotifications />
         <section className="w-100" id="auth-page">
           <div className="row m-0">
             <div className="col-lg-6 d-none d-lg-block p-0">

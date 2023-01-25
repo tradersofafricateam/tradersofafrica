@@ -1,12 +1,13 @@
 import React from "react";
 import ProductImg3 from "../../../../../assets/img/products/p-img3.png";
 
-const ViewOrderModal = () => {
+const ViewOrderModal = ({ orderInfo }) => {
+  console.log("orderInfo", orderInfo);
   return (
     <div
       className="modal fade place-order-modal"
-      // id="vieworderModal"
-      tabindex="-1"
+      id="vieworderModall"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
@@ -22,20 +23,10 @@ const ViewOrderModal = () => {
           </div>
           <div className="modal-body">
             <div className="row">
-              <div className="col-lg-8">
+              <div className="col-lg-6">
                 <h5 className="modal-sub-title">Product information</h5>
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1">Product Requirements</label>
-                    <textarea
-                      class="form-control"
-                      id=""
-                      rows="3"
-                      value="Jute bag packaging, KOR 48 - 50"
-                      placeholder="Enter product requirements like etc"
-                      disabled
-                    ></textarea>
-                  </div>
+                {/* <form>
+                  <div class="mb-3"></div>
 
                   <div className="row">
                     <div className="col-lg-6 mb-3">
@@ -128,9 +119,9 @@ const ViewOrderModal = () => {
                       />
                     </div>
                   </div>
-                </form>
+                </form> */}
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-6">
                 <h5 className="modal-sub-title">Order Summary</h5>
                 <div className="order-summary">
                   <div class="d-flex mb-2">

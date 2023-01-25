@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useMemo, useContext } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { axios } from "../../../../components/baseUrl";
 import { useNavigate, useParams } from "react-router-dom";
-import { GlobalContext } from "../../../../components/utils/GlobalState";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { Store } from "react-notifications-component";
@@ -110,6 +109,9 @@ const OrderModal = () => {
       navigate(`/details/${productId}`);
     } catch (err) {
       setLoader(false);
+      if (!err.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       Store.addNotification({
         title: "Order Failed!",
         message: err.response.data.errors[0].message,
@@ -134,6 +136,9 @@ const OrderModal = () => {
       setProductInfo(data.data);
     } catch (error) {
       console.log(error);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
     }
   };
 

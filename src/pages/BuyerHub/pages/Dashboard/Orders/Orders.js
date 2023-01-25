@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { axios } from "../../../../../components/baseUrl.jsx";
 
 import "../Dashboard.css";
@@ -24,6 +24,7 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [allLoading, setAllLoading] = useState(true);
   const [orderLoad, setOrderLoad] = useState(true);
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
@@ -39,6 +40,9 @@ const Orders = () => {
       .catch((error) => {
         console.log(error);
         setOrderLoad(false);
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
       });
   };
 
@@ -52,6 +56,9 @@ const Orders = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
       });
   }, []);
 
@@ -65,6 +72,9 @@ const Orders = () => {
       .catch((error) => {
         setAllLoading(false);
         console.log(error);
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
       });
   }, []);
 
@@ -162,7 +172,7 @@ const Orders = () => {
             <div className="overview-card">
               <div>
                 <h2>Total Orders</h2>
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   {orderSummary === NaN || null ? (
                     <h3>0</h3>
                   ) : (
@@ -174,7 +184,7 @@ const Orders = () => {
             <div className="overview-card">
               <div>
                 <h2>Pending Orders</h2>
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   {userOrderSummary.total_pending_orders < 1 ? (
                     <h3>0</h3>
                   ) : (
@@ -186,7 +196,7 @@ const Orders = () => {
             <div className="overview-card">
               <div>
                 <h2>Delivered Orders</h2>
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   {userOrderSummary.total_delivered_orders < 1 ? (
                     <h3>0</h3>
                   ) : (
@@ -201,8 +211,8 @@ const Orders = () => {
           {allUserOrder && allUserOrder.length > 0 ? (
             <div className="main-overview">
               <div className="overview-card no-padding">
-                <div class="table-responsive">
-                  <table class="table table-striped">
+                <div className="table-responsive">
+                  <table className="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col">Product Info</th>
@@ -216,18 +226,18 @@ const Orders = () => {
                     <tbody>
                       {ordersData &&
                         ordersData.map((orders) => (
-                          <tr>
+                          <tr key={orders.id}>
                             <td>
                               <div className="d-flex">
                                 <div className="flex-shrink-0">
-                                  {/* <img
+                                  <img
                                     className="table-product-img"
                                     src={
-                                      orders.product.productImages[0] &&
+                                      orders.product &&
                                       orders.product.productImages[0].image
                                     }
-                                    alt="Product name"
-                                  /> */}
+                                    alt="product image"
+                                  />
                                 </div>
                                 <div className="flex-grow-1 ms-3">
                                   <p>

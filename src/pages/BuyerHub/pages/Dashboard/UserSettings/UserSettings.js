@@ -9,9 +9,11 @@ import PhoneInput from "react-phone-number-input";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { Store } from "react-notifications-component";
+import { useNavigate } from "react-router-dom";
 
 const UserSettings = () => {
   const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [passLoader, setPassLoader] = useState(false);
   const [inputType, setInputType] = useState("password");
@@ -60,9 +62,15 @@ const UserSettings = () => {
         country: editProfile.country,
         phoneNumber: editPhoneNumber,
       };
+      console.log("editUserDetails", editUserDetails);
 
-      const { data } = await axios.post(`/buyer-hub/profile`, editUserDetails);
+      const { data } = await axios.post(`/buyer-hub/profile`, {
+        fullName: editProfile.fullName,
+        country: editProfile.country,
+        phoneNumber: editPhoneNumber,
+      });
       setLoader(false);
+      console.log("data", data);
       Store.addNotification({
         title: "Successful!",
         message: `Your profile has been successful updated`,
@@ -80,6 +88,9 @@ const UserSettings = () => {
       });
     } catch (error) {
       setLoader(false);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       if (error.response.data.errors[0].field) {
         console.log(error.response.data.errors);
         setFormattedErrors(
@@ -89,10 +100,8 @@ const UserSettings = () => {
           }, {})
         );
       } else {
-        console.log(error.response.data.errors[0].message);
         setCustomError(error.response.data.errors[0].message);
       }
-      console.log(error.response.data.errors);
       Store.addNotification({
         title: "Failed!",
         message: error.response.data.errors[0].message,
@@ -122,7 +131,7 @@ const UserSettings = () => {
       const {
         data: { data },
       } = await axios.post(`/buyer-hub/password`, editUserPassword);
-      setLoader(false);
+      setPassLoader(false);
       Store.addNotification({
         title: "Successful!",
         message: `Your password has been successfully changed.`,
@@ -139,7 +148,10 @@ const UserSettings = () => {
         breakpoint: 768,
       });
     } catch (error) {
-      setLoader(false);
+      setPassLoader(false);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       if (error.response.data.errors[0].field) {
         console.log(error.response.data.errors);
         setFormattedErrors(
@@ -149,7 +161,6 @@ const UserSettings = () => {
           }, {})
         );
       } else {
-        console.log(error.response.data.errors[0].message);
         setCustomError(error.response.data.errors[0].message);
       }
       Store.addNotification({

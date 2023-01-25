@@ -25,6 +25,7 @@ import ProtectedRoutes from "./components/utils/ProtectedRoutes";
 import GlobalState from "./components/utils/GlobalState";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Internet from "./pages/BuyerHub/pages/Internet";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
               path="/verify-email/:email"
               element={<EmailVerification />}
             />
+            <Route path="/no-connection" element={<Internet />} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} exact />
               <Route path="/order-info" element={<OrderInfo />} exact />

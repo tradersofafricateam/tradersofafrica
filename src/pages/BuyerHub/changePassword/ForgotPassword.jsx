@@ -51,6 +51,9 @@ export default function ForgotPassword() {
     } catch (error) {
       setLoading(false);
       console.log(error);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       Store.addNotification({
         title: "Failed!",
         message: error.response.data.errors[0].message,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import "./emailVerification.css";
 import { axios } from "../../components/baseUrl";
 import { ReactNotifications } from "react-notifications-component";
@@ -9,6 +9,7 @@ import { Store } from "react-notifications-component";
 export default function EmailVerification() {
   const [loader, setLoader] = useState(false);
   const { email } = useParams();
+  const navigate = useNavigate();
 
   const handleEmail = async () => {
     setLoader(true);
@@ -35,9 +36,12 @@ export default function EmailVerification() {
     } catch (error) {
       setLoader(false);
       console.log(error);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       Store.addNotification({
         title: "Failed!",
-        message: "Try Again.",
+        message: error.response.data.errors[0],
         type: "danger",
         insert: "top",
         container: "top-right",

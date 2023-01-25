@@ -7,12 +7,15 @@ import "../Dashboard.css";
 import PaginationComponent from "../components/Pagination";
 import SearchInput from "../components/SearchInput";
 import CardSkeleton from "../../CardSkeleton";
+import { useNavigate } from "react-router-dom";
 
 const Inquiries = () => {
   const [userEnquireSummary, setUserEnquireSummary] = useState("");
   const [allUserEnquire, setAllUserEnquire] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isActive, setIsActive] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
@@ -27,7 +30,10 @@ const Inquiries = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log("error loading inquiry summary", error);
+        console.log(error);
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
       });
   }, []);
 
@@ -40,7 +46,10 @@ const Inquiries = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log("error loading all inquires", error);
+        console.log(error);
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
       });
   }, []);
 

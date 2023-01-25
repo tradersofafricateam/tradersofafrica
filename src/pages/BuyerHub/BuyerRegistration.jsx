@@ -71,6 +71,9 @@ export default function BuyerRegistration() {
       navigate(`/verify-email/${data.email}`);
     } catch (error) {
       setLoading(false);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
       if (error.response.data.errors[0].field) {
         console.log(error.response.data.errors);
         setFormattedErrors(

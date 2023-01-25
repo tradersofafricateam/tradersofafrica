@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 import dayjs from "dayjs";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
@@ -23,8 +23,30 @@ const MessageCenter = () => {
   const socket = useRef();
   const [isActive, setIsActive] = useState(false);
 
+  const [orderInfo, setOrderInfo] = useState({});
+  const navigate = useNavigate();
+
   const handleClick = (event) => {
     setIsActive((current) => !current);
+  };
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  const viewOrderInfo = async (orderId) => {
+    await axios
+      .get(`/order/${orderId}`)
+      .then((response) => {
+        setOrderInfo(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+
+        if (!error.response.data.errors) {
+          return navigate(`/no-connection`);
+        }
+      });
   };
 
   const convertDateFormat = (oldDate) => {
@@ -43,7 +65,7 @@ const MessageCenter = () => {
   useEffect(() => {
     if (user) {
       socket.current = io(
-        "http://ec2-18-221-181-52.us-east-2.compute.amazonaws.com"
+        "http://ec2-18-221-181-52.us-east-2.compute.amazonaws.com:8081"
       );
       socket.current.emit(socketEvents.addUser, user.id, user.type);
     }
@@ -99,6 +121,24 @@ const MessageCenter = () => {
       console.log(error);
     }
   };
+
+  function isMsgObject(msg) {
+    let isObject;
+
+    try {
+      const orderResultObj = JSON.parse(msg);
+      if (typeof orderResultObj === "object") {
+        isObject = true;
+      }
+      console.log(orderResultObj);
+    } catch (error) {
+      if (error) {
+        isObject = false;
+      }
+    }
+
+    return isObject;
+  }
 
   return (
     <div>
@@ -187,28 +227,90 @@ const MessageCenter = () => {
 
                   <div className="chat-area">
                     <div className="message-area">
-                      <ChatOrder />
                       {messages.map((message, index) => {
                         return (
-                          <div
-                            className={`chat-msg ${
-                              message.fromSelf ? "sender" : "receiver"
-                            }`}
-                            key={index}
-                            ref={scrollRef}
-                          >
-                            {" "}
-                            {message.message === "START_NEW_ORDER" ? (
-                              <div class="order-msg">
-                                <h2>Start Order</h2>
+                          <div className="message-area">
+                            {isMsgObject(message.message) ? (
+                              // <ChatOrder order={JSON.parse(message.message)} />
+                              <div className="chat-order-request-msg receiver">
+                                <div class="order-msg d-flex">
+                                  <div class="flex-shrink-0">
+                                    <h2>New Order</h2>
+                                    <p className="cp-name">
+                                      Order{" "}
+                                      {JSON.parse(message.message)
+                                        .orderNumber &&
+                                        JSON.parse(message.message).orderNumber}
+                                    </p>
+                                    <p className="cp-price">
+                                      <span>USD</span>{" "}
+                                      {JSON.parse(message.message).cost
+                                        ? numberWithCommas(
+                                            JSON.parse(message.message).cost
+                                          )
+                                        : numberWithCommas(
+                                            JSON.parse(message.message).data
+                                              .cost
+                                          )}{" "}
+                                      <span>/ MT</span>
+                                    </p>
+                                  </div>
+                                  {/* <div className="flex-grow-1 ms-3">
+                                  <p className="cp-name">{order.incoterm && order.incoterm}</p>
+                                  <p className="cp-price">
+                                    {order.cost
+                                      ? numberWithCommas(order.cost)
+                                      : numberWithCommas(order.data.cost)}{" "}
+                                  </p>
+                                </div> */}
+                                </div>
+                                {JSON.parse(message.message).id && (
+                                  <button
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#vieworderModall"
+                                    className="order_msg-btn"
+                                    onClick={(e) =>
+                                      viewOrderInfo(
+                                        JSON.parse(message.message).id
+                                      )
+                                    }
+                                  >
+                                    View Order
+                                  </button>
+                                )}
+                                <button className="order_msg-btn">
+                                  Approve Order
+                                </button>
+                                <p className="chat-timestamp">
+                                  {JSON.parse(message.message).createdAt &&
+                                    dayjs(
+                                      JSON.parse(message.message).createdAt
+                                    ).format("hh:mm a")}
+                                </p>
                               </div>
                             ) : (
-                              <p>{message.message}</p>
+                              <div
+                                className={`chat-msg ${
+                                  message.fromSelf ? "sender" : "receiver"
+                                }`}
+                                key={index}
+                                ref={scrollRef}
+                              >
+                                <div>
+                                  {message.message === "START_NEW_ORDER" ? (
+                                    <div class="order-msg">
+                                      <h2>Start Order</h2>
+                                    </div>
+                                  ) : (
+                                    <p>{message.message}</p>
+                                  )}
+                                  <p className="chat-timestamp">
+                                    {dayjs(message.createdAt).format("hh:mm a")}{" "}
+                                    {/* {convertDateFormat(message.createdAt)} */}
+                                  </p>
+                                </div>
+                              </div>
                             )}
-                            <p className="chat-timestamp">
-                              {dayjs(message.createdAt).format("hh:mm a")}{" "}
-                              {/* {convertDateFormat(message.createdAt)} */}
-                            </p>
                           </div>
                         );
                       })}
@@ -227,9 +329,8 @@ const MessageCenter = () => {
             {/* Raise Dispute Modal */}
             <RaiseDisputeModal />
             {/* End of Raise Dispute Modal */}
-
             {/* View Order */}
-            <ViewOrderModal />
+            <ViewOrderModal orderInfo={orderInfo} />
             {/* End of View Order Modal */}
           </div>
         </main>
