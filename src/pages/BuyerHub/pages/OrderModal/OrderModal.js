@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { axios } from "../../../../components/baseUrl";
 import { useNavigate, useParams } from "react-router-dom";
-import { ReactNotifications } from "react-notifications-component";
+
 import "react-notifications-component/dist/theme.css";
-import { Store } from "react-notifications-component";
+import { ReactNotifications, Store } from "react-notifications-component";
+
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
@@ -73,9 +74,8 @@ const OrderModal = () => {
         port: foreignOrderDetails.port,
         productRequirement: foreignOrderDetails.productRequirement,
       };
-      const {
-        data: { data },
-      } = await axios.post("/order/foreign", createForeignOrder);
+      await axios.post("/order/foreign", createForeignOrder);
+
       setLoader(false);
       setForeignOrderDetails({
         quantity: 1,
@@ -103,9 +103,7 @@ const OrderModal = () => {
         isMobile: true,
         breakpoint: 768,
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 5800);
+
       navigate(`/details/${productId}`);
     } catch (err) {
       setLoader(false);
@@ -135,7 +133,6 @@ const OrderModal = () => {
       const { data } = await axios.get(`/product/${productId}`);
       setProductInfo(data.data);
     } catch (error) {
-      console.log(error);
       if (!error.response.data.errors) {
         return navigate(`/no-connection`);
       }

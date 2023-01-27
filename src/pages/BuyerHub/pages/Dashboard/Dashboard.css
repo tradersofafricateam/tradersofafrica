@@ -709,6 +709,17 @@ body {
   visibility: hidden !important;
 }
 
+.img-pro-ctn {
+  width: 80px;
+  height: 80px;
+}
+
+.img-pro-ctn .s-product-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
 /* end of order info */
 
 .footer {

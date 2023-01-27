@@ -1,11 +1,6 @@
-import React, { useState, useMemo } from "react";
-import Select from "react-select";
-import countryList from "react-select-country-list";
+import React from "react";
 
 export const NewOrderModal = ({ handleSendMsg }) => {
-  const [country, setCountry] = useState("");
-  const options = useMemo(() => countryList().getData(), []);
-
   const handleClick = () => {
     handleSendMsg("START_NEW_ORDER");
   };

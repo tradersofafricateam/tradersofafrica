@@ -85,7 +85,7 @@ const Wedo = () => {
                     international markets.
                   </p>
                   <p>
-                    <a className="hvr-icon-forward" href="#">
+                    <a className="hvr-icon-forward" href="/">
                       Sell Commodities
                       <img className="hvr-icon" src={ChevronRightOrg} alt="" />
                     </a>
@@ -137,7 +137,7 @@ const Wedo = () => {
                   and earn a share of the profits.
                 </p>
                 <p>
-                  <a className="hvr-icon-forward" href="#">
+                  <a className="hvr-icon-forward" href="/">
                     Contact us{" "}
                     <img className="hvr-icon" src={ChevronRightOrg} alt="" />
                   </a>
@@ -166,7 +166,7 @@ const Wedo = () => {
                   offtake of all products. Become a member of our TOFA Tribe,
                   where we'll mentor you for impact and monitor you for success!
                 </p>
-                <a className="hvr-icon-forward" href="#">
+                <a className="hvr-icon-forward" href="/">
                   <button className="btn btn-danger training-cta">
                     Apply now
                     <img className="hvr-icon" src={ChevronRightOrg} alt="" />

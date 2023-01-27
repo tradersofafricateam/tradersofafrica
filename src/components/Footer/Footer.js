@@ -23,20 +23,20 @@ const Footer = () => {
                   <br />
                   with and within Africa through Technology
                 </p>
-                <a href="#">
+                <a href="https://twitter.com/tradersofafrica">
                   <img className="social-icon" src={Twitter} alt="Twitter" />
                 </a>
-                <a href="#">
+                <a href="/">
                   <img className="social-icon" src={Facebook} alt="Facebook" />
                 </a>
-                <a href="#">
+                <a href="/">
                   <img
                     className="social-icon"
                     src={Instagram}
                     alt="Instagram"
                   />
                 </a>
-                <a href="#">
+                <a href="/">
                   <img className="social-icon" src={Linkedin} alt="LinkedIn" />
                 </a>
               </div>
@@ -126,7 +126,6 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            
           </div>
         </div>
         <div className="bottom-wrap">

@@ -4,11 +4,13 @@ import Sidebar from "../components/Sidebar";
 import "../Dashboard.css";
 import "./UserSettings.css";
 import { axios } from "../../../../../components/baseUrl.jsx";
+
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { ReactNotifications } from "react-notifications-component";
+
+import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-import { Store } from "react-notifications-component";
+
 import { useNavigate } from "react-router-dom";
 
 const UserSettings = () => {
@@ -18,7 +20,6 @@ const UserSettings = () => {
   const [passLoader, setPassLoader] = useState(false);
   const [inputType, setInputType] = useState("password");
   const [formattedErrors, setFormattedErrors] = useState({});
-  const [customError, setCustomError] = useState("");
   const [createdAt, setCreatedAt] = useState("");
   const [editPhoneNumber, setEditPhoneNumber] = useState("");
   const [editProfile, setEditProfile] = useState({
@@ -37,10 +38,10 @@ const UserSettings = () => {
     }
   }, []);
 
-  const convertDateFormat = (oldDate) => {
-    let date = new Date(oldDate).toString().split(" ");
-    return date[2] + " " + date[1] + "," + " " + date[3];
-  };
+  // const convertDateFormat = (oldDate) => {
+  //   let date = new Date(oldDate).toString().split(" ");
+  //   return date[2] + " " + date[1] + "," + " " + date[3];
+  // };
 
   const handleChange = (e) => {
     setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
@@ -57,20 +58,12 @@ const UserSettings = () => {
     e.preventDefault();
     setLoader(true);
     try {
-      const editUserDetails = {
-        fullName: editProfile.fullName,
-        country: editProfile.country,
-        phoneNumber: editPhoneNumber,
-      };
-      console.log("editUserDetails", editUserDetails);
-
-      const { data } = await axios.post(`/buyer-hub/profile`, {
+      await axios.post(`/buyer-hub/profile`, {
         fullName: editProfile.fullName,
         country: editProfile.country,
         phoneNumber: editPhoneNumber,
       });
       setLoader(false);
-      console.log("data", data);
       Store.addNotification({
         title: "Successful!",
         message: `Your profile has been successful updated`,
@@ -99,8 +92,6 @@ const UserSettings = () => {
             return obj;
           }, {})
         );
-      } else {
-        setCustomError(error.response.data.errors[0].message);
       }
       Store.addNotification({
         title: "Failed!",
@@ -128,9 +119,7 @@ const UserSettings = () => {
         oldPassword: editPassword.currentPassword,
         newPassword: editPassword.newPassword,
       };
-      const {
-        data: { data },
-      } = await axios.post(`/buyer-hub/password`, editUserPassword);
+      await axios.post(`/buyer-hub/password`, editUserPassword);
       setPassLoader(false);
       Store.addNotification({
         title: "Successful!",
@@ -160,8 +149,6 @@ const UserSettings = () => {
             return obj;
           }, {})
         );
-      } else {
-        setCustomError(error.response.data.errors[0].message);
       }
       Store.addNotification({
         title: "Failed!",
@@ -399,7 +386,7 @@ const UserSettings = () => {
                     </div>
                     <div className="seller-seting-joindate">
                       <p>Joined Since</p>
-                      <p>{convertDateFormat(createdAt)}</p>
+                      <p>{createdAt}</p>
                     </div>
                   </div>
                 </form>

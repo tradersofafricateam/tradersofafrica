@@ -3,15 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import BuyHubNavbar from "./components/BuyHubNavbar/BuyHubNavbar";
 import { axios } from "../../components/baseUrl";
+
 import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+
 import Select from "react-select";
 import countryList from "react-select-country-list";
+
 import "react-loading-skeleton/dist/skeleton.css";
+
+// import { Slide } from "react-slideshow-image";
+// import "react-slideshow-image/dist/styles.css";
 
 import { GlobalContext } from "../../components/utils/GlobalState";
 
 import Banner from "../../assets/img/b-home-bn2.png";
+
 import { Iconly } from "react-iconly";
 
 import "./BuyersHome.css";
@@ -23,9 +30,9 @@ const BuyerHome = () => {
   const { userLoading } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(false);
-  const [banner, setBanner] = useState([]);
+  // const [banner, setBanner] = useState([]);
   const [product, setProduct] = useState([]);
-  const [bannerLoader, setBannerLoader] = useState(true);
+  // const [bannerLoader, setBannerLoader] = useState(false);
   const options = useMemo(() => countryList().getData(), []);
   const navigate = useNavigate();
   const [inquiry, setInquiry] = useState({
@@ -44,6 +51,7 @@ const BuyerHome = () => {
     try {
       axios.get("/product").then((response) => {
         setProduct(response.data.data);
+        console.log("response", response);
         setLoading(false);
       });
     } catch (error) {
@@ -65,24 +73,30 @@ const BuyerHome = () => {
     ref.current.scrollLeft += scrollOffset;
   };
 
-  const getBanner = async () => {
-    try {
-      axios.get("/banner").then((response) => {
-        setBanner(response.data.data);
-        setBannerLoader(false);
-      });
-    } catch (error) {
-      setBannerLoader(false);
-      console.log(error);
-      // if (!error.response.data.errors) {
-      //   return navigate(`/no-connection`);
-      // }
-    }
-  };
+  // const getBanner = async () => {
+  //   try {
+  //     axios.get("/banner").then((response) => {
+  //       setBanner(response.data.data);
+  //       setBannerLoader(false);
+  //       console.log("responseBanner", response);
+  //     });
+  //   } catch (error) {
+  //     setBannerLoader(false);
+  //     console.log(" bannerErrot", error);
+  //     if (!error.response.data.errors) {
+  //       return navigate(`/no-connection`);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    getBanner();
-  }, []);
+  // useEffect(() => {
+  //   getBanner();
+  // }, []);
+
+  // const filteredBanner = banner.filter(
+  //   (bann) => bann.section === "Buyers Hub Slider"
+  // );
+  // console.log("filteredBanner", filteredBanner);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -104,9 +118,7 @@ const BuyerHome = () => {
         termsOfTrade: inquiry.termsOfTrade,
         paymentTerms: inquiry.paymentTerms,
       };
-      const {
-        data: { data },
-      } = await axios.post("/rfq", createInquiry);
+      await axios.post("/rfq", createInquiry);
       setLoader(false);
       setInquiry({
         productName: "",
@@ -157,10 +169,6 @@ const BuyerHome = () => {
     }
   };
 
-  const filteredBanner = banner.filter(
-    (bann) => bann.section === "Hero Section Banner"
-  );
-
   if (userLoading || loading) {
     return <CardSkeleton />;
   }
@@ -188,6 +196,20 @@ const BuyerHome = () => {
             </div>
           </div>
         </div>
+        {/* <div className="slide-container">
+          <Slide>
+            {filteredBanner &&
+              filteredBanner.map((banner, index) => (
+                <div className="img-slider-ctn" key={index}>
+                  <img
+                    src={banner.image && banner.image}
+                    className="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+              ))}
+          </Slide>
+        </div> */}
       </section>
 
       {/* Trending Products */}

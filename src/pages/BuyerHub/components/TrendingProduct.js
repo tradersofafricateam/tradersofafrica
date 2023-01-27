@@ -8,18 +8,14 @@ import { Iconly } from "react-iconly";
 
 const TrendingProduct = ({ sectionTitle }) => {
   const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const getData = async () => {
     try {
       axios.get("/product").then((response) => {
         setProduct(response.data.data);
-        setLoading(false);
-        console.log("response", response);
       });
     } catch (error) {
-      setLoading(false);
-      console.log("error loading products", error.response.data.erros);
+      console.log(error);
     }
   };
 

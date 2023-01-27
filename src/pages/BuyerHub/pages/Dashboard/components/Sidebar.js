@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Iconly } from "react-iconly";
-import UserAvatar from "../../../../../assets/img/erhun.png";
 import "../Dashboard.css";
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import axios from "axios";

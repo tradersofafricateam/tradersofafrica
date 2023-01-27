@@ -1,16 +1,19 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 import { Iconly } from "react-iconly";
+
 import Footer from "../../../../components/Footer/Footer";
 import BuyHubNavbar from "../../components/BuyHubNavbar/BuyHubNavbar";
 import OrderModal from "../OrderModal/OrderModal";
 import { axios } from "../../../../components/baseUrl";
-import { useParams } from "react-router-dom";
+
 import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
 import Select from "react-select";
 import countryList from "react-select-country-list";
+
 import "./Details.css";
 
 import { GlobalContext } from "../../../../components/utils/GlobalState";
@@ -27,7 +30,6 @@ const Details = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loader, setLoader] = useState(false);
   const [customError, setCustomError] = useState("");
-  const [formErrors, setFormErrors] = useState({});
   const { productId } = useParams();
   const navigate = useNavigate();
   const productInterest = "You might be interested in";
@@ -52,14 +54,14 @@ const Details = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const shuffleArray = (array) => {
-    for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-  };
+  // const shuffleArray = (array) => {
+  //   for (var i = array.length - 1; i > 0; i--) {
+  //     var j = Math.floor(Math.random() * (i + 1));
+  //     var temp = array[i];
+  //     array[i] = array[j];
+  //     array[j] = temp;
+  //   }
+  // };
 
   const displayImageHandler = (imageIndex) => {
     const newProductImages = productImages.map((image, index) => {
@@ -85,9 +87,7 @@ const Details = () => {
         termsOfTrade: inquiry.termsOfTrade,
         paymentTerms: inquiry.paymentTerms,
       };
-      const {
-        data: { data },
-      } = await axios.post("/rfq", createInquiry);
+      await axios.post("/rfq", createInquiry);
       setLoader(false);
       setInquiry({
         productDescription: "",
@@ -116,18 +116,7 @@ const Details = () => {
       if (!err.response.data.errors) {
         return navigate(`/no-connection`);
       }
-      if (err.response.data.errors[0].field) {
-        console.log(err.response.data.errors);
-        setFormErrors(
-          err.response.data.errors.reduce(function(obj, err) {
-            obj[err.field] = err.message;
-            return obj;
-          }, {})
-        );
-      } else {
-        console.log(err.response.data.errors[0].message);
-        setCustomError(err.response.data.errors[0].message);
-      }
+      setCustomError(err.response.data.errors[0].message);
 
       Store.addNotification({
         title: "Failed!",

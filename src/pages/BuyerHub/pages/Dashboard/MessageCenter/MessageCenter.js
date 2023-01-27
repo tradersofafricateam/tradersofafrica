@@ -7,13 +7,21 @@ import dayjs from "dayjs";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
 
 import "../Dashboard.css";
+
 import { RaiseDisputeModal } from "./RaiseDisputeModal";
+
 import ViewOrderModal from "./ViewOrderModal";
+
 import { NewOrderModal } from "./NewOrderModal";
-import { ChatOrder } from "./ChatOrder";
+
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
+
 import { ChatInput } from "./ChatInput";
+
 import { axios } from "../../../../../components/baseUrl";
+
+import { ReactNotifications, Store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 const MessageCenter = () => {
   const { user } = useContext(GlobalContext);
@@ -21,6 +29,7 @@ const MessageCenter = () => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const scrollRef = useRef();
   const socket = useRef();
+  const [loader, setLoader] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
   const [orderInfo, setOrderInfo] = useState({});
@@ -49,9 +58,52 @@ const MessageCenter = () => {
       });
   };
 
-  const convertDateFormat = (oldDate) => {
-    let date = new Date(oldDate).toString().split(" ");
-    return date[2] + " " + date[1] + "," + " " + date[3];
+  // const convertDateFormat = (oldDate) => {
+  //   let date = new Date(oldDate).toString().split(" ");
+  //   return date[2] + " " + date[1] + "," + " " + date[3];
+  // };
+
+  const handleApproval = async () => {
+    try {
+      setLoader(true);
+      await axios.get(`/order/approve/${orderInfo.id}`);
+      setLoader(false);
+      Store.addNotification({
+        title: "Successful!",
+        message: "You have successfully approved this order",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    } catch (error) {
+      setLoader(false);
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
+      Store.addNotification({
+        title: "Failed, Try again!",
+        message: error.response.data.errors[0].message,
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+        isMobile: true,
+        breakpoint: 768,
+      });
+    }
   };
 
   const socketEvents = {
@@ -130,7 +182,6 @@ const MessageCenter = () => {
       if (typeof orderResultObj === "object") {
         isObject = true;
       }
-      console.log(orderResultObj);
     } catch (error) {
       if (error) {
         isObject = false;
@@ -142,6 +193,7 @@ const MessageCenter = () => {
 
   return (
     <div>
+      <ReactNotifications />
       <div className="grid-container">
         {/* <div className="menu-icon">
           <i className="fas fa-bars header__menu"></i>
@@ -264,6 +316,7 @@ const MessageCenter = () => {
                                   </p>
                                 </div> */}
                                 </div>
+
                                 {JSON.parse(message.message).id && (
                                   <button
                                     data-bs-toggle="modal"
@@ -278,9 +331,11 @@ const MessageCenter = () => {
                                     View Order
                                   </button>
                                 )}
-                                <button className="order_msg-btn">
-                                  Approve Order
-                                </button>
+
+                                {/* <button className="order_msg-btn">
+                                      Approve Order
+                                    </button> */}
+
                                 <p className="chat-timestamp">
                                   {JSON.parse(message.message).createdAt &&
                                     dayjs(
@@ -330,7 +385,11 @@ const MessageCenter = () => {
             <RaiseDisputeModal />
             {/* End of Raise Dispute Modal */}
             {/* View Order */}
-            <ViewOrderModal orderInfo={orderInfo} />
+            <ViewOrderModal
+              orderInfo={orderInfo}
+              handleApproval={handleApproval}
+              loader={loader}
+            />
             {/* End of View Order Modal */}
           </div>
         </main>

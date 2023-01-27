@@ -37,7 +37,7 @@ const Story = () => {
               <div className="d-flex justify-content-start">
                 <img src={PlayBtn} alt="" />
                 <p className="play-icon-text">
-                  <a href="#"> Watch the Groundnut Story</a>
+                  <a href="/"> Watch the Groundnut Story</a>
                 </p>
               </div>
             </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactReadMoreReadLess from "react-read-more-read-less";
 import { axios } from "../../../components/baseUrl";
 
 const Capitalize = (str) => {
@@ -8,9 +7,7 @@ const Capitalize = (str) => {
 
 const CommodityInsight = ({ productInfo }) => {
   const [commodityId, setCommodityId] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  console.log("productInfo", productInfo);
   const addClassToPath = (country) => {
     const filteredCountry = productInfo.CountryTraded
       ? productInfo.CountryTraded.filter(
@@ -27,14 +24,9 @@ const CommodityInsight = ({ productInfo }) => {
 
   const getInfo = async () => {
     try {
-      setIsLoading(true);
       const { data } = await axios.get(`/commodity`);
       setCommodityId(data.data);
-      console.log("commodity insight", data.data);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -61,6 +53,7 @@ const CommodityInsight = ({ productInfo }) => {
                   <div className="col-lg-7 data">
                     {filteredCommodityId.map((commodityInsight, index) => (
                       <div
+                        key={index}
                         className="briefHistory"
                         dangerouslySetInnerHTML={{
                           __html: commodityInsight.briefHistory

@@ -1,15 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import "./password.css";
-import backIcon from "../../../assets/img/back-icon.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../BuyerMain.css";
+
 import LogoWhite from "../../../assets/img/icons/logo-white.png";
 import { axios } from "../../../components/baseUrl";
 
-import { ReactNotifications } from "react-notifications-component";
+import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-import { Store } from "react-notifications-component";
+
 import { Iconly } from "react-iconly";
 
 export default function ForgotPassword() {
@@ -27,10 +27,7 @@ export default function ForgotPassword() {
       const forgotPassword = {
         email: email,
       };
-      const { data } = await axios.post(
-        `/auth/forgot-password`,
-        forgotPassword
-      );
+      await axios.post(`/auth/forgot-password`, forgotPassword);
       setLoading(false);
       setEmail("");
       Store.addNotification({
@@ -50,7 +47,6 @@ export default function ForgotPassword() {
       });
     } catch (error) {
       setLoading(false);
-      console.log(error);
       if (!error.response.data.errors) {
         return navigate(`/no-connection`);
       }
@@ -95,13 +91,13 @@ export default function ForgotPassword() {
                   size="medium"
                   color="#282828"
                 />
-                <a href="#">Back</a>
+                Back
               </button>
             </div>
             <div className="col-lg-6 col-9 return-to" id="header-text">
-              <a href="/login" style={{ color: "rgb(201, 79, 5)" }}>
+              <Link href="/login" style={{ color: "rgb(201, 79, 5)" }}>
                 Return to login
-              </a>
+              </Link>
             </div>
           </main>
           <div className="password-content">

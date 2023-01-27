@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo, useContext } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Iconly } from "react-iconly";
+
 import Sidebar from "../components/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import { axios } from "../../../../../components/baseUrl.jsx";
@@ -23,7 +24,7 @@ const Orders = () => {
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allLoading, setAllLoading] = useState(true);
-  const [orderLoad, setOrderLoad] = useState(true);
+  // const [orderLoad, setOrderLoad] = useState(true);
   const navigate = useNavigate();
 
   const handleClick = (event) => {
@@ -35,11 +36,10 @@ const Orders = () => {
       .get(`/order/${orderId}`)
       .then((response) => {
         setOrderInfo(response.data.data);
-        setOrderLoad(false);
       })
       .catch((error) => {
         console.log(error);
-        setOrderLoad(false);
+
         if (!error.response.data.errors) {
           return navigate(`/no-connection`);
         }
@@ -173,11 +173,7 @@ const Orders = () => {
               <div>
                 <h2>Total Orders</h2>
                 <div className="d-flex justify-content-between mt-4">
-                  {orderSummary === NaN || null ? (
-                    <h3>0</h3>
-                  ) : (
-                    <h3>{orderSummary}</h3>
-                  )}
+                  <h3>{orderSummary && orderSummary}</h3>
                 </div>
               </div>
             </div>
@@ -236,7 +232,7 @@ const Orders = () => {
                                       orders.product &&
                                       orders.product.productImages[0].image
                                     }
-                                    alt="product image"
+                                    alt="product"
                                   />
                                 </div>
                                 <div className="flex-grow-1 ms-3">

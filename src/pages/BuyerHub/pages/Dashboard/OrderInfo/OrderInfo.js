@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { axios } from "../../../../../components/baseUrl";
-import { ReactNotifications } from "react-notifications-component";
+
+import { ReactNotifications, Store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-import { Store } from "react-notifications-component";
+
 import { useNavigate, Link } from "react-router-dom";
 
 const ViewOrderModal = ({ orderInfo, Capitalize }) => {
@@ -11,16 +12,14 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
   const [file, setFile] = useState({});
   const [fileLoader, setFileLoader] = useState(false);
 
-  console.log("orderInfo", orderInfo);
-
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  const convertDateFormat = (oldDate) => {
-    let date = new Date(oldDate).toString().split(" ");
-    return date[2] + " " + date[1] + "," + " " + date[3];
-  };
+  // const convertDateFormat = (oldDate) => {
+  //   let date = new Date(oldDate).toString().split(" ");
+  //   return date[2] + " " + date[1] + "," + " " + date[3];
+  // };
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -31,16 +30,11 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
     setFileLoader(true);
     try {
       const formData = new FormData();
-      formData.append("file", file);
-      const { data: result } = await axios.post(
-        `/order/image/${orderInfo.id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`/order/image/${orderInfo.id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setFileLoader(false);
       Store.addNotification({
         title: "Successful!",
@@ -84,7 +78,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
   const handleApproval = async () => {
     try {
       setLoader(true);
-      const { data } = await axios.get(`/order/approve/${orderInfo.id}`);
+      await axios.get(`/order/approve/${orderInfo.id}`);
       setLoader(false);
       Store.addNotification({
         title: "Successful!",
@@ -124,11 +118,6 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
       });
     }
   };
-
-  console.log(
-    "orderInfo.paymentReceipt.id",
-    orderInfo.paymentReceipt && orderInfo.paymentReceipt.id
-  );
 
   // if (orderLoad) {
   //   <div
@@ -217,13 +206,13 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
                         <td className="osd-title">Destination:</td>
                         <td>{orderInfo && orderInfo.country}</td>
                       </tr>
-                      <tr>
+                      {/* <tr>
                         <td className="osd-title">Date created:</td>
                         <td>
                           {orderInfo.createdAt &&
                             convertDateFormat(orderInfo.createdAt)}
                         </td>
-                      </tr>
+                      </tr> */}
                     </table>
 
                     <div className="line"></div>
@@ -257,6 +246,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
                             <a
                               href={orderInfo.paymentReceipt.image}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               View receipt
                             </a>
@@ -327,6 +317,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
                             <a
                               href={orderInfo.paymentReceipt.image}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               View receipt
                             </a>
@@ -384,6 +375,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
                             <a
                               href={orderInfo.paymentReceipt.image}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               View receipt
                             </a>
@@ -457,6 +449,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
                             <a
                               href={orderInfo.paymentReceipt.image}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               View receipt
                             </a>

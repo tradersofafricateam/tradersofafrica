@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 import "./Home.css";
 
@@ -44,7 +44,7 @@ const Home = () => {
                   Bridging the Gaps in Trade with and within Africa.
                 </p>
                 <p>
-                  <a href="#">
+                  <a href="/">
                     Learn more <img src={ChevronRight} alt="" />
                   </a>
                 </p>
@@ -74,7 +74,7 @@ const Home = () => {
                 a safe platform dedicated to solving issues of trust and
                 acceptable payment terms for both buyers and African suppliers.
               </p>
-              <a className="hvr-icon-forward" href="#">
+              <a className="hvr-icon-forward" href="/">
                 <button className="btn btn-danger">
                   Learn more{" "}
                   <img className="hvr-icon" src={ChevronRight} alt="" />
@@ -96,7 +96,12 @@ const Home = () => {
       {/* Lp Services */}
       <section id="lp-our-services">
         <div className="container">
-          <div className="row mb-3" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="300">
+          <div
+            className="row mb-3"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-offset="300"
+          >
             <div className="col-lg-6" align="center">
               <img className="img-fluid lp-img1" src={HomeImg1} alt="" />
             </div>
@@ -112,7 +117,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="row mb-3" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="300">
+          <div
+            className="row mb-3"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-offset="300"
+          >
             <div className="col-lg-6 order-last order-lg-first">
               <div className="lp-service-info">
                 <h2>Training and Mentorship </h2>
@@ -128,7 +138,12 @@ const Home = () => {
               <img className="img-fluid lp-img2" src={HomeImg2} alt="" />
             </div>
           </div>
-          <div className="row" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="300">
+          <div
+            className="row"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-offset="300"
+          >
             <div className="col-lg-6" align="center">
               <img className="img-fluid lp-img3" src={HomeImg3} alt="" />
             </div>
