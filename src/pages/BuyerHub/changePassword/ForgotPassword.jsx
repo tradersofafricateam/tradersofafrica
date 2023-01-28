@@ -3,13 +3,12 @@ import { useState } from "react";
 import "./password.css";
 import { Link, useNavigate } from "react-router-dom";
 import "../BuyerMain.css";
-
 import LogoWhite from "../../../assets/img/icons/logo-white.png";
 import { axios } from "../../../components/baseUrl";
 
-import { ReactNotifications, Store } from "react-notifications-component";
+import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-
+import { Store } from "react-notifications-component";
 import { Iconly } from "react-iconly";
 
 export default function ForgotPassword() {
@@ -47,6 +46,7 @@ export default function ForgotPassword() {
       });
     } catch (error) {
       setLoading(false);
+      console.log(error);
       if (!error.response.data.errors) {
         return navigate(`/no-connection`);
       }
@@ -95,7 +95,7 @@ export default function ForgotPassword() {
               </button>
             </div>
             <div className="col-lg-6 col-9 return-to" id="header-text">
-              <Link href="/login" style={{ color: "rgb(201, 79, 5)" }}>
+              <Link to="/login" style={{ color: "rgb(201, 79, 5)" }}>
                 Return to login
               </Link>
             </div>

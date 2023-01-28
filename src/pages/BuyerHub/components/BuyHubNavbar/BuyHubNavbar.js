@@ -84,7 +84,7 @@ const BuyHubNavbar = () => {
                         <Iconly
                           className="nav-icon"
                           name="Paper"
-                          set="line"
+                          set="light"
                           primaryColor="#282828"
                           size="small"
                         />
@@ -96,7 +96,7 @@ const BuyHubNavbar = () => {
                         <Iconly
                           className="nav-icon"
                           name="Message"
-                          set="line"
+                          set="light"
                           primaryColor="#282828"
                           size="small"
                         />
@@ -108,7 +108,7 @@ const BuyHubNavbar = () => {
                         <Iconly
                           className="nav-icon"
                           name="Folder"
-                          set="line"
+                          set="light"
                           primaryColor="#282828"
                           size="small"
                         />
@@ -120,7 +120,7 @@ const BuyHubNavbar = () => {
                         <Iconly
                           className="nav-icon"
                           name="Logout"
-                          set="line"
+                          set="light"
                           primaryColor="#282828"
                           size="small"
                         />
@@ -133,7 +133,7 @@ const BuyHubNavbar = () => {
                   <Link className="nav-link main-nav-link" to="#">
                     <Iconly
                       name="Notification"
-                      set="line"
+                      set="light"
                       primaryColor="#282828"
                       size="medium"
                     />

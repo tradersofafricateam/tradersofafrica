@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./emailVerification.css";
 import { axios } from "../../components/baseUrl";
-
-import { ReactNotifications, Store } from "react-notifications-component";
+import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import { Store } from "react-notifications-component";
 
 export default function EmailVerification() {
   const [loader, setLoader] = useState(false);

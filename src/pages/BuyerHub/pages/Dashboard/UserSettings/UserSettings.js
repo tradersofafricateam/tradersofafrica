@@ -4,13 +4,11 @@ import Sidebar from "../components/Sidebar";
 import "../Dashboard.css";
 import "./UserSettings.css";
 import { axios } from "../../../../../components/baseUrl.jsx";
-
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-
-import { ReactNotifications, Store } from "react-notifications-component";
+import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-
+import { Store } from "react-notifications-component";
 import { useNavigate } from "react-router-dom";
 
 const UserSettings = () => {

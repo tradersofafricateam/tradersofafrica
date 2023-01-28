@@ -183,7 +183,7 @@ const Dashboard = () => {
               <div>
                 <h2>Total Transactions</h2>
                 <p>Detailed transaction history is on the order page</p>
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   <h3>
                     {activity.total_transactions &&
                       numberWithCommas(activity.total_transactions)}
@@ -195,7 +195,7 @@ const Dashboard = () => {
               <div>
                 <h2>Total Orders</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   <h3>
                     {activity.total_number_of_orders &&
                       numberWithCommas(activity.total_number_of_orders)}
@@ -211,7 +211,7 @@ const Dashboard = () => {
               <div>
                 <h2>Total Inquiries</h2>
                 {/* <p>Detailed transaction history is on the order page</p> */}
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   <h3>
                     {activity.total_number_of_enquiries &&
                       numberWithCommas(activity.total_number_of_enquiries)}
@@ -241,8 +241,8 @@ const Dashboard = () => {
           ) : (
             <div className="main-overview">
               <div className="overview-card no-padding">
-                <div class="table-responsive">
-                  <table class="table table-striped">
+                <div className="table-responsive">
+                  <table className="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col">Product Info</th>

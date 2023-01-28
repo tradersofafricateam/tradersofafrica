@@ -7,21 +7,15 @@ import dayjs from "dayjs";
 import UserAvatar from "../../../../../assets/img/logo.jpg";
 
 import "../Dashboard.css";
-
 import { RaiseDisputeModal } from "./RaiseDisputeModal";
-
 import ViewOrderModal from "./ViewOrderModal";
-
 import { NewOrderModal } from "./NewOrderModal";
 
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
-
 import { ChatInput } from "./ChatInput";
-
 import { axios } from "../../../../../components/baseUrl";
-
-import { ReactNotifications, Store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
+import { ReactNotifications } from "react-notifications-component";
+import { Store } from "react-notifications-component";
 
 const MessageCenter = () => {
   const { user } = useContext(GlobalContext);
@@ -281,12 +275,12 @@ const MessageCenter = () => {
                     <div className="message-area">
                       {messages.map((message, index) => {
                         return (
-                          <div className="message-area">
+                          <div className="message-area" key={index}>
                             {isMsgObject(message.message) ? (
                               // <ChatOrder order={JSON.parse(message.message)} />
                               <div className="chat-order-request-msg receiver">
-                                <div class="order-msg d-flex">
-                                  <div class="flex-shrink-0">
+                                <div className="order-msg d-flex">
+                                  <div className="flex-shrink-0">
                                     <h2>New Order</h2>
                                     <p className="cp-name">
                                       Order{" "}
@@ -353,7 +347,7 @@ const MessageCenter = () => {
                               >
                                 <div>
                                   {message.message === "START_NEW_ORDER" ? (
-                                    <div class="order-msg">
+                                    <div className="order-msg">
                                       <h2>Start Order</h2>
                                     </div>
                                   ) : (

@@ -19,7 +19,6 @@ const GlobalState = ({ children }) => {
       })
       .catch((error) => {
         setUserLoading(false);
-        console.log("error loading user", error);
       });
   };
 

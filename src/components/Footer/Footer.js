@@ -16,7 +16,6 @@ const Footer = () => {
           <div className="container">
             <div className="row footer-content">
               <div className="col-lg-6 col-12">
-                <img className="ft-logo" src="img/mark-white.png" alt="" />
                 <img className="ft-logo" src={LogoMark} alt="TOFA" />
                 <p className="tagline">
                   Traders of Africa is a Pan African Hub for Facilitating Trade{" "}

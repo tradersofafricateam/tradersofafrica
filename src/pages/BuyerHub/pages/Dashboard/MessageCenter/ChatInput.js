@@ -39,7 +39,7 @@ export const ChatInput = ({ handleSendMsg }) => {
         <div className="chat-input-area d-flex justify-content-between">
           <textarea
             id="chatInput"
-            class="form-control"
+            className="form-control"
             onChange={handleSetMessage}
             value={msg}
             placeholder="Type your message here..."

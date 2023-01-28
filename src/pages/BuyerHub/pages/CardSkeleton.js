@@ -7,21 +7,6 @@ const CardSkeleton = () => {
     <div>
       <Skeleton height={50} />
 
-      {/* Hero Section */}
-      {/* <section id="b-hero-section">
-        <div
-          id="carouselExampleSlidesOnly"
-          className="carousel slide carousel-fade"
-          data-bs-ride="carousel"
-        >
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <Skeleton height={300} />
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Trending Products */}
       <section id="b-trending">
         <div className="container">

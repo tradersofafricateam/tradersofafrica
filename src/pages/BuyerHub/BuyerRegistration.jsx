@@ -2,14 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BuyerRegistration.css";
-
+// import backIcon from "../../assets/img/back-icon.svg";
 import LogoWhite from "../../assets/img/icons/logo-white.png";
 import "../BuyerHub/BuyerMain.css";
 import { axios } from "../../components/baseUrl";
-
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-
 import { Iconly } from "react-iconly";
 
 export default function BuyerRegistration() {
@@ -66,6 +64,8 @@ export default function BuyerRegistration() {
         console.log(error.response.data.errors[0].message);
         setCustomError(error.response.data.errors[0].message);
       }
+
+      console.log(error.response.data.errors);
     }
   };
 

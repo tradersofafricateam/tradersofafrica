@@ -1,6 +1,8 @@
 import React from "react";
 
 export const NewOrderModal = ({ handleSendMsg }) => {
+  // const options = useMemo(() => countryList().getData(), []);
+
   const handleClick = () => {
     handleSendMsg("START_NEW_ORDER");
   };
@@ -8,7 +10,7 @@ export const NewOrderModal = ({ handleSendMsg }) => {
     <div
       className="modal fade place-order-modal"
       id="orderModal"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { axios } from "../../../../components/baseUrl";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-import { ReactNotifications, Store } from "react-notifications-component";
-
+import { Store } from "react-notifications-component";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
@@ -150,7 +149,7 @@ const OrderModal = () => {
       <div
         className="modal fade place-order-modal"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -173,12 +172,12 @@ const OrderModal = () => {
                 <div className="col-lg-8">
                   <h5 className="modal-sub-title">Product information</h5>
                   <form onSubmit={handleSubmit}>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1">
+                    <div className="mb-3">
+                      <label htmlFor="exampleInputEmail1">
                         Product Requirements
                       </label>
                       <textarea
-                        class="form-control"
+                        className="form-control"
                         id=""
                         name="productRequirement"
                         value={foreignOrderDetails.productRequirement}
@@ -191,7 +190,7 @@ const OrderModal = () => {
 
                     <div className="row">
                       <div className="col-lg-6 mb-3">
-                        <label for="exampleInputPassword1">Quantity</label>
+                        <label htmlFor="exampleInputPassword1">Quantity</label>
                         <div className="custom-input form-control">
                           <div className="row">
                             <div className="col-lg-7 col">
@@ -213,7 +212,7 @@ const OrderModal = () => {
                         </div>
                       </div>
                       <div className="col-lg-6 mb-3">
-                        <label for="exampleInputPassword1">
+                        <label htmlFor="exampleInputPassword1">
                           Shipping Terms
                         </label>
                         <select
@@ -224,7 +223,9 @@ const OrderModal = () => {
                           onChange={handleOrderChange}
                           required
                         >
-                          <option selected>Select shipping terms</option>
+                          <option defaultValue="selected">
+                            Select shipping terms
+                          </option>
                           <option value="LOCAL">Local Delivery</option>
                           <option value="CIF">CIF</option>
                           <option value="CFR">CFR</option>
@@ -241,7 +242,7 @@ const OrderModal = () => {
                     ) : (
                       <div className="row">
                         <div className="col-lg-6 mb-3">
-                          <label for="exampleInputPassword1">
+                          <label htmlFor="exampleInputPassword1">
                             Country of Origin
                           </label>
                           <select
@@ -251,7 +252,9 @@ const OrderModal = () => {
                             onChange={selectCountryHandler}
                             required
                           >
-                            <option selected>Select country of origin</option>
+                            <option defaultValue="selected">
+                              Select country of origin
+                            </option>
                             {productInfo.CountryTraded &&
                               productInfo.CountryTraded.map((country, id) => {
                                 return (
@@ -269,7 +272,7 @@ const OrderModal = () => {
                         </div>
 
                         <div className="col-lg-6 mb-3">
-                          <label for="exampleInputPassword1">
+                          <label htmlFor="exampleInputPassword1">
                             Payment Terms
                           </label>
                           <select
@@ -280,7 +283,9 @@ const OrderModal = () => {
                             onChange={handleOrderChange}
                             required
                           >
-                            <option selected>Select payment terms</option>
+                            <option defaultValue="selected">
+                              Select payment terms
+                            </option>
                             <option value="LC">Letter of Credit</option>
                             <option value="CAD">Cash Against Delivery</option>
                             <option value="DP">Document Against Payment</option>
@@ -298,7 +303,7 @@ const OrderModal = () => {
                     ) : (
                       <div className="row">
                         <div className="col-lg-6 mb-3">
-                          <label for="exampleInputPassword1">
+                          <label htmlFor="exampleInputPassword1">
                             Destination Country
                           </label>
                           <Select
@@ -311,10 +316,10 @@ const OrderModal = () => {
                         </div>
 
                         <div className="col-lg-6 mb-3">
-                          <label for="exampleInputPassword1">Port</label>
+                          <label htmlFor="exampleInputPassword1">Port</label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id=""
                             name="port"
                             placeholder="Enter destination port"
@@ -366,8 +371,8 @@ const OrderModal = () => {
                   <div className="col-lg-4">
                     <h5 className="modal-sub-title">Order Summary</h5>
                     <div className="order-summary">
-                      <div class="d-flex mb-2">
-                        <div class="flex-shrink-0">
+                      <div className="d-flex mb-2">
+                        <div className="flex-shrink-0">
                           <img
                             src={
                               productInfo.productImages &&
@@ -382,7 +387,7 @@ const OrderModal = () => {
                             }}
                           />
                         </div>
-                        <div class="flex-grow-1 ms-3">
+                        <div className="flex-grow-1 ms-3">
                           <h2 className="s-product-name">
                             {productInfo.productName
                               ? Capitalize(productInfo.productName)
@@ -400,36 +405,40 @@ const OrderModal = () => {
                       </div>
 
                       <div className="os-details">
-                        <table class="table table-borderless">
-                          <tr>
-                            <td className="osd-title">Quantity:</td>
-                            <td>{foreignOrderDetails.quantity} MT</td>
-                          </tr>
-                          <tr>
-                            <td className="osd-title">Shipping Terms:</td>
-                            <td>{foreignOrderDetails.shipping}</td>
-                          </tr>
-                          <tr>
-                            <td className="osd-title">Price / MT:</td>
-                            <td>
-                              {productInfo.currency} {priceSelected}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="osd-title">Origin:</td>
-                            <td>
-                              {" "}
-                              {Capitalize(foreignOrderDetails.countryOfOrigin)}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="osd-title">Destination:</td>
-                            <td>{country.label}</td>
-                          </tr>
-                          <tr>
-                            <td className="osd-title">Payment Terms:</td>
-                            <td>{foreignOrderDetails.paymentTerm}</td>
-                          </tr>
+                        <table className="table table-borderless">
+                          <tbody>
+                            <tr>
+                              <td className="osd-title">Quantity:</td>
+                              <td>{foreignOrderDetails.quantity} MT</td>
+                            </tr>
+                            <tr>
+                              <td className="osd-title">Shipping Terms:</td>
+                              <td>{foreignOrderDetails.shipping}</td>
+                            </tr>
+                            <tr>
+                              <td className="osd-title">Price / MT:</td>
+                              <td>
+                                {productInfo.currency} {priceSelected}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="osd-title">Origin:</td>
+                              <td>
+                                {" "}
+                                {Capitalize(
+                                  foreignOrderDetails.countryOfOrigin
+                                )}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="osd-title">Destination:</td>
+                              <td>{country.label}</td>
+                            </tr>
+                            <tr>
+                              <td className="osd-title">Payment Terms:</td>
+                              <td>{foreignOrderDetails.paymentTerm}</td>
+                            </tr>
+                          </tbody>
                         </table>
 
                         <div className="line"></div>

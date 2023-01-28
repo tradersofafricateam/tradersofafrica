@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { axios } from "../../../../../components/baseUrl";
-
-import { ReactNotifications, Store } from "react-notifications-component";
+import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-
+import { Store } from "react-notifications-component";
 import { useNavigate, Link } from "react-router-dom";
 
 const ViewOrderModal = ({ orderInfo, Capitalize }) => {
@@ -30,6 +29,7 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
     setFileLoader(true);
     try {
       const formData = new FormData();
+      formData.append("file", file);
       await axios.post(`/order/image/${orderInfo.id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -164,48 +164,51 @@ const ViewOrderModal = ({ orderInfo, Capitalize }) => {
                 <div className="order-summary">
                   <div className="os-details">
                     <table className="table table-borderless">
-                      <tr>
-                        <td className="osd-title">Product Name:</td>
-                        <td>
-                          {orderInfo.product
-                            ? Capitalize(orderInfo.product.productName)
-                            : " "}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Order :</td>
-                        <td>{orderInfo && orderInfo.orderNumber}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Quantity:</td>
-                        <td>
-                          {orderInfo.quantityOrdered &&
-                            numberWithCommas(orderInfo.quantityOrdered)}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Incoterm:</td>
-                        <td>{orderInfo && orderInfo.incoterm}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Shipping Term:</td>
-                        <td>{orderInfo && orderInfo.shippingType}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Payment Terms:</td>
-                        <td>{orderInfo && orderInfo.paymentTerm}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Origin:</td>
-                        <td>
-                          {orderInfo.countryOfOrigin &&
-                            orderInfo.countryOfOrigin}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Destination:</td>
-                        <td>{orderInfo && orderInfo.country}</td>
-                      </tr>
+                      <tbody>
+                        <tr>
+                          <td className="osd-title">Product Name:</td>
+                          <td>
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Order :</td>
+                          <td>{orderInfo && orderInfo.orderNumber}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Quantity:</td>
+                          <td>
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Incoterm:</td>
+                          <td>{orderInfo && orderInfo.incoterm}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Shipping Term:</td>
+                          <td>{orderInfo && orderInfo.shippingType}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Payment Terms:</td>
+                          <td>{orderInfo && orderInfo.paymentTerm}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Origin:</td>
+                          <td>
+                            {orderInfo.countryOfOrigin &&
+                              orderInfo.countryOfOrigin}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Destination:</td>
+                          <td>{orderInfo && orderInfo.country}</td>
+                        </tr>
+                      </tbody>
+
                       {/* <tr>
                         <td className="osd-title">Date created:</td>
                         <td>

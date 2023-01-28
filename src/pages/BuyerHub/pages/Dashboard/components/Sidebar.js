@@ -124,7 +124,7 @@ const Sidebar = ({ isActive }) => {
               <Iconly
                 className="nav-icon"
                 name="Logout"
-                set="line"
+                set="light"
                 size="small"
                 style={{ marginRight: "15px" }}
               />

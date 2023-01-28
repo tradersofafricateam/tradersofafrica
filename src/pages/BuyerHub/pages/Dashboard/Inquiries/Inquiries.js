@@ -149,15 +149,15 @@ const Inquiries = () => {
             <div className="overview-card">
               <div>
                 <h2>All Inquiries</h2>
-                <div class="d-flex justify-content-between mt-4">
-                  <h3> {enquireSummary && <h3>{enquireSummary}</h3>}</h3>
+                <div className="d-flex justify-content-between mt-4">
+                  <h3> {enquireSummary && enquireSummary}</h3>
                 </div>
               </div>
             </div>
             <div className="overview-card">
               <div>
                 <h2>Pending Inquiries</h2>
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   {userEnquireSummary.total_pending_enquiries && (
                     <h3>{userEnquireSummary.total_pending_enquiries}</h3>
                   )}
@@ -167,7 +167,7 @@ const Inquiries = () => {
             <div className="overview-card">
               <div>
                 <h2>Received Quotes</h2>
-                <div class="d-flex justify-content-between mt-4">
+                <div className="d-flex justify-content-between mt-4">
                   {userEnquireSummary.total_received_quote && (
                     <h3>{userEnquireSummary.total_received_quote}</h3>
                   )}
@@ -189,8 +189,8 @@ const Inquiries = () => {
           ) : (
             <div className="main-overview">
               <div className="overview-card no-padding">
-                <div class="table-responsive">
-                  <table class="table table-striped">
+                <div className="table-responsive">
+                  <table className="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col">Product Info</th>

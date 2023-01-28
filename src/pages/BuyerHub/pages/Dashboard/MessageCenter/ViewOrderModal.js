@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { axios } from "../../../../../components/baseUrl";
-
 import "react-notifications-component/dist/theme.css";
-import { ReactNotifications, Store } from "react-notifications-component";
-
+import { ReactNotifications } from "react-notifications-component";
+import { Store } from "react-notifications-component";
 import { useNavigate, Link } from "react-router-dom";
 
 const ViewOrderModal = ({ orderInfo, handleApproval, loader }) => {
@@ -34,6 +33,7 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader }) => {
     setFileLoader(true);
     try {
       const formData = new FormData();
+      formData.append("file", file);
       await axios.post(`/order/image/${orderInfo.id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -104,8 +104,8 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader }) => {
                 <h5 className="modal-sub-title">Order Summary</h5>
                 <div className="order-summary">
                   <div className="os-details">
-                    <div class="d-flex mb-2">
-                      <div class="flex-shrink-0 img-pro-ctn">
+                    <div className="d-flex mb-2">
+                      <div className="flex-shrink-0 img-pro-ctn">
                         <img
                           className="s-product-img"
                           src={
@@ -115,7 +115,7 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader }) => {
                           alt="..."
                         />
                       </div>
-                      <div class="flex-grow-1 ms-3">
+                      <div className="flex-grow-1 ms-3">
                         <h2 className="s-product-name">
                           {orderInfo.product
                             ? Capitalize(orderInfo.product.productName)
@@ -124,51 +124,53 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader }) => {
                       </div>
                     </div>
                     <table className="table table-borderless">
-                      <tr>
-                        <td className="osd-title">Order :</td>
-                        <td>{orderInfo && orderInfo.orderNumber}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Quantity:</td>
-                        <td>
-                          {orderInfo.quantityOrdered &&
-                            numberWithCommas(orderInfo.quantityOrdered)}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Incoterm:</td>
-                        <td>{orderInfo && orderInfo.incoterm}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Shipping Term:</td>
-                        <td>{orderInfo && orderInfo.shippingType}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Payment Terms:</td>
-                        <td>{orderInfo && orderInfo.paymentTerm}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Origin:</td>
-                        <td>
-                          {orderInfo.countryOfOrigin &&
-                            orderInfo.countryOfOrigin}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Destination:</td>
-                        <td>{orderInfo && orderInfo.country}</td>
-                      </tr>
-                      <tr>
-                        <td className="osd-title">Port:</td>
-                        <td>{orderInfo.port && orderInfo.port}</td>
-                      </tr>
-                      {/* <tr>
+                      <tbody>
+                        <tr>
+                          <td className="osd-title">Order :</td>
+                          <td>{orderInfo && orderInfo.orderNumber}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Quantity:</td>
+                          <td>
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Incoterm:</td>
+                          <td>{orderInfo && orderInfo.incoterm}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Shipping Term:</td>
+                          <td>{orderInfo && orderInfo.shippingType}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Payment Terms:</td>
+                          <td>{orderInfo && orderInfo.paymentTerm}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Origin:</td>
+                          <td>
+                            {orderInfo.countryOfOrigin &&
+                              orderInfo.countryOfOrigin}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Destination:</td>
+                          <td>{orderInfo && orderInfo.country}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Port:</td>
+                          <td>{orderInfo.port && orderInfo.port}</td>
+                        </tr>
+                        {/* <tr>
                         <td className="osd-title">Date created:</td>
                         <td>
                           {orderInfo.createdAt &&
                             convertDateFormat(orderInfo.createdAt)}
                         </td>
                       </tr> */}
+                      </tbody>
                     </table>
 
                     <div className="line"></div>

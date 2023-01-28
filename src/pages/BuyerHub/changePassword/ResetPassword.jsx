@@ -14,7 +14,7 @@ import { Store } from "react-notifications-component";
 export default function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const { resetToken } = useParams();
-
+  console.log(resetToken);
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [inputType, setInputType] = useState("password");
@@ -44,7 +44,6 @@ export default function ResetPassword() {
   const handleValidation = (evnt) => {
     const passwordInputValue = evnt.target.value.trim();
     const passwordInputFieldName = evnt.target.name;
-    
     //for password
     if (passwordInputFieldName === "password") {
       const uppercaseRegExp = /(?=.*?[A-Z])/;
