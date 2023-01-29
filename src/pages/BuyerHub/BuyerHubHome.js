@@ -49,10 +49,7 @@ const BuyerHome = () => {
       });
     } catch (error) {
       setLoading(false);
-      console.log("error", error);
-      // if (!error.response.data.errors) {
-      //   return navigate(`/no-connection`);
-      // }
+      console.log(error);
     }
   };
 
