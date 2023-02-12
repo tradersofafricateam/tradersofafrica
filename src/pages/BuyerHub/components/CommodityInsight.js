@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { axios } from "../../../components/baseUrl";
+import { axiosInstance } from "../../../components/axios";
 
 const Capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -24,7 +24,7 @@ const CommodityInsight = ({ productInfo }) => {
 
   const getInfo = async () => {
     try {
-      const { data } = await axios.get(`/commodity`);
+      const { data } = await axiosInstance.get(`/commodity`);
       setCommodityId(data.data);
     } catch (error) {}
   };

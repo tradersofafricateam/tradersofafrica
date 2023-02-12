@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axios } from "../../../../../components/baseUrl";
-import { ReactNotifications, Store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
+import { axiosInstance } from "./../../../../../components/axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RaiseDisputeModal = () => {
   const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
   const [createDispute, setCreateDispute] = useState({
     subject: "",
     complaint: "",
@@ -20,54 +21,40 @@ export const RaiseDisputeModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoader(true);
     try {
       const disputeCreate = {
         subject: createDispute.subject,
         complaint: createDispute.complaint,
       };
-      const { data } = await axios.post("/dispute", disputeCreate);
-      console.log(data);
+      await axiosInstance.post("/dispute", disputeCreate);
       setCreateDispute({
         subject: "",
         complaint: "",
       });
-
-      Store.addNotification({
-        title: "Success!",
-        message: "You have successfully created a dispute",
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      setLoader(false);
+      toast.success(`You have successfully submitted a dispute`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
+
       setTimeout(() => {
         window.location.reload();
       }, 5500);
       navigate("/message-center");
     } catch (error) {
+      setLoader(false);
       console.log(error.response.data.errors);
-      Store.addNotification({
-        title: "Failed!",
-        message: "Try Again.",
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      if (!error.response.data.errors) {
+        return navigate(`/no-connection`);
+      }
+      toast.error(`${error.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
@@ -79,7 +66,7 @@ export const RaiseDisputeModal = () => {
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <ReactNotifications />
+      <ToastContainer />
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
           <div className="modal-header">
@@ -99,20 +86,12 @@ export const RaiseDisputeModal = () => {
                 <form className="w-100" onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1">Dispute Type</label>
-                    <select
+                    <input
                       className="form-select"
-                      aria-label="Default select example"
                       name="subject"
                       value={createDispute.subject}
                       onChange={handleChange}
-                    >
-                      <option defaultValue="selected">
-                        Select Dispute Type
-                      </option>
-                      <option value="1">Cashew</option>
-                      <option value="2">Cocoa</option>
-                      <option value="3">Paddy Rice</option>
-                    </select>
+                    />
                   </div>
 
                   <div className="mb-3">
@@ -132,10 +111,19 @@ export const RaiseDisputeModal = () => {
                     For local delivery please proceed to chat with a SourcPro
                     agent to continue
                   </p>
-
-                  <button className="mt-3" type="submit">
-                    Submit Dispute
-                  </button>
+                  {loader ? (
+                    <button className="mt-3" type="submit">
+                      <span
+                        className="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  ) : (
+                    <button className="mt-3" type="submit">
+                      Submit Dispute
+                    </button>
+                  )}
                 </form>
               </div>
             </div>

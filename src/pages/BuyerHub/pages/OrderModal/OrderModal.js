@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { axios } from "../../../../components/baseUrl";
+import React, { useState, useMemo } from "react";
+import { axiosInstance } from "../../../../components/axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { ReactNotifications } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import { Store } from "react-notifications-component";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
-const OrderModal = () => {
-  const [productInfo, setProductInfo] = useState([]);
+const OrderModal = ({ productInfo }) => {
   const [loader, setLoader] = useState(false);
   const [priceSelected, setPriceSelected] = useState("");
 
@@ -73,7 +73,7 @@ const OrderModal = () => {
         port: foreignOrderDetails.port,
         productRequirement: foreignOrderDetails.productRequirement,
       };
-      await axios.post("/order/foreign", createForeignOrder);
+      await axiosInstance.post("/order/foreign", createForeignOrder);
 
       setLoader(false);
       setForeignOrderDetails({
@@ -87,20 +87,11 @@ const OrderModal = () => {
       });
 
       setCountry("");
-      Store.addNotification({
-        title: "Order Successful!",
-        message: "Your order has been successfully placed",
-        type: "success",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.success(`Your order has been successfully placed.`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
 
       navigate(`/details/${productId}`);
@@ -109,43 +100,19 @@ const OrderModal = () => {
       if (!err.response.data.errors) {
         return navigate(`/no-connection`);
       }
-      Store.addNotification({
-        title: "Order Failed!",
-        message: err.response.data.errors[0].message,
-        type: "danger",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.error(`${err.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
 
-  const getInfo = async () => {
-    try {
-      const { data } = await axios.get(`/product/${productId}`);
-      setProductInfo(data.data);
-    } catch (error) {
-      if (!error.response.data.errors) {
-        return navigate(`/no-connection`);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getInfo();
-  }, [productId]);
-
   const totalCost = priceSelected * foreignOrderDetails.quantity;
   return (
     <div>
-      {/* Modal */}
+      <ToastContainer />
       <div
         className="modal fade place-order-modal"
         id="exampleModal"
@@ -153,7 +120,6 @@ const OrderModal = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <ReactNotifications />
         <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">

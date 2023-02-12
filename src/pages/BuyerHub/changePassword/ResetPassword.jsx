@@ -1,20 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 import LogoWhite from "../../../assets/img/icons/logo-white.png";
 import "./password.css";
-import { useNavigate, useParams } from "react-router-dom";
 import "../BuyerMain.css";
-import { axios } from "../../../components/baseUrl";
 
-import { Iconly } from "react-iconly";
-import { ReactNotifications } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import { Store } from "react-notifications-component";
+import { axiosInstance } from "../../../components/axios";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const { resetToken } = useParams();
-  console.log(resetToken);
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [inputType, setInputType] = useState("password");
@@ -98,26 +96,20 @@ export default function ResetPassword() {
       const changePassword = {
         password: passwordInput.password,
       };
-      await axios.post(`/auth/reset-password/${resetToken}`, changePassword);
+      await axiosInstance.post(
+        `/auth/reset-password/${resetToken}`,
+        changePassword
+      );
       setLoading(false);
       setPasswordInput({
         password: "",
         confirmPassword: "",
       });
-      Store.addNotification({
-        title: "Successful!",
-        message: `Your Password has been updated successfully`,
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.success(`Your Password has been changed successfully.`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
       setTimeout(() => {
         navigate(`/login`);
@@ -128,20 +120,11 @@ export default function ResetPassword() {
       if (!error.response.data.errors) {
         return navigate(`/no-connection`);
       }
-      Store.addNotification({
-        title: "Failed!",
-        message: error.response.data.errors[0].message,
-        type: "danger",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.error(`${error.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
@@ -149,7 +132,7 @@ export default function ResetPassword() {
   return (
     <>
       <section className="w-100">
-        <ReactNotifications />
+        <ToastContainer />
         <section className="row m-0">
           <div className="col-lg-6 d-none d-lg-block p-0">
             <div className="map-img">
@@ -166,13 +149,7 @@ export default function ResetPassword() {
                   className="back-btn d-flex"
                   onClick={() => navigate(-1)}
                 >
-                  <Iconly
-                    className="me-2 auth-back-btn"
-                    name="ChevronLeft"
-                    set="light"
-                    size="medium"
-                    color="#282828"
-                  />
+                  <i className="fas fa-chevron-left me-2 auth-back-btn"></i>
                   Back
                 </button>
               </div>
@@ -210,21 +187,9 @@ export default function ResetPassword() {
                       onClick={handlePasswordToggle}
                     >
                       {inputType === "password" ? (
-                        <Iconly
-                          className="mt-1 pt-1"
-                          name="Hide"
-                          set="light"
-                          size="medium"
-                          color="#5C5C5C"
-                        />
+                        <i className="far fa-eye-slash mt-1 pt-1"></i>
                       ) : (
-                        <Iconly
-                          className="mt-1 pt-1"
-                          name="Show"
-                          set="light"
-                          size="medium"
-                          color="#5C5C5C"
-                        />
+                        <i className="far fa-eye mt-1 pt-1"></i>
                       )}
                     </span>
                   </div>
@@ -249,21 +214,9 @@ export default function ResetPassword() {
                       onClick={handleConfirmPasswordToggle}
                     >
                       {confirmInputType === "password" ? (
-                        <Iconly
-                          className="mt-1 pt-1"
-                          name="Hide"
-                          set="light"
-                          size="medium"
-                          color="#5C5C5C"
-                        />
+                        <i className="far fa-eye-slash mt-1 pt-1"></i>
                       ) : (
-                        <Iconly
-                          className="mt-1 pt-1"
-                          name="Show"
-                          set="light"
-                          size="medium"
-                          color="#5C5C5C"
-                        />
+                        <i className="far fa-eye mt-1 pt-1"></i>
                       )}
                     </span>
                   </div>

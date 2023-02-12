@@ -2,18 +2,20 @@ import React, { useEffect, useState, useContext, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import BuyHubNavbar from "./components/BuyHubNavbar/BuyHubNavbar";
-import { axios } from "../../components/baseUrl";
-import { ReactNotifications, Store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
+import { axiosInstance } from "../../components/axios";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Select from "react-select";
 import countryList from "react-select-country-list";
+
 import "react-loading-skeleton/dist/skeleton.css";
 // import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import { GlobalContext } from "../../components/utils/GlobalState";
 
 import Banner from "../../assets/img/b-home-bn2.png";
-import { Iconly } from "react-iconly";
 
 import "./BuyersHome.css";
 import TrendingProduct from "./components/TrendingProduct";
@@ -43,7 +45,7 @@ const BuyerHome = () => {
 
   const getData = async () => {
     try {
-      axios.get("/product").then((response) => {
+      axiosInstance.get("/product").then((response) => {
         setProduct(response.data.data);
         setLoading(false);
       });
@@ -108,7 +110,7 @@ const BuyerHome = () => {
         termsOfTrade: inquiry.termsOfTrade,
         paymentTerms: inquiry.paymentTerms,
       };
-      await axios.post("/rfq", createInquiry);
+      await axiosInstance.post("/rfq", createInquiry);
       setLoader(false);
       setInquiry({
         productName: "",
@@ -118,43 +120,26 @@ const BuyerHome = () => {
         paymentTerms: "",
       });
       setCountry("");
-      Store.addNotification({
-        title: "Inquiry Successful!",
-        message: "Your inquiry has been successfully sent.",
-        type: "success",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.success(`Your inquiry has been successfully submitted.`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
+
       setTimeout(() => {
         window.location.reload();
-      }, 5800);
+      }, 6800);
     } catch (err) {
       setLoader(false);
       if (!err.response.data.errors) {
         return navigate(`/no-connection`);
       }
-      Store.addNotification({
-        title: "Inquiry Failed!",
-        message: err.response.data.errors[0].message,
-        type: "danger",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.error(`${err.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
@@ -165,7 +150,7 @@ const BuyerHome = () => {
 
   return (
     <div>
-      <ReactNotifications />
+      <ToastContainer />
       <BuyHubNavbar />
       {/* Hero Section */}
       <section id="b-hero-section">
@@ -210,22 +195,17 @@ const BuyerHome = () => {
               <h1>Trending Products</h1>
             </div>
             <div className="col-lg-6" align="right">
-              <Iconly
+              <i
+                className="fas fa-chevron-circle-left scroll-icon me-4"
+                style={{ color: "#282828", fontSize: "25px" }}
                 onClick={() => scroll(-1070)}
-                className="scroll-icon me-4"
-                name="ChevronLeftCircle"
-                set="two-tone"
-                size="large"
-                color="#282828"
-              />
-              <Iconly
+              ></i>
+
+              <i
+                className="fas fa-chevron-circle-right scroll-icon"
                 onClick={() => scroll(1070)}
-                className="scroll-icon"
-                name="ChevronRightCircle"
-                set="two-tone"
-                size="large"
-                color="#282828"
-              />
+                style={{ color: "#282828", fontSize: "25px" }}
+              ></i>
             </div>
           </div>
           <div className="row main-container">

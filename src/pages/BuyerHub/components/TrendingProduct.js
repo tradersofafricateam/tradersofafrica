@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "./../../../components/axios";
 
 import "../../../assets/styles/global.css";
 import "../pages/Details/Details.css";
-import { Iconly } from "react-iconly";
 
 const TrendingProduct = ({ sectionTitle }) => {
   const [product, setProduct] = useState([]);
 
   const getData = async () => {
     try {
-      axios.get("/product").then((response) => {
+      axiosInstance.get("/product").then((response) => {
         setProduct(response.data.data);
       });
     } catch (error) {
@@ -41,22 +40,17 @@ const TrendingProduct = ({ sectionTitle }) => {
             <h1>{sectionTitle}</h1>
           </div>
           <div className="col-lg-6" align="right">
-            <Iconly
+            <i
+              className="fas fa-chevron-circle-left scroll-icon me-4"
+              style={{ color: "#282828", fontSize: "25px" }}
               onClick={() => scroll(-1070)}
-              className="scroll-icon me-4"
-              name="ChevronLeftCircle"
-              set="two-tone"
-              size="large"
-              color="#282828"
-            />
-            <Iconly
+            ></i>
+
+            <i
+              className="fas fa-chevron-circle-right scroll-icon"
               onClick={() => scroll(1070)}
-              className="scroll-icon"
-              name="ChevronRightCircle"
-              set="two-tone"
-              size="large"
-              color="#282828"
-            />
+              style={{ color: "#282828", fontSize: "25px" }}
+            ></i>
           </div>
         </div>
         <div className="row main-container">

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Iconly } from "react-iconly";
 
 export const ChatInput = ({ handleSendMsg }) => {
   const [msg, setMsg] = useState("");
@@ -47,21 +46,11 @@ export const ChatInput = ({ handleSendMsg }) => {
               event.key === "Enter" && handleSendMessage(event);
             }}
           ></textarea>
-          <Iconly
-            className="chat-icon"
-            name="PaperUpload"
-            set="light"
-            primaryColor="#5C5C5C"
-            size="medium"
-          />
-          <Iconly
+
+          <i
+            className="fas fa-paper-plane send-icon ms-3"
             onClick={handleSendMessage}
-            className="send-icon ms-3"
-            name="Send"
-            set="bulk"
-            primaryColor="#5C5C5C"
-            size="medium"
-          />
+          ></i>
         </div>
       </form>
     </div>

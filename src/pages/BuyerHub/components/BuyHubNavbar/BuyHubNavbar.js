@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Iconly } from "react-iconly";
-import axios from "axios";
+
+import { axiosInstance } from "./../../../../components/axios";
 import { GlobalContext } from "../../../../components/utils/GlobalState";
 
 import Logo from "../../../../assets/img/logo.png";
@@ -15,12 +15,13 @@ const BuyHubNavbar = () => {
   };
 
   const handleSignOut = () => {
-    axios
+    axiosInstance
       .get(`/auth/signout`)
       .then((response) => {
         setUser(null);
         localStorage.setItem("user", false);
         localStorage.removeItem("joinedAt");
+        localStorage.removeItem("token");
       })
       .catch((error) => {
         console.log(error);
@@ -81,49 +82,37 @@ const BuyHubNavbar = () => {
                   >
                     <li>
                       <Link className="dropdown-item" to="/orders">
-                        <Iconly
-                          className="nav-icon"
-                          name="Paper"
-                          set="light"
-                          primaryColor="#282828"
-                          size="small"
-                        />
+                        <i
+                          className="fas fa-shopping-cart nav-icon"
+                          style={{ color: "#282828" }}
+                        ></i>
                         My Orders
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/message-center">
-                        <Iconly
-                          className="nav-icon"
-                          name="Message"
-                          set="light"
-                          primaryColor="#282828"
-                          size="small"
-                        />
+                        <i
+                          className="fas fa-envelope nav-icon"
+                          style={{ color: "#282828" }}
+                        ></i>
                         Message Center
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/inquiries">
-                        <Iconly
-                          className="nav-icon"
-                          name="Folder"
-                          set="light"
-                          primaryColor="#282828"
-                          size="small"
-                        />
+                        <i
+                          className="fas fa-sticky-note nav-icon"
+                          style={{ color: "#282828" }}
+                        ></i>
                         Inquiries
                       </Link>
                     </li>
                     <li onClick={handleSignOut}>
                       <Link className="dropdown-item" to="/">
-                        <Iconly
-                          className="nav-icon"
-                          name="Logout"
-                          set="light"
-                          primaryColor="#282828"
-                          size="small"
-                        />
+                        <i
+                          className="fas fa-sign-out-alt nav-icon"
+                          style={{ color: "#282828" }}
+                        ></i>
                         Logout
                       </Link>
                     </li>
@@ -131,12 +120,11 @@ const BuyHubNavbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link main-nav-link" to="#">
-                    <Iconly
-                      name="Notification"
-                      set="light"
-                      primaryColor="#282828"
-                      size="medium"
-                    />
+                    <i
+                      className="far fa-bell"
+                      style={{ color: "#282828", fontSize: "25px" }}
+                    ></i>
+
                     <span className="notify"></span>
                   </Link>
                 </li>

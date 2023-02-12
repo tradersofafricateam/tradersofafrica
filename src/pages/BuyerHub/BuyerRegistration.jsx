@@ -1,14 +1,11 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BuyerRegistration.css";
-// import backIcon from "../../assets/img/back-icon.svg";
 import LogoWhite from "../../assets/img/icons/logo-white.png";
 import "../BuyerHub/BuyerMain.css";
-import { axios } from "../../components/baseUrl";
+import { axiosInstance } from "../../components/axios";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { Iconly } from "react-iconly";
 
 export default function BuyerRegistration() {
   const [registerDetail, setRegisterDetail] = useState({
@@ -44,7 +41,7 @@ export default function BuyerRegistration() {
       };
       const {
         data: { data },
-      } = await axios.post(`/auth/register-buyer`, buyerRegistration);
+      } = await axiosInstance.post(`/auth/register-buyer`, buyerRegistration);
       setLoading(false);
       navigate(`/verify-email/${data.email}`);
     } catch (error) {
@@ -64,8 +61,6 @@ export default function BuyerRegistration() {
         console.log(error.response.data.errors[0].message);
         setCustomError(error.response.data.errors[0].message);
       }
-
-      console.log(error.response.data.errors);
     }
   };
 
@@ -84,13 +79,11 @@ export default function BuyerRegistration() {
           <main className="row auth-header" id="header-info">
             <div className="col-lg-6 col-3">
               <button className="back-btn d-flex" onClick={() => navigate(-1)}>
-                <Iconly
-                  className="me-2 auth-back-btn"
-                  name="ChevronLeft"
-                  set="light"
-                  size="medium"
-                  color="#282828"
-                />
+                <i className="fas fa-chevron-left me-2 auth-back-btn"></i>
+                <i
+                  className="fas fa-chevron-left me-2 auth-back-btn"
+                  style={{ color: "#282828" }}
+                ></i>
                 Back
               </button>
             </div>
@@ -171,21 +164,15 @@ export default function BuyerRegistration() {
                     onClick={handlePasswordToggle}
                   >
                     {inputType === "password" ? (
-                      <Iconly
-                        className="mt-1 pt-1"
-                        name="Hide"
-                        set="light"
-                        size="medium"
-                        color="#5C5C5C"
-                      />
+                      <i
+                        className="far fa-eye-slash mt-1 pt-1"
+                        style={{ color: "#5C5C5C" }}
+                      ></i>
                     ) : (
-                      <Iconly
-                        className="mt-1 pt-1"
-                        name="Show"
-                        set="light"
-                        size="medium"
-                        color="#5C5C5C"
-                      />
+                      <i
+                        className="far fa-eye mt-1 pt-1"
+                        style={{ color: "#5C5C5C" }}
+                      ></i>
                     )}
                   </span>
                 </div>

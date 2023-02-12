@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Iconly } from "react-iconly";
+
 import "../Dashboard.css";
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
-import axios from "axios";
+import { axiosInstance } from "./../../../../../components/axios";
 
 const Sidebar = ({ isActive }) => {
   const { user, userLoading, setUser } = useContext(GlobalContext);
@@ -12,12 +12,13 @@ const Sidebar = ({ isActive }) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   const handleSignOut = () => {
-    axios
+    axiosInstance
       .get(`/auth/signout`)
       .then((response) => {
         setUser(null);
         localStorage.setItem("user", false);
         localStorage.removeItem("joinedAt");
+        localStorage.removeItem("token");
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -40,7 +41,7 @@ const Sidebar = ({ isActive }) => {
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0 user-area-art">
                 {" "}
-                {user.fullName.charAt(0).toUpperCase()}
+                {user.fullName && user.fullName.charAt(0).toUpperCase()}
               </div>
               <div className="flex-grow-1 ms-3">
                 {user.fullName.length > 15 ? (
@@ -60,36 +61,21 @@ const Sidebar = ({ isActive }) => {
         <ul className="sidenav__list">
           <Link className="sidenav-link" to="/dashboard">
             <li className="sidenav__list-item">
-              <Iconly
-                className="list_icon"
-                name="Home"
-                set="light"
-                size="small"
-              />
+              <i className="fas fa-home list_icon"></i>
               Overview
             </li>
           </Link>
 
           <Link className="sidenav-link" to="/orders">
             <li className="sidenav__list-item">
-              <Iconly
-                className="list_icon"
-                name="Paper"
-                set="light"
-                size="small"
-              />
+              <i className="fas fa-shopping-cart list_icon"></i>
               My Orders
             </li>
           </Link>
 
           <Link className="sidenav-link" to="/message-center">
             <li className="sidenav__list-item">
-              <Iconly
-                className="list_icon position-relative"
-                name="Message"
-                set="light"
-                size="small"
-              />
+              <i className="fas fa-envelope list_icon position-relative"></i>
               Message Center
               <span className="icon-notification position-absolute"></span>
             </li>
@@ -97,37 +83,21 @@ const Sidebar = ({ isActive }) => {
 
           <Link className="sidenav-link" to="/inquiries">
             <li className="sidenav__list-item">
-              <Iconly
-                className="list_icon"
-                name="Folder"
-                set="light"
-                size="small"
-              />
+              <i className="fas fa-sticky-note list_icon"></i>
               My Inquiries
             </li>
           </Link>
 
           <Link className="sidenav-link" to="/settings">
             <li className="sidenav__list-item">
-              <Iconly
-                className="list_icon"
-                name="Setting"
-                set="light"
-                size="small"
-              />
+              <i className="fas fa-cog list_icon"></i>
               Settings
             </li>
           </Link>
 
           <Link className="sidenav-link" to="/">
             <li onClick={handleSignOut} className="sidenav__list-item">
-              <Iconly
-                className="nav-icon"
-                name="Logout"
-                set="light"
-                size="small"
-                style={{ marginRight: "15px" }}
-              />
+              <i className="fas fa-sign-out-alt list_icon"></i>
               Logout
             </li>
           </Link>
@@ -136,12 +106,7 @@ const Sidebar = ({ isActive }) => {
         <ul className="sidenav__list mt-auto">
           <Link className="sidenav-link" to="/buy-commodities">
             <li className="sidenav__list-item">
-              <Iconly
-                className="list_icon"
-                name="ArrowLeft"
-                set="light"
-                size="small"
-              />
+              <i className="fas fa-arrow-left list_icon"></i>
               Back to Buyers Hub
             </li>
           </Link>

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Iconly } from "react-iconly";
+import { useNavigate } from "react-router-dom";
+
 import Sidebar from "../components/Sidebar";
 import "../Dashboard.css";
 import "./UserSettings.css";
-import { axios } from "../../../../../components/baseUrl.jsx";
+import { axiosInstance } from "../../../../../components/axios";
+
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { ReactNotifications } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import { Store } from "react-notifications-component";
-import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserSettings = () => {
   const [isActive, setIsActive] = useState(false);
@@ -36,10 +37,11 @@ const UserSettings = () => {
     }
   }, []);
 
-  // const convertDateFormat = (oldDate) => {
-  //   let date = new Date(oldDate).toString().split(" ");
-  //   return date[2] + " " + date[1] + "," + " " + date[3];
-  // };
+  const convertDateFormat = (oldDate) => {
+    let date = new Date(oldDate).toString().split(" ");
+    let newFormat = `${date[0]} ${date[2]}  ${date[1]}, ${date[3]}`;
+    return newFormat;
+  };
 
   const handleChange = (e) => {
     setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
@@ -56,26 +58,17 @@ const UserSettings = () => {
     e.preventDefault();
     setLoader(true);
     try {
-      await axios.post(`/buyer-hub/profile`, {
+      await axiosInstance.post(`/buyer-hub/profile`, {
         fullName: editProfile.fullName,
         country: editProfile.country,
         phoneNumber: editPhoneNumber,
       });
       setLoader(false);
-      Store.addNotification({
-        title: "Successful!",
-        message: `Your profile has been successful updated`,
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.success(`Your profile has been successful updated`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     } catch (error) {
       setLoader(false);
@@ -91,20 +84,11 @@ const UserSettings = () => {
           }, {})
         );
       }
-      Store.addNotification({
-        title: "Failed!",
-        message: error.response.data.errors[0].message,
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 3000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.error(`${error.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
@@ -117,22 +101,13 @@ const UserSettings = () => {
         oldPassword: editPassword.currentPassword,
         newPassword: editPassword.newPassword,
       };
-      await axios.post(`/buyer-hub/password`, editUserPassword);
+      await axiosInstance.post(`/buyer-hub/password`, editUserPassword);
       setPassLoader(false);
-      Store.addNotification({
-        title: "Successful!",
-        message: `Your password has been successfully changed.`,
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.success(`Your password has been successfully changed.`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     } catch (error) {
       setPassLoader(false);
@@ -148,20 +123,11 @@ const UserSettings = () => {
           }, {})
         );
       }
-      Store.addNotification({
-        title: "Failed!",
-        message: error.response.data.errors[0].message,
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 3000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.error(`${error.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
@@ -171,7 +137,7 @@ const UserSettings = () => {
   };
   return (
     <div>
-      <ReactNotifications />
+      <ToastContainer />
       <div className="grid-container">
         {/* <div className="menu-icon">
           <i className="fas fa-bars header__menu"></i>
@@ -190,30 +156,11 @@ const UserSettings = () => {
             <h2>Settings</h2>
           </div>
           <div className="header__search">
-            <form>
-              <div className="custom__search">
-                <Iconly
-                  name="Search"
-                  set="light"
-                  primaryColor="#5C5C5C"
-                  size="medium"
-                />
-                <input
-                  type="text"
-                  className="form-control custom-style"
-                  id=""
-                  placeholder="Search for orders, inquiries and more"
-                />
-              </div>
-            </form>
-
             <div className="notify-wrap position-relative">
-              <Iconly
-                name="Notification"
-                set="bulk"
-                primaryColor="#282828"
-                size="medium"
-              />
+              <i
+                className="far fa-bell"
+                style={{ color: "#282828", fontSize: "25px" }}
+              ></i>
               <span className="icon-notification position-absolute"></span>
             </div>
           </div>
@@ -281,21 +228,15 @@ const UserSettings = () => {
                             onClick={handlePasswordToggle}
                           >
                             {inputType === "password" ? (
-                              <Iconly
-                                className="mt-1 pt-1"
-                                name="Hide"
-                                set="light"
-                                size="medium"
-                                color="#5C5C5C"
-                              />
+                              <i
+                                className="far fa-eye-slash mt-1 pt-1"
+                                style={{ color: "#5C5C5C" }}
+                              ></i>
                             ) : (
-                              <Iconly
-                                className="mt-1 pt-1"
-                                name="Show"
-                                set="light"
-                                size="medium"
-                                color="#5C5C5C"
-                              />
+                              <i
+                                className="far fa-eye mt-1 pt-1"
+                                style={{ color: "#5C5C5C" }}
+                              ></i>
                             )}
                           </span>
                         </div>
@@ -321,21 +262,15 @@ const UserSettings = () => {
                             onClick={handlePasswordToggle}
                           >
                             {inputType === "password" ? (
-                              <Iconly
-                                className="mt-1 pt-1"
-                                name="Hide"
-                                set="light"
-                                size="medium"
-                                color="#5C5C5C"
-                              />
+                              <i
+                                className="far fa-eye-slash mt-1 pt-1"
+                                style={{ color: "#5C5C5C" }}
+                              ></i>
                             ) : (
-                              <Iconly
-                                className="mt-1 pt-1"
-                                name="Show"
-                                set="light"
-                                size="medium"
-                                color="#5C5C5C"
-                              />
+                              <i
+                                className="far fa-eye mt-1 pt-1"
+                                style={{ color: "#5C5C5C" }}
+                              ></i>
                             )}
                           </span>
                         </div>
@@ -384,7 +319,7 @@ const UserSettings = () => {
                     </div>
                     <div className="seller-seting-joindate">
                       <p>Joined Since</p>
-                      <p>{createdAt}</p>
+                      <p>{createdAt && convertDateFormat(createdAt)}</p>
                     </div>
                   </div>
                 </form>

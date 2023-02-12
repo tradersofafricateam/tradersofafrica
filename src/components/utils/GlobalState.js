@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosInstance } from "./../axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -11,7 +11,7 @@ const GlobalState = ({ children }) => {
   const [user, setUser] = useState("");
 
   const getUser = () => {
-    axios
+    axiosInstance
       .get(`/auth/current-user`)
       .then((response) => {
         setUser(response.data.currentUser);

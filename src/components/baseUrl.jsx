@@ -1,5 +1,7 @@
-import api from "axios";
+// import axios from "axios";
 
-export const axios = api.create({
-  withCredentials: true,
-});
+// const baseUrl = process.env.REACT_APP_BACKEND_URL;
+
+// export const axios = axios.create({
+//   baseURL: baseUrl,
+// });

@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Iconly } from "react-iconly";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 import Footer from "../../../../components/Footer/Footer";
 import BuyHubNavbar from "../../components/BuyHubNavbar/BuyHubNavbar";
 import OrderModal from "../OrderModal/OrderModal";
-import { axios } from "../../../../components/baseUrl";
-import { useParams } from "react-router-dom";
-import { ReactNotifications, Store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
+import { axiosInstance } from "../../../../components/axios";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Select from "react-select";
 import countryList from "react-select-country-list";
@@ -84,7 +84,7 @@ const Details = () => {
         termsOfTrade: inquiry.termsOfTrade,
         paymentTerms: inquiry.paymentTerms,
       };
-      await axios.post("/rfq", createInquiry);
+      await axiosInstance.post("/rfq", createInquiry);
       setLoader(false);
       setInquiry({
         productDescription: "",
@@ -93,20 +93,11 @@ const Details = () => {
         paymentTerms: "",
       });
       setCountry("");
-      Store.addNotification({
-        title: "Inquiry Successful!",
-        message: "Your inquiry has been successfully sent.",
-        type: "success",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 3000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.success(`Your inquiry has been successfully submitted.`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     } catch (err) {
       setLoader(false);
@@ -115,20 +106,11 @@ const Details = () => {
       }
       setCustomError(err.response.data.errors[0].message);
 
-      Store.addNotification({
-        title: "Failed!",
-        message: err.response.data.errors[0].message,
-        type: "danger",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.error(`${err.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
@@ -136,7 +118,7 @@ const Details = () => {
   const getInfo = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get(`/product/${productId}`);
+      const { data } = await axiosInstance.get(`/product/${productId}`);
       setProductInfo(data.data);
       setProductImages(data.data.productImages);
       const mainImage = data.data.productImages.filter(
@@ -158,7 +140,7 @@ const Details = () => {
   }
   return (
     <div>
-      <ReactNotifications />
+      <ToastContainer />
       <BuyHubNavbar />
       <div>
         <section id="product-details">
@@ -167,13 +149,7 @@ const Details = () => {
               <div className="col-lg-12">
                 <p className="back-text">
                   <Link to="/buy-commodities">
-                    <Iconly
-                      className="list_icon me-3"
-                      primaryColor=""
-                      name="ArrowLeft"
-                      set="light"
-                      size="small"
-                    />
+                    <i className="fas fa-arrow-left list_icon me-3"></i>
                     Browse Products
                   </Link>
                 </p>
@@ -309,7 +285,7 @@ const Details = () => {
                     </a>
                   </div>
 
-                  <OrderModal />
+                  <OrderModal productInfo={productInfo} />
                 </div>
               </div>
             </div>

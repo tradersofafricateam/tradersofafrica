@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
-import { Iconly } from "react-iconly";
 import Sidebar from "./components/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
-import { axios } from "./../../../../components/baseUrl.jsx";
+import { axiosInstance } from "./../../../../components/axios";
 
 import TrackImg from "../../../../assets/img/track-illus.png";
 import OrdersImg from "../../../../assets/img/orders-illus.png";
@@ -27,7 +26,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`/buyer-hub/activity-summary`)
       .then((response) => {
         setActivity(response.data.data);
@@ -43,7 +42,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`/buyer-hub/all-orders`)
       .then((response) => {
         setAllUserOrder(response.data.data);
@@ -136,12 +135,10 @@ const Dashboard = () => {
 
             <div className="notify-wrap position-relative">
               <Link to="/dashboard">
-                <Iconly
-                  name="Notification"
-                  set="bulk"
-                  primaryColor="#282828"
-                  size="medium"
-                />
+                <i
+                  className="far fa-bell"
+                  style={{ color: "#282828", fontSize: "25px" }}
+                ></i>
                 <span className="icon-notification position-absolute"></span>
               </Link>
             </div>

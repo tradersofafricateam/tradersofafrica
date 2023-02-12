@@ -1,7 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
-import { axios } from "../../../../../components/baseUrl.jsx";
+import { axiosInstance } from "../../../../../components/axios";
 
 import "../Dashboard.css";
 import PaginationComponent from "../components/Pagination";
@@ -22,7 +21,7 @@ const Inquiries = () => {
   };
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`/buyer-hub/enquiry-summary`)
       .then((response) => {
         setUserEnquireSummary(response.data.data);
@@ -38,7 +37,7 @@ const Inquiries = () => {
   }, []);
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`/buyer-hub/all-enquiries`)
       .then((response) => {
         setAllUserEnquire(response.data.data);
@@ -131,12 +130,10 @@ const Inquiries = () => {
             />
 
             <div className="notify-wrap position-relative">
-              <Iconly
-                name="Notification"
-                set="bulk"
-                primaryColor="#282828"
-                size="medium"
-              />
+              <i
+                className="far fa-bell"
+                style={{ color: "#282828", fontSize: "25px" }}
+              ></i>
               <span className="icon-notification position-absolute"></span>
             </div>
           </div>

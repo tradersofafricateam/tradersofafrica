@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
@@ -13,9 +12,9 @@ import { NewOrderModal } from "./NewOrderModal";
 
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import { ChatInput } from "./ChatInput";
-import { axios } from "../../../../../components/baseUrl";
-import { ReactNotifications } from "react-notifications-component";
-import { Store } from "react-notifications-component";
+import { axiosInstance } from "./../../../../../components/axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MessageCenter = () => {
   const { user } = useContext(GlobalContext);
@@ -25,6 +24,7 @@ const MessageCenter = () => {
   const socket = useRef();
   const [loader, setLoader] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [orderLoad, setOrderLoad] = useState(false);
 
   const [orderInfo, setOrderInfo] = useState({});
   const navigate = useNavigate();
@@ -38,17 +38,16 @@ const MessageCenter = () => {
   }
 
   const viewOrderInfo = async (orderId) => {
-    await axios
+    setOrderLoad(true);
+    await axiosInstance
       .get(`/order/${orderId}`)
       .then((response) => {
         setOrderInfo(response.data.data);
+        setOrderLoad(false);
       })
       .catch((error) => {
         console.log(error);
-
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
-        }
+        setOrderLoad(false);
       });
   };
 
@@ -60,42 +59,24 @@ const MessageCenter = () => {
   const handleApproval = async () => {
     try {
       setLoader(true);
-      await axios.get(`/order/approve/${orderInfo.id}`);
+      await axiosInstance.get(`/order/approve/${orderInfo.id}`);
       setLoader(false);
-      Store.addNotification({
-        title: "Successful!",
-        message: "You have successfully approved this order",
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.success(`You have successfully approved this order`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     } catch (error) {
       setLoader(false);
       if (!error.response.data.errors) {
         return navigate(`/no-connection`);
       }
-      Store.addNotification({
-        title: "Failed, Try again!",
-        message: error.response.data.errors[0].message,
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-        isMobile: true,
-        breakpoint: 768,
+      toast.error(`${error.response.data.errors[0].message}`, {
+        position: "top-right",
+        autoClose: 6000,
+        pauseHover: true,
+        draggable: true,
       });
     }
   };
@@ -122,7 +103,7 @@ const MessageCenter = () => {
       try {
         const {
           data: { data },
-        } = await axios.get("/message/receive-message");
+        } = await axiosInstance.get("/message/receive-message");
         setMessages(data);
       } catch (error) {
         console.log(error);
@@ -158,7 +139,7 @@ const MessageCenter = () => {
 
       socket.current.emit(socketEvents.sendMessage, payload);
 
-      axios.post("/message/send-message", payload);
+      axiosInstance.post("/message/send-message", payload);
 
       const msgs = [...messages];
       msgs.push({ fromSelf: true, message: msg });
@@ -187,7 +168,7 @@ const MessageCenter = () => {
 
   return (
     <div>
-      <ReactNotifications />
+      <ToastContainer />
       <div className="grid-container">
         {/* <div className="menu-icon">
           <i className="fas fa-bars header__menu"></i>
@@ -206,30 +187,11 @@ const MessageCenter = () => {
             <h2>Message Center</h2>
           </div>
           <div className="header__search">
-            <form>
-              <div className="custom__search">
-                <Iconly
-                  name="Search"
-                  set="light"
-                  primaryColor="#5C5C5C"
-                  size="medium"
-                />
-                <input
-                  type="text"
-                  className="form-control custom-style"
-                  id=""
-                  placeholder="Search for orders, inquiries and more"
-                />
-              </div>
-            </form>
-
             <div className="notify-wrap position-relative">
-              <Iconly
-                name="Notification"
-                set="bulk"
-                primaryColor="#282828"
-                size="medium"
-              />
+              <i
+                className="far fa-bell"
+                style={{ color: "#282828", fontSize: "25px" }}
+              ></i>
               <span className="icon-notification position-absolute"></span>
             </div>
           </div>
@@ -257,16 +219,11 @@ const MessageCenter = () => {
                       </div>
                     </div>
                     <div className="chat-action">
-                      {/* <Link to="/message-center"><Iconly className="chat-icon" name='Camera' set='light' primaryColor='#5C5C5C' size='medium' /></Link>
-                      <Link to="/message-center"><Iconly className="chat-icon" name='PaperUpload' set='light' primaryColor='#5C5C5C' size='medium' /></Link> */}
                       <Link to="/message-center">
-                        <Iconly
-                          className="chat-icon"
-                          name="MoreCircle"
-                          set="light"
-                          primaryColor="#5C5C5C"
-                          size="medium"
-                        />
+                        <i
+                          className="fas fa-comment-dots chat-icon"
+                          style={{ color: "#5C5C5C" }}
+                        ></i>
                       </Link>
                     </div>
                   </div>
@@ -383,6 +340,7 @@ const MessageCenter = () => {
               orderInfo={orderInfo}
               handleApproval={handleApproval}
               loader={loader}
+              orderLoad={orderLoad}
             />
             {/* End of View Order Modal */}
           </div>

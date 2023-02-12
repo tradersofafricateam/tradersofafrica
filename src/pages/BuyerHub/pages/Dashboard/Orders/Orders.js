@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Iconly } from "react-iconly";
 import Sidebar from "../components/Sidebar";
-import { Link, useNavigate } from "react-router-dom";
-import { axios } from "../../../../../components/baseUrl.jsx";
+import { Link } from "react-router-dom";
+import { axiosInstance } from "./../../../../../components/axios";
 
 import "../Dashboard.css";
 import SearchInput from "../components/SearchInput";
@@ -23,30 +22,28 @@ const Orders = () => {
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allLoading, setAllLoading] = useState(true);
-  // const [orderLoad, setOrderLoad] = useState(true);
-  const navigate = useNavigate();
+  const [orderLoad, setOrderLoad] = useState(false);
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
 
   const viewOrderInfo = async (orderId) => {
-    await axios
+    setOrderLoad(true);
+    await axiosInstance
       .get(`/order/${orderId}`)
       .then((response) => {
         setOrderInfo(response.data.data);
+        setOrderLoad(false);
       })
       .catch((error) => {
+        setOrderLoad(false);
         console.log(error);
-
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
-        }
       });
   };
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`/buyer-hub/order-summary`)
       .then((response) => {
         setUserOrderSummary(response.data.data);
@@ -55,14 +52,11 @@ const Orders = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
-        }
       });
   }, []);
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`/buyer-hub/all-orders`)
       .then((response) => {
         setAllUserOrder(response.data.data);
@@ -71,9 +65,6 @@ const Orders = () => {
       .catch((error) => {
         setAllLoading(false);
         console.log(error);
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
-        }
       });
   }, []);
 
@@ -155,12 +146,10 @@ const Orders = () => {
             />
 
             <div className="notify-wrap position-relative">
-              <Iconly
-                name="Notification"
-                set="bulk"
-                primaryColor="#282828"
-                size="medium"
-              />
+              <i
+                className="far fa-bell"
+                style={{ color: "#282828", fontSize: "25px" }}
+              ></i>
               <span className="icon-notification position-absolute"></span>
             </div>
           </div>
@@ -278,6 +267,11 @@ const Orders = () => {
                               >
                                 View
                               </p>
+                              <OrderInfo
+                                orderInfo={orderInfo}
+                                Capitalize={Capitalize}
+                                orderLoad={orderLoad}
+                              />
                             </td>
                           </tr>
                         ))}
@@ -313,7 +307,6 @@ const Orders = () => {
             />
           )}
         </main>
-        <OrderInfo orderInfo={orderInfo} Capitalize={Capitalize} />
       </div>
     </div>
   );
