@@ -108,14 +108,14 @@ input, select, textarea {
 }
 
 .p-container {
-    width:auto;
+    width:100%;
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
 }
 
-.p-container:after {
+/* .p-container:after {
     content: '';
     position: absolute;
     right: 0px;
@@ -127,16 +127,16 @@ input, select, textarea {
 
 .p-container::-webkit-scrollbar {
     display: none; 
-}
+} */
 
 .p-container .link {
     text-decoration: none;
 }
 
 .product-card {
-    width: 245px;
+    width: 275px;
     overflow: hidden;
-    margin-right: 30px;
+    /* margin-right: 25px; */
     margin-bottom: 50px;
     flex: 0 0 auto;
     cursor: pointer;

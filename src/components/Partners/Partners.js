@@ -6,7 +6,8 @@ import Ati from "../../assets/img/partners/ati-logo.png";
 import Shecluded from "../../assets/img/partners/shecluded-logo.png";
 import Iverify from "../../assets/img/partners/iverify-logo.png";
 import Eagri from "../../assets/img/partners/eagrib-logo.png";
-import Echovc from "../../assets/img/partners/echovc-logo.png";
+import PIA from "../../assets/img/partners/pia-logo.svg";
+import SIPI from "../../assets/img/partners/sipi-logo.png";
 
 
 const Partners = () => {
@@ -25,11 +26,12 @@ const Partners = () => {
           </div>
         </div>
         <div className="d-flex flex-wrap justify-content-start">
+          <img src={PIA} alt="" /> 
+          <img src={SIPI} alt="" />
+          <img src={Eagri} alt="" />
           <img src={Ati} alt="" />
           <img src={Shecluded} alt="" />
           <img src={Iverify} alt="" />
-          <img src={Eagri} alt="" />
-          <img src={Echovc} alt="" />
         </div>
       </div>
     </section>

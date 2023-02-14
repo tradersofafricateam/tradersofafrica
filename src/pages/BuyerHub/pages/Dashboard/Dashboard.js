@@ -133,7 +133,7 @@ const Dashboard = () => {
               placeholder="Search for orders, order status and more"
             />
 
-            <div className="notify-wrap position-relative">
+            {/* <div className="notify-wrap position-relative">
               <Link to="/dashboard">
                 <i
                   className="far fa-bell"
@@ -141,7 +141,7 @@ const Dashboard = () => {
                 ></i>
                 <span className="icon-notification position-absolute"></span>
               </Link>
-            </div>
+            </div> */}
           </div>
         </header>
 
@@ -191,32 +191,32 @@ const Dashboard = () => {
             <div className="overview-card">
               <div>
                 <h2>Total Orders</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <p>Detailed transaction history is on the order page</p>
                 <div className="d-flex justify-content-between mt-4">
                   <h3>
                     {activity.total_number_of_orders &&
                       numberWithCommas(activity.total_number_of_orders)}
                   </h3>
 
-                  <Link className="overview-card-link" to="/orders">
+                  {/* <Link className="overview-card-link" to="/orders">
                     View all
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
             <div className="overview-card">
               <div>
                 <h2>Total Inquiries</h2>
-                {/* <p>Detailed transaction history is on the order page</p> */}
+                <p>Detailed transaction history is on the order page</p>
                 <div className="d-flex justify-content-between mt-4">
                   <h3>
                     {activity.total_number_of_enquiries &&
                       numberWithCommas(activity.total_number_of_enquiries)}
                   </h3>
 
-                  <Link className="overview-card-link" to="/inquiries">
+                  {/* <Link className="overview-card-link" to="/inquiries">
                     View all
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
@@ -227,12 +227,7 @@ const Dashboard = () => {
             <div className="empty-state">
               <h3>Welcome to your Dashboard</h3>
               <p>
-                Access history to all your <Link to="/orders">Orders</Link> and{" "}
-                <Link to="/inquiries">Inquiries</Link> , chat a{" "}
-                <Link to="/message-center">SourcePro</Link>,{" "}
-                <Link to="/settings">
-                  edit your name, email and password here.
-                </Link>
+                No activity found on your dashbaord. Start by placing an order or submitting a product inquiry
               </p>
             </div>
           ) : (

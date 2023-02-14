@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import "../Dashboard.css";
 import "./UserSettings.css";
 import { axiosInstance } from "../../../../../components/axios";
+import SearchInput from "../components/SearchInput";
 
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -156,13 +157,17 @@ const UserSettings = () => {
             <h2>Settings</h2>
           </div>
           <div className="header__search">
-            <div className="notify-wrap position-relative">
+            <SearchInput
+              
+              placeholder="Search for orders, order status and more"
+            />
+            {/* <div className="notify-wrap position-relative">
               <i
                 className="far fa-bell"
                 style={{ color: "#282828", fontSize: "25px" }}
               ></i>
               <span className="icon-notification position-absolute"></span>
-            </div>
+            </div> */}
           </div>
         </header>
 

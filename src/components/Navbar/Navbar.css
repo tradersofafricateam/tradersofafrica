@@ -12,9 +12,13 @@ font-size: .85rem; }
 
 .navbar-nav .nav-item .nav-link {
     color: #282828;
-    padding: .8rem 0;
-    margin-left: 15px;
+    padding: .8rem .8rem;
+    /* margin-left: 15px; */
     border-bottom: 2px solid transparent; 
+}
+
+.navbar-nav .nav-item:last-child {
+    padding-right: 0;
 }
 
 .navbar-nav .main-nav-link {

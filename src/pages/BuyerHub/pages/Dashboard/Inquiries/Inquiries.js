@@ -129,13 +129,13 @@ const Inquiries = () => {
               placeholder="Search for inquiries, status and more"
             />
 
-            <div className="notify-wrap position-relative">
+            {/* <div className="notify-wrap position-relative">
               <i
                 className="far fa-bell"
                 style={{ color: "#282828", fontSize: "25px" }}
               ></i>
               <span className="icon-notification position-absolute"></span>
-            </div>
+            </div> */}
           </div>
         </header>
 

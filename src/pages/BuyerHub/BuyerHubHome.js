@@ -154,7 +154,7 @@ const BuyerHome = () => {
       <BuyHubNavbar />
       {/* Hero Section */}
       <section id="b-hero-section">
-        <div
+        {/* <div
           id="carouselExampleSlidesOnly"
           className="carousel slide carousel-fade"
           data-bs-ride="carousel"
@@ -170,7 +170,7 @@ const BuyerHome = () => {
               <img src={Banner} className="d-block w-100" alt="..." />
             </div>
           </div>
-        </div>
+        </div> */}
         {/* <div className="slide-container">
           <Slide>
             {filteredBanner &&
@@ -194,7 +194,7 @@ const BuyerHome = () => {
             <div className="col-lg-6">
               <h1>Trending Products</h1>
             </div>
-            <div className="col-lg-6" align="right">
+            {/* <div className="col-lg-6" align="right">
               <i
                 className="fas fa-chevron-circle-left scroll-icon me-4"
                 style={{ color: "#282828", fontSize: "25px" }}
@@ -206,10 +206,10 @@ const BuyerHome = () => {
                 onClick={() => scroll(1070)}
                 style={{ color: "#282828", fontSize: "25px" }}
               ></i>
-            </div>
+            </div> */}
           </div>
           <div className="row main-container">
-            <div className="p-container" ref={ref}>
+            <div className="p-container">
               {product &&
                 product.map((item) => {
                   return (
@@ -440,7 +440,7 @@ const BuyerHome = () => {
         </div>
       </div>
       {/* Trending Products */}
-      <TrendingProduct sectionTitle="Newly Added Products" />
+      {/* <TrendingProduct sectionTitle="Newly Added Products" /> */}
       {/* Newsletter Space */}
 
       <Footer />

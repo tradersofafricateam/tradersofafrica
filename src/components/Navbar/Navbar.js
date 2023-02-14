@@ -69,7 +69,7 @@ const Navbar = () => {
                   to="/buy-commodities"
                   role="button"
                 >
-                  Buy Commodities
+                  Buyers Hub
                 </Link>
               </li>
             </ul>

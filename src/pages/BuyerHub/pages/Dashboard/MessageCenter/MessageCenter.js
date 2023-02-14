@@ -9,6 +9,7 @@ import "../Dashboard.css";
 import { RaiseDisputeModal } from "./RaiseDisputeModal";
 import ViewOrderModal from "./ViewOrderModal";
 import { NewOrderModal } from "./NewOrderModal";
+import SearchInput from "../components/SearchInput";
 
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import { ChatInput } from "./ChatInput";
@@ -186,14 +187,19 @@ const MessageCenter = () => {
           <div className="header__message">
             <h2>Message Center</h2>
           </div>
+          
           <div className="header__search">
-            <div className="notify-wrap position-relative">
+            <SearchInput
+              
+              placeholder="Search for orders, order status and more"
+            />
+            {/* <div className="notify-wrap position-relative">
               <i
                 className="far fa-bell"
                 style={{ color: "#282828", fontSize: "25px" }}
               ></i>
               <span className="icon-notification position-absolute"></span>
-            </div>
+            </div> */}
           </div>
         </header>
 

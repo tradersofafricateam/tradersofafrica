@@ -161,7 +161,7 @@ const OrderModal = ({ productInfo }) => {
                           <div className="row">
                             <div className="col-lg-7 col">
                               <input
-                                type="number"
+                                type="text"
                                 className="form-control custom-style"
                                 id=""
                                 placeholder="Enter quantity"
@@ -336,7 +336,7 @@ const OrderModal = ({ productInfo }) => {
                 ) : (
                   <div className="col-lg-4">
                     <h5 className="modal-sub-title">Order Summary</h5>
-                    <div className="order-summary">
+                    <div className="order-summary-front">
                       <div className="d-flex mb-2">
                         <div className="flex-shrink-0">
                           <img

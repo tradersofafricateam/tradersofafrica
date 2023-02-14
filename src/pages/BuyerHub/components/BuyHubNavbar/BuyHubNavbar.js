@@ -118,7 +118,7 @@ const BuyHubNavbar = () => {
                     </li>
                   </ul>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link main-nav-link" to="#">
                     <i
                       className="far fa-bell"
@@ -127,7 +127,7 @@ const BuyHubNavbar = () => {
 
                     <span className="notify"></span>
                   </Link>
-                </li>
+                </li> */}
               </ul>
             ) : (
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">

@@ -245,8 +245,9 @@
   padding: 0;
 }
 
-.place-order-modal .modal-body .order-summary {
+.place-order-modal .modal-body .order-summary-front {
   margin: 20px 0;
+  width: 100%;
 }
 
 .place-order-modal .modal-body button {
@@ -254,50 +255,50 @@
   color: #FFFFFF;
 }
 
-.order-summary .s-product-img {
+.order-summary-front .s-product-img {
   width: 65px;
 }
 
-.order-summary .s-product-name {
+.order-summary-front .s-product-name {
   font-size: 1.05rem;
   margin: 0;
   padding: 0 0 10px;
 }
 
-.order-summary .s-product-price {
+.order-summary-front .s-product-price {
   font-size: 0.9rem;
   margin: 0;
   padding: 0 0 20px;
 }
 
-.order-summary .s-product-price .s-mp-currency {
+.order-summary-front .s-product-price .s-mp-currency {
   color: #5c5c5c;
   font-weight: 300;
 }
 
-.order-summary .s-product-price .s-mp-unit {
+.order-summary-front .s-product-price .s-mp-unit {
   font-size: 0.7rem;
 }
 
-.order-summary .os-details {
+.order-summary-front .os-details {
   width: 100%;
 }
 
-.order-summary .os-details table {
+.order-summary-front .os-details table {
   font-size: 0.85rem;
   margin-bottom: 0;
 }
 
-.order-summary .os-details table tr td {
+.order-summary-front .os-details table tr td {
   padding: 10px 15px;
 }
 
-.order-summary .os-details table tr .osd-title {
+.order-summary-front .os-details table tr .osd-title {
   color: #5c5c5c;
   padding-left: 0;
 }
 
-.order-summary .os-details .line {
+.order-summary-front .os-details .line {
   height: 1px;
   background-color: #dddddd;
   margin: 20px 0;

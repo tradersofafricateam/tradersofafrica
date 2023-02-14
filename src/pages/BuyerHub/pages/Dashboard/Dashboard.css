@@ -60,7 +60,7 @@ body {
   background-color: #ffffff;
   padding: 5px 15px;
   border-radius: 4px;
-  margin-right: 25px;
+  /* margin-right: 25px; */
   box-shadow: 0px 4px 20px rgba(11, 34, 57, 0.08);
 }
 
@@ -644,17 +644,19 @@ body {
 
 /* start of order info */
 .order-summary {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  
 }
 
 .order-summary .os-details {
-  width: 100% !important;
+  width: 100% ;
 }
 
 .order-summary .order-history {
-  width: 100% !important;
+  width: 100%;
+}
+
+.osd-title {
+  font-weight: 600!important;
 }
 
 .order-summary .order-history .order-history-details-ctn {
@@ -775,11 +777,11 @@ body {
   }
 
   .order-summary .os-details {
-    width: 50% !important;
+    width: 100% !important;
   }
 
   .order-summary .order-history {
-    width: 50% !important;
+    width: 100% !important;
   }
 
   .chat-wrap .chat-area .message-area .chat-msg {
@@ -789,4 +791,21 @@ body {
   .chat-wrap .chat-area .message-area .chat-order-request-msg {
     max-width: 55%;
   }
+}
+
+.empty-state {
+  margin-top: 50px;
+}
+
+.empty-state h3 {
+  margin-bottom: 15px;
+}
+
+.empty-state p {
+ font-size: 14px;
+}
+
+.empty-state p a{
+  color: #dc4d04;
+  text-decoration: none;
 }
