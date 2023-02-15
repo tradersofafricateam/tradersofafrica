@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "./../../../components/axios";
 
 import "../../../assets/styles/global.css";
@@ -7,6 +7,7 @@ import "../pages/Details/Details.css";
 
 const TrendingProduct = ({ sectionTitle }) => {
   const [product, setProduct] = useState([]);
+  const navigate = useNavigate();
 
   const getData = async () => {
     try {
@@ -15,6 +16,9 @@ const TrendingProduct = ({ sectionTitle }) => {
       });
     } catch (error) {
       console.log(error);
+      if (error.message && error.message === "Network Error") {
+        navigate("/no-connection");
+      }
     }
   };
 

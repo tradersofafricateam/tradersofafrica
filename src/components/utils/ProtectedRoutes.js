@@ -15,7 +15,9 @@ const ProtectedRoutes = () => {
       })
       .catch((error) => {
         console.log(error);
-        navigate("/login");
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
+        } else navigate("/login");
       });
   }, []);
 

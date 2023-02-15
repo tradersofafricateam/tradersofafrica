@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { axiosInstance } from "../../../../components/axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,7 +12,6 @@ const OrderModal = ({ productInfo }) => {
   const [loader, setLoader] = useState(false);
   const [priceSelected, setPriceSelected] = useState("");
 
-  const { productId } = useParams();
   const navigate = useNavigate();
 
   function numberWithCommas(x) {
@@ -94,7 +93,9 @@ const OrderModal = ({ productInfo }) => {
         draggable: true,
       });
 
-      navigate(`/details/${productId}`);
+      setTimeout(() => {
+        window.location.reload();
+      }, 6800);
     } catch (err) {
       setLoader(false);
       if (!err.response.data.errors) {

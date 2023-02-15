@@ -15,10 +15,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "react-slideshow-image/dist/styles.css";
 import { GlobalContext } from "../../components/utils/GlobalState";
 
-import Banner from "../../assets/img/b-home-bn2.png";
-
 import "./BuyersHome.css";
-import TrendingProduct from "./components/TrendingProduct";
 import CardSkeleton from "./pages/CardSkeleton";
 
 const BuyerHome = () => {
@@ -52,6 +49,9 @@ const BuyerHome = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
+      if (error.message && error.message === "Network Error") {
+        navigate("/no-connection");
+      }
     }
   };
 
@@ -59,11 +59,11 @@ const BuyerHome = () => {
     getData();
   }, []);
 
-  const ref = React.useRef(null);
+  // const ref = React.useRef(null);
 
-  const scroll = (scrollOffset) => {
-    ref.current.scrollLeft += scrollOffset;
-  };
+  // const scroll = (scrollOffset) => {
+  //   ref.current.scrollLeft += scrollOffset;
+  // };
 
   // const getBanner = async () => {
   //   try {

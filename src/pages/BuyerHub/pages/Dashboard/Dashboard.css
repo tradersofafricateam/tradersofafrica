@@ -653,11 +653,10 @@ body {
 
 /* start of order info */
 .order-summary {
-  
 }
 
 .order-summary .os-details {
-  width: 100% ;
+  width: 100%;
 }
 
 .order-summary .order-history {
@@ -665,7 +664,7 @@ body {
 }
 
 .osd-title {
-  font-weight: 600!important;
+  font-weight: 600 !important;
 }
 
 .order-summary .order-history .order-history-details-ctn {
@@ -712,7 +711,7 @@ body {
 }
 
 .order-history-details button {
-  background-color: #04a72d;
+  background-color: #dc4d04;
   border: none;
 }
 
@@ -811,10 +810,10 @@ body {
 }
 
 .empty-state p {
- font-size: 14px;
+  font-size: 14px;
 }
 
-.empty-state p a{
+.empty-state p a {
   color: #dc4d04;
   text-decoration: none;
 }

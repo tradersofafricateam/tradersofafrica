@@ -3,7 +3,8 @@ import React from "react";
 export const NewOrderModal = ({ handleSendMsg }) => {
   // const options = useMemo(() => countryList().getData(), []);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     handleSendMsg("START_NEW_ORDER");
   };
   return (
@@ -35,7 +36,12 @@ export const NewOrderModal = ({ handleSendMsg }) => {
                     Send an order request, our agents will help you draft your
                     order
                   </p>
-                  <button onClick={handleClick} className="mt-3">
+                  <button
+                    onClick={handleClick}
+                    className="mt-3"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
                     Send Order Request
                   </button>
                 </form>

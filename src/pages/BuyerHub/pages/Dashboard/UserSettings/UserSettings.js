@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
@@ -7,49 +7,75 @@ import "./UserSettings.css";
 import { axiosInstance } from "../../../../../components/axios";
 import SearchInput from "../components/SearchInput";
 
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { GlobalContext } from "../../../../../components/utils/GlobalState";
+import CardSkeleton from "../../CardSkeleton";
 
 const UserSettings = () => {
-  const { user } = useContext(GlobalContext);
+  const [user, setUser] = useState();
+  const [userLoading, setUserLoading] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [passLoader, setPassLoader] = useState(false);
   const [inputType, setInputType] = useState("password");
   const [formattedErrors, setFormattedErrors] = useState({});
-  const [createdAt, setCreatedAt] = useState("");
-  const [editPhoneNumber, setEditPhoneNumber] = useState("");
+  // const [createdAt, setCreatedAt] = useState("");
+
   const [editProfile, setEditProfile] = useState({
     fullName: "",
     country: "",
+    phoneNumber: "",
+    email: "",
   });
+
+  const getUser = () => {
+    axiosInstance
+      .get(`/auth/current-user`)
+      .then((response) => {
+        setUser(response.data.currentUser);
+
+        setEditProfile({
+          fullName: response.data.currentUser.fullName,
+          email: response.data.currentUser.email,
+          phoneNumber: response.data.currentUser.phoneNumber,
+        });
+        setUserLoading(false);
+      })
+      .catch((error) => {
+        setUserLoading(false);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
+        }
+      });
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const [editPassword, setEditPassword] = useState({
     currentPassword: "",
     newPassword: "",
   });
 
-  useEffect(() => {
-    const accountCreated = JSON.parse(localStorage.getItem("joinedAt"));
-    if (accountCreated) {
-      setCreatedAt(accountCreated);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const accountCreated = JSON.parse(localStorage.getItem("joinedAt"));
+  //   if (accountCreated) {
+  //     setCreatedAt(accountCreated);
+  //   }
+  // }, []);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const convertDateFormat = (oldDate) => {
-    let date = new Date(oldDate).toString().split(" ");
-    let newFormat = `${date[0]} ${date[2]}  ${date[1]}, ${date[3]}`;
-    return newFormat;
-  };
+  // const convertDateFormat = (oldDate) => {
+  //   let date = new Date(oldDate).toString().split(" ");
+  //   let newFormat = `${date[0]} ${date[2]}  ${date[1]}, ${date[3]}`;
+  //   return newFormat;
+  // };
 
   const handleChange = (e) => {
     setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
@@ -69,7 +95,7 @@ const UserSettings = () => {
       await axiosInstance.post(`/buyer-hub/profile`, {
         fullName: editProfile.fullName,
         country: editProfile.country,
-        phoneNumber: editPhoneNumber,
+        phoneNumber: editProfile.phoneNumber,
       });
       setLoader(false);
       toast.success(`Your profile has been successful updated`, {
@@ -117,6 +143,9 @@ const UserSettings = () => {
         pauseHover: true,
         draggable: true,
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 6800);
     } catch (error) {
       setPassLoader(false);
       if (!error.response.data.errors) {
@@ -143,6 +172,11 @@ const UserSettings = () => {
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
+
+  if (userLoading) {
+    return <CardSkeleton />;
+  }
+
   return (
     <div>
       <ToastContainer />
@@ -164,10 +198,7 @@ const UserSettings = () => {
             <h2>Settings</h2>
           </div>
           <div className="header__search">
-            <SearchInput
-              
-              placeholder="Search for orders, order status and more"
-            />
+            <SearchInput placeholder="Search for orders, order status and more" />
             {/* <div className="notify-wrap position-relative">
               <i
                 className="far fa-bell"
@@ -184,7 +215,7 @@ const UserSettings = () => {
                   {user.fullName && user.fullName.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-grow-1 ms-2">
-                  {user.fullName.length > 15 ? (
+                  {user.fullName && user.fullName.length > 15 ? (
                     <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
                   ) : (
                     <p>{Capitalize(user.fullName)}</p>
@@ -359,7 +390,12 @@ const UserSettings = () => {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label">Full name</label>
+                        <label
+                          htmlFor="exampleInputEmail1"
+                          className="form-label"
+                        >
+                          Full name
+                        </label>
                         <input
                           className="form-control"
                           type="text"
@@ -372,8 +408,21 @@ const UserSettings = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <label
+                          htmlFor="exampleInputEmail1"
+                          className="form-label"
+                        >
+                          Email address
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          name="email"
+                          value={editProfile.email}
+                          onChange={handleChange}
+                        />
                       </div>
                     </div>
                   </div>
@@ -381,31 +430,74 @@ const UserSettings = () => {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label">Phone number</label>
-                        <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <label
+                          htmlFor="exampleInputEmail1"
+                          className="form-label"
+                        >
+                          Phone number
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          name="phoneNumber"
+                          value={editProfile.phoneNumber}
+                          onChange={handleChange}
+                        />
                       </div>
                     </div>
                     <div className="col-lg-6">
                       <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label">Country</label>
-                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <label
+                          htmlFor="exampleInputEmail1"
+                          className="form-label"
+                        >
+                          Country
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          name="country"
+                          value={editProfile.country}
+                          onChange={handleChange}
+                        />
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="mb-3">
-                    <label for="exampleInputPassword1" className="form-label">Password</label>
-                    <h4 className="user-setting-change-pwd" data-bs-toggle="modal" data-bs-target="#exampleModal">Change Password</h4>
+                    <label
+                      htmlFor="exampleInputPassword1"
+                      className="form-label"
+                    >
+                      Password
+                    </label>
+                    <h4
+                      className="user-setting-change-pwd"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      Change Password
+                    </h4>
                   </div>
                   {/* Change Password Modal */}
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        {/* <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <div
+                    className="modal fade"
+                    id="exampleModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        {/* <div className="modal-header">
+                          <h5 className="modal-title" id="exampleModalLabel">Change Password</h5>
+                          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> */}
-                        <div class="modal-body">
+                        <div className="modal-body">
                           <div className="modal-padding">
                             <h2>Change Password</h2>
                             <div className="mt-3">
@@ -439,7 +531,9 @@ const UserSettings = () => {
                               </div>
                             </div>
                             {formattedErrors.oldPassword && (
-                              <p className="errors">{formattedErrors.oldPassword}</p>
+                              <p className="errors">
+                                {formattedErrors.oldPassword}
+                              </p>
                             )}
                             <div className="mt-3">
                               <label htmlFor="password" className="form-label">
@@ -477,44 +571,43 @@ const UserSettings = () => {
                               </p>
                             )}
                             {!passLoader ? (
-                            <button
-                              onClick={handleUserPasswordChange}
-                              className="btn btn-primary changepassword my-4"
-                            >
-                              Change Password
-                            </button>
+                              <button
+                                onClick={handleUserPasswordChange}
+                                className="btn btn-primary changepassword my-4"
+                              >
+                                Change Password
+                              </button>
                             ) : (
-                            <button className="btn btn-primary changepassword my-4">
-                              <span
-                                className="spinner-border spinner-border-sm"
-                                role="status"
-                                aria-hidden="true"
-                              ></span>
-                            </button>
+                              <button className="btn btn-primary changepassword my-4">
+                                <span
+                                  className="spinner-border spinner-border-sm"
+                                  role="status"
+                                  aria-hidden="true"
+                                ></span>
+                              </button>
                             )}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
 
                   {!loader ? (
-                        <button
-                          onClick={handleEditProfile}
-                          className="btn btn-primary savechanges my-4"
-                        >
-                          Save Changes
-                        </button>
-                      ) : (
-                        <button className="btn btn-primary savechanges my-4">
-                          <span
-                            className="spinner-border spinner-border-sm"
-                            role="status"
-                            aria-hidden="true"
-                          ></span>
-                        </button>
-                      )}
+                    <button
+                      onClick={handleEditProfile}
+                      className="btn btn-primary savechanges my-4"
+                    >
+                      Save Changes
+                    </button>
+                  ) : (
+                    <button className="btn btn-primary savechanges my-4">
+                      <span
+                        className="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  )}
                 </form>
               </div>
             </div>

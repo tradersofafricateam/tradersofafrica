@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
 import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "./../../../../../components/axios";
 
 import "../Dashboard.css";
 import SearchInput from "../components/SearchInput";
 import PaginationComponent from "../components/Pagination";
 import CardSkeleton from "../../CardSkeleton";
-import OrderInfo from "../OrderInfo/OrderInfo";
 
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 
@@ -18,31 +17,16 @@ const Orders = () => {
   const ITEMS_PER_PAGE = 10;
   const [noMatch, setNoMatch] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [orderInfo, setOrderInfo] = useState({});
 
   const { user } = useContext(GlobalContext);
   const [userOrderSummary, setUserOrderSummary] = useState("");
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allLoading, setAllLoading] = useState(true);
-  const [orderLoad, setOrderLoad] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setIsActive((current) => !current);
-  };
-
-  const viewOrderInfo = async (orderId) => {
-    setOrderLoad(true);
-    await axiosInstance
-      .get(`/order/${orderId}`)
-      .then((response) => {
-        setOrderInfo(response.data.data);
-        setOrderLoad(false);
-      })
-      .catch((error) => {
-        setOrderLoad(false);
-        console.log(error);
-      });
   };
 
   useEffect(() => {
@@ -55,6 +39,9 @@ const Orders = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
+        }
       });
   }, []);
 
@@ -68,6 +55,9 @@ const Orders = () => {
       .catch((error) => {
         setAllLoading(false);
         console.log(error);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
+        }
       });
   }, []);
 
@@ -94,10 +84,14 @@ const Orders = () => {
         (order) =>
           order.shippingType.toLowerCase().includes(search.toLowerCase()) ||
           order.paymentTerm.toLowerCase().includes(search.toLowerCase()) ||
-          order.product.productName
-            .toLowerCase()
-            .includes(search.toLowerCase()) ||
-          order.status.toLowerCase().includes(search.toLowerCase())
+          (order.product &&
+            order.product.productName
+              .toLowerCase()
+              .includes(search.toLowerCase())) ||
+          order.status.toLowerCase().includes(search.toLowerCase()) ||
+          (order.productName &&
+            order.productName.toLowerCase().includes(search.toLowerCase())) ||
+          order.orderNumber.toLowerCase().includes(search.toLowerCase())
       );
       if (computedOrders.length < 1) {
         setNoMatch(true);
@@ -164,7 +158,7 @@ const Orders = () => {
                   {user.fullName && user.fullName.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-grow-1 ms-2">
-                  {user.fullName.length > 15 ? (
+                  {user.fullName && user.fullName.length > 15 ? (
                     <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
                   ) : (
                     <p>{Capitalize(user.fullName)}</p>
@@ -259,7 +253,7 @@ const Orders = () => {
                               </div>
                             </td>
                             <td>USD {numberWithCommas(orders.cost)}</td>
-                            <td>{orders.shippingType}</td>
+                            <td>{orders.incoterm}</td>
                             <td>{orders.paymentTerm}</td>
                             <td>
                               {orders.status === "PENDING" && (
@@ -280,20 +274,12 @@ const Orders = () => {
                             </td>
                             <td>
                               {" "}
-                              <p
+                              <Link
+                                to={`/order/details/${orders.id}`}
                                 className="text-primary "
-                                data-bs-toggle="modal"
-                                data-bs-target="#vieworderModal"
-                                onClick={(e) => viewOrderInfo(orders.id)}
-                                style={{ cursor: "pointer" }}
                               >
                                 View
-                              </p>
-                              <OrderInfo
-                                orderInfo={orderInfo}
-                                Capitalize={Capitalize}
-                                orderLoad={orderLoad}
-                              />
+                              </Link>
                             </td>
                           </tr>
                         ))}

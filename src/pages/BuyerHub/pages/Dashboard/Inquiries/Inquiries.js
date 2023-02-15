@@ -10,12 +10,17 @@ import { useNavigate } from "react-router-dom";
 
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 
+import InquiryInfo from "./InquiryInfo";
+
 const Inquiries = () => {
   const [userEnquireSummary, setUserEnquireSummary] = useState("");
   const [allUserEnquire, setAllUserEnquire] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [summaryLoad, setSummaryLoad] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const { user } = useContext(GlobalContext);
+  const [inquiryLoad, setInquiryLoad] = useState(false);
+  const [inquiryInfo, setInquiryInfo] = useState({});
 
   const navigate = useNavigate();
 
@@ -23,18 +28,35 @@ const Inquiries = () => {
     setIsActive((current) => !current);
   };
 
+  const viewInquiryInfo = async (inquiryId) => {
+    setInquiryLoad(true);
+    await axiosInstance
+      .get(`/rfq/${inquiryId}`)
+      .then((response) => {
+        setInquiryInfo(response.data.data);
+        setInquiryLoad(false);
+      })
+      .catch((error) => {
+        setInquiryLoad(false);
+        console.log(error);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
+        }
+      });
+  };
+
   useEffect(() => {
     axiosInstance
       .get(`/buyer-hub/enquiry-summary`)
       .then((response) => {
         setUserEnquireSummary(response.data.data);
-        setLoading(false);
+        setSummaryLoad(false);
       })
       .catch((error) => {
-        setLoading(false);
+        setSummaryLoad(false);
         console.log(error);
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
         }
       });
   }, []);
@@ -49,8 +71,8 @@ const Inquiries = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
         }
       });
   }, []);
@@ -82,7 +104,6 @@ const Inquiries = () => {
           inquiry.productName.toLowerCase().includes(search.toLowerCase()) ||
           inquiry.status.toLowerCase().includes(search.toLowerCase())
       );
-      console.log("computedInquiry", computedInquiry);
       if (computedInquiry.length < 1) {
         setNoMatch(true);
       } else if (computedInquiry.length > 0) {
@@ -100,7 +121,7 @@ const Inquiries = () => {
     );
   }, [allUserEnquire, currentPage, search]);
 
-  if (loading) {
+  if (loading || summaryLoad) {
     return <CardSkeleton />;
   }
 
@@ -177,9 +198,11 @@ const Inquiries = () => {
               <div>
                 <h2>Pending Inquiries</h2>
                 <div className="d-flex justify-content-between mt-4">
-                  {userEnquireSummary.total_pending_enquiries && (
-                    <h3>{userEnquireSummary.total_pending_enquiries}</h3>
-                  )}
+                  <h3>
+                    {" "}
+                    {userEnquireSummary.total_pending_enquiries &&
+                      userEnquireSummary.total_pending_enquiries}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -187,9 +210,11 @@ const Inquiries = () => {
               <div>
                 <h2>Received Quotes</h2>
                 <div className="d-flex justify-content-between mt-4">
-                  {userEnquireSummary.total_received_quote && (
-                    <h3>{userEnquireSummary.total_received_quote}</h3>
-                  )}
+                  <h3>
+                    {" "}
+                    {userEnquireSummary.total_received_quote &&
+                      userEnquireSummary.total_received_quote}{" "}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -217,6 +242,7 @@ const Inquiries = () => {
                         <th scope="col">Shipping Terms</th>
                         <th scope="col">Payment Terms</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -249,6 +275,20 @@ const Inquiries = () => {
                             {inquiries.status === "COMPLETED" && (
                               <div className="text-info">Completed</div>
                             )}
+                          </td>
+                          <td>
+                            <a
+                              data-bs-toggle="modal"
+                              href="#exampleModal"
+                              role="button"
+                              onClick={(e) => viewInquiryInfo(inquiries.id)}
+                            >
+                              View
+                            </a>
+                            <InquiryInfo
+                              inquiryInfo={inquiryInfo}
+                              inquiryLoad={inquiryLoad}
+                            />
                           </td>
                         </tr>
                       ))}

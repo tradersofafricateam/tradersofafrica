@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
 import Sidebar from "./components/Sidebar";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "./../../../../components/axios";
 
 import TrackImg from "../../../../assets/img/track-illus.png";
@@ -35,8 +35,8 @@ const Dashboard = () => {
       .catch((error) => {
         setActivityLoading(false);
         console.log(error);
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
         }
       });
   }, []);
@@ -51,8 +51,8 @@ const Dashboard = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
-        if (!error.response.data.errors) {
-          return navigate(`/no-connection`);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
         }
       });
   }, []);
@@ -76,10 +76,14 @@ const Dashboard = () => {
         (order) =>
           order.shippingType.toLowerCase().includes(search.toLowerCase()) ||
           order.paymentTerm.toLowerCase().includes(search.toLowerCase()) ||
-          order.product.productName
-            .toLowerCase()
-            .includes(search.toLowerCase()) ||
-          order.status.toLowerCase().includes(search.toLowerCase())
+          (order.product &&
+            order.product.productName
+              .toLowerCase()
+              .includes(search.toLowerCase())) ||
+          order.status.toLowerCase().includes(search.toLowerCase()) ||
+          (order.productName &&
+            order.productName.toLowerCase().includes(search.toLowerCase())) ||
+          order.orderNumber.toLowerCase().includes(search.toLowerCase())
       );
       if (computedOrders.length < 1) {
         setNoMatch(true);
@@ -152,7 +156,7 @@ const Dashboard = () => {
                   {user.fullName && user.fullName.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-grow-1 ms-2">
-                  {user.fullName.length > 15 ? (
+                  {user.fullName && user.fullName.length > 15 ? (
                     <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
                   ) : (
                     <p>{Capitalize(user.fullName)}</p>
@@ -247,7 +251,8 @@ const Dashboard = () => {
             <div className="empty-state">
               <h3>Welcome to your Dashboard</h3>
               <p>
-                No activity found on your dashbaord. Start by placing an order or submitting a product inquiry
+                No activity found on your dashbaord. Start by placing an order
+                or submitting a product inquiry
               </p>
             </div>
           ) : (

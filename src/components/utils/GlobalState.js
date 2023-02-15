@@ -1,14 +1,13 @@
 import { axiosInstance } from "./../axios";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const GlobalContext = createContext();
 
 const GlobalState = ({ children }) => {
   const [userLoading, setUserLoading] = useState(false);
   const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
   const getUser = () => {
     axiosInstance
@@ -19,6 +18,9 @@ const GlobalState = ({ children }) => {
       })
       .catch((error) => {
         setUserLoading(false);
+        if (error.message && error.message === "Network Error") {
+          navigate("/no-connection");
+        }
       });
   };
 

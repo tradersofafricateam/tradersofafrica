@@ -7,11 +7,8 @@ import { axiosInstance } from "./../../../../../components/axios";
 import Logo from "../../../../../assets/img/logo-white.png";
 
 const Sidebar = ({ isActive }) => {
-  const { user, userLoading, setUser } = useContext(GlobalContext);
+  const { setUser } = useContext(GlobalContext);
 
-  const Capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
   const handleSignOut = () => {
     axiosInstance
       .get(`/auth/signout`)
@@ -26,13 +23,12 @@ const Sidebar = ({ isActive }) => {
       });
   };
 
-  if (userLoading) {
-    return <div className="loader mx-auto" align="center" id="loader"></div>;
-  }
-
   return (
     <>
-      <aside className={isActive ? "media-sidenav" : "sidenav"} id="main-sidebar">
+      <aside
+        className={isActive ? "media-sidenav" : "sidenav"}
+        id="main-sidebar"
+      >
         <div className="sidenav__close-icon">
           <i className="fas fa-times sidenav__brand-close"></i>
         </div>
@@ -89,7 +85,6 @@ const Sidebar = ({ isActive }) => {
         </ul>
 
         <ul className="sidenav__list mt-auto">
-          
           <Link className="sidenav-link" to="/">
             <li onClick={handleSignOut} className="sidenav__list-item">
               <i className="fas fa-sign-out-alt list_icon"></i>

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../../components/axios";
-
-const Capitalize = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
 
 const CommodityInsight = ({ productInfo }) => {
   const [commodityId, setCommodityId] = useState([]);
+  const navigate = useNavigate();
+
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   const addClassToPath = (country) => {
     const filteredCountry = productInfo.CountryTraded
@@ -26,7 +28,11 @@ const CommodityInsight = ({ productInfo }) => {
     try {
       const { data } = await axiosInstance.get(`/commodity`);
       setCommodityId(data.data);
-    } catch (error) {}
+    } catch (error) {
+      if (error.message && error.message === "Network Error") {
+        navigate("/no-connection");
+      }
+    }
   };
 
   useEffect(() => {

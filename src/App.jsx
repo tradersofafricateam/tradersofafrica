@@ -60,7 +60,11 @@ function App() {
             <Route path="/no-connection" element={<Internet />} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} exact />
-              <Route path="/order-info" element={<OrderInfo />} exact />
+              <Route
+                path="/order/details/:orderId"
+                element={<OrderInfo />}
+                exact
+              />
               <Route path="/message-center" element={<MessageCenter />} exact />
               <Route path="/orders" element={<Order />} exact />
               <Route path="/details/:productId" element={<Details />} exact />

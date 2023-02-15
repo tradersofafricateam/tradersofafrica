@@ -17,7 +17,6 @@ import { axiosInstance } from "./../../../../../components/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const MessageCenter = () => {
   const { user } = useContext(GlobalContext);
   const [messages, setMessages] = useState([]);
@@ -134,7 +133,7 @@ const MessageCenter = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const handleSendMsg = (msg) => {
+  const handleSendMsg = async (msg) => {
     try {
       const payload = {
         from: user.id,
@@ -145,7 +144,7 @@ const MessageCenter = () => {
 
       socket.current.emit(socketEvents.sendMessage, payload);
 
-      axiosInstance.post("/message/send-message", payload);
+      await axiosInstance.post("/message/send-message", payload);
 
       const msgs = [...messages];
       msgs.push({ fromSelf: true, message: msg });
@@ -192,12 +191,9 @@ const MessageCenter = () => {
           <div className="header__message me-5">
             <h2>Message Center</h2>
           </div>
-          
+
           <div className="header__search">
-            <SearchInput
-              
-              placeholder="Search for orders, order status and more"
-            />
+            <SearchInput placeholder="Search for orders, order status and more" />
             {/* <div className="notify-wrap position-relative">
               <i
                 className="far fa-bell"

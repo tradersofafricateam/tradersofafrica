@@ -48,6 +48,9 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
         pauseHover: true,
         draggable: true,
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 6800);
     } catch (error) {
       setFileLoader(false);
       console.log("error", error);
@@ -195,7 +198,16 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
                               to be delivered to{" "}
                               {orderInfo && orderInfo.country}.
                             </p>
-
+                          </div>
+                        </div>
+                        <div className="order-history-details-ctn">
+                          <div className="order-circle"></div>
+                          <div className="order-history-details">
+                            <h6>Payment Uploaded</h6>
+                            <p>
+                              Uploaded and processed requirements in the payment
+                              type of {orderInfo && orderInfo.paymentTerm}
+                            </p>
                             {orderInfo.paymentReceipt ? (
                               <a
                                 href={orderInfo.paymentReceipt.image}

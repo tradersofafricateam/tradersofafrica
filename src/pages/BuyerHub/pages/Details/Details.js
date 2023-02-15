@@ -128,6 +128,9 @@ const Details = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+      if (error.message && error.message === "Network Error") {
+        navigate("/no-connection");
+      }
     }
   };
 
