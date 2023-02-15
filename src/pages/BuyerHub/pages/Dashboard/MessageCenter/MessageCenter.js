@@ -17,6 +17,7 @@ import { axiosInstance } from "./../../../../../components/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const MessageCenter = () => {
   const { user } = useContext(GlobalContext);
   const [messages, setMessages] = useState([]);
@@ -129,6 +130,10 @@ const MessageCenter = () => {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   const handleSendMsg = (msg) => {
     try {
       const payload = {
@@ -184,7 +189,7 @@ const MessageCenter = () => {
         </div>
 
         <header className="header">
-          <div className="header__message">
+          <div className="header__message me-5">
             <h2>Message Center</h2>
           </div>
           
@@ -200,6 +205,25 @@ const MessageCenter = () => {
               ></i>
               <span className="icon-notification position-absolute"></span>
             </div> */}
+          </div>
+          <div className="user-area ms-auto">
+            {user ? (
+              <div className="d-flex align-items-center">
+                <div className="flex-shrink-0 user-area-art">
+                  {" "}
+                  {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-grow-1 ms-2">
+                  {user.fullName.length > 15 ? (
+                    <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
+                  ) : (
+                    <p>{Capitalize(user.fullName)}</p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div> </div>
+            )}
           </div>
         </header>
 

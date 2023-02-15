@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
@@ -13,7 +13,10 @@ import PhoneInput from "react-phone-number-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { GlobalContext } from "../../../../../components/utils/GlobalState";
+
 const UserSettings = () => {
+  const { user } = useContext(GlobalContext);
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
@@ -37,6 +40,10 @@ const UserSettings = () => {
       setCreatedAt(accountCreated);
     }
   }, []);
+
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   const convertDateFormat = (oldDate) => {
     let date = new Date(oldDate).toString().split(" ");
@@ -153,7 +160,7 @@ const UserSettings = () => {
         </div>
 
         <header className="header">
-          <div className="header__message">
+          <div className="header__message me-5">
             <h2>Settings</h2>
           </div>
           <div className="header__search">
@@ -169,6 +176,25 @@ const UserSettings = () => {
               <span className="icon-notification position-absolute"></span>
             </div> */}
           </div>
+          <div className="user-area ms-auto">
+            {user ? (
+              <div className="d-flex align-items-center">
+                <div className="flex-shrink-0 user-area-art">
+                  {" "}
+                  {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-grow-1 ms-2">
+                  {user.fullName.length > 15 ? (
+                    <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
+                  ) : (
+                    <p>{Capitalize(user.fullName)}</p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div> </div>
+            )}
+          </div>
         </header>
 
         <Sidebar isActive={isActive} />
@@ -177,7 +203,7 @@ const UserSettings = () => {
           <div className="main-overview">
             <div className="overview-card">
               <div className="seller-setting-form">
-                <form>
+                {/* <form>
                   <div className="seller-setting-formgroup">
                     <div className="form-group-right">
                       <div className="form-group">
@@ -327,6 +353,168 @@ const UserSettings = () => {
                       <p>{createdAt && convertDateFormat(createdAt)}</p>
                     </div>
                   </div>
+                </form> */}
+                <h2>My Profile</h2>
+                <form>
+                  <div className="row">
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label">Full name</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="fullname"
+                          name="fullName"
+                          value={editProfile.fullName}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label">Phone number</label>
+                        <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label">Country</label>
+                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mb-3">
+                    <label for="exampleInputPassword1" className="form-label">Password</label>
+                    <h4 className="user-setting-change-pwd" data-bs-toggle="modal" data-bs-target="#exampleModal">Change Password</h4>
+                  </div>
+                  {/* Change Password Modal */}
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        {/* <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> */}
+                        <div class="modal-body">
+                          <div className="modal-padding">
+                            <h2>Change Password</h2>
+                            <div className="mt-3">
+                              <label htmlFor="password" className="form-label">
+                                Current password
+                              </label>
+                              <div className="passwordToggle form-control input">
+                                <input
+                                  className="password-input"
+                                  type={inputType}
+                                  name="currentPassword"
+                                  value={editPassword.currentPassword}
+                                  onChange={handlePasswordChange}
+                                />
+                                <span
+                                  className={"password-icon"}
+                                  onClick={handlePasswordToggle}
+                                >
+                                  {inputType === "password" ? (
+                                    <i
+                                      className="far fa-eye-slash mt-1 pt-1"
+                                      style={{ color: "#5C5C5C" }}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="far fa-eye mt-1 pt-1"
+                                      style={{ color: "#5C5C5C" }}
+                                    ></i>
+                                  )}
+                                </span>
+                              </div>
+                            </div>
+                            {formattedErrors.oldPassword && (
+                              <p className="errors">{formattedErrors.oldPassword}</p>
+                            )}
+                            <div className="mt-3">
+                              <label htmlFor="password" className="form-label">
+                                New password
+                              </label>
+                              <div className="passwordToggle form-control input">
+                                <input
+                                  className="password-input"
+                                  type={inputType}
+                                  name="newPassword"
+                                  value={editPassword.newPassword}
+                                  onChange={handlePasswordChange}
+                                />
+                                <span
+                                  className={"password-icon"}
+                                  onClick={handlePasswordToggle}
+                                >
+                                  {inputType === "password" ? (
+                                    <i
+                                      className="far fa-eye-slash mt-1 pt-1"
+                                      style={{ color: "#5C5C5C" }}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="far fa-eye mt-1 pt-1"
+                                      style={{ color: "#5C5C5C" }}
+                                    ></i>
+                                  )}
+                                </span>
+                              </div>
+                            </div>
+                            {formattedErrors.newPassword && (
+                              <p className="errors" style={{ color: "red" }}>
+                                {formattedErrors.newPassword}
+                              </p>
+                            )}
+                            {!passLoader ? (
+                            <button
+                              onClick={handleUserPasswordChange}
+                              className="btn btn-primary changepassword my-4"
+                            >
+                              Change Password
+                            </button>
+                            ) : (
+                            <button className="btn btn-primary changepassword my-4">
+                              <span
+                                className="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                            </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                  {!loader ? (
+                        <button
+                          onClick={handleEditProfile}
+                          className="btn btn-primary savechanges my-4"
+                        >
+                          Save Changes
+                        </button>
+                      ) : (
+                        <button className="btn btn-primary savechanges my-4">
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      )}
                 </form>
               </div>
             </div>

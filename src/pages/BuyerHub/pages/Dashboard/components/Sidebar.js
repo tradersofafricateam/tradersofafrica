@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../Dashboard.css";
 import { GlobalContext } from "../../../../../components/utils/GlobalState";
 import { axiosInstance } from "./../../../../../components/axios";
+import Logo from "../../../../../assets/img/logo-white.png";
 
 const Sidebar = ({ isActive }) => {
   const { user, userLoading, setUser } = useContext(GlobalContext);
@@ -31,32 +32,16 @@ const Sidebar = ({ isActive }) => {
 
   return (
     <>
-      <aside className={isActive ? "media-sidenav" : "sidenav"}>
+      <aside className={isActive ? "media-sidenav" : "sidenav"} id="main-sidebar">
         <div className="sidenav__close-icon">
           <i className="fas fa-times sidenav__brand-close"></i>
         </div>
 
-        <div className="user-area">
-          {user ? (
-            <div className="d-flex align-items-center">
-              <div className="flex-shrink-0 user-area-art">
-                {" "}
-                {user.fullName && user.fullName.charAt(0).toUpperCase()}
-              </div>
-              <div className="flex-grow-1 ms-3">
-                {user.fullName.length > 15 ? (
-                  <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
-                ) : (
-                  <p>{Capitalize(user.fullName)}</p>
-                )}
-              </div>
-            </div>
-          ) : (
-            <div> </div>
-          )}
+        <div className="d-logo-area mb-3">
+          <img className="logo" src={Logo} alt="TOFA" />
         </div>
 
-        <h2 className="sidenav_title">Dashboard</h2>
+        {/* <h2 className="sidenav_title">Dashboard</h2> */}
 
         <ul className="sidenav__list">
           <Link className="sidenav-link" to="/dashboard">
@@ -95,19 +80,20 @@ const Sidebar = ({ isActive }) => {
             </li>
           </Link>
 
-          <Link className="sidenav-link" to="/">
-            <li onClick={handleSignOut} className="sidenav__list-item">
-              <i className="fas fa-sign-out-alt list_icon"></i>
-              Logout
+          <Link className="sidenav-link" to="/buy-commodities">
+            <li className="sidenav__list-item">
+              <i className="fas fa-arrow-left list_icon"></i>
+              Buyers Hub
             </li>
           </Link>
         </ul>
 
         <ul className="sidenav__list mt-auto">
-          <Link className="sidenav-link" to="/buy-commodities">
-            <li className="sidenav__list-item">
-              <i className="fas fa-arrow-left list_icon"></i>
-              Back to Buyers Hub
+          
+          <Link className="sidenav-link" to="/">
+            <li onClick={handleSignOut} className="sidenav__list-item">
+              <i className="fas fa-sign-out-alt list_icon"></i>
+              Logout
             </li>
           </Link>
         </ul>

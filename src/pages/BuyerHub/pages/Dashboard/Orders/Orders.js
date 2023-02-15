@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import { axiosInstance } from "./../../../../../components/axios";
@@ -9,6 +9,8 @@ import PaginationComponent from "../components/Pagination";
 import CardSkeleton from "../../CardSkeleton";
 import OrderInfo from "../OrderInfo/OrderInfo";
 
+import { GlobalContext } from "../../../../../components/utils/GlobalState";
+
 const Orders = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,6 +20,7 @@ const Orders = () => {
   const [isActive, setIsActive] = useState(false);
   const [orderInfo, setOrderInfo] = useState({});
 
+  const { user } = useContext(GlobalContext);
   const [userOrderSummary, setUserOrderSummary] = useState("");
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -132,7 +135,7 @@ const Orders = () => {
           <div className="line line3"></div>
         </div>
         <header className="header">
-          <div className="header__message">
+          <div className="header__message me-5">
             <h2>My Orders</h2>
           </div>
 
@@ -152,6 +155,25 @@ const Orders = () => {
               ></i>
               <span className="icon-notification position-absolute"></span>
             </div> */}
+          </div>
+          <div className="user-area ms-auto">
+            {user ? (
+              <div className="d-flex align-items-center">
+                <div className="flex-shrink-0 user-area-art">
+                  {" "}
+                  {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-grow-1 ms-2">
+                  {user.fullName.length > 15 ? (
+                    <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
+                  ) : (
+                    <p>{Capitalize(user.fullName)}</p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div> </div>
+            )}
           </div>
         </header>
         <Sidebar isActive={isActive} />

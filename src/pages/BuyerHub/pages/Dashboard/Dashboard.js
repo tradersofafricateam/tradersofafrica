@@ -121,8 +121,9 @@ const Dashboard = () => {
         </div>
 
         <header className="header">
-          <div className="header__message">
-            <h2>Hello {user.fullName ? Capitalize(user.fullName) : ""}</h2>
+          <div className="header__message me-5">
+            {/* <h2>Hello {user.fullName ? Capitalize(user.fullName) : ""}</h2> */}
+            <h2>Account Overview</h2>
           </div>
           <div className="header__search">
             <SearchInput
@@ -142,6 +143,25 @@ const Dashboard = () => {
                 <span className="icon-notification position-absolute"></span>
               </Link>
             </div> */}
+          </div>
+          <div className="user-area ms-auto">
+            {user ? (
+              <div className="d-flex align-items-center">
+                <div className="flex-shrink-0 user-area-art">
+                  {" "}
+                  {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-grow-1 ms-2">
+                  {user.fullName.length > 15 ? (
+                    <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
+                  ) : (
+                    <p>{Capitalize(user.fullName)}</p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div> </div>
+            )}
           </div>
         </header>
 

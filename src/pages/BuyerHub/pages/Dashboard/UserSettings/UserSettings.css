@@ -1,6 +1,16 @@
 .seller-setting-form {
-  margin: 30px 0;
+  margin: 0;
+  padding: 10px 25px 0;
 }
+
+.seller-setting-form h2 {
+  font-size: 1rem;
+}
+
+.seller-setting-form form {
+  width: 70%;
+}
+
 .seller-setting-formgroup {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,23 +24,41 @@
   margin: 20px 0;
 }
 .seller-setting-form input {
-  padding: 10px 10px;
-  width: 292px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #282828;
 }
 .seller-setting-form textarea {
-  padding: 10px 10px;
-  width: 322px;
+  padding: 10px 15px;
 }
-.password input {
-  padding: 10px 10px;
-  width: 200px;
+.password-input {
+  padding: 4px 5px!important;
+  font-size: .1rem;
+  font-size: 1rem;
 }
 
 .changepassword {
+  width: 100%;
   margin-right: 20px;
-  background: #dd4f05 !important;
+  background: #FFFFFF !important;
+  border:1px solid #dd4f05!important;
+  color: #dd4f05!important;
   border: none;
+  font-size: .9rem;
 }
+
+.modal-padding {
+  padding: 0 30px;
+}
+
+.user-setting-change-pwd {
+  font-size: .85rem!important;
+  color: #0083d3!important;
+  text-decoration: underline;
+  font-weight: 400;
+  cursor: pointer;
+}
+
 .seller-footer {
   display: flex;
   justify-content: space-between;
@@ -43,9 +71,9 @@
 
 .savechanges {
   border: 1px solid !important;
-  color: #dd4f05 !important;
-  background-color: #fff !important;
-  width: 180px;
+  color: #ffffff !important;
+  background-color: #dd4f05 !important;
+  font-size: .9rem;
 }
 .address {
   height: 54px;

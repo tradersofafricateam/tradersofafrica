@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useContext } from "react";
 import Sidebar from "../components/Sidebar";
 import { axiosInstance } from "../../../../../components/axios";
 
@@ -8,11 +8,14 @@ import SearchInput from "../components/SearchInput";
 import CardSkeleton from "../../CardSkeleton";
 import { useNavigate } from "react-router-dom";
 
+import { GlobalContext } from "../../../../../components/utils/GlobalState";
+
 const Inquiries = () => {
   const [userEnquireSummary, setUserEnquireSummary] = useState("");
   const [allUserEnquire, setAllUserEnquire] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isActive, setIsActive] = useState(false);
+  const { user } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -117,7 +120,7 @@ const Inquiries = () => {
         </div>
 
         <header className="header">
-          <div className="header__message">
+          <div className="header__message me-5">
             <h2>My Inquiries</h2>
           </div>
           <div className="header__search">
@@ -136,6 +139,25 @@ const Inquiries = () => {
               ></i>
               <span className="icon-notification position-absolute"></span>
             </div> */}
+          </div>
+          <div className="user-area ms-auto">
+            {user ? (
+              <div className="d-flex align-items-center">
+                <div className="flex-shrink-0 user-area-art">
+                  {" "}
+                  {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-grow-1 ms-2">
+                  {user.fullName.length > 15 ? (
+                    <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
+                  ) : (
+                    <p>{Capitalize(user.fullName)}</p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div> </div>
+            )}
           </div>
         </header>
 
