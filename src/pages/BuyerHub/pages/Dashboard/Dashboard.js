@@ -13,7 +13,7 @@ import SearchInput from "./components/SearchInput";
 import CardSkeleton from "../CardSkeleton";
 
 const Dashboard = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, userLoading } = useContext(GlobalContext);
   const navigate = useNavigate();
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [activity, setActivity] = useState({});
@@ -106,7 +106,7 @@ const Dashboard = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  if (loading || activityLoading) {
+  if (loading || activityLoading || userLoading) {
     return <CardSkeleton />;
   }
   return (

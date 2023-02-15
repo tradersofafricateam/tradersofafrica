@@ -18,7 +18,7 @@ const Orders = () => {
   const [noMatch, setNoMatch] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  const { user } = useContext(GlobalContext);
+  const { user, userLoading } = useContext(GlobalContext);
   const [userOrderSummary, setUserOrderSummary] = useState("");
   const [allUserOrder, setAllUserOrder] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -111,7 +111,7 @@ const Orders = () => {
     );
   }, [allUserOrder, currentPage, search, noMatch]);
 
-  if (loading || allLoading) {
+  if (loading || allLoading || userLoading) {
     return <CardSkeleton />;
   }
   return (

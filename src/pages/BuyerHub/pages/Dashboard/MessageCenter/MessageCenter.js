@@ -16,9 +16,10 @@ import { ChatInput } from "./ChatInput";
 import { axiosInstance } from "./../../../../../components/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CardSkeleton from "../../CardSkeleton";
 
 const MessageCenter = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, userLoading } = useContext(GlobalContext);
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const scrollRef = useRef();
@@ -171,6 +172,10 @@ const MessageCenter = () => {
     return isObject;
   }
 
+  if (userLoading) {
+    return <CardSkeleton />;
+  }
+
   return (
     <div>
       <ToastContainer />
@@ -210,7 +215,7 @@ const MessageCenter = () => {
                   {user.fullName && user.fullName.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-grow-1 ms-2">
-                  {user.fullName.length > 15 ? (
+                  {user.fullName && user.fullName.length > 15 ? (
                     <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
                   ) : (
                     <p>{Capitalize(user.fullName)}</p>

@@ -18,7 +18,7 @@ const Inquiries = () => {
   const [loading, setLoading] = useState(true);
   const [summaryLoad, setSummaryLoad] = useState(true);
   const [isActive, setIsActive] = useState(false);
-  const { user } = useContext(GlobalContext);
+  const { user, userLoading } = useContext(GlobalContext);
   const [inquiryLoad, setInquiryLoad] = useState(false);
   const [inquiryInfo, setInquiryInfo] = useState({});
 
@@ -121,7 +121,7 @@ const Inquiries = () => {
     );
   }, [allUserEnquire, currentPage, search]);
 
-  if (loading || summaryLoad) {
+  if (loading || summaryLoad || userLoading) {
     return <CardSkeleton />;
   }
 
@@ -169,7 +169,7 @@ const Inquiries = () => {
                   {user.fullName && user.fullName.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-grow-1 ms-2">
-                  {user.fullName.length > 15 ? (
+                  {user.fullName && user.fullName.length > 15 ? (
                     <p>{Capitalize(user.fullName.slice(0, 15))}...</p>
                   ) : (
                     <p>{Capitalize(user.fullName)}</p>
