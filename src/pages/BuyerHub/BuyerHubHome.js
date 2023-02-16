@@ -308,7 +308,7 @@ const BuyerHome = () => {
             </div>
             <div className="modal-body">
               {succesMsg ? (
-                <div>You have successfully submitted your Inquiry</div>
+                <div className="text-center mt-5 mb-5">We have received your product inquiry. We willl get back to you shortly.</div>
               ) : (
                 <div className="row">
                   <div className="col-lg-12">
@@ -346,13 +346,13 @@ const BuyerHome = () => {
                       <div className="row">
                         <div className="col-lg-6 mb-3">
                           <label htmlFor="exampleInputPassword1">
-                            Quantity
+                            Quantity (Metric tonnes)
                           </label>
                           <div className="custom-input form-control">
                             <div className="row">
-                              <div className="col-lg-7 col">
+                              <div className="col-lg-9 col">
                                 <input
-                                  type="number"
+                                  type="text"
                                   className="form-control custom-style"
                                   id=""
                                   placeholder="Enter quantity"
@@ -362,8 +362,8 @@ const BuyerHome = () => {
                                   required
                                 />
                               </div>
-                              <div className="col-lg-5 col">
-                                <div className="form-unit">metric tons</div>
+                              <div className="col-lg-3 col">
+                                <div className="form-unit">MT</div>
                               </div>
                             </div>
                           </div>
@@ -405,10 +405,10 @@ const BuyerHome = () => {
                             <option defaultValue="selected">
                               Select payment terms
                             </option>
-                            <option value="LC">LC</option>
-                            <option value="DP">DP</option>
-                            <option value="CAD">CAD</option>
-                            <option value="TT">TT</option>
+                            <option value="LC">Letter of Credit (LC)</option>
+                            <option value="DP">Document Against Payment (DP)</option>
+                            <option value="CAD">Cash Against Document (CAD)</option>
+                            <option value="TT">Telegraphic Transfer (TT)</option>
                           </select>
                         </div>
                         <div className="col-lg-6 mb-3">
