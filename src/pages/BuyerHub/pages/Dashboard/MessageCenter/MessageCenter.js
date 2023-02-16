@@ -260,7 +260,18 @@ const MessageCenter = () => {
                   </div>
 
                   <div className="chat-area">
-                    <div className="message-area">
+                    <div className="message-area ">
+                      <div className="message-area ">
+                        <div className="chat-msg  receiver " ref={scrollRef}>
+                          <div>
+                            <p>
+                              {" "}
+                              Welcome to Taders of Africa, how can we help you
+                              today?
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                       {messages.map((message, index) => {
                         return (
                           <div className="message-area" key={index}>
@@ -336,14 +347,13 @@ const MessageCenter = () => {
                                 <div>
                                   {message.message === "START_NEW_ORDER" ? (
                                     <div className="order-msg">
-                                      <h2>Start Order</h2>
+                                      <h2>New order request.</h2>
                                     </div>
                                   ) : (
                                     <p>{message.message}</p>
                                   )}
                                   <p className="chat-timestamp">
                                     {dayjs(message.createdAt).format("hh:mm a")}{" "}
-                                    {/* {convertDateFormat(message.createdAt)} */}
                                   </p>
                                 </div>
                               </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Story.css";
 
-import PlayBtn from "../../assets/img/dark-play-btn.svg";
+// import PlayBtn from "../../assets/img/dark-play-btn.svg";
 import LinkedIn from "../../assets/img/linkedin.svg";
 
 import Footer from "../../components/Footer/Footer";

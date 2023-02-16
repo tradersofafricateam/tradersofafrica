@@ -343,9 +343,8 @@ const ViewOrderModal = () => {
                             <form className="m-0" onSubmit={handleSubmit}>
                               <div class="row g-3 align-items-center">
                                 <div class="col-auto">
-
                                   <label
-                                    for="uploadImage"
+                                    htmlFor="uploadImage"
                                     class="custom-file-upload me-2"
                                   >
                                     {/* <i className="fas fa-file-upload list_icon me-2"></i> */}

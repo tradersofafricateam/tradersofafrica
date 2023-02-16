@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Impact.css";
 
-import PlayBtnW from "../../assets/img/white-play-btn.svg";
+// import PlayBtnW from "../../assets/img/white-play-btn.svg";
 import SupplierIcon from "../../assets/img/suppliers-icon.svg";
 import ProductIcon from "../../assets/img/product-icon.svg";
 import CoverageIcon from "../../assets/img/cc-icon.svg";

@@ -97,7 +97,458 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
             </div>
 
             <div className="modal-body">
-              <div className="row py-5">
+              <div className="overview-card row">
+                <h2>{orderInfo && orderInfo.orderNumber}</h2>
+                <div className="col-lg-6">
+                  <div className="os-details py-5">
+                    <table className="table table-borderless table-striped">
+                      <tbody>
+                        <tr>
+                          <td className="osd-title">Product Name:</td>
+                          <td>
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Order :</td>
+                          <td>{orderInfo && orderInfo.orderNumber}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Quantity:</td>
+                          <td>
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Shipping Term:</td>
+                          <td>
+                            <span>
+                              {orderInfo && orderInfo.incoterm === "LOCAL" && (
+                                <span>Local Delivery</span>
+                              )}
+                            </span>
+                            <span>
+                              {orderInfo && orderInfo.incoterm === "FOB" && (
+                                <span>Free on Board</span>
+                              )}
+                            </span>
+                            <span>
+                              {orderInfo && orderInfo.incoterm === "CIF" && (
+                                <span>Cost, Insurance, and Freight</span>
+                              )}
+                            </span>
+                            <span>
+                              {orderInfo && orderInfo.incoterm === "CFR" && (
+                                <span>Cost and Freight</span>
+                              )}
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Payment Terms:</td>
+                          <td>
+                            <span>
+                              {orderInfo && orderInfo.paymentTerm === "LC" && (
+                                <span>Letter of Credit</span>
+                              )}
+                            </span>
+                            <span>
+                              {" "}
+                              {orderInfo && orderInfo.paymentTerm === "CAD" && (
+                                <span>Cash Against Delivery</span>
+                              )}
+                            </span>
+                            <span>
+                              {orderInfo && orderInfo.paymentTerm === "DP" && (
+                                <span>Document Against Payment</span>
+                              )}
+                            </span>
+                            <span>
+                              {" "}
+                              {orderInfo && orderInfo.paymentTerm === "TT" && (
+                                <span>Telegraphic Transfer</span>
+                              )}
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Origin:</td>
+                          <td>
+                            {orderInfo.countryOfOrigin &&
+                              orderInfo.countryOfOrigin}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Destination Country:</td>
+                          <td>{orderInfo && orderInfo.country}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Destination Port:</td>
+                          <td>{orderInfo && orderInfo.port}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Date created:</td>
+                          <td>
+                            {orderInfo.createdAt &&
+                              convertDateFormat(orderInfo.createdAt)}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Total Cost:</td>
+                          <td>
+                            USD{" "}
+                            {orderInfo.cost && numberWithCommas(orderInfo.cost)}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className="col-lg-5 offset-1 py-5 ">
+                  {orderInfo.status === "PENDING" && (
+                    <div className="order-history">
+                      {/* <h5 className="modal-sub-title">Order history</h5> */}
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6 className="order-history-title">Order Placed</h6>
+                          <p className="order-history-info">
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6 className="order-history-title">
+                            Payment Uploaded
+                          </h6>
+                          <p className="order-history-info">
+                            Uploaded and processed requirements in the payment
+                            type of {orderInfo && orderInfo.paymentTerm}
+                          </p>
+                          {orderInfo.paymentReceipt ? (
+                            <a
+                              className="custom-file-upload"
+                              href={orderInfo.paymentReceipt.image}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View receipt
+                            </a>
+                          ) : (
+                            <form className="m-0" onSubmit={handleSubmit}>
+                              <div class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                  <label
+                                    htmlFor="uploadImage"
+                                    class="custom-file-upload me-2"
+                                  >
+                                    {/* <i className="fas fa-file-upload list_icon me-2"></i> */}
+                                    Upload Payment Proof
+                                  </label>
+                                  {file && file.name}
+                                  <input
+                                    className="file-upload"
+                                    id="uploadImage"
+                                    onChange={handleChange}
+                                    name="file"
+                                    type="file"
+                                  />
+                                </div>
+                                <div class="col-auto">
+                                  {!fileLoader ? (
+                                    <button type="submit">Submit</button>
+                                  ) : (
+                                    <button>
+                                      <span
+                                        className="spinner-border spinner-border-sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                      ></span>
+                                    </button>
+                                  )}
+                                </div>
+                              </div>
+                            </form>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {orderInfo.status === "PROCESSING" && (
+                    <div className="order-history ">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Placed</h6>
+                          <p>
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Payment Successful</h6>
+                          <p>
+                            Uploaded and processed requirements in the payment
+                            type of {orderInfo && orderInfo.paymentTerm} with
+                            TOFA has been confirmed
+                          </p>
+                          <p>
+                            {" "}
+                            {orderInfo.paymentReceipt && (
+                              <a
+                                href={orderInfo.paymentReceipt.image}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                View receipt
+                              </a>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Processing</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been proccessed and ready for shipping.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {orderInfo.status === "SHIPPED" && (
+                    <div className="order-history ">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Placed</h6>
+                          <p>
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+
+                          {orderInfo.paymentReceipt && (
+                            <a
+                              href={orderInfo.paymentReceipt.image}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View receipt
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Payment Successful</h6>
+                          <p>
+                            Uploaded and processed requirements in the payment
+                            type of {orderInfo && orderInfo.paymentTerm} with
+                            TOFA has been confirmed
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Processed</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been processed
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Shipped</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been shipped
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {orderInfo.status === "DELIVERED" && (
+                    <div className="order-history  ">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Placed</h6>
+                          <p>
+                            Placed Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            to be delivered to {orderInfo && orderInfo.country}.
+                          </p>
+
+                          {orderInfo.paymentReceipt && (
+                            <a
+                              href={orderInfo.paymentReceipt.image}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View receipt
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Payment Successful</h6>
+                          <p>
+                            Uploaded and processed requirements in the payment
+                            type of {orderInfo && orderInfo.paymentTerm} with
+                            TOFA has been confirmed
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Processed</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been shipped
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Shipped</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been shipped
+                          </p>
+                        </div>
+                      </div>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h6>Order Delivered</h6>
+                          <p>
+                            Order for{" "}
+                            {orderInfo.quantityOrdered &&
+                              numberWithCommas(orderInfo.quantityOrdered)}
+                            MT of{" "}
+                            {orderInfo.product
+                              ? Capitalize(orderInfo.product.productName)
+                              : " "}{" "}
+                            has been delivered to{" "}
+                            {orderInfo && orderInfo.country}.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {orderInfo.status === "CANCELLED" && (
+                    <div className="order-history ">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h3>Order Cancelled</h3>
+                          <p>
+                            If you didn't request your order to be cancelled,
+                            contact us <Link to=""> here</Link> to get full
+                            details.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  {!orderInfo.buyerApproved && (
+                    <div className="col-lg-12">
+                      {!loader ? (
+                        <button className="mt-3" onClick={handleApproval}>
+                          Approve Order
+                        </button>
+                      ) : (
+                        <button className="mt-3" onClick={handleApproval}>
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+              {/* <div className="row py-5">
                 <h5 className="modal-sub-title">Order Summary</h5>
                 <div className="col-lg-6">
                   <div className="os-details py-5">
@@ -545,7 +996,7 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

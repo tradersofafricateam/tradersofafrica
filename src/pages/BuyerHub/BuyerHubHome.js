@@ -23,6 +23,7 @@ const BuyerHome = () => {
   const { userLoading } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(false);
+  const [succesMsg, setSuccessMsg] = useState(false);
   // const [banner, setBanner] = useState([]);
   const [product, setProduct] = useState([]);
   // const [bannerLoader, setBannerLoader] = useState(false);
@@ -127,11 +128,10 @@ const BuyerHome = () => {
         draggable: true,
       });
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 6800);
+      setSuccessMsg(true);
     } catch (err) {
       setLoader(false);
+      setSuccessMsg(true);
       if (!err.response.data.errors) {
         return navigate(`/no-connection`);
       }
@@ -307,134 +307,140 @@ const BuyerHome = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <div className="row">
-                <div className="col-lg-12">
-                  <form className="w-100" onSubmit={handleInquirySubmit}>
-                    <div className="mb-3">
-                      <label htmlFor="exampleInputEmail1">Product Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id=""
-                        placeholder="Enter Product Name"
-                        name="productName"
-                        value={inquiry.productName}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
+              {succesMsg ? (
+                <div>You have successfully submitted your Inquiry</div>
+              ) : (
+                <div className="row">
+                  <div className="col-lg-12">
+                    <form className="w-100" onSubmit={handleInquirySubmit}>
+                      <div className="mb-3">
+                        <label htmlFor="exampleInputEmail1">Product Name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id=""
+                          placeholder="Enter Product Name"
+                          name="productName"
+                          value={inquiry.productName}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
 
-                    <div className="mb-3">
-                      <label htmlFor="exampleInputEmail1">
-                        Product Requirements
-                      </label>
-                      <textarea
-                        className="form-control"
-                        id=""
-                        rows="3"
-                        placeholder="Enter product requirements"
-                        name="productDescription"
-                        value={inquiry.productDescription}
-                        onChange={handleChange}
-                        required
-                      ></textarea>
-                    </div>
+                      <div className="mb-3">
+                        <label htmlFor="exampleInputEmail1">
+                          Product Requirements
+                        </label>
+                        <textarea
+                          className="form-control"
+                          id=""
+                          rows="3"
+                          placeholder="Enter product requirements"
+                          name="productDescription"
+                          value={inquiry.productDescription}
+                          onChange={handleChange}
+                          required
+                        ></textarea>
+                      </div>
 
-                    <div className="row">
-                      <div className="col-lg-6 mb-3">
-                        <label htmlFor="exampleInputPassword1">Quantity</label>
-                        <div className="custom-input form-control">
-                          <div className="row">
-                            <div className="col-lg-7 col">
-                              <input
-                                type="number"
-                                className="form-control custom-style"
-                                id=""
-                                placeholder="Enter quantity"
-                                name="quantityRequired"
-                                value={inquiry.quantityRequired}
-                                onChange={handleChange}
-                                required
-                              />
-                            </div>
-                            <div className="col-lg-5 col">
-                              <div className="form-unit">metric tons</div>
+                      <div className="row">
+                        <div className="col-lg-6 mb-3">
+                          <label htmlFor="exampleInputPassword1">
+                            Quantity
+                          </label>
+                          <div className="custom-input form-control">
+                            <div className="row">
+                              <div className="col-lg-7 col">
+                                <input
+                                  type="number"
+                                  className="form-control custom-style"
+                                  id=""
+                                  placeholder="Enter quantity"
+                                  name="quantityRequired"
+                                  value={inquiry.quantityRequired}
+                                  onChange={handleChange}
+                                  required
+                                />
+                              </div>
+                              <div className="col-lg-5 col">
+                                <div className="form-unit">metric tons</div>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div className="col-lg-6 mb-3">
+                          <label htmlFor="exampleInputPassword1">
+                            Shipping Terms
+                          </label>
+                          <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            name="termsOfTrade"
+                            value={inquiry.termsOfTrade}
+                            onChange={handleChange}
+                          >
+                            <option defaultValue="selected">
+                              Select shipping terms
+                            </option>
+                            <option value="FOB">FOB</option>
+                            <option value="CIF">CIF</option>
+                            <option value="CFR">CFR</option>
+                            <option value="LOCAL">Local Delivery</option>
+                          </select>
+                        </div>
                       </div>
-                      <div className="col-lg-6 mb-3">
-                        <label htmlFor="exampleInputPassword1">
-                          Shipping Terms
-                        </label>
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
-                          name="termsOfTrade"
-                          value={inquiry.termsOfTrade}
-                          onChange={handleChange}
-                        >
-                          <option defaultValue="selected">
-                            Select shipping terms
-                          </option>
-                          <option value="FOB">FOB</option>
-                          <option value="CIF">CIF</option>
-                          <option value="CFR">CFR</option>
-                          <option value="LOCAL">Local Delivery</option>
-                        </select>
-                      </div>
-                    </div>
 
-                    <div className="row">
-                      <div className="col-lg-6 mb-3">
-                        <label htmlFor="exampleInputPassword1">
-                          Payment Terms
-                        </label>
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
-                          name="paymentTerms"
-                          value={inquiry.paymentTerms}
-                          onChange={handleChange}
-                        >
-                          <option defaultValue="selected">
-                            Select payment terms
-                          </option>
-                          <option value="LC">LC</option>
-                          <option value="DP">DP</option>
-                          <option value="CAD">CAD</option>
-                          <option value="TT">TT</option>
-                        </select>
+                      <div className="row">
+                        <div className="col-lg-6 mb-3">
+                          <label htmlFor="exampleInputPassword1">
+                            Payment Terms
+                          </label>
+                          <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            name="paymentTerms"
+                            value={inquiry.paymentTerms}
+                            onChange={handleChange}
+                          >
+                            <option defaultValue="selected">
+                              Select payment terms
+                            </option>
+                            <option value="LC">LC</option>
+                            <option value="DP">DP</option>
+                            <option value="CAD">CAD</option>
+                            <option value="TT">TT</option>
+                          </select>
+                        </div>
+                        <div className="col-lg-6 mb-3">
+                          <label htmlFor="exampleInputPassword1">
+                            Destination Country
+                          </label>
+                          <Select
+                            className="custom-country-list"
+                            options={options}
+                            name="country"
+                            value={country}
+                            onChange={setCountry}
+                          />
+                        </div>
                       </div>
-                      <div className="col-lg-6 mb-3">
-                        <label htmlFor="exampleInputPassword1">
-                          Destination Country
-                        </label>
-                        <Select
-                          className="custom-country-list"
-                          options={options}
-                          name="country"
-                          value={country}
-                          onChange={setCountry}
-                        />
-                      </div>
-                    </div>
-                    {!loader ? (
-                      <button className="mt-3" type="submit">
-                        Submit Inquiry
-                      </button>
-                    ) : (
-                      <button className="mt-3" type="submit">
-                        <span
-                          className="spinner-border spinner-border-sm"
-                          role="status"
-                          aria-hidden="true"
-                        ></span>
-                      </button>
-                    )}
-                  </form>
+                      {!loader ? (
+                        <button className="mt-3" type="submit">
+                          Submit Inquiry
+                        </button>
+                      ) : (
+                        <button className="mt-3" type="submit">
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      )}
+                    </form>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
