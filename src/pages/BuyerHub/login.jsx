@@ -58,7 +58,7 @@ export default function Login() {
         data: { data },
       } = await axiosInstance.post("/auth/signin-buyer", loginDetails);
       setLoading(false);
-      setUser(data);
+      setUser(data.user);
       localStorage.setItem("user", true);
       localStorage.setItem("token", data.token);
       localStorage.setItem("joinedAt", JSON.stringify(data.user.createdAt));
