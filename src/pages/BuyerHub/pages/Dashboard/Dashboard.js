@@ -294,7 +294,7 @@ const Dashboard = () => {
                             </div>
                           </td>
                           <td>USD {numberWithCommas(orders.cost)}</td>
-                          <td>{orders.shippingType}</td>
+                          <td>{orders.incoterm}</td>
                           <td>{orders.paymentTerm}</td>
                           <td>
                             {orders.status === "PENDING" && (
