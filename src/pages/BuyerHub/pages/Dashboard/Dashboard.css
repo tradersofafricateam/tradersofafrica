@@ -667,7 +667,7 @@ body {
   font-weight: 600 !important;
 }
 
-.order-summary .order-history .order-history-details-ctn {
+.order-history .order-history-details-ctn {
   display: flex;
   justify-content: flex-start;
   border-left: 1px dotted #282828;
@@ -675,7 +675,7 @@ body {
   padding-left: 10px;
 }
 
-.order-summary .order-history .order-history-details-ctn .order-circle {
+.order-history-details-ctn .order-circle {
   background-color: #04a72d;
   width: 18px;
   height: 18px;
