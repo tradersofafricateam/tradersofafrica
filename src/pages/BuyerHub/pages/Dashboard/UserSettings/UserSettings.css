@@ -7,6 +7,13 @@
   font-size: 1rem;
 }
 
+.seller-setting-form h2 span {
+  float:right;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+
 .seller-setting-form form {
   width: 70%;
 }
@@ -24,8 +31,8 @@
   margin: 20px 0;
 }
 .seller-setting-form input {
-  padding: 10px 15px;
-  font-size: 1rem;
+  padding: 12px 15px;
+  font-size: .85rem;
   color: #282828;
 }
 .seller-setting-form textarea {

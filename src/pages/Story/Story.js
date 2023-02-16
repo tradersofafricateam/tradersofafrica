@@ -34,12 +34,12 @@ const Story = () => {
                 in our locality and from our surroundings, as well as showcase
                 African products to the rest of the world.
               </h3>
-              <div className="d-flex justify-content-start">
+              {/* <div className="d-flex justify-content-start">
                 <img src={PlayBtn} alt="" />
                 <p className="play-icon-text">
                   <a href="/"> Watch the Groundnut Story</a>
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ const Story = () => {
       </section>
 
       {/* Core values */}
-      <section id="values">
+      {/* <section id="values">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -92,7 +92,7 @@ const Story = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Leadership team */}
       <section id="l-team">

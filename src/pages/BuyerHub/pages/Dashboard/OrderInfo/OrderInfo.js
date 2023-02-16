@@ -275,8 +275,12 @@ const ViewOrderModal = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="osd-title">Destination:</td>
+                          <td className="osd-title">Destination Country:</td>
                           <td>{orderInfo && orderInfo.country}</td>
+                        </tr>
+                        <tr>
+                          <td className="osd-title">Destination Port:</td>
+                          <td>{orderInfo && orderInfo.port}</td>
                         </tr>
                         <tr>
                           <td className="osd-title">Date created:</td>
@@ -344,8 +348,8 @@ const ViewOrderModal = () => {
                                     for="uploadImage"
                                     class="custom-file-upload me-2"
                                   >
-                                    <i className="fas fa-file-upload list_icon me-2"></i>
-                                    Select Payment Receipt
+                                    {/* <i className="fas fa-file-upload list_icon me-2"></i> */}
+                                    Upload Payment Proof
                                   </label>
                                   {file && file.name}
                                   <input
@@ -358,7 +362,7 @@ const ViewOrderModal = () => {
                                 </div>
                                 <div class="col-auto">
                                   {!fileLoader ? (
-                                    <button type="submit">upload</button>
+                                    <button type="submit">Submit</button>
                                   ) : (
                                     <button>
                                       <span

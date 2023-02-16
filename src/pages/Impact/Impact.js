@@ -41,12 +41,12 @@ const Impact = () => {
                   Global Demand.
                 </p>
                 <p className="customer-name">Ajibike, 50 Million Women Speak</p>
-                <div className="d-flex justify-content-start play-icon-wrap">
+                {/* <div className="d-flex justify-content-start play-icon-wrap">
                   <img src={PlayBtnW} alt="" />
                   <p className="play-icon-text">
                     <a href="/"> Watch video</a>
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -21,7 +21,7 @@ const UserSettings = () => {
   const [passLoader, setPassLoader] = useState(false);
   const [inputType, setInputType] = useState("password");
   const [formattedErrors, setFormattedErrors] = useState({});
-  // const [createdAt, setCreatedAt] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
 
   const [editProfile, setEditProfile] = useState({
     fullName: "",
@@ -60,22 +60,22 @@ const UserSettings = () => {
     newPassword: "",
   });
 
-  // useEffect(() => {
-  //   const accountCreated = JSON.parse(localStorage.getItem("joinedAt"));
-  //   if (accountCreated) {
-  //     setCreatedAt(accountCreated);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const accountCreated = JSON.parse(localStorage.getItem("joinedAt"));
+    if (accountCreated) {
+      setCreatedAt(accountCreated);
+    }
+  }, []);
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  // const convertDateFormat = (oldDate) => {
-  //   let date = new Date(oldDate).toString().split(" ");
-  //   let newFormat = `${date[0]} ${date[2]}  ${date[1]}, ${date[3]}`;
-  //   return newFormat;
-  // };
+  const convertDateFormat = (oldDate) => {
+    let date = new Date(oldDate).toString().split(" ");
+    let newFormat = `${date[0]} ${date[2]}  ${date[1]}, ${date[3]}`;
+    return newFormat;
+  };
 
   const handleChange = (e) => {
     setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
@@ -385,7 +385,7 @@ const UserSettings = () => {
                     </div>
                   </div>
                 </form> */}
-                <h2>My Profile</h2>
+                <h2>My Profile <span>Joined Since {createdAt && convertDateFormat(createdAt)}</span></h2>
                 <form>
                   <div className="row">
                     <div className="col-lg-6">

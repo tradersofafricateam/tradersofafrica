@@ -44,7 +44,7 @@ const Home = () => {
                   Bridging the Gaps in Trade with and within Africa.
                 </p>
                 <p>
-                  <a href="/">
+                  <a href="/our-story">
                     Learn more <img src={ChevronRight} alt="" />
                   </a>
                 </p>
@@ -74,7 +74,7 @@ const Home = () => {
                 a safe platform dedicated to solving issues of trust and
                 acceptable payment terms for both buyers and African suppliers.
               </p>
-              <a className="hvr-icon-forward" href="/">
+              <a className="hvr-icon-forward" href="/our-story">
                 <button className="btn btn-danger">
                   Learn more{" "}
                   <img className="hvr-icon" src={ChevronRight} alt="" />
