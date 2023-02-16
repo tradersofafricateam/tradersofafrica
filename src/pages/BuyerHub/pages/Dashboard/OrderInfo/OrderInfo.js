@@ -301,7 +301,22 @@ const ViewOrderModal = () => {
                   </div>
                 </div>
                 <div className="col-lg-5 offset-1 py-5 ">
-                  {orderInfo.status === "PENDING" && (
+                  {orderInfo.status === "CANCELLED" ? (
+                    <div className="order-history ">
+                      <h5 className="modal-sub-title">Order history</h5>
+                      <div className="order-history-details-ctn">
+                        <div className="order-circle"></div>
+                        <div className="order-history-details">
+                          <h3>Order Cancelled</h3>
+                          <p>
+                            If you didn't request your order to be cancelled,
+                            contact us <Link to=""> here</Link> to get full
+                            details.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
                     <div className="order-history">
                       {/* <h5 className="modal-sub-title">Order history</h5> */}
                       <div className="order-history-details-ctn">
@@ -321,7 +336,13 @@ const ViewOrderModal = () => {
                         </div>
                       </div>
                       <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
+                        <div
+                          className={
+                            orderInfo.status === "PENDING"
+                              ? "order-circle-next"
+                              : "order-circle"
+                          }
+                        ></div>
                         <div className="order-history-details">
                           <h6 className="order-history-title">
                             Payment Uploaded
@@ -330,247 +351,73 @@ const ViewOrderModal = () => {
                             Uploaded and processed requirements in the payment
                             type of {orderInfo && orderInfo.paymentTerm}
                           </p>
-                          {orderInfo.paymentReceipt ? (
-                            <a
-                              className="custom-file-upload"
-                              href={orderInfo.paymentReceipt.image}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View receipt
-                            </a>
+                          {orderInfo.paymentTerm === "DP" ? (
+                            ""
+                          ) : orderInfo.paymentTerm === "CAD" ? (
+                            ""
                           ) : (
-                            <form className="m-0" onSubmit={handleSubmit}>
-                              <div class="row g-3 align-items-center">
-                                <div class="col-auto">
-                                  <label
-                                    htmlFor="uploadImage"
-                                    class="custom-file-upload me-2"
-                                  >
-                                    {/* <i className="fas fa-file-upload list_icon me-2"></i> */}
-                                    Upload Payment Proof
-                                  </label>
-                                  {file && file.name}
-                                  <input
-                                    className="file-upload"
-                                    id="uploadImage"
-                                    onChange={handleChange}
-                                    name="file"
-                                    type="file"
-                                  />
-                                </div>
-                                <div class="col-auto">
-                                  {!fileLoader ? (
-                                    <button type="submit">Submit</button>
-                                  ) : (
-                                    <button>
-                                      <span
-                                        className="spinner-border spinner-border-sm"
-                                        role="status"
-                                        aria-hidden="true"
-                                      ></span>
-                                    </button>
-                                  )}
-                                </div>
-                              </div>
-                            </form>
+                            <div>
+                              {orderInfo.paymentReceipt ? (
+                                <a
+                                  className="custom-file-upload"
+                                  href={orderInfo.paymentReceipt.image}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  View receipt
+                                </a>
+                              ) : (
+                                <form className="m-0" onSubmit={handleSubmit}>
+                                  <div className="row g-3 align-items-center">
+                                    <div className="col-auto">
+                                      <label
+                                        htmlFor="uploadImage"
+                                        className="custom-file-upload me-2"
+                                      >
+                                        {/* <i className="fas fa-file-upload list_icon me-2"></i> */}
+                                        Upload Payment Proof
+                                      </label>
+                                      {file && file.name}
+                                      <input
+                                        className="file-upload"
+                                        id="uploadImage"
+                                        onChange={handleChange}
+                                        name="file"
+                                        type="file"
+                                      />
+                                    </div>
+                                    <div className="col-auto">
+                                      {!fileLoader ? (
+                                        <button type="submit">Submit</button>
+                                      ) : (
+                                        <button>
+                                          <span
+                                            className="spinner-border spinner-border-sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                          ></span>
+                                        </button>
+                                      )}
+                                    </div>
+                                  </div>
+                                </form>
+                              )}
+                            </div>
                           )}
                         </div>
                       </div>
-                    </div>
-                  )}
-                  {orderInfo.status === "PROCESSING" && (
-                    <div className="order-history ">
-                      <h5 className="modal-sub-title">Order history</h5>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Order Placed</h6>
-                          <p>
-                            Placed Order for{" "}
-                            {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
-                            MT of{" "}
-                            {orderInfo.product
-                              ? Capitalize(orderInfo.product.productName)
-                              : " "}{" "}
-                            to be delivered to {orderInfo && orderInfo.country}.
-                          </p>
-                        </div>
-                      </div>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Payment Successful</h6>
-                          <p>
-                            Uploaded and processed requirements in the payment
-                            type of {orderInfo && orderInfo.paymentTerm} with
-                            TOFA has been confirmed
-                          </p>
-                          <p>
-                            {" "}
-                            {orderInfo.paymentReceipt && (
-                              <a
-                                href={orderInfo.paymentReceipt.image}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                View receipt
-                              </a>
-                            )}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Order Processing</h6>
-                          <p>
-                            Order for{" "}
-                            {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
-                            MT of{" "}
-                            {orderInfo.product
-                              ? Capitalize(orderInfo.product.productName)
-                              : " "}{" "}
-                            has been proccessed and ready for shipping.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {orderInfo.status === "SHIPPED" && (
-                    <div className="order-history ">
-                      <h5 className="modal-sub-title">Order history</h5>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Order Placed</h6>
-                          <p>
-                            Placed Order for{" "}
-                            {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
-                            MT of{" "}
-                            {orderInfo.product
-                              ? Capitalize(orderInfo.product.productName)
-                              : " "}{" "}
-                            to be delivered to {orderInfo && orderInfo.country}.
-                          </p>
 
-                          {orderInfo.paymentReceipt && (
-                            <a
-                              href={orderInfo.paymentReceipt.image}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View receipt
-                            </a>
-                          )}
-                        </div>
-                      </div>
                       <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Payment Successful</h6>
-                          <p>
-                            Uploaded and processed requirements in the payment
-                            type of {orderInfo && orderInfo.paymentTerm} with
-                            TOFA has been confirmed
-                          </p>
-                        </div>
-                      </div>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Order Processed</h6>
-                          <p>
-                            Order for{" "}
-                            {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
-                            MT of{" "}
-                            {orderInfo.product
-                              ? Capitalize(orderInfo.product.productName)
-                              : " "}{" "}
-                            has been processed
-                          </p>
-                        </div>
-                      </div>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Order Shipped</h6>
-                          <p>
-                            Order for{" "}
-                            {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
-                            MT of{" "}
-                            {orderInfo.product
-                              ? Capitalize(orderInfo.product.productName)
-                              : " "}{" "}
-                            has been shipped
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {orderInfo.status === "DELIVERED" && (
-                    <div className="order-history  ">
-                      <h5 className="modal-sub-title">Order history</h5>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Order Placed</h6>
-                          <p>
-                            Placed Order for{" "}
-                            {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
-                            MT of{" "}
-                            {orderInfo.product
-                              ? Capitalize(orderInfo.product.productName)
-                              : " "}{" "}
-                            to be delivered to {orderInfo && orderInfo.country}.
-                          </p>
-
-                          {orderInfo.paymentReceipt && (
-                            <a
-                              href={orderInfo.paymentReceipt.image}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View receipt
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Payment Successful</h6>
-                          <p>
-                            Uploaded and processed requirements in the payment
-                            type of {orderInfo && orderInfo.paymentTerm} with
-                            TOFA has been confirmed
-                          </p>
-                        </div>
-                      </div>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h6>Order Processed</h6>
-                          <p>
-                            Order for{" "}
-                            {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
-                            MT of{" "}
-                            {orderInfo.product
-                              ? Capitalize(orderInfo.product.productName)
-                              : " "}{" "}
-                            has been shipped
-                          </p>
-                        </div>
-                      </div>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
+                        <div
+                          className={
+                            orderInfo.status === "PENDING"
+                              ? "order-circle-wait"
+                              : orderInfo.paymentReceipt ||
+                                orderInfo.status === "PROCESSING"
+                              ? "order-circle-next"
+                              : "order-circle"
+                          }
+                        ></div>
                         <div className="order-history-details">
                           <h6>Order Shipped</h6>
                           <p>
@@ -586,7 +433,16 @@ const ViewOrderModal = () => {
                         </div>
                       </div>
                       <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
+                        <div
+                          className={
+                            orderInfo.status === "PENDING" ||
+                            orderInfo.status === "PROCESSING"
+                              ? "order-circle-wait"
+                              : orderInfo.status === "SHIPPED"
+                              ? "order-circle-next"
+                              : "order-circle"
+                          }
+                        ></div>
                         <div className="order-history-details">
                           <h6>Order Delivered</h6>
                           <p>
@@ -599,22 +455,6 @@ const ViewOrderModal = () => {
                               : " "}{" "}
                             has been delivered to{" "}
                             {orderInfo && orderInfo.country}.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {orderInfo.status === "CANCELLED" && (
-                    <div className="order-history ">
-                      <h5 className="modal-sub-title">Order history</h5>
-                      <div className="order-history-details-ctn">
-                        <div className="order-circle"></div>
-                        <div className="order-history-details">
-                          <h3>Order Cancelled</h3>
-                          <p>
-                            If you didn't request your order to be cancelled,
-                            contact us <Link to=""> here</Link> to get full
-                            details.
                           </p>
                         </div>
                       </div>

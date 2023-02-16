@@ -315,7 +315,7 @@ body {
 .overview-card h3 {
   font-size: 2rem;
   font-weight: 700;
-  color:#282828;
+  color: #282828;
   margin: 0;
   padding: 0 0 0;
 }
@@ -700,6 +700,28 @@ body {
   left: -8px;
 }
 
+.order-history-details-ctn .order-circle-next {
+  background-color: #ffc124;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  margin-right: 10px;
+  position: absolute;
+  left: -8px;
+}
+
+.order-history-details-ctn .order-circle-wait {
+  background-color: #7f8d96;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  margin-right: 10px;
+  position: absolute;
+  left: -8px;
+}
+
 .order-history-details {
   padding-bottom: 10px;
   width: 100%;
@@ -734,14 +756,14 @@ body {
   visibility: hidden !important;
 } */
 
-.custom-file-upload{
+.custom-file-upload {
   color: #0083d3;
   text-decoration: underline;
   margin-bottom: 0;
   padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: .9rem!important;
+  font-size: 0.9rem !important;
 }
 
 .file-upload[type="file"] {

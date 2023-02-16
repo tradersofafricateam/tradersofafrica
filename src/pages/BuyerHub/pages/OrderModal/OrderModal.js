@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { axiosInstance } from "../../../../components/axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,10 @@ const OrderModal = ({ productInfo }) => {
   const [successMsg, setSuccessMsg] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/message-center");
+  };
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -311,9 +315,14 @@ const OrderModal = ({ productInfo }) => {
                       <p className="modal-info">
                         For local, CIF and CFR shipping delivery or for CAD and
                         DP payments, please proceed to chat with a{" "}
-                        <Link className="modal-info" to="/message-center">
+                        <a
+                          href="/message-center"
+                          onClick={handleNavigate}
+                          className="modal-info"
+                          data-bs-dismiss="modal"
+                        >
                           SourcPro agent on the message center
-                        </Link>
+                        </a>
                       </p>
                       {foreignOrderDetails.paymentTerm === "DP" ? (
                         ""

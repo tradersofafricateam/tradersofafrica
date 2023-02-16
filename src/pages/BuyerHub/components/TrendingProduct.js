@@ -61,6 +61,7 @@ const TrendingProduct = ({ sectionTitle }) => {
           <div className="p-container" ref={ref}>
             {product &&
               product
+                .slice(0, 4)
                 .map((item) => ({ item, sort: Math.random() }))
                 .sort((a, b) => a.sort - b.sort)
                 .map(({ item }) => {
