@@ -213,6 +213,7 @@ const ViewOrderModal = () => {
                           <td>
                             {orderInfo.quantityOrdered &&
                               numberWithCommas(orderInfo.quantityOrdered)}
+                            <span className="ms-1">MT</span>
                           </td>
                         </tr>
                         <tr>

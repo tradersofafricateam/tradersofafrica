@@ -19,6 +19,10 @@ const OrderModal = ({ productInfo }) => {
     navigate("/message-center");
   };
 
+  const handleNavigatee = () => {
+    navigate("/orders");
+  };
+
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -139,7 +143,18 @@ const OrderModal = ({ productInfo }) => {
             </div>
             <div className="modal-body">
               {successMsg ? (
-                <div>Go to your dashboard to upload proof of payment</div>
+                <div className="text-center mt-5 mb-5">
+                  Your order has been submitted successfully. Go to your{" "}
+                  <a
+                    href="/orders"
+                    onClick={handleNavigatee}
+                    className="modal-info"
+                    data-bs-dismiss="modal"
+                  >
+                    dashboard
+                  </a>{" "}
+                  to upload proof of payment
+                </div>
               ) : (
                 <div className="row">
                   <div className="col-lg-8">
@@ -164,11 +179,11 @@ const OrderModal = ({ productInfo }) => {
                       <div className="row">
                         <div className="col-lg-6 mb-3">
                           <label htmlFor="exampleInputPassword1">
-                            Quantity
+                            Quantity (Metric tonnes)
                           </label>
                           <div className="custom-input form-control">
                             <div className="row">
-                              <div className="col-lg-7 col">
+                              <div className="col-lg-9 col">
                                 <input
                                   type="text"
                                   className="form-control custom-style"
@@ -180,8 +195,8 @@ const OrderModal = ({ productInfo }) => {
                                   required
                                 />
                               </div>
-                              <div className="col-lg-5 col">
-                                <div className="form-unit">metric tons</div>
+                              <div className="col-lg-3 col">
+                                <div className="form-unit">MT</div>
                               </div>
                             </div>
                           </div>
@@ -201,10 +216,10 @@ const OrderModal = ({ productInfo }) => {
                             <option defaultValue="selected">
                               Select shipping terms
                             </option>
-                            <option value="LOCAL">Local Delivery</option>
                             <option value="CIF">CIF</option>
                             <option value="CFR">CFR</option>
                             <option value="FOB">FOB</option>
+                            <option value="LOCAL">Local Delivery</option>
                           </select>
                         </div>
                       </div>
@@ -261,12 +276,16 @@ const OrderModal = ({ productInfo }) => {
                               <option defaultValue="selected">
                                 Select payment terms
                               </option>
-                              <option value="LC">Letter of Credit</option>
-                              <option value="CAD">Cash Against Delivery</option>
-                              <option value="DP">
-                                Document Against Payment
+                              <option value="LC">Letter of Credit (LC)</option>
+                              <option value="CAD">
+                                Cash Against Delivery (CAD)
                               </option>
-                              <option value="TT">Telegraphic Transfer</option>
+                              <option value="DP">
+                                Document Against Payment (DP)
+                              </option>
+                              <option value="TT">
+                                Telegraphic Transfer (TT)
+                              </option>
                             </select>
                           </div>
                         </div>
@@ -297,7 +316,9 @@ const OrderModal = ({ productInfo }) => {
                           </div>
 
                           <div className="col-lg-6 mb-3">
-                            <label htmlFor="exampleInputPassword1">Port</label>
+                            <label htmlFor="exampleInputPassword1">
+                              Destination Port
+                            </label>
                             <input
                               type="text"
                               className="form-control"
@@ -313,15 +334,16 @@ const OrderModal = ({ productInfo }) => {
                       )}
 
                       <p className="modal-info">
-                        For local, CIF and CFR shipping delivery or for CAD and
-                        DP payments, please proceed to chat with a{" "}
+                        For shipping terms local, CIF and CFR, and payment terms
+                        CAD and DP, please proceed to chat with a SourcPro agent
+                        on the{" "}
                         <a
                           href="/message-center"
                           onClick={handleNavigate}
                           className="modal-info"
                           data-bs-dismiss="modal"
                         >
-                          SourcPro agent on the message center
+                          Message Center
                         </a>
                       </p>
                       {foreignOrderDetails.paymentTerm === "DP" ? (

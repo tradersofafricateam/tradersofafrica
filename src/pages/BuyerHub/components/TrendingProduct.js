@@ -30,11 +30,11 @@ const TrendingProduct = ({ sectionTitle }) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const ref = React.useRef(null);
+  // const ref = React.useRef(null);
 
-  const scroll = (scrollOffset) => {
-    ref.current.scrollLeft += scrollOffset;
-  };
+  // const scroll = (scrollOffset) => {
+  //   ref.current.scrollLeft += scrollOffset;
+  // };
 
   return (
     <section id="b-trending">
@@ -43,7 +43,7 @@ const TrendingProduct = ({ sectionTitle }) => {
           <div className="col-lg-6">
             <h1>{sectionTitle}</h1>
           </div>
-          <div className="col-lg-6" align="right">
+          {/* <div className="col-lg-6" align="right">
             <i
               className="fas fa-chevron-circle-left scroll-icon me-4"
               style={{ color: "#282828", fontSize: "25px" }}
@@ -55,10 +55,10 @@ const TrendingProduct = ({ sectionTitle }) => {
               onClick={() => scroll(1070)}
               style={{ color: "#282828", fontSize: "25px" }}
             ></i>
-          </div>
+          </div> */}
         </div>
         <div className="row main-container">
-          <div className="p-container" ref={ref}>
+          <div className="p-container">
             {product &&
               product
                 .slice(0, 4)
