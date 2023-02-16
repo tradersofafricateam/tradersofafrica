@@ -315,15 +315,25 @@ body {
 .overview-card h3 {
   font-size: 2rem;
   font-weight: 700;
-  color: rgba(27, 38, 49, 0.38);
+  color:#282828;
   margin: 0;
   padding: 0 0 0;
 }
 
 .overview-card p {
   font-size: 0.8rem;
-  font-weight: 300;
+  font-weight: normal;
   color: #5c5c5c !important;
+}
+
+.overview-card .order-history-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.overview-card .order-history-info {
+  font-weight: normal;
+  font-size: 14px;
 }
 
 .overview-card table {
@@ -663,6 +673,10 @@ body {
   width: 100%;
 }
 
+.overview-card .order-history {
+  padding-right: 75px;
+}
+
 .osd-title {
   font-weight: 600 !important;
 }
@@ -715,8 +729,18 @@ body {
   border: none;
 }
 
-.order-history-details input {
+/* .order-history-details input {
   visibility: hidden !important;
+} */
+
+.custom-file-upload{
+  color: #0083d3;
+  text-decoration: underline;
+  margin-bottom: 0;
+}
+
+.file-upload[type="file"] {
+  display: none;
 }
 
 .img-pro-ctn {

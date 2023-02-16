@@ -409,7 +409,7 @@ const UserSettings = () => {
                     <div className="col-lg-6">
                       <div className="mb-3">
                         <label
-                          htmlFor="exampleInputEmail1"
+                          htmlFor="email"
                           className="form-label"
                         >
                           Email address
@@ -417,7 +417,7 @@ const UserSettings = () => {
                         <input
                           type="email"
                           className="form-control"
-                          id="exampleInputEmail1"
+                          id="email"
                           aria-describedby="emailHelp"
                           name="email"
                           value={editProfile.email}
@@ -431,7 +431,7 @@ const UserSettings = () => {
                     <div className="col-lg-6">
                       <div className="mb-3">
                         <label
-                          htmlFor="exampleInputEmail1"
+                          htmlFor="phone"
                           className="form-label"
                         >
                           Phone number
@@ -439,7 +439,7 @@ const UserSettings = () => {
                         <input
                           type="text"
                           className="form-control"
-                          id="exampleInputEmail1"
+                          id="phone"
                           aria-describedby="emailHelp"
                           name="phoneNumber"
                           value={editProfile.phoneNumber}
@@ -450,7 +450,7 @@ const UserSettings = () => {
                     <div className="col-lg-6">
                       <div className="mb-3">
                         <label
-                          htmlFor="exampleInputEmail1"
+                          htmlFor="country"
                           className="form-label"
                         >
                           Country
@@ -458,7 +458,7 @@ const UserSettings = () => {
                         <input
                           type="text"
                           className="form-control"
-                          id="exampleInputEmail1"
+                          id="country"
                           aria-describedby="emailHelp"
                           name="country"
                           value={editProfile.country}
