@@ -727,6 +727,10 @@ body {
   width: 100%;
   margin-left: 15px;
 }
+.opacity p,
+.opacity h6 {
+  opacity: 0.3;
+}
 
 .order-history-details > p {
   word-wrap: break-word;

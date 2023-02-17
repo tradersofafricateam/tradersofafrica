@@ -344,7 +344,13 @@ const ViewOrderModal = () => {
                               : "order-circle"
                           }
                         ></div>
-                        <div className="order-history-details">
+                        <div
+                          className={
+                            !orderInfo.paymentReceipt
+                              ? `${"order-history-details"} ${"opacity"}`
+                              : "order-history-details"
+                          }
+                        >
                           <h6 className="order-history-title">
                             Payment Uploaded
                           </h6>
@@ -419,7 +425,14 @@ const ViewOrderModal = () => {
                               : "order-circle"
                           }
                         ></div>
-                        <div className="order-history-details">
+                        <div
+                          className={
+                            orderInfo.status === "PENDING" ||
+                            orderInfo.status === "PROCESSING"
+                              ? `${"order-history-details"} ${"opacity"}`
+                              : "order-history-details"
+                          }
+                        >
                           <h6>Order Shipped</h6>
                           <p>
                             Order for{" "}
@@ -444,7 +457,15 @@ const ViewOrderModal = () => {
                               : "order-circle"
                           }
                         ></div>
-                        <div className="order-history-details">
+                        <div
+                          className={
+                            orderInfo.status === "PENDING" ||
+                            orderInfo.status === "PROCESSING" ||
+                            orderInfo.status === "SHIPPED"
+                              ? `${"order-history-details"} ${"opacity"}`
+                              : "order-history-details"
+                          }
+                        >
                           <h6>Order Delivered</h6>
                           <p>
                             Order for{" "}

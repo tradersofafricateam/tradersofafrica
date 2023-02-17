@@ -258,7 +258,7 @@ const Orders = () => {
                                 <div className="text-info">Shipped</div>
                               )}
                               {orders.status === "DELIVERED" && (
-                                <div className="text-success">Delivery</div>
+                                <div className="text-success">Delivered</div>
                               )}
                               {orders.status === "CANCELLED" && (
                                 <div className="text-danger">Cancelled</div>
