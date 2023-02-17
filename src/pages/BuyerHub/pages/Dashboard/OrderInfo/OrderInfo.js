@@ -433,8 +433,8 @@ const ViewOrderModal = () => {
                               : "order-history-details"
                           }
                         >
-                          <h6>Order Shipped</h6>
-                          <p>
+                          <h6 className="order-history-title">Order Shipped</h6>
+                          <p className="order-history-info">
                             Order for{" "}
                             {orderInfo.quantityOrdered &&
                               numberWithCommas(orderInfo.quantityOrdered)}
@@ -457,6 +457,7 @@ const ViewOrderModal = () => {
                               : "order-circle"
                           }
                         ></div>
+
                         <div
                           className={
                             orderInfo.status === "PENDING" ||
@@ -466,8 +467,10 @@ const ViewOrderModal = () => {
                               : "order-history-details"
                           }
                         >
-                          <h6>Order Delivered</h6>
-                          <p>
+                          <h6 className="order-history-title">
+                            Order Delivered
+                          </h6>
+                          <p className="order-history-info">
                             Order for{" "}
                             {orderInfo.quantityOrdered &&
                               numberWithCommas(orderInfo.quantityOrdered)}

@@ -29,6 +29,12 @@ const Orders = () => {
     setIsActive((current) => !current);
   };
 
+  const convertDateFormat = (oldDate) => {
+    let date = new Date(oldDate).toString().split(" ");
+    let newFormat = `${date[0]} ${date[2]}  ${date[1]}, ${date[3]}`;
+    return newFormat;
+  };
+
   useEffect(() => {
     axiosInstance
       .get(`/buyer-hub/order-summary`)
@@ -211,6 +217,7 @@ const Orders = () => {
                         <th scope="col">Product Cost</th>
                         <th scope="col">Shipping Terms</th>
                         <th scope="col">Payment Terms</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
@@ -238,15 +245,19 @@ const Orders = () => {
                                       ? Capitalize(orders.product.productName)
                                       : " "}
                                   </p>
-                                  <p className="table-order-no">
+                                  {/* <p className="table-order-no">
                                     Order {orders.orderNumber}
-                                  </p>
+                                  </p> */}
                                 </div>
                               </div>
                             </td>
                             <td>USD {numberWithCommas(orders.cost)}</td>
                             <td>{orders.incoterm}</td>
                             <td>{orders.paymentTerm}</td>
+                            <td>
+                              {orders.createdAt &&
+                                convertDateFormat(orders.createdAt)}
+                            </td>
                             <td>
                               {orders.status === "PENDING" && (
                                 <div className="text-warning ">Pending</div>

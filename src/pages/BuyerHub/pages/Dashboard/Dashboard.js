@@ -25,6 +25,12 @@ const Dashboard = () => {
     setIsActive((current) => !current);
   };
 
+  const convertDateFormat = (oldDate) => {
+    let date = new Date(oldDate).toString().split(" ");
+    let newFormat = `${date[0]} ${date[2]}  ${date[1]}, ${date[3]}`;
+    return newFormat;
+  };
+
   useEffect(() => {
     axiosInstance
       .get(`/buyer-hub/activity-summary`)
@@ -207,7 +213,7 @@ const Dashboard = () => {
                 <div className="d-flex justify-content-between mt-4">
                   <h3>
                     {activity.total_transactions &&
-                      numberWithCommas(activity.total_transactions)}
+                      numberWithCommas(activity.total_transactions)}<span>USD</span>
                   </h3>
                 </div>
               </div>
@@ -262,10 +268,11 @@ const Dashboard = () => {
                   <table className="table table-striped">
                     <thead>
                       <tr>
-                        <th scope="col">Product Info</th>
+                        <th scope="col">Product Name</th>
                         <th scope="col">Product Cost</th>
                         <th scope="col">Shipping Terms</th>
                         <th scope="col">Payment Terms</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
@@ -274,28 +281,32 @@ const Dashboard = () => {
                         <tr key={index}>
                           <td>
                             <div className="d-flex">
-                              {/* <div className="flex-shrink-0">
+                              <div className="flex-shrink-0">
                                 <img
                                   className="table-product-img"
                                   src={orders.product.productImages[0].image}
                                   alt="product name"
                                 />
-                              </div> */}
+                              </div>
                               <div className="flex-grow-1 ms-3">
                                 <p>
                                   {orders.product
                                     ? Capitalize(orders.product.productName)
                                     : ""}
                                 </p>
-                                <p className="table-order-no">
+                                {/* <p className="table-order-no">
                                   Order {orders.orderNumber}
-                                </p>
+                                </p> */}
                               </div>
                             </div>
                           </td>
                           <td>USD {numberWithCommas(orders.cost)}</td>
                           <td>{orders.incoterm}</td>
                           <td>{orders.paymentTerm}</td>
+                          <td>
+                              {orders.createdAt &&
+                                convertDateFormat(orders.createdAt)}
+                            </td>
                           <td>
                             {orders.status === "PENDING" && (
                               <div className="text-warning ">Pending</div>
