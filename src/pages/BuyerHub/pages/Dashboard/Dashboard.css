@@ -85,7 +85,7 @@ body {
   flex-direction: column;
   height: 100%;
   width: 250px;
-  position: fixed;
+  position: fixed!important;
   overflow-y: auto;
   transform: translateX(0);
   transition: all 0.6s ease-in-out;
@@ -100,7 +100,7 @@ body {
   flex-direction: column;
   height: 100%;
   width: 250px;
-  position: fixed;
+  position: fixed!important;
   overflow-y: auto;
   transform: translateX(-250px);
   transition: all 0.6s ease-in-out;
@@ -320,6 +320,13 @@ body {
   padding: 0 0 0;
 }
 
+.overview-card h3 span {
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin-left: 5px;
+  color: #5c5c5c;
+}
+
 .overview-card p {
   font-size: 0.8rem;
   font-weight: normal;
@@ -328,7 +335,7 @@ body {
 
 .overview-card .order-history-title {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .overview-card .order-history-info {
@@ -357,7 +364,7 @@ body {
 .overview-card table tbody tr td .table-product-img {
   width: 40px;
   height: 40px;
-  /* border-radius: 50%; */
+  border-radius: 50%;
 }
 
 .overview-card table tbody tr td p {
@@ -726,6 +733,7 @@ body {
   padding-bottom: 10px;
   width: 100%;
   margin-left: 15px;
+  margin-bottom: 25px;
 }
 
 .order-history-details > p {
