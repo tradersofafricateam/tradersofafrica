@@ -346,7 +346,7 @@ const ViewOrderModal = () => {
                         ></div>
                         <div
                           className={
-                            !orderInfo.paymentReceipt
+                            orderInfo.status === "PENDING"
                               ? `${"order-history-details"} ${"opacity"}`
                               : "order-history-details"
                           }
