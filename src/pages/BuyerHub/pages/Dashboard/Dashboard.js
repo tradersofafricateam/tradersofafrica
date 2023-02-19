@@ -213,7 +213,8 @@ const Dashboard = () => {
                 <div className="d-flex justify-content-between mt-4">
                   <h3>
                     {activity.total_transactions &&
-                      numberWithCommas(activity.total_transactions)}<span>USD</span>
+                      numberWithCommas(activity.total_transactions)}
+                    <span>USD</span>
                   </h3>
                 </div>
               </div>
@@ -284,7 +285,10 @@ const Dashboard = () => {
                               <div className="flex-shrink-0">
                                 <img
                                   className="table-product-img"
-                                  src={orders.product.productImages[0].image}
+                                  src={
+                                    orders.product &&
+                                    orders.product.productImages[0].image
+                                  }
                                   alt="product name"
                                 />
                               </div>
@@ -304,9 +308,9 @@ const Dashboard = () => {
                           <td>{orders.incoterm}</td>
                           <td>{orders.paymentTerm}</td>
                           <td>
-                              {orders.createdAt &&
-                                convertDateFormat(orders.createdAt)}
-                            </td>
+                            {orders.createdAt &&
+                              convertDateFormat(orders.createdAt)}
+                          </td>
                           <td>
                             {orders.status === "PENDING" && (
                               <div className="text-warning ">Pending</div>
