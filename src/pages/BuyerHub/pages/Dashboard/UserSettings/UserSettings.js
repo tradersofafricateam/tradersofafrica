@@ -234,158 +234,12 @@ const UserSettings = () => {
           <div className="main-overview">
             <div className="overview-card">
               <div className="seller-setting-form">
-                {/* <form>
-                  <div className="seller-setting-formgroup">
-                    <div className="form-group-right">
-                      <div className="form-group">
-                        <label>Full Name</label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="fullname"
-                          name="fullName"
-                          value={editProfile.fullName}
-                          onChange={handleChange}
-                          placeholder="Enter full name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Country</label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="country"
-                          name="country"
-                          value={editProfile.country}
-                          onChange={handleChange}
-                          placeholder="Enter country"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Phone Number</label>
-                        <PhoneInput
-                          name="editPhoneNumber"
-                          className="form-control"
-                          defaultCountry="NG"
-                          value={editPhoneNumber}
-                          onChange={setEditPhoneNumber}
-                          placeholder="+123909989898"
-                        />
-                      </div>
-                      <div className="mt-3">
-                        <label htmlFor="password" className="form-label">
-                          Current password
-                        </label>
-                        <div className="passwordToggle form-control input">
-                          <input
-                            className="password-input"
-                            placeholder="Enter current password"
-                            type={inputType}
-                            name="currentPassword"
-                            value={editPassword.currentPassword}
-                            onChange={handlePasswordChange}
-                          />
-                          <span
-                            className={"password-icon"}
-                            onClick={handlePasswordToggle}
-                          >
-                            {inputType === "password" ? (
-                              <i
-                                className="far fa-eye-slash mt-1 pt-1"
-                                style={{ color: "#5C5C5C" }}
-                              ></i>
-                            ) : (
-                              <i
-                                className="far fa-eye mt-1 pt-1"
-                                style={{ color: "#5C5C5C" }}
-                              ></i>
-                            )}
-                          </span>
-                        </div>
-                      </div>
-                      {formattedErrors.oldPassword && (
-                        <p className="errors">{formattedErrors.oldPassword}</p>
-                      )}
-                      <div className="mt-3">
-                        <label htmlFor="password" className="form-label">
-                          New password
-                        </label>
-                        <div className="passwordToggle form-control input">
-                          <input
-                            className="password-input"
-                            type={inputType}
-                            placeholder="Enter new password"
-                            name="newPassword"
-                            value={editPassword.newPassword}
-                            onChange={handlePasswordChange}
-                          />
-                          <span
-                            className={"password-icon"}
-                            onClick={handlePasswordToggle}
-                          >
-                            {inputType === "password" ? (
-                              <i
-                                className="far fa-eye-slash mt-1 pt-1"
-                                style={{ color: "#5C5C5C" }}
-                              ></i>
-                            ) : (
-                              <i
-                                className="far fa-eye mt-1 pt-1"
-                                style={{ color: "#5C5C5C" }}
-                              ></i>
-                            )}
-                          </span>
-                        </div>
-                      </div>
-                      {formattedErrors.newPassword && (
-                        <p className="errors" style={{ color: "red" }}>
-                          {formattedErrors.newPassword}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="seller-footer">
-                    <div className="seller-seting-submit mx-2">
-                      {!passLoader ? (
-                        <button
-                          onClick={handleUserPasswordChange}
-                          className="btn btn-primary changepassword my-4"
-                        >
-                          Change Password
-                        </button>
-                      ) : (
-                        <button className="btn btn-primary changepassword my-4">
-                          <span
-                            className="spinner-border spinner-border-sm"
-                            role="status"
-                            aria-hidden="true"
-                          ></span>
-                        </button>
-                      )}
-                      {!loader ? (
-                        <button
-                          onClick={handleEditProfile}
-                          className="btn btn-primary savechanges my-4"
-                        >
-                          Save Changes
-                        </button>
-                      ) : (
-                        <button className="btn btn-primary savechanges my-4">
-                          <span
-                            className="spinner-border spinner-border-sm"
-                            role="status"
-                            aria-hidden="true"
-                          ></span>
-                        </button>
-                      )}
-                    </div>
-                    <div className="seller-seting-joindate">
-                      <p>Joined Since</p>
-                      <p>{createdAt && convertDateFormat(createdAt)}</p>
-                    </div>
-                  </div>
-                </form> */}
-                <h2>My Profile <span>Joined Since {createdAt && convertDateFormat(createdAt)}</span></h2>
+                <h2>
+                  My Profile{" "}
+                  <span>
+                    Joined Since {createdAt && convertDateFormat(createdAt)}
+                  </span>
+                </h2>
                 <form>
                   <div className="row">
                     <div className="col-lg-6">
@@ -408,10 +262,7 @@ const UserSettings = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="mb-3">
-                        <label
-                          htmlFor="email"
-                          className="form-label"
-                        >
+                        <label htmlFor="email" className="form-label">
                           Email address
                         </label>
                         <input
@@ -430,10 +281,7 @@ const UserSettings = () => {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="mb-3">
-                        <label
-                          htmlFor="phone"
-                          className="form-label"
-                        >
+                        <label htmlFor="phone" className="form-label">
                           Phone number
                         </label>
                         <input
@@ -449,10 +297,7 @@ const UserSettings = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="mb-3">
-                        <label
-                          htmlFor="country"
-                          className="form-label"
-                        >
+                        <label htmlFor="country" className="form-label">
                           Country
                         </label>
                         <input
