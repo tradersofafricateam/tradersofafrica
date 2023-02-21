@@ -19,7 +19,7 @@ import MoranLogo from "../../assets/img/moran.png";
 import TechpointLogo from "../../assets/img/techpoint.png";
 import Hwmialogo from "../../assets/img/hwmia.png";
 
-import ChevronRight from "../../assets/img/chevron-right.svg";
+// import ChevronRight from "../../assets/img/chevron-right.svg";
 
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
