@@ -119,7 +119,8 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
                           <td className="osd-title">Quantity:</td>
                           <td>
                             {orderInfo.quantityOrdered &&
-                              numberWithCommas(orderInfo.quantityOrdered)}
+                              numberWithCommas(orderInfo.quantityOrdered)}{" "}
+                            MT
                           </td>
                         </tr>
                         <tr>
@@ -250,13 +251,7 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
                               : "order-circle"
                           }
                         ></div>
-                        <div
-                          className={
-                            orderInfo.status === "PENDING"
-                              ? `${"order-history-details"} ${"opacity"}`
-                              : "order-history-details"
-                          }
-                        >
+                        <div className="order-history-details">
                           <h6 className="order-history-title">
                             Payment Uploaded
                           </h6>
@@ -333,8 +328,7 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
                         ></div>
                         <div
                           className={
-                            orderInfo.status === "PENDING" ||
-                            orderInfo.status === "PROCESSING"
+                            orderInfo.status === "PENDING"
                               ? `${"order-history-details"} ${"opacity"}`
                               : "order-history-details"
                           }
@@ -366,8 +360,7 @@ const ViewOrderModal = ({ orderInfo, handleApproval, loader, orderLoad }) => {
                         <div
                           className={
                             orderInfo.status === "PENDING" ||
-                            orderInfo.status === "PROCESSING" ||
-                            orderInfo.status === "SHIPPED"
+                            orderInfo.status === "PROCESSING"
                               ? `${"order-history-details"} ${"opacity"}`
                               : "order-history-details"
                           }

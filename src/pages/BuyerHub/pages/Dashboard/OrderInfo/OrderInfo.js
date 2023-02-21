@@ -345,13 +345,7 @@ const ViewOrderModal = () => {
                               : "order-circle"
                           }
                         ></div>
-                        <div
-                          className={
-                            orderInfo.status === "PENDING"
-                              ? `${"order-history-details"} ${"opacity"}`
-                              : "order-history-details"
-                          }
-                        >
+                        <div className="order-history-details">
                           <h6 className="order-history-title">
                             Payment Uploaded
                           </h6>
@@ -428,8 +422,7 @@ const ViewOrderModal = () => {
                         ></div>
                         <div
                           className={
-                            orderInfo.status === "PENDING" ||
-                            orderInfo.status === "PROCESSING"
+                            orderInfo.status === "PENDING"
                               ? `${"order-history-details"} ${"opacity"}`
                               : "order-history-details"
                           }
@@ -462,8 +455,7 @@ const ViewOrderModal = () => {
                         <div
                           className={
                             orderInfo.status === "PENDING" ||
-                            orderInfo.status === "PROCESSING" ||
-                            orderInfo.status === "SHIPPED"
+                            orderInfo.status === "PROCESSING"
                               ? `${"order-history-details"} ${"opacity"}`
                               : "order-history-details"
                           }
@@ -487,7 +479,7 @@ const ViewOrderModal = () => {
                     </div>
                   )}
                 </div>
-              <div>
+                <div>
                   {!orderInfo.buyerApproved && (
                     <div className="col-lg-12">
                       {!loader ? (
