@@ -13,7 +13,7 @@ import TofaAcademy from "../../assets/img/tcb-img.png";
 
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
-import Partners from "../../components/Partners/Partners";
+// import Partners from "../../components/Partners/Partners";
 
 const Wedo = () => {
   return (
@@ -77,7 +77,7 @@ const Wedo = () => {
                   <div className="sol-img">
                     <img className="img-fluid" src={SuppliersMarket} alt="" />
                   </div>
-                  <h2>Suppliers Marketplace</h2>
+                  <h2>Online Marketplace</h2>
                   <p>
                     We have created a platform to showcase African products from
                     verified suppliers across the continent. Producers and
@@ -85,10 +85,10 @@ const Wedo = () => {
                     international markets.
                   </p>
                   <p>
-                    <a className="hvr-icon-forward" href="/">
-                      Sell Commodities
+                    <Link className="hvr-icon-forward" to="https://tradersofafrica.com">
+                      Visit Marketplace
                       <img className="hvr-icon" src={ChevronRightOrg} alt="" />
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -108,12 +108,12 @@ const Wedo = () => {
                   SourcePro guarantees quality, logistics and off-take solutions
                   to both buyers and suppliers.
                 </p>
-                <p>
+                {/* <p>
                   <Link className="hvr-icon-forward" to="/buy-commodities">
                     Make an Inquiry{" "}
                     <img className="hvr-icon" src={ChevronRightOrg} alt="" />
                   </Link>
-                </p>
+                </p> */}
               </div>
               <div className="col-lg-6" align="center">
                 <img className="img-fluid sp-img" src={SourcePro} alt="" />
@@ -126,22 +126,17 @@ const Wedo = () => {
                   financing across Africa
                 </h2>
                 <p>
-                  While international buyers prefer to pay through various
-                  instruments, African suppliers want to be paid in cash. To
-                  solve this issue, we have partnered with several credible
-                  financial organizations interested in funding trade in Africa.
+                  Through Tofa Pay, we facilitate trade by financing the supply of various agro products. Genuine suppliers of African products who have confirmed orders backed by an acceptable payment term can request for funds. 
                 </p>
                 <p>
-                  We continue to welcome investments from international and
-                  local investors, who can now directly finance African trade
-                  and earn a share of the profits.
+                  We can also undertake to pay on behalf of factories and processors across Africa which will assist them in managing their cashflow as well as build integrity with their suppliers.
                 </p>
-                <p>
+                {/* <p>
                   <a className="hvr-icon-forward" href="/">
                     Contact us{" "}
                     <img className="hvr-icon" src={ChevronRightOrg} alt="" />
                   </a>
-                </p>
+                </p> */}
               </div>
               <div className="col-lg-6" align="center">
                 <img className="img-fluid tf-img" src={TradeFinance} alt="" />
@@ -166,12 +161,12 @@ const Wedo = () => {
                   offtake of all products. Become a member of our TOFA Tribe,
                   where we'll mentor you for impact and monitor you for success!
                 </p>
-                <a className="hvr-icon-forward" href="/">
+                {/* <a className="hvr-icon-forward" href="/">
                   <button className="btn btn-danger training-cta">
                     Apply now
                     <img className="hvr-icon" src={ChevronRightOrg} alt="" />
                   </button>
-                </a>
+                </a> */}
               </div>
               <div className="col-lg-6" align="center">
                 <img className="img-fluid cb-img" src={TofaAcademy} alt="" />
@@ -180,7 +175,6 @@ const Wedo = () => {
           </div>
         </section>
       </div>
-      <Partners />
       <Footer />
     </div>
   );

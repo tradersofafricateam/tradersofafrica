@@ -1,14 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./Story.css";
 
 // import PlayBtn from "../../assets/img/dark-play-btn.svg";
 import LinkedIn from "../../assets/img/linkedin.svg";
 
+import Uju from "../../assets/img/team/uju.jpg";
+import Erhun from "../../assets/img/team/erhun.jpg";
+import Oge from "../../assets/img/team/oge.jpg";
+import Bambam from "../../assets/img/team/bambam.jpg";
+import Chinedu from "../../assets/img/team/chinedu.jpg";
+import Jonathan from "../../assets/img/team/jon.jpeg";
+import Blessing from "../../assets/img/team/blessing.jpg";
+import Dami from "../../assets/img/team/dami.jpg";
+
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
-import Partners from "../../components/Partners/Partners";
-import Testimonials from "../../components/Testimonials/Testimonials";
+// import Partners from "../../components/Partners/Partners";
+// import Testimonials from "../../components/Testimonials/Testimonials";
 
 const Story = () => {
   return (
@@ -20,7 +30,7 @@ const Story = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-7">
-              <h2>How it all Started</h2>
+              <h2>Our Story</h2>
               <p>
                 It all started because of groundnuts! Remember, there used to be
                 groundnut pyramids in Kano and other cities in Northern Nigeria.
@@ -102,9 +112,9 @@ const Story = () => {
               <h2>Our Leadership Team</h2>
               <p>
                 Traders of Africa promotes a relaxed, culturally diverse
-                workplace for the optimal <br />
+                workplace for the optimal 
                 performance of its employees, as well as an all-round friendly
-                experience for <br />
+                experience for 
                 anyone who walks through our doors. We are called Team Awesome!
               </p>
               <h3>
@@ -117,74 +127,75 @@ const Story = () => {
             <div className="d-flex flex-wrap justify-content-start">
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Uju} alt="" />
+                  <Link to="https://www.linkedin.com/in/uju-uzo-ojinnaka-46288041/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
                 <h4>Uju Uzo-Ojinnaka</h4>
                 <p>Founder &amp; CEO</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Jonathan} alt="" />
+                  <Link to="https://www.linkedin.com/in/jonathan-ojesebholo-mba-fmva-b624492a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
-                <h4>Unwana Usoro</h4>
-                <p>Registrar, TOFA Academy</p>
+                <h4>Jonathan Ojesebholo</h4>
+                <p>Head, TOFA Pay</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Oge} alt="" />
+                  <Link to="https://www.linkedin.com/in/oge-belonwu-868b2866/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
                 <h4>Oge Belonwu</h4>
                 <p>Head, Operations</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Erhun} alt="" />
+                  <Link to="https://www.linkedin.com/in/erhun-abbe-3ba4617a"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
                 <h4>Erhun Abbe</h4>
                 <p>Head, Digital &amp; Partnerships</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Bambam} alt="" />
+                  <Link to="https://www.linkedin.com/in/ayobamidele-mebude-448454144/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
-                <h4>Olayemi Ajayi</h4>
-                <p>Head, SourcePro Nigeria</p>
+                <h4>Bamidele Mebude</h4>
+                <p>Human Resource Manager</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Chinedu} alt="" />
+                  <Link to="https://www.linkedin.com/in/chinedu-odunukwe-55a2b011b/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
                 <h4>Chinedu Odunukwe</h4>
                 <p>Finance Officer</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Blessing} alt="" />
+                  <Link to="https://www.linkedin.com/in/blessing-igri-25b25a179/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
-                <h4>Rachael Ezeanya</h4>
-                <p>Human Resource Manager</p>
+                <h4>Blessing Igri</h4>
+                <p>Head, SourcePro</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  <img className="team-img" src={Dami} alt="" />
+                  <Link to="https://www.linkedin.com/in/damilola-anifowoshe-859a9718a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
                 <h4>Damilola Anifowoshe</h4>
-                <p>Marketing &amp; Public Relations</p>
-              </div>
-              <div className="l-member-wrap">
-                <div className="l-member-img">
-                  <img className="linkedin-icon" src={LinkedIn} alt="" />
-                </div>
-                <h4>Olayemi Ajayi</h4>
-                <p>Head, SourcePro Nigeria</p>
+                <p>Marketing & Public Relations</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <Testimonials />
-      <Partners />
+      {/* <Testimonials />
+      <Partners /> */}
       <Footer />
     </div>
   );

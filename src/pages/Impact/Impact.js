@@ -197,11 +197,11 @@ const Impact = () => {
                   and mentorship to boost your supply capacity and grow your
                   agribusiness.{" "}
                 </p>
-                <p>
+                {/* <p>
                   <a href="/">
                     Get Started <img src={ChevronRight} alt="" />
                   </a>
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

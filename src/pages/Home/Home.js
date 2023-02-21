@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
+// import { Link } from "react-router-dom";
 
 import "./Home.css";
 
 import PlainMap from "../../assets/img/plain-africa-map.svg";
+// import ColouredMap from "../../assets/img/map-col2.svg";
 import HomeImg1 from "../../assets/img/lp-1.png";
 import HomeImg2 from "../../assets/img/lp-2.png";
 import HomeImg3 from "../../assets/img/lp-3.png";
@@ -34,22 +36,18 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="hero-text">
-                <h2>Small Business Communities</h2>
+                {/* <h2>Small Business Communities</h2> */}
                 <h1>
-                  Big Market
-                  <br /> Opportunities
+                A Pan African Hub <br/>Facilitating African Trade
                 </h1>
                 <p>
-                  With a Global Breadth and African Depth, We are <br />{" "}
-                  Bridging the Gaps in Trade with and within Africa.
-                </p>
-                <p>
-                  <a href="/our-story">
-                    Learn more <img src={ChevronRight} alt="" />
-                  </a>
+                  With a Global Breadth and African Depth, We are
+                  Bridging <br/>the Gaps in Trade with and within Africa.
                 </p>
               </div>
-              {/* <button class="btn btn-danger hero-cta">Learn more <img src="img/chevron-right.svg" alt=""></button> */}
+              {/* <Link to="/what-we-do">
+                <button class="btn btn-danger hero-cta">Learn more<img className="hvr-icon" src={ChevronRight} alt="" /></button>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -60,12 +58,11 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-sm-12 col-xs-12">
-              {/* <h3>What we do</h3> */}
-              <h2>A Pan African Hub Facilitating African Trade </h2>
+              <h2>What we do</h2>
               <p>
                 Our mission and core business are clearly represented by our
                 name
-                <span>Traders of Africa</span>. We pride ourselves as African
+                <span> Traders of Africa</span>. We pride ourselves as African
                 trade harbingers.
               </p>
               <p>
@@ -80,7 +77,6 @@ const Home = () => {
                   <img className="hvr-icon" src={ChevronRight} alt="" />
                 </button>
               </a>
-              {/* <p><a href="#">Learn more <img src="img/chevron-right-org.svg" alt=""></a></p> */}
             </div>
             <div className="col-lg-6 col-6" align="right">
               <img

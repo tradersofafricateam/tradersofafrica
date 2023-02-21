@@ -15,56 +15,28 @@ const Footer = () => {
         <div className="footer-wrap">
           <div className="container">
             <div className="row footer-content">
-              <div className="col-lg-6 col-12">
+              <div className="col-lg-4 col-12">
                 <img className="ft-logo" src={LogoMark} alt="TOFA" />
                 <p className="tagline">
-                  Traders of Africa is a Pan African Hub for Facilitating Trade{" "}
-                  <br />
-                  with and within Africa through Technology
+                  © 2023 Traders of Africa. All Rights Reserved.
                 </p>
-                <a href="https://twitter.com/tradersofafrica">
-                  <img className="social-icon" src={Twitter} alt="Twitter" />
-                </a>
-                <a href="/">
-                  <img className="social-icon" src={Facebook} alt="Facebook" />
-                </a>
-                <a href="/">
-                  <img
-                    className="social-icon"
-                    src={Instagram}
-                    alt="Instagram"
-                  />
-                </a>
-                <a href="/">
-                  <img className="social-icon" src={Linkedin} alt="LinkedIn" />
-                </a>
               </div>
               <div className="col-lg-2 col-6">
                 <ul>
                   <h5 className="footer-headers">Company</h5>
                   <li>
-                    <Link to="/" className="text">
+                    <Link to="/our-story" className="text">
                       Our Story
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="text">
+                    <Link to="/what-we-do" className="text">
                       What we do
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="text">
+                    <Link to="/our-impact" className="text">
                       Our Impact
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="text">
-                      Market Intelligence
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="text">
-                      Partnerships
                     </Link>
                   </li>
                 </ul>
@@ -73,61 +45,55 @@ const Footer = () => {
                 <ul>
                   <h5 className="footer-headers">Our Solutions</h5>
                   <li>
-                    <Link to="/" className="text">
+                    <Link to="/buy-commodities" className="text">
                       Buyers Hub
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="text">
+                    <Link to="https://tradersofafrica.com" className="text">
                       Marketplace
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="text">
-                      TOFA Academy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="text">
+                    <Link to="/what-we-do" className="text">
                       SourcePro
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="text">
-                      Trade Finance
                     </Link>
                   </li>
                 </ul>
               </div>
-              <div className="col-lg-2 col-6">
+              <div className="col-lg-4 col-6">
                 <ul>
-                  <h5 className="footer-headers">Help &amp; Support</h5>
+                  <h5 className="footer-headers">Contact Us</h5>
                   <li>
-                    <Link to="/" className="text">
-                      Contact us
-                    </Link>
+                    7/9 Adebisi Oyenola Street, Idado Estate, Lekki Lagos
                   </li>
                   <li>
-                    <Link to="/" className="text">
-                      FAQ's
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="text">
-                      Marketplace
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="text">
-                      How to trade
-                    </Link>
+                    info@tradersofafrica.com
                   </li>
                 </ul>
+                <div className="mt-2">
+                  <Link to="https://twitter.com/tradersofafrica">
+                    <img className="social-icon" src={Twitter} alt="Twitter" />
+                  </Link>
+                  <Link to="https://web.facebook.com/tradersofafrica">
+                    <img className="social-icon" src={Facebook} alt="Facebook" />
+                  </Link>
+                  <Link to="https://www.instagram.com/tradersofafrica/">
+                    <img
+                      className="social-icon"
+                      src={Instagram}
+                      alt="Instagram"
+                    />
+                  </Link>
+                  <Link to="https://www.linkedin.com/company/tradersofafrica/">
+                    <img className="social-icon" src={Linkedin} alt="LinkedIn" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="bottom-wrap">
+        {/* <div className="bottom-wrap">
           <div className="container">
             <div className="row">
               <div className="col-lg-6">
@@ -140,7 +106,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </footer>
     </>
   );

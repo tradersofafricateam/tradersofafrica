@@ -153,7 +153,7 @@ const ViewOrderModal = () => {
 
           <header className="header">
             <div className="header__message me-5">
-              <h2>Order Summary</h2>
+              <h2>Order Information</h2>
             </div>
             <div className="header__search">
               <SearchInput placeholder="Search for orders, order status and more" />
@@ -191,9 +191,10 @@ const ViewOrderModal = () => {
           <main className="main">
             <div className="main-overview">
               <div className="overview-card row">
-                <h2>{orderInfo && orderInfo.orderNumber}</h2>
+                {/* <h2>{orderInfo && orderInfo.orderNumber}</h2> */}
+                {/* <h2>Order details</h2> */}
                 <div className="col-lg-6">
-                  <div className="os-details py-5">
+                  <div className="os-details py-4">
                     <table className="table table-borderless table-striped">
                       <tbody>
                         <tr>
@@ -301,7 +302,7 @@ const ViewOrderModal = () => {
                     </table>
                   </div>
                 </div>
-                <div className="col-lg-5 offset-1 py-5 ">
+                <div className="col-lg-5 offset-1 py-4">
                   {orderInfo.status === "CANCELLED" ? (
                     <div className="order-history ">
                       <h5 className="modal-sub-title">Order history</h5>
@@ -486,7 +487,7 @@ const ViewOrderModal = () => {
                     </div>
                   )}
                 </div>
-                <div>
+              <div>
                   {!orderInfo.buyerApproved && (
                     <div className="col-lg-12">
                       {!loader ? (

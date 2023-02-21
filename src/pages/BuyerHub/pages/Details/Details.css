@@ -12,6 +12,10 @@
   text-decoration: none;
 }
 
+#product-details .back-text a:hover {
+  color: #DC4D04;
+}
+
 #product-details .back-icon {
   margin-right: 15px;
 }

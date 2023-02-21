@@ -403,7 +403,7 @@ const UserSettings = () => {
                           name="fullName"
                           value={editProfile.fullName}
                           onChange={handleChange}
-                        />
+                          disabled />
                       </div>
                     </div>
                     <div className="col-lg-6">
@@ -422,7 +422,7 @@ const UserSettings = () => {
                           name="email"
                           value={editProfile.email}
                           onChange={handleChange}
-                        />
+                          disabled />
                       </div>
                     </div>
                   </div>
@@ -444,7 +444,7 @@ const UserSettings = () => {
                           name="phoneNumber"
                           value={editProfile.phoneNumber}
                           onChange={handleChange}
-                        />
+                          disabled />
                       </div>
                     </div>
                     <div className="col-lg-6">
@@ -463,7 +463,7 @@ const UserSettings = () => {
                           name="country"
                           value={editProfile.country}
                           onChange={handleChange}
-                        />
+                          disabled />
                       </div>
                     </div>
                   </div>

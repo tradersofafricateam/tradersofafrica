@@ -52,18 +52,26 @@ const Navbar = () => {
                   Our Impact
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   className="nav-link main-nav-link"
                   to="/market-intelligence"
                 >
                   Market Intelligence
                 </Link>
+              </li> */}
+              <li className="nav-item">
+                <Link
+                  className="nav-link main-nav-link"
+                  to="/buy-commodities"
+                >
+                  Buy Commodities
+                </Link>
               </li>
               {/* <li className="nav-item">
                       <Link className="nav-link main-nav-link" href="./market-intelligence.html">Sell Commodities</Link>
                   </li> */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   className="nav-link btn btn-danger nav-btn-sec"
                   to="/buyers-hub"
@@ -71,14 +79,14 @@ const Navbar = () => {
                 >
                   Marketplace
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link
                   className="nav-link btn btn-danger nav-btn"
-                  to="/buy-commodities"
+                  to="https://tradersofafrica.com"
                   role="button"
                 >
-                  Buyers Hub
+                  Marketplace
                 </Link>
               </li>
             </ul>
