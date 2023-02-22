@@ -10,6 +10,8 @@ import SuppliersMarket from "../../assets/img/sm-img.jpg";
 import SourcePro from "../../assets/img/sp2.png";
 import TradeFinance from "../../assets/img/network.png";
 import TofaAcademy from "../../assets/img/tcb-img.png";
+import TopImg from "../../assets/img/intell-img2.png";
+import OrangeCheck from "../../assets/img/check-orange.svg";
 
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -21,7 +23,7 @@ const Wedo = () => {
       <Navbar />
       <div>
         {/* What we do top */}
-        <section id="what-we-do-top">
+        {/* <section id="what-we-do-top">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
@@ -31,6 +33,26 @@ const Wedo = () => {
                   <br />
                   to the challenges we face in facilitating trade.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section> */}
+
+        {/* Market Intelligence Top */}
+        <section id="intel-top">
+          <img className="intell-img" src={TopImg} alt="" />
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-6">
+                <h2>Backed by Technology</h2>
+                <p>Our data are reliably informed by the large network of people and partners we have across the various countries in Africa. This data is updated regularly to provide key information about products made in Africa. </p>
+                <h3><img src={OrangeCheck} alt="" />Monitoring &amp; Real-time Reporting</h3>
+                <h3><img src={OrangeCheck} alt="" />Product Mapping</h3>
+                <h3><img src={OrangeCheck} alt="" />Seasonality Data</h3>
+                <h3><img src={OrangeCheck} alt="" />Updated Commodity Prices</h3>
+                <h3><img src={OrangeCheck} alt="" />Instant Payments across Africa</h3>
+              </div>
+              <div className="col-lg-6">
               </div>
             </div>
           </div>
@@ -85,7 +107,7 @@ const Wedo = () => {
                     international markets.
                   </p>
                   <p>
-                    <Link className="hvr-icon-forward" to="https://tradersofafrica.com">
+                    <Link className="hvr-icon-forward" to="https://marketplace.tradersofafrica.com">
                       Visit Marketplace
                       <img className="hvr-icon" src={ChevronRightOrg} alt="" />
                     </Link>
@@ -99,26 +121,6 @@ const Wedo = () => {
         {/* Our Services */}
         <section id="sourcepro-finance">
           <div className="container">
-            <div className="row row-margin">
-              <div className="col-lg-6 padding-top">
-                <h2>Let SourcePro do the work</h2>
-                <p>
-                  We have amassed a team of sourcing professionals who work 24/7
-                  to provide products according to our buyers’ specifications.
-                  SourcePro guarantees quality, logistics and off-take solutions
-                  to both buyers and suppliers.
-                </p>
-                {/* <p>
-                  <Link className="hvr-icon-forward" to="/buy-commodities">
-                    Make an Inquiry{" "}
-                    <img className="hvr-icon" src={ChevronRightOrg} alt="" />
-                  </Link>
-                </p> */}
-              </div>
-              <div className="col-lg-6" align="center">
-                <img className="img-fluid sp-img" src={SourcePro} alt="" />
-              </div>
-            </div>
             <div className="row row-margin">
               <div className="col-lg-6">
                 <h2>
@@ -140,6 +142,26 @@ const Wedo = () => {
               </div>
               <div className="col-lg-6" align="center">
                 <img className="img-fluid tf-img" src={TradeFinance} alt="" />
+              </div>
+            </div>
+            <div className="row row-margin">
+              <div className="col-lg-6" align="left">
+                <img className="img-fluid sp-img" src={SourcePro} alt="" />
+              </div>
+              <div className="col-lg-6 padding-top">
+                <h2>Let SourcePro do the work</h2>
+                <p>
+                  We have amassed a team of sourcing professionals who work 24/7
+                  to provide products according to our buyers’ specifications.
+                  SourcePro guarantees quality, logistics and off-take solutions
+                  to both buyers and suppliers.
+                </p>
+                {/* <p>
+                  <Link className="hvr-icon-forward" to="/buy-commodities">
+                    Make an Inquiry{" "}
+                    <img className="hvr-icon" src={ChevronRightOrg} alt="" />
+                  </Link>
+                </p> */}
               </div>
             </div>
             <div className="row">

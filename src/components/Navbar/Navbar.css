@@ -4,7 +4,7 @@
     border: none; }
   
 .main-nav {
-    padding: 12px 0;
+    padding: 10px 0;
     background-color: transparent !important; }
 
 .navbar-nav .nav-item {
@@ -71,14 +71,15 @@ font-size: .85rem; }
     border: 1px solid #DC4D04!important;
     border: 1px solid #DC4D04!important;
     border-radius: 4px;
-    padding: 12px 32px !important;
+    padding: 9px 28px !important;
     font-size: 1rem;
     color: #FFFFFF!important;
     font-size: 0.85rem !important;
     border-radius: 4px;
     box-shadow: none !important;
     outline: 0px !important;
-    margin-left: 1.2rem; 
+    margin-left: 1.2rem;
+    margin-top: .3rem; 
 }
 
 .nav-btn-sec {
@@ -86,14 +87,16 @@ font-size: .85rem; }
     border: 1px solid #DC4D04!important;
     border: 1px solid !important;
     border-radius: 4px;
-    padding: 12px 32px !important;
+    padding: 9px 28px !important;
     font-size: 1rem;
     color: #DC4D04 !important;
     font-size: 0.85rem !important;
     border-radius: 4px;
     box-shadow: none !important;
     outline: 0px !important;
-    margin-left: 1.2rem; }
+    margin-left: 1.2rem; 
+    margin-top: .4rem; 
+}
 
 .nav-btn:hover {
     background: #F05305;

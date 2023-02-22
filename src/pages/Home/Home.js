@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./Home.css";
 
-import PlainMap from "../../assets/img/plain-africa-map.svg";
+import PlainMap from "../../assets/img/tst.jpg";
 // import ColouredMap from "../../assets/img/map-col2.svg";
 import HomeImg1 from "../../assets/img/lp-1.png";
 import HomeImg2 from "../../assets/img/lp-2.png";
@@ -17,7 +17,7 @@ import ChevronRight from "../../assets/img/chevron-right.svg";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Partners from "../../components/Partners/Partners";
-import Testimonials from "../../components/Testimonials/Testimonials";
+// import Testimonials from "../../components/Testimonials/Testimonials";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -45,9 +45,9 @@ const Home = () => {
                   Bridging <br/>the Gaps in Trade with and within Africa.
                 </p>
               </div>
-              {/* <Link to="/what-we-do">
+              <Link to="/our-story">
                 <button class="btn btn-danger hero-cta">Learn more<img className="hvr-icon" src={ChevronRight} alt="" /></button>
-              </Link> */}
+              </Link>
             </div>
           </div>
         </div>
@@ -71,9 +71,9 @@ const Home = () => {
                 a safe platform dedicated to solving issues of trust and
                 acceptable payment terms for both buyers and African suppliers.
               </p>
-              <a className="hvr-icon-forward" href="/our-story">
+              <a className="hvr-icon-forward" href="/what-we-do">
                 <button className="btn btn-danger">
-                  Learn more{" "}
+                  Read more{" "}
                   <img className="hvr-icon" src={ChevronRight} alt="" />
                 </button>
               </a>
@@ -199,7 +199,7 @@ const Home = () => {
         </div>
       </section>
 
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Partners />
       <Footer />
     </div>

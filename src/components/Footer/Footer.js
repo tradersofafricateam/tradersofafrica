@@ -50,7 +50,7 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="https://tradersofafrica.com" className="text">
+                    <Link to="https://marketplace.tradersofafrica.com" className="text">
                       Marketplace
                     </Link>
                   </li>

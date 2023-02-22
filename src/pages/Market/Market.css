@@ -1,43 +1,4 @@
-#intel-top {
-  background: #f9f9f9;
-  padding: 50px 0;
-  min-height: 850px;
-}
-#intel-top .container {
-  position: relative;
-}
-#intel-top .intell-img {
-  height: 700px;
-  position: absolute;
-  right: 0;
-}
-#intel-top h2,
-#intel-top .h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 50px 0 0;
-  padding: 0;
-}
-#intel-top h3,
-#intel-top .h3 {
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0;
-  padding: 25px 0 15px;
-}
-#intel-top h3 img,
-#intel-top .h3 img {
-  margin-right: 15px;
-}
-#intel-top p {
-  font-size: 16px;
-  font-weight: 300;
-  margin: 0;
-  padding: 15px 0 10px;
-  line-height: 28px;
-}
-
-#comm-data {
+/* #comm-data {
   padding: 100px 0;
   background-image: url("../../assets/img/insight-bg.png");
   background-repeat: no-repeat;
@@ -45,10 +6,10 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+} */
 
 /*  product dropdown*/
-label {
+/* label {
   background-color: transparent;
 }
 .products-ctn {
@@ -61,15 +22,15 @@ option {
   background-color: transparent;
   color: #282828;
   outline: none;
-}
+} */
 
 /* end of product dropdown */
-#comm-data svg .cls-1 {
+/* #comm-data svg .cls-1 {
   fill: #282828;
   stroke: #ffffff !important;
   stroke-width: 1.5;
   transition: 0.8s;
-}
+} */
 
 /* #comm-data svg .cls-1:hover {
   fill: #fb7837 !important;
@@ -78,7 +39,7 @@ option {
   cursor: pointer;
 } */
 
-#comm-data .commodity-wrap h2,
+/* #comm-data .commodity-wrap h2,
 #comm-data .commodity-wrap .h2 {
   color: #ffffff;
   font-size: 2rem;
@@ -134,4 +95,4 @@ option {
     box-shadow: none !important;
     outline: 0px !important;
     border-radius: 4px;
-}
+} */

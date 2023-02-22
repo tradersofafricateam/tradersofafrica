@@ -206,7 +206,7 @@ const ViewOrderModal = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="osd-title">Order :</td>
+                          <td className="osd-title">Order Number:</td>
                           <td>{orderInfo && orderInfo.orderNumber}</td>
                         </tr>
                         <tr>
@@ -292,6 +292,12 @@ const ViewOrderModal = () => {
                           </td>
                         </tr>
                         <tr>
+                          <td className="osd-title">Order Notes:</td>
+                          <td>
+                            {orderInfo.note && orderInfo.note}
+                          </td>
+                        </tr>
+                        <tr>
                           <td className="osd-title">Total Cost:</td>
                           <td>
                             USD{" "}
@@ -326,7 +332,7 @@ const ViewOrderModal = () => {
                         <div className="order-history-details">
                           <h6 className="order-history-title">Order Placed</h6>
                           <p className="order-history-info">
-                            Placed Order for{" "}
+                            Order placed for{" "}
                             {orderInfo.quantityOrdered &&
                               numberWithCommas(orderInfo.quantityOrdered)}
                             MT of{" "}
@@ -347,11 +353,11 @@ const ViewOrderModal = () => {
                         ></div>
                         <div className="order-history-details">
                           <h6 className="order-history-title">
-                            Payment Uploaded
+                            Payment
                           </h6>
                           <p className="order-history-info">
-                            Uploaded and processed requirements in the payment
-                            type of {orderInfo && orderInfo.paymentTerm}
+                            Your selected payment method is {orderInfo && orderInfo.paymentTerm}
+                            &nbsp;Please upload proof of payment
                           </p>
                           {orderInfo.paymentTerm === "DP" ? (
                             ""

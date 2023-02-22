@@ -36,11 +36,9 @@ const Impact = () => {
               <div className="col-lg-6">
                 <h2>Customer Stories</h2>
                 <p className="cutomer-quote">
-                  The aim of TOFA Academy is to Build a Network of Credible
-                  Suppliers all over Africa in Order to Meet Both Local and
-                  Global Demand.
+                I'm delighted TOFA has brought technology into agriculture, which is desperately needed in the field; also, their creation of market access addresses a key difficulty for individuals in agribusiness, particularly women.
                 </p>
-                <p className="customer-name">Ajibike, 50 Million Women Speak</p>
+                <p className="customer-name">Dr Ajibike Saratu Oluwatimilehin, 50 Million Women Speak</p>
                 {/* <div className="d-flex justify-content-start play-icon-wrap">
                   <img src={PlayBtnW} alt="" />
                   <p className="play-icon-text">

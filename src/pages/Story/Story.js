@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./Story.css";
 
-// import PlayBtn from "../../assets/img/dark-play-btn.svg";
+import PlayBtn from "../../assets/img/dark-play-btn.svg";
 import LinkedIn from "../../assets/img/linkedin.svg";
 
 import Uju from "../../assets/img/team/uju.jpg";
@@ -14,6 +14,10 @@ import Chinedu from "../../assets/img/team/chinedu.jpg";
 import Jonathan from "../../assets/img/team/jon.jpeg";
 import Blessing from "../../assets/img/team/blessing.jpg";
 import Dami from "../../assets/img/team/dami.jpg";
+
+import Victor from "../../assets/img/team/victor.jpeg";
+import Joseph from "../../assets/img/team/joseph.jpg";
+import Emeka from "../../assets/img/team/emeka.jpg";
 
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -42,14 +46,14 @@ const Story = () => {
               <h3>
                 There is an urgent need to expose to Africans what is obtainable
                 in our locality and from our surroundings, as well as showcase
-                African products to the rest of the world.
+                African products to the rest of the world. - Uju Uzo-Ojinnaka
               </h3>
-              {/* <div className="d-flex justify-content-start">
+              <div className="d-flex justify-content-start">
                 <img src={PlayBtn} alt="" />
                 <p className="play-icon-text">
-                  <a href="/"> Watch the Groundnut Story</a>
+                  <Link target="_blank" to="https://www.youtube.com/watch?v=zsj0Tw38qj0"> Watch the Groundnut Story</Link>
                 </p>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -109,7 +113,7 @@ const Story = () => {
         <div className="container">
           <div className="row mb-4">
             <div className="col-lg-12">
-              <h2>Our Leadership Team</h2>
+              <h2>Our Team Awesome</h2>
               <p>
                 Traders of Africa promotes a relaxed, culturally diverse
                 workplace for the optimal 
@@ -175,6 +179,22 @@ const Story = () => {
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
+                  <img className="team-img" src={Dami} alt="" />
+                  <Link to="https://www.linkedin.com/in/damilola-anifowoshe-859a9718a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                </div>
+                <h4>Damilola Anifowoshe</h4>
+                <p>Marketing & Public Relations</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
+                  <img className="team-img" src={Victor} alt="" />
+                  <Link to="https://www.linkedin.com/in/ejiogu-victor-4b594916a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                </div>
+                <h4>Victor Ejiogu</h4>
+                <p>Digital Lead</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
                   <img className="team-img" src={Blessing} alt="" />
                   <Link to="https://www.linkedin.com/in/blessing-igri-25b25a179/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
@@ -183,11 +203,19 @@ const Story = () => {
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="team-img" src={Dami} alt="" />
-                  <Link to="https://www.linkedin.com/in/damilola-anifowoshe-859a9718a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <img className="team-img" src={Emeka} alt="" />
+                  <Link to="https://www.linkedin.com/in/nnaemeka-ogunewe-45379a167/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
                 </div>
-                <h4>Damilola Anifowoshe</h4>
-                <p>Marketing & Public Relations</p>
+                <h4>Nnaemeka Ogunewe</h4>
+                <p>Front End Developer</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
+                  <img className="team-img" src={Joseph} alt="" />
+                  <Link to="https://www.linkedin.com/in/joseph-matthias-a66745225/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                </div>
+                <h4>Joseph Matthias</h4>
+                <p>TOFA Pay Executive</p>
               </div>
             </div>
           </div>
