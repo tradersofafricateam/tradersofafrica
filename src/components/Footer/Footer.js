@@ -61,7 +61,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-lg-4 col-6">
+              <div className="col-lg-4 col-12">
                 <ul>
                   <h5 className="footer-headers">Contact Us</h5>
                   <li>

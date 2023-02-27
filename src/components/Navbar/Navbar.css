@@ -1,3 +1,7 @@
+.navbar-toggler-icon {
+    width: 2rem;
+}
+
 .navbar-toggler {
     padding: 0 !important;
     color: #282828 !important;

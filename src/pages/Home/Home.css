@@ -207,3 +207,58 @@
     font-weight: 400;
     font-size: 1.2rem;
 }
+
+@media (max-width: 768px) {
+
+    #main-hero {
+        height: 65vh;
+    }
+    #main-hero .row {
+        height: 65vh;
+        align-items: center;
+    }
+    #main-hero .hero-text h1, #main-hero .hero-text .h1 {
+        font-size: 2.8rem;
+    }
+    #lp-what-we-do {
+        padding: 50px 0;
+    }
+    #lp-what-we-do h2, #lp-what-we-do .h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 35px;
+        margin: 0;
+        padding: 0;
+    }
+    #lp-what-we-do .lp-map {
+        display: none;
+    }
+    #lp-our-services .row {
+        margin-bottom: 35px !important;
+    }
+    #lp-our-services .line {
+        display: none;
+    }
+    #lp-our-services .lp-service-info {
+        padding: 0;
+    }
+    #lp-our-services .lp-service-info h2, #lp-our-services .lp-service-info .h2 {
+        font-size: 1.5rem;
+        padding: 10px 0 0;
+    }
+    #lp-our-services .lp-service-info p {
+        font-size: 16px;
+        line-height: 28px;
+    }
+    #lp-our-services .lp-img {
+        width: 100%;
+        float: left;
+    }
+    #lp-product {
+        padding: 50px 0;
+    }
+    #lp-product .product-box {
+        margin-bottom: 25px;
+    }
+
+}
