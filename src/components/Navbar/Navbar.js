@@ -83,7 +83,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link
                   className="nav-link btn btn-danger nav-btn"
-                  to="https://marketplace.tradersofafrica.com"
+                  to={{ pathname: "https://marketplace.tradersofafrica.com" }}
                   role="button"
                 >
                   Marketplace
