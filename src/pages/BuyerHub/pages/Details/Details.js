@@ -351,13 +351,13 @@ const Details = () => {
                 </div>
 
                 {/* Product Certification */}
-                <div className="m-product-spec-box">
+                {/* <div className="m-product-spec-box">
                   <h3 className="m-product-spec-title2 mb-1 mt-5">
                     Product Certification
                   </h3>
 
                   <div className="row"></div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
