@@ -102,9 +102,11 @@ const TrendingProduct = ({ sectionTitle }) => {
                           <p className="product-spec-sum">
                             <span>Available Specs:</span>
                             <br />
-                            {Capitalize(
-                              Object.entries(item.productSpecification)[0][1]
-                            )}
+                            {Object.keys(item.productSpecification).length >
+                              0 &&
+                              Capitalize(
+                                Object.entries(item.productSpecification)[0][1]
+                              )}
                           </p>
                           <p className="product-link">View Product</p>
                         </div>
