@@ -308,8 +308,8 @@ const Details = () => {
                       {productInfo.productSpecification &&
                         Object.entries(productInfo.productSpecification)
                           .slice(1, productInfo.productSpecification.length)
-                          .map((specification) => (
-                            <tr>
+                          .map((specification, index) => (
+                            <tr key={index}>
                               <td className="mps-title">
                                 {Capitalize(specification[0])}:
                               </td>
@@ -462,14 +462,18 @@ const Details = () => {
                                 <option defaultValue="selected">
                                   Select payment terms
                                 </option>
-                                <option value="LC">Letter of Credit (LC)</option>
+                                <option value="LC">
+                                  Letter of Credit (LC)
+                                </option>
                                 <option value="CAD">
                                   Cash Against Delivery (CAD)
                                 </option>
                                 <option value="DP">
                                   Document Against Payment (DP)
                                 </option>
-                                <option value="TT">Telegraphic Transfer (TT)</option>
+                                <option value="TT">
+                                  Telegraphic Transfer (TT)
+                                </option>
                               </select>
                             </div>
                             <div className="col-lg-6 mb-3">
