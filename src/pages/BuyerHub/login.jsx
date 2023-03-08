@@ -67,6 +67,10 @@ export default function Login() {
       setLoading(false);
       console.log(err);
       localStorage.setItem("user", false);
+      if (err.message && err.message === "Network Error") {
+        return navigate(`/no-connection`);
+      }
+
       if (!err.response.data.errors) {
         return navigate(`/no-connection`);
       }
