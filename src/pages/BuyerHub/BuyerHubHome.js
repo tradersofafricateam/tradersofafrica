@@ -82,6 +82,8 @@ const BuyerHome = () => {
   //   }
   // };
 
+  console.log("product", product);
+
   // useEffect(() => {
   //   getBanner();
   // }, []);
@@ -249,9 +251,11 @@ const BuyerHome = () => {
                           <p className="product-spec-sum">
                             <span>Available Specs:</span>
                             <br />
-                            {Capitalize(
-                              Object.entries(item.productSpecification)[0][1]
-                            )}
+                            {Object.keys(item.productSpecification).length >
+                              0 &&
+                              Capitalize(
+                                Object.entries(item.productSpecification)[0][1]
+                              )}
                           </p>
                           <p className="product-link">View Product</p>
                         </div>
@@ -308,7 +312,10 @@ const BuyerHome = () => {
             </div>
             <div className="modal-body">
               {succesMsg ? (
-                <div className="text-center mt-5 mb-5">We have received your product inquiry. We willl get back to you shortly.</div>
+                <div className="text-center mt-5 mb-5">
+                  We have received your product inquiry. We willl get back to
+                  you shortly.
+                </div>
               ) : (
                 <div className="row">
                   <div className="col-lg-12">
@@ -406,9 +413,15 @@ const BuyerHome = () => {
                               Select payment terms
                             </option>
                             <option value="LC">Letter of Credit (LC)</option>
-                            <option value="DP">Document Against Payment (DP)</option>
-                            <option value="CAD">Cash Against Document (CAD)</option>
-                            <option value="TT">Telegraphic Transfer (TT)</option>
+                            <option value="DP">
+                              Document Against Payment (DP)
+                            </option>
+                            <option value="CAD">
+                              Cash Against Document (CAD)
+                            </option>
+                            <option value="TT">
+                              Telegraphic Transfer (TT)
+                            </option>
                           </select>
                         </div>
                         <div className="col-lg-6 mb-3">

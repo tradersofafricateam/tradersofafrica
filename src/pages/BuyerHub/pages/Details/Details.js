@@ -236,7 +236,8 @@ const Details = () => {
                       <tbody>
                         <tr>
                           <td className="mps-title">
-                            {productInfo.productSpecification &&
+                            {Object.keys(productInfo.productSpecification)
+                              .length > 0 &&
                               Capitalize(
                                 Object.entries(
                                   productInfo.productSpecification
@@ -245,7 +246,8 @@ const Details = () => {
                             :
                           </td>
                           <td>
-                            {productInfo.productSpecification &&
+                            {Object.keys(productInfo.productSpecification)
+                              .length > 0 &&
                               Capitalize(
                                 Object.entries(
                                   productInfo.productSpecification
@@ -305,7 +307,8 @@ const Details = () => {
                   </h3>
                   <table className="table table-striped">
                     <tbody>
-                      {productInfo.productSpecification &&
+                      {Object.keys(productInfo.productSpecification).length >
+                        0 &&
                         Object.entries(productInfo.productSpecification)
                           .slice(1, productInfo.productSpecification.length)
                           .map((specification, index) => (
@@ -318,7 +321,7 @@ const Details = () => {
                           ))}
                       <tr>
                         <td className="mps-title">Sub-category:</td>
-                        <td>{productInfo.subCategory}</td>
+                        <td>{productInfo.subCategory}</td>r
                       </tr>
 
                       <tr>
