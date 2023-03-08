@@ -103,7 +103,7 @@ input, select, textarea {
     width:100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 /* .p-container:after {
     content: '';
@@ -124,8 +124,7 @@ input, select, textarea {
 .product-card {
     width: 275px;
     overflow: hidden;
-   /* margin-right: 25px;
-    */
+   margin-right: 25px;
     margin-bottom: 50px;
     flex: 0 0 auto;
     cursor: pointer;
