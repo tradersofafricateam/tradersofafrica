@@ -60,14 +60,14 @@ const Navbar = () => {
                   Market Intelligence
                 </Link>
               </li> */}
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <Link
                   className="nav-link main-nav-link"
                   to="/buy-commodities"
                 >
                   Buy Commodities
                 </Link>
-              </li> */}
+              </li>
               {/* <li className="nav-item">
                       <Link className="nav-link main-nav-link" href="./market-intelligence.html">Sell Commodities</Link>
                   </li> */}
