@@ -82,8 +82,6 @@ const BuyerHome = () => {
   //   }
   // };
 
-  console.log("product", product);
-
   // useEffect(() => {
   //   getBanner();
   // }, []);
