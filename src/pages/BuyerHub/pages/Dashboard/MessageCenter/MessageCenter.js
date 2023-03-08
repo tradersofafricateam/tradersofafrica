@@ -93,9 +93,7 @@ const MessageCenter = () => {
 
   useEffect(() => {
     if (user) {
-      socket.current = io(
-        "http://ec2-18-221-181-52.us-east-2.compute.amazonaws.com:8081"
-      );
+      socket.current = io("https://buyershubapi.tradersofafrica.com:4433");
       socket.current.emit(socketEvents.addUser, user.id, user.type);
     }
   }, [user]);

@@ -38,15 +38,20 @@ const Home = () => {
               <div className="hero-text">
                 {/* <h2>Small Business Communities</h2> */}
                 <h1>
-                A Pan African Hub <br/>Facilitating African Trade
+                  A Pan African Hub <br />
+                  Facilitating African Trade
                 </h1>
                 <p>
-                  With a Global Breadth and African Depth, We are
-                  Bridging <br/>the Gaps in Trade with and within Africa.
+                  With a Global Breadth and African Depth, We are Bridging{" "}
+                  <br />
+                  the Gaps in Trade with and within Africa.
                 </p>
               </div>
               <Link to="/our-story">
-                <button class="btn btn-danger hero-cta">Learn more<img className="hvr-icon" src={ChevronRight} alt="" /></button>
+                <button className="btn btn-danger hero-cta">
+                  Learn more
+                  <img className="hvr-icon" src={ChevronRight} alt="" />
+                </button>
               </Link>
             </div>
           </div>
