@@ -15,7 +15,7 @@ import "./Details.css";
 
 import { GlobalContext } from "../../../../components/utils/GlobalState";
 import TrendingProduct from "../../components/TrendingProduct";
-import CommodityInsight from "../../components/CommodityInsight";
+// import CommodityInsight from "../../components/CommodityInsight";
 import CardSkeleton from "../CardSkeleton";
 
 const Details = () => {
@@ -515,7 +515,7 @@ const Details = () => {
           </div>
         </section>
 
-        <CommodityInsight productInfo={productInfo} />
+        {/* <CommodityInsight productInfo={productInfo} /> */}
         <TrendingProduct sectionTitle={productInterest} />
       </div>
       <Footer />

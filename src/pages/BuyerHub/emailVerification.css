@@ -21,6 +21,10 @@
   margin-left: 5px;
 }
 
+.re-verify {
+  color: #dd4f05;
+}
+
 @media (max-width: 900px) {
   .verify-email {
     width: 90%;
