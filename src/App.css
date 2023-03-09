@@ -124,7 +124,7 @@ input, select, textarea {
 .product-card {
     width: 275px;
     overflow: hidden;
-   margin-right: 25px;
+    margin-right: 15px;
     margin-bottom: 50px;
     flex: 0 0 auto;
     cursor: pointer;

@@ -105,8 +105,14 @@ const TrendingProduct = ({ sectionTitle }) => {
                             {Object.keys(item.productSpecification).length >
                               0 &&
                               Capitalize(
-                                Object.entries(item.productSpecification)[0][1]
+                                Object.entries(item.productSpecification)[0][0]
                               )}
+                            :{" "}
+                            {Object.keys(item.productSpecification).length >
+                              0 &&
+                              Object.entries(
+                                item.productSpecification
+                              )[0][1].slice(0, 16)}
                           </p>
                           <p className="product-link">View Product</p>
                         </div>
