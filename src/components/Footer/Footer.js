@@ -50,9 +50,9 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to={{ pathname: "https://marketplace.tradersofafrica.com" }} className="text">
+                    <a className="text" target="_blank" rel="noopener noreferrer" href="https://marketplace.tradersofafrica.com">
                       Marketplace
-                    </Link>
+                    </a>
                   </li>
                   <li>
                     <Link to="/what-we-do" className="text">

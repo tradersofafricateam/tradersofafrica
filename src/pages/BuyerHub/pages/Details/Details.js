@@ -321,7 +321,7 @@ const Details = () => {
                           ))}
                       <tr>
                         <td className="mps-title">Sub-category:</td>
-                        <td>{productInfo.subCategory}</td>r
+                        <td>{productInfo.subCategory}</td>
                       </tr>
 
                       <tr>

@@ -107,10 +107,10 @@ const Wedo = () => {
                     international markets.
                   </p>
                   <p>
-                    <Link className="hvr-icon-forward" to={{ pathname: "https://marketplace.tradersofafrica.com" }}>
+                    <a className="hvr-icon-forward" target="_blank" rel="noopener noreferrer" href="https://marketplace.tradersofafrica.com">
                       Visit Marketplace
                       <img className="hvr-icon" src={ChevronRightOrg} alt="" />
-                    </Link>
+                    </a>
                   </p>
                 </div>
               </div>

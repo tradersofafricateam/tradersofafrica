@@ -81,13 +81,9 @@ const Navbar = () => {
                 </Link>
               </li> */}
               <li className="nav-item">
-                <Link
-                  className="nav-link btn btn-danger nav-btn"
-                  to={{ pathname: "https://marketplace.tradersofafrica.com" }}
-                  role="button"
-                >
+                <a className="nav-link btn btn-danger nav-btn" role="button" target="_blank" rel="noopener noreferrer" href="https://marketplace.tradersofafrica.com">
                   Marketplace
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
