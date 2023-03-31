@@ -50,7 +50,12 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <a className="text" target="_blank" rel="noopener noreferrer" href="https://marketplace.tradersofafrica.com">
+                    <a
+                      className="text"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://marketplace.tradersofafrica.com"
+                    >
                       Marketplace
                     </a>
                   </li>
@@ -64,30 +69,50 @@ const Footer = () => {
               <div className="col-lg-4 col-12">
                 <ul>
                   <h5 className="footer-headers">Contact Us</h5>
-                  <li>
-                    7/9 Adebisi Oyenola Street, Idado Estate, Lekki Lagos
-                  </li>
-                  <li>
-                    info@tradersofafrica.com
-                  </li>
+                  <li>7/9 Adebisi Oyenola Street, Idado Estate, Lekki Lagos</li>
+                  <li>info@tradersofafrica.com</li>
                 </ul>
                 <div className="mt-2">
-                  <Link to="https://twitter.com/tradersofafrica">
+                  <a
+                    href="https://twitter.com/tradersofafrica"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img className="social-icon" src={Twitter} alt="Twitter" />
-                  </Link>
-                  <Link to="https://web.facebook.com/tradersofafrica">
-                    <img className="social-icon" src={Facebook} alt="Facebook" />
-                  </Link>
-                  <Link to="https://www.instagram.com/tradersofafrica/">
+                  </a>
+                  <a
+                    href="https://web.facebook.com/tradersofafrica"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      className="social-icon"
+                      src={Facebook}
+                      alt="Facebook"
+                    />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/tradersofafrica/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img
                       className="social-icon"
                       src={Instagram}
                       alt="Instagram"
                     />
-                  </Link>
-                  <Link to="https://www.linkedin.com/company/tradersofafrica/">
-                    <img className="social-icon" src={Linkedin} alt="LinkedIn" />
-                  </Link>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/tradersofafrica/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      className="social-icon"
+                      src={Linkedin}
+                      alt="LinkedIn"
+                    />
+                  </a>
                 </div>
               </div>
             </div>

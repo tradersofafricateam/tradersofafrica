@@ -51,7 +51,13 @@ const Story = () => {
               <div className="d-flex justify-content-start">
                 <img src={PlayBtn} alt="" />
                 <p className="play-icon-text">
-                  <Link target="_blank" to="https://www.youtube.com/watch?v=zsj0Tw38qj0"> Watch the Groundnut Story</Link>
+                  <Link
+                    target="_blank"
+                    to="https://www.youtube.com/watch?v=zsj0Tw38qj0"
+                  >
+                    {" "}
+                    Watch the Groundnut Story
+                  </Link>
                 </p>
               </div>
             </div>
@@ -116,10 +122,9 @@ const Story = () => {
               <h2>Our Team Awesome</h2>
               <p>
                 Traders of Africa promotes a relaxed, culturally diverse
-                workplace for the optimal 
-                performance of its employees, as well as an all-round friendly
-                experience for 
-                anyone who walks through our doors. We are called Team Awesome!
+                workplace for the optimal performance of its employees, as well
+                as an all-round friendly experience for anyone who walks through
+                our doors. We are called Team Awesome!
               </p>
               <h3>
                 A team of young, dynamic innovators sowing the <br />
@@ -132,7 +137,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Uju} alt="" />
-                  <Link to="https://www.linkedin.com/in/uju-uzo-ojinnaka-46288041/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/uju-uzo-ojinnaka-46288041/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Uju Uzo-Ojinnaka</h4>
                 <p>Founder &amp; CEO</p>
@@ -140,7 +151,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Jonathan} alt="" />
-                  <Link to="https://www.linkedin.com/in/jonathan-ojesebholo-mba-fmva-b624492a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/jonathan-ojesebholo-mba-fmva-b624492a/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Jonathan Ojesebholo</h4>
                 <p>Head, TOFA Pay</p>
@@ -148,7 +165,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Oge} alt="" />
-                  <Link to="https://www.linkedin.com/in/oge-belonwu-868b2866/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/oge-belonwu-868b2866/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Oge Belonwu</h4>
                 <p>Head, Operations</p>
@@ -156,7 +179,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Erhun} alt="" />
-                  <Link to="https://www.linkedin.com/in/erhun-abbe-3ba4617a"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/erhun-abbe-3ba4617a"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Erhun Abbe</h4>
                 <p>Head, Digital &amp; Partnerships</p>
@@ -164,7 +193,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Bambam} alt="" />
-                  <Link to="https://www.linkedin.com/in/ayobamidele-mebude-448454144/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/ayobamidele-mebude-448454144/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Bamidele Mebude</h4>
                 <p>Human Resource Manager</p>
@@ -172,7 +207,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Chinedu} alt="" />
-                  <Link to="https://www.linkedin.com/in/chinedu-odunukwe-55a2b011b/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/chinedu-odunukwe-55a2b011b/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Chinedu Odunukwe</h4>
                 <p>Finance Officer</p>
@@ -180,7 +221,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Dami} alt="" />
-                  <Link to="https://www.linkedin.com/in/damilola-anifowoshe-859a9718a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/damilola-anifowoshe-859a9718a/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Damilola Anifowoshe</h4>
                 <p>Marketing & Public Relations</p>
@@ -188,7 +235,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Victor} alt="" />
-                  <Link to="https://www.linkedin.com/in/ejiogu-victor-4b594916a/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/ejiogu-victor-4b594916a/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Victor Ejiogu</h4>
                 <p>Digital Lead</p>
@@ -196,7 +249,9 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Blessing} alt="" />
-                  <Link to="https://www.linkedin.com/in/blessing-igri-25b25a179/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a href="https://www.linkedin.com/in/blessing-igri-25b25a179/">
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Blessing Igri</h4>
                 <p>Head, SourcePro</p>
@@ -204,7 +259,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Emeka} alt="" />
-                  <Link to="https://www.linkedin.com/in/nnaemeka-ogunewe-45379a167/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/nnaemeka-ogunewe-45379a167/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Nnaemeka Ogunewe</h4>
                 <p>Front End Developer</p>
@@ -212,7 +273,13 @@ const Story = () => {
               <div className="l-member-wrap">
                 <div className="l-member-img">
                   <img className="team-img" src={Joseph} alt="" />
-                  <Link to="https://www.linkedin.com/in/joseph-matthias-a66745225/"><img className="linkedin-icon" src={LinkedIn} alt="" /></Link>
+                  <a
+                    href="https://www.linkedin.com/in/joseph-matthias-a66745225/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
                 </div>
                 <h4>Joseph Matthias</h4>
                 <p>TOFA Pay Executive</p>
