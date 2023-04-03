@@ -20,7 +20,7 @@ import CardSkeleton from "./pages/CardSkeleton";
 
 const BuyerHome = () => {
   const [country, setCountry] = useState("");
-  const { userLoading } = useContext(GlobalContext);
+  const { userLoading, user } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(false);
   const [succesMsg, setSuccessMsg] = useState(false);
@@ -257,10 +257,9 @@ const BuyerHome = () => {
                             :{" "}
                             {Object.keys(item.productSpecification).length >
                               0 &&
-                              Object.entries(item.productSpecification)[0][1].slice(
-                                0,
-                                16
-                              )}
+                              Object.entries(
+                                item.productSpecification
+                              )[0][1].slice(0, 16)}
                           </p>
                           <p className="product-link">View Product</p>
                         </div>
@@ -286,9 +285,15 @@ const BuyerHome = () => {
                 </p>
               </div>
               <div className="inq-right flex-shrink-0">
-                <button data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Make Inquiry
-                </button>
+                {user ? (
+                  <button data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Make Inquiry
+                  </button>
+                ) : (
+                  <Link to="/login">
+                    <button>Make Inquiry</button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
