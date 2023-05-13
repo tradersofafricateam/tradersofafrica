@@ -24,7 +24,7 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
-            <li className="nav-item">
+              <li className="nav-item">
                 <Link
                   className="nav-link main-nav-link"
                   aria-current="page"
@@ -61,10 +61,7 @@ const Navbar = () => {
                 </Link>
               </li> */}
               <li className="nav-item">
-                <Link
-                  className="nav-link main-nav-link"
-                  to="/buy-commodities"
-                >
+                <Link className="nav-link main-nav-link" to="/buy-commodities">
                   Buy Commodities
                 </Link>
               </li>
@@ -81,7 +78,13 @@ const Navbar = () => {
                 </Link>
               </li> */}
               <li className="nav-item">
-                <a className="nav-link btn btn-danger nav-btn" role="button" target="_blank" rel="noopener noreferrer" href="https://marketplace.tradersofafrica.com">
+                <a
+                  className="nav-link btn btn-danger nav-btn"
+                  role="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://marketplase.tradersofafrica.com"
+                >
                   Marketplace
                 </a>
               </li>
