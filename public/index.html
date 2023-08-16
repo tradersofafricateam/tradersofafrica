@@ -46,6 +46,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -218,16 +219,31 @@
     <script>
       AOS.init();
     </script>
-    <script type="text/javascript">
-      window.$crisp = [];
-      window.CRISP_WEBSITE_ID = "94458331-0933-4dca-9e45-f33642ed015c";
-      (function () {
-        d = document;
-        s = d.createElement("script");
-        s.src = "https://client.crisp.chat/l.js";
-        s.async = 1;
-        d.getElementsByTagName("head")[0].appendChild(s);
-      })();
+    <!-- Live chat -->
+    <script>
+      (function (w, d, s, o, f, js, fjs) {
+        w["EBANQO-WIDGET"] = o;
+        w[o] =
+          w[o] ||
+          function () {
+            (w[o].q = w[o].q || []).push(arguments);
+          };
+        (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
+        js.id = o;
+        js.src = f;
+        js.async = 1;
+        fjs.parentNode.insertBefore(js, fjs);
+      })(
+        window,
+        document,
+        "script",
+        "ebanqo_widget",
+        "https://widget.ebanqo.io/app.js"
+      );
+      ebanqo_widget("init", {
+        url: "https://webchat.ebanqo.io/v2/TradersofAfrica",
+      });
     </script>
+    <!-- End of Live Chat -->
   </body>
 </html>

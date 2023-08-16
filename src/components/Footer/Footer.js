@@ -92,7 +92,7 @@ const Footer = () => {
                     />
                   </a>
                   <a
-                    href="https://www.instagram.com/tradersofafrica/"
+                    href="https://www.instagram.com/tradersofafrica.tofa/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
