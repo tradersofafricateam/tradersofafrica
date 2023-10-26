@@ -8,7 +8,9 @@ import Iverify from "../../assets/img/partners/iverify-logo.png";
 import Eagri from "../../assets/img/partners/eagrib-logo.png";
 import PIA from "../../assets/img/partners/pia-logo.svg";
 import SIPI from "../../assets/img/partners/sipi-logo.png";
-
+import NacAfcta from "../../assets/img/partners/nac.jpeg";
+import Afcta from "../../assets/img/partners/cct.png";
+import LCCI from "../../assets/img/partners/afcta.jpeg";
 
 const Partners = () => {
   return (
@@ -25,8 +27,11 @@ const Partners = () => {
             </p>
           </div>
         </div>
-        <div className="d-flex flex-wrap justify-content-start">
-          <img src={PIA} alt="" /> 
+        <div className="d-flex flex-wrap justify-content-start partner-ctn">
+          <img src={NacAfcta} alt="" className="partner-img" />
+          <img src={Afcta} alt="" className="partner-img" />
+          <img src={LCCI} alt="" className="partner-img" />
+          <img src={PIA} alt="" />
           <img src={SIPI} alt="" />
           <img src={Eagri} alt="" />
           <img src={Ati} alt="" />
