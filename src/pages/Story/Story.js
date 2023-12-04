@@ -7,17 +7,21 @@ import PlayBtn from "../../assets/img/dark-play-btn.svg";
 import LinkedIn from "../../assets/img/linkedin.svg";
 
 import Uju from "../../assets/img/team/uju.jpg";
-import Erhun from "../../assets/img/team/erhun.jpg";
-import Oge from "../../assets/img/team/oge.jpg";
+import Augustine from "../../assets/img/team/aug.jpg";
+import Tokunbo from "../../assets/img/team/toks.jpg";
 import Bambam from "../../assets/img/team/bambam.jpg";
+import Mildred from "../../assets/img/team/midred.jpg";
 import Chinedu from "../../assets/img/team/chinedu.jpg";
-import Jonathan from "../../assets/img/team/jon.jpeg";
+import Jonathan from "../../assets/img/team/jonathan.jpg";
 import Blessing from "../../assets/img/team/blessing.jpg";
 import Dami from "../../assets/img/team/dami.jpg";
 
-import Victor from "../../assets/img/team/victor.jpeg";
+import Dolapo from "../../assets/img/team/dolapo.jpg";
+import John from "../../assets/img/team/nedz.jpg";
+import Ola from "../../assets/img/team/ola.jpg";
+import Victor from "../../assets/img/team/vic.jpg";
 import Joseph from "../../assets/img/team/joseph.jpg";
-import Emeka from "../../assets/img/team/emeka.jpg";
+import Tom from "../../assets/img/team/tom.jpg";
 
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -150,6 +154,20 @@ const Story = () => {
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
+                  <img className="team-img" src={Tokunbo} alt="" />
+                  <a
+                    href="https://www.linkedin.com/in/tokunbo-fatoki-bsc-aca-69023a153/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
+                </div>
+                <h4>Tokunbo Fatoki </h4>
+                <p>Head Operations & Finance</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
                   <img className="team-img" src={Jonathan} alt="" />
                   <a
                     href="https://www.linkedin.com/in/jonathan-ojesebholo-mba-fmva-b624492a/"
@@ -162,33 +180,20 @@ const Story = () => {
                 <h4>Jonathan Ojesebholo</h4>
                 <p>Head, TOFA Pay</p>
               </div>
+
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="team-img" src={Oge} alt="" />
+                  <img className="team-img" src={Augustine} alt="" />
                   <a
-                    href="https://www.linkedin.com/in/oge-belonwu-868b2866/"
+                    href="https://www.linkedin.com/in/augustine-emeka-a34a6882/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <img className="linkedin-icon" src={LinkedIn} alt="" />
                   </a>
                 </div>
-                <h4>Oge Belonwu</h4>
-                <p>Head, Operations</p>
-              </div>
-              <div className="l-member-wrap">
-                <div className="l-member-img">
-                  <img className="team-img" src={Erhun} alt="" />
-                  <a
-                    href="https://www.linkedin.com/in/erhun-abbe-3ba4617a"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img className="linkedin-icon" src={LinkedIn} alt="" />
-                  </a>
-                </div>
-                <h4>Erhun Abbe</h4>
-                <p>Head, Digital &amp; Partnerships</p>
+                <h4>Augustine Emeka</h4>
+                <p>Head of Tech</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
@@ -220,6 +225,20 @@ const Story = () => {
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
+                  <img className="team-img" src={Mildred} alt="" />
+                  <a
+                    href="https://www.linkedin.com/in/ayobamidele-mebude-448454144/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
+                </div>
+                <h4>Jaja Mildred</h4>
+                <p>Legal Officer</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
                   <img className="team-img" src={Dami} alt="" />
                   <a
                     href="https://www.linkedin.com/in/damilola-anifowoshe-859a9718a/"
@@ -244,7 +263,7 @@ const Story = () => {
                   </a>
                 </div>
                 <h4>Victor Ejiogu</h4>
-                <p>Digital Lead</p>
+                <p>Frontend Developer</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
@@ -258,17 +277,45 @@ const Story = () => {
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
-                  <img className="team-img" src={Emeka} alt="" />
+                  <img className="team-img" src={Tom} alt="" />
                   <a
-                    href="https://www.linkedin.com/in/nnaemeka-ogunewe-45379a167/"
+                    href="https://www.linkedin.com/in/john-tom-728183185/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <img className="linkedin-icon" src={LinkedIn} alt="" />
                   </a>
                 </div>
-                <h4>Nnaemeka Ogunewe</h4>
-                <p>Front End Developer</p>
+                <h4>Tom John</h4>
+                <p>Backend Developer</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
+                  <img className="team-img" src={John} alt="" />
+                  <a
+                    href="www.linkedin.com/in/john-chinedu-nzekwe-2ba5a11a2/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
+                </div>
+                <h4>Nzekwe John C.</h4>
+                <p>Graphics &amp; Content Manager</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
+                  <img className="team-img" src={Ola} alt="" />
+                  <a
+                    href="www.linkedin.com/in/ola7/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
+                </div>
+                <h4>Olawale Ojo</h4>
+                <p>Backend Developer</p>
               </div>
               <div className="l-member-wrap">
                 <div className="l-member-img">
@@ -283,6 +330,20 @@ const Story = () => {
                 </div>
                 <h4>Joseph Matthias</h4>
                 <p>TOFA Pay Executive</p>
+              </div>
+              <div className="l-member-wrap">
+                <div className="l-member-img">
+                  <img className="team-img" src={Dolapo} alt="" />
+                  <a
+                    href="https://www.linkedin.com/in/toromade-adedolapo-0a804b223/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img className="linkedin-icon" src={LinkedIn} alt="" />
+                  </a>
+                </div>
+                <h4>Toromade Adedolapo</h4>
+                <p>Admin & Grant Officer</p>
               </div>
             </div>
           </div>

@@ -2,8 +2,11 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./Home.css";
-
-import PlainMap from "../../assets/img/tst.jpg";
+import SupplierIcon from "../../assets/img/suppliers-icon.svg";
+import ProductIcon from "../../assets/img/product-icon.svg";
+// import CoverageIcon from "../../assets/img/cc-icon.svg";
+import CurrencyIcon from "../../assets/img/currency-icon.svg";
+import CountryIcon from "../../assets/img/cp-icon.svg";
 // import ColouredMap from "../../assets/img/map-col2.svg";
 import HomeImg1 from "../../assets/img/lp-1.png";
 import HomeImg2 from "../../assets/img/lp-2.png";
@@ -20,12 +23,24 @@ import Partners from "../../components/Partners/Partners";
 // import Testimonials from "../../components/Testimonials/Testimonials";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useGetTofaPayStatistics } from "../../hooks/useGetTofaPayStatistics";
+import { useGetMarketplaceStatistics } from "../../hooks/useGetMarketplaceStatistics";
+import { numberWithCommas } from "../../helpers/helpFunctions";
 
 const Home = () => {
+  const { getAllTofapayStatistics, tofapayStatistics } =
+    useGetTofaPayStatistics();
+  const { getAllMarketplaceStatistics, marketplaceStatistics } =
+    useGetMarketplaceStatistics();
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();
+    getAllTofapayStatistics();
+    getAllMarketplaceStatistics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div>
       <Navbar />
@@ -61,8 +76,8 @@ const Home = () => {
       {/* What we do */}
       <section id="lp-what-we-do">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-6 col-sm-12 col-xs-12">
+          <div className="row ">
+            <div className="col-lg-6 col-sm-12 col-xs-12 mb-5">
               <h2>What we do</h2>
               <p>
                 Our mission and core business are clearly represented by our
@@ -76,19 +91,106 @@ const Home = () => {
                 a safe platform dedicated to solving issues of trust and
                 acceptable payment terms for both buyers and African suppliers.
               </p>
-              <a className="hvr-icon-forward" href="/what-we-do">
+              <a className="hvr-icon-forward mb-5" href="/what-we-do">
                 <button className="btn btn-danger">
                   Read more{" "}
                   <img className="hvr-icon" src={ChevronRight} alt="" />
                 </button>
               </a>
             </div>
-            <div className="col-lg-6 col-6" align="right">
-              <img
-                className="img-fluid lp-map"
-                src={PlainMap}
-                alt="African Map"
-              />
+            <div className="col-lg-6 col-sm-12 col-xs-12 mt-5" align="right">
+              <div className="our-business">
+                <h4>Our business at a glance</h4>
+                <div className="metic-ctn">
+                  <div className="metric-wrapper">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://tofapay.tradersofafrica.com"
+                    >
+                      <h6>TOFAPAY</h6>
+                    </a>
+                    <div className="metric-content">
+                      <img src={CurrencyIcon} alt="" />
+                      <div className="metric">
+                        <h6>
+                          {" "}
+                          {tofapayStatistics?.totalQuantitySupplied &&
+                            numberWithCommas(
+                              tofapayStatistics.totalQuantitySupplied
+                            )}{" "}
+                          KG
+                        </h6>
+                        <h5>Total Quantity Supplied</h5>
+                      </div>
+                    </div>
+                    <div className="metric-content">
+                      <img src={ProductIcon} alt="" />
+                      <div className="metric">
+                        <h6>
+                          {" "}
+                          {tofapayStatistics?.totalNumberOfProducts &&
+                            numberWithCommas(
+                              tofapayStatistics.totalNumberOfProducts
+                            )}
+                        </h6>
+                        <h5>Products</h5>
+                      </div>
+                    </div>
+                    <div className="metric-content">
+                      <img src={SupplierIcon} alt="" />
+                      <div className="metric">
+                        <h6>
+                          {tofapayStatistics?.totalNumberOfSuppliers &&
+                            numberWithCommas(
+                              tofapayStatistics.totalNumberOfSuppliers
+                            )}
+                        </h6>
+                        <h5>Farmers</h5>
+                      </div>
+                    </div>
+                  </div>{" "}
+                  <div className="metric-wrapper">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://marketplase.tradersofafrica.com"
+                    >
+                      <h6>MARKETPLACE</h6>
+                    </a>
+                    <div className="metric-content">
+                      <img src={ProductIcon} alt="" />
+                      <div className="metric">
+                        <h6>
+                          {marketplaceStatistics?.products &&
+                            numberWithCommas(marketplaceStatistics?.products)}
+                        </h6>
+                        <h5>Products</h5>
+                      </div>
+                    </div>
+                    <div className="metric-content">
+                      <img src={SupplierIcon} alt="" />
+                      <div className="metric">
+                        <h6>
+                          {marketplaceStatistics?.sellers &&
+                            numberWithCommas(marketplaceStatistics?.sellers)}
+                        </h6>
+                        <h5>Registered Sellers</h5>
+                      </div>
+                    </div>
+                    <div className="metric-content">
+                      <img src={CountryIcon} alt="" />
+                      <div className="metric">
+                        <h6>
+                          {marketplaceStatistics?.buyers &&
+                            numberWithCommas(marketplaceStatistics?.buyers)}
+                        </h6>
+                        <h5>Registered Buyers</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -54,7 +54,7 @@ const Footer = () => {
                       className="text"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://marketplace.tradersofafrica.com"
+                      href="https://marketplase.tradersofafrica.com"
                     >
                       Marketplace
                     </a>
