@@ -119,7 +119,7 @@ const Home = () => {
                             numberWithCommas(
                               tofapayStatistics.totalQuantitySupplied
                             )}{" "}
-                          KG
+                          Tons
                         </h6>
                         <h5>Total Quantity Supplied</h5>
                       </div>
