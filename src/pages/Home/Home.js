@@ -3,25 +3,17 @@ import { Link } from "react-router-dom";
 
 import "./Home.css";
 
-import SupplierIcon from "../../assets/img/suppliers-icon.svg";
-import ProductIcon from "../../assets/img/product-icon.svg";
-// import CoverageIcon from "../../assets/img/cc-icon.svg";
-import CurrencyIcon from "../../assets/img/currency-icon.svg";
-import CountryIcon from "../../assets/img/cp-icon.svg";
-import ColouredMap from "../../assets/img/map-col2.svg";
 import HomeImg1 from "../../assets/img/lp-1.png";
 import HomeImg2 from "../../assets/img/lp-2.png";
 import HomeImg3 from "../../assets/img/lp-3.png";
 import ProductFocus1 from "../../assets/img/pf-1.png";
 import ProductFocus2 from "../../assets/img/pf-2.png";
 import ProductFocus3 from "../../assets/img/pf-3.png";
-// import QuoteImg from "../../assets/img/quote.svg";
 import ChevronRight from "../../assets/img/chevron-right.svg";
 import PlainMap from "../../assets/img/tst.jpg";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Partners from "../../components/Partners/Partners";
-// import Testimonials from "../../components/Testimonials/Testimonials";
 import { GiCorn } from "react-icons/gi";
 import { FaBasketShopping } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
