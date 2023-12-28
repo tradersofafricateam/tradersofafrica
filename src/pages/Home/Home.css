@@ -215,54 +215,82 @@
   font-size: 1.2rem;
 }
 
-.our-business h4 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
-  padding: 0 0 0;
-  text-align: left;
+.metric_heading {
+  text-align: center;
 }
 
-.metic-ctn {
+/* .our_business {
+  margin-top: 4rem;
+} */
+
+.our_business a {
+  text-decoration: none !important;
+}
+
+.our_business .metric_title {
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+  margin-top: 4rem;
+}
+
+.our_business .metric_title:hover {
+  color: #dc4d04;
+}
+
+.metric_wrapper {
   display: flex;
-  flex: 1 1 0%;
-  gap: 4rem;
-  flex-wrap: wrap;
-  margin-top: 3rem;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 2.5rem;
+  gap: 1rem;
 }
 
-.metic-ctn a {
-  text-decoration: none;
-  color: #000;
-  transition: all 0.3s ease-in-out;
-}
-
-.metic-ctn a h6 {
-  font-weight: 900;
-}
-
-.metic-ctn a:hover {
-  text-decoration: underline;
-  color: #f05305;
-}
-
-.metic-ctn .metric-wrapper {
+.metric_wrapper .metric_content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.metic-ctn .metric-content {
+.metric_wrapper .metric_content .metric_icon {
+  font-size: 26px;
+  color: #f05305;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #f05305;
+  border-radius: 50%;
   display: flex;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
   margin-top: 1rem;
 }
 
-.metric-content .metric {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.metric_wrapper .metric_content h6 {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 !important;
+}
+
+.metric_wrapper .metric_content h6 .metric_unit {
+  font-size: 12px;
+  font-weight: 400;
+  color: #dc4d04;
+}
+
+.metric_wrapper .metric_content p {
+  padding: 0 !important;
+  font-weight: 300 !important;
+  text-transform: uppercase !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+
+.metric_wrapper .metric_content p span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #dc4d04;
 }
 
 @media (max-width: 768px) {

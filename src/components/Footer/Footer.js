@@ -60,9 +60,14 @@ const Footer = () => {
                     </a>
                   </li>
                   <li>
-                    <Link to="/what-we-do" className="text">
-                      SourcePro
-                    </Link>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.quicklogisticshub.com/"
+                      className="text"
+                    >
+                      Quick Logistic Hub
+                    </a>
                   </li>
                 </ul>
               </div>
