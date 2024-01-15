@@ -47,8 +47,6 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(sourceProStatistics);
-
   return (
     <div>
       <Navbar />
