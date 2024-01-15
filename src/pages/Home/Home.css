@@ -219,9 +219,9 @@
   text-align: center;
 }
 
-/* .our_business {
-  margin-top: 4rem;
-} */
+.our_business {
+  justify-content: center;
+}
 
 .our_business a {
   text-decoration: none !important;

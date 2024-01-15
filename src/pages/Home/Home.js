@@ -28,20 +28,26 @@ import "aos/dist/aos.css";
 import { useGetTofaPayStatistics } from "../../hooks/useGetTofaPayStatistics";
 import { useGetMarketplaceStatistics } from "../../hooks/useGetMarketplaceStatistics";
 import { numberWithCommas } from "../../helpers/helpFunctions";
+import { getSourceProStatistics } from "../../hooks/useSourceProStatistics";
 
 const Home = () => {
   const { getAllTofapayStatistics, tofapayStatistics } =
     useGetTofaPayStatistics();
   const { getAllMarketplaceStatistics, marketplaceStatistics } =
     useGetMarketplaceStatistics();
+  const { sourceProStatistics, getAllSourceProStatistics } =
+    getSourceProStatistics();
 
   useEffect(() => {
     AOS.init();
     AOS.refresh();
     getAllTofapayStatistics();
     getAllMarketplaceStatistics();
+    getAllSourceProStatistics();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(sourceProStatistics);
 
   return (
     <div>
@@ -190,6 +196,56 @@ const Home = () => {
                   </p>
                   <div className="metric_icon">
                     <GrDeliver />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4" align="center">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.tradersofafrica.com/buy-commodities"
+              >
+                <h5 className="metric_title">Source Pro</h5>{" "}
+              </a>
+              <div className="metric_wrapper">
+                <div className="metric_content">
+                  <h6>
+                    {" "}
+                    {sourceProStatistics?.totalQuantity
+                      ? numberWithCommas(sourceProStatistics.totalQuantity)
+                      : 0}{" "}
+                    <span className="metric_unit">/TONS</span>
+                  </h6>
+                  <p>Transaction volume</p>
+                  <div className="metric_icon">
+                    <GiMoneyStack />
+                  </div>
+                </div>
+                <div className="metric_content">
+                  <h6>
+                    {" "}
+                    {sourceProStatistics?.totalUniqueCompanies
+                      ? numberWithCommas(
+                          sourceProStatistics?.totalUniqueCompanies
+                        )
+                      : 0}
+                  </h6>
+                  <p>Partners</p>
+                  <div className="metric_icon">
+                    <FaUser />
+                  </div>
+                </div>
+                <div className="metric_content">
+                  <h6>
+                    {" "}
+                    {sourceProStatistics?.totalUniqueProducts
+                      ? sourceProStatistics?.totalUniqueProducts
+                      : 0}
+                  </h6>
+                  <p>Products </p>
+                  <div className="metric_icon">
+                    <GiFruitBowl />
                   </div>
                 </div>
               </div>
