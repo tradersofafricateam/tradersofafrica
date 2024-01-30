@@ -11,7 +11,7 @@ export const useGetMarketplaceStatistics = () => {
   const getAllMarketplaceStatistics = async () => {
     try {
       const data = await axios.get(
-        `https://marketplace-server-vwav.onrender.com/api/v2/product/analytics/products`
+        `https://api.tradersofafrica.com/api/v2/product/analytics/products`
       );
       setMarketplaceStatistics(data?.data?.data);
       setIsLoading(false);
