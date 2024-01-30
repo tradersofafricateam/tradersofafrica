@@ -14,7 +14,7 @@ export const getSourceProStatistics = () => {
     setLoading(true);
     try {
       const data = await axios.get(
-        "https://marketplace-server-vwav.onrender.com/api/v2/sourcepro-transaction/sourcepro-statistics"
+        "https://api.tradersofafrica.com/api/v2/sourcepro-transaction/sourcepro-statistics"
       );
       setSourceProStatistics(data?.data?.data);
       setLoading(false);
