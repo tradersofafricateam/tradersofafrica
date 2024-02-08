@@ -6,22 +6,25 @@ import "./Home.css";
 import HomeImg1 from "../../assets/img/lp-1.png";
 import HomeImg2 from "../../assets/img/lp-2.png";
 import HomeImg3 from "../../assets/img/lp-3.png";
+import ProductBag from "../../assets/img/grain-sack-icon.svg";
+import Request from "../../assets/img/female-services-support-icon.svg";
+import User from "../../assets/img/group-icon.svg";
+import Partner from "../../assets/img/young-businessman-icon.svg";
+import Logistic from "../../assets/img/truck-icon.svg";
+import Transaction from "../../assets/img/money-icon.svg";
+import SellerIcon from "../../assets/img/sellerIcon.svg";
+import BuyerIcon from "../../assets/img/shopper-icon.svg";
 import ProductFocus1 from "../../assets/img/pf-1.png";
 import ProductFocus2 from "../../assets/img/pf-2.png";
 import ProductFocus3 from "../../assets/img/pf-3.png";
 import ChevronRight from "../../assets/img/chevron-right.svg";
 import PlainMap from "../../assets/img/tst.jpg";
+import ColouredMap from "../../assets/img/map-col2.svg";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Partners from "../../components/Partners/Partners";
 import { GiCorn } from "react-icons/gi";
-import { FaBasketShopping } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
 import { GiMoneyStack } from "react-icons/gi";
-import { GiFruitBowl } from "react-icons/gi";
-import { MdDeliveryDining } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
-import { GrDeliver } from "react-icons/gr";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -80,7 +83,7 @@ const Home = () => {
       </section>
 
       {/* Metrics for subsidaries */}
-      <section id="lp-what-we-do">
+      {/* <section id="lp-what-we-do">
         <div className="container ">
           <div className="metric_heading">
             <h1>Our business at a glance</h1>
@@ -250,17 +253,272 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </section> */}
+
+      {/* Metrics for subsidaries */}
+      <section id="lp-what-we-do">
+        <div className="container ">
+          <div className="row">
+            <div className=" col-md-6 col-12">
+              <div className="">
+                <h2>Our business at a glance</h2>
+                <div className="row">
+                  <div className="col-12 mt-4">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://marketplase.tradersofafrica.com"
+                      className="metric__link"
+                    >
+                      <h4 className="metric__heading">Market Place</h4>{" "}
+                    </a>
+                    <div className="row">
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            <img src={ProductBag} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {marketplaceStatistics?.products &&
+                                numberWithCommas(
+                                  marketplaceStatistics?.products
+                                )}
+                            </h4>
+                            <h6 className="metric__title">PRODUCTS</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <img src={SellerIcon} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {marketplaceStatistics?.sellers &&
+                                numberWithCommas(
+                                  marketplaceStatistics?.sellers
+                                )}
+                            </h4>
+
+                            <h6 className="metric__title">SELLERS</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            <img src={BuyerIcon} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {marketplaceStatistics?.buyers &&
+                                numberWithCommas(marketplaceStatistics?.buyers)}
+                            </h4>
+                            <h6 className="metric__title">BUYERS</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-12 mt-4">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.quicklogisticshub.com/"
+                      className="metric__link"
+                    >
+                      <h4 className="metric__heading">Quick Logistics Hub</h4>{" "}
+                    </a>
+                    <div className="row">
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            <img src={Request} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">4,000+</h4>
+                            <h6 className="metric__title">
+                              {" "}
+                              Request
+                              <span className="metric__unit"> /wkly</span>
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <img src={User} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">7,000+</h4>
+                            <h6 className="metric__title">Users</h6>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-sm-4 col-8">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            <img src={Logistic} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">200+</h4>
+                            <h6 className="metric__title">
+                              Logistic Providers
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 mt-4">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.tradersofafrica.com/buy-commodities"
+                      className="metric__link"
+                    >
+                      <h4 className="metric__heading">Source Pro</h4>
+                    </a>
+                    <div className="row">
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <img src={Partner} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {sourceProStatistics?.totalUniqueCompanies
+                                ? numberWithCommas(
+                                    sourceProStatistics?.totalUniqueCompanies
+                                  )
+                                : 0}
+                            </h4>
+                            <h6 className="metric__title">Partners</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-8 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <img src={Transaction} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {sourceProStatistics?.totalQuantity
+                                ? numberWithCommas(
+                                    sourceProStatistics.totalQuantity
+                                  )
+                                : 0}{" "}
+                            </h4>
+                            <h6 className="metric__title">
+                              Transaction volume
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <GiFruitBowl />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {sourceProStatistics?.totalUniqueProducts
+                                ? sourceProStatistics?.totalUniqueProducts
+                                : 0}
+                            </h4>
+                            <h6 className="metric__title">PRODUCTS</h6>
+                          </div>
+                        </div>
+                      </div> */}
+                    </div>
+                  </div>
+                  <div className="col-12 mt-4">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://tofapay.tradersofafrica.com"
+                      className="metric__link"
+                    >
+                      {" "}
+                      <h4 className="metric__heading">Tofa Pay</h4>
+                    </a>
+
+                    <div className="row">
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <img src={ProductBag} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {tofapayStatistics?.totalNumberOfProducts &&
+                                numberWithCommas(
+                                  tofapayStatistics.totalNumberOfProducts
+                                )}
+                            </h4>
+                            <h6 className="metric__title">PRODUCTS</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-8 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <img src={Transaction} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {tofapayStatistics?.totalQuantitySupplied &&
+                                numberWithCommas(
+                                  tofapayStatistics.totalQuantitySupplied
+                                )}{" "}
+                              <span className="metric__unit">/TONS</span>
+                            </h4>
+                            <h6 className="metric__title">
+                              Transaction Volume
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6 col-12 mt-4">
+              <img className="img-fluid" src={ColouredMap} alt="" />
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* What we do */}
       <section id="lp-what-we-do">
-        <div
-          className="container"
-          data-aos="fade-up"
-          data-aos-duration="1000"
-          data-aos-offset="300"
-        >
+        <div className="container">
           <div className="row ">
+            <div className="col-lg-6" align="center">
+              <img className="img-fluid lp-img1" src={PlainMap} alt="" />
+            </div>
             <div className="col-lg-6 col-sm-12 col-xs-12 mb-5">
               <h2>What we do</h2>
               <p>
@@ -282,9 +540,6 @@ const Home = () => {
                 </button>
               </a>
             </div>
-            <div className="col-lg-6" align="center">
-              <img className="img-fluid lp-img1" src={PlainMap} alt="" />
-            </div>
           </div>
         </div>
       </section>
@@ -298,9 +553,6 @@ const Home = () => {
             data-aos-duration="1000"
             data-aos-offset="300"
           >
-            <div className="col-lg-6" align="center">
-              <img className="img-fluid lp-img1" src={HomeImg1} alt="" />
-            </div>
             <div className="col-lg-6">
               <div className="lp-service-info">
                 <h2>Visibility and Access</h2>
@@ -312,6 +564,9 @@ const Home = () => {
                 <div className="line" />
               </div>
             </div>
+            <div className="col-lg-6" align="center">
+              <img className="img-fluid lp-img1" src={HomeImg1} alt="" />
+            </div>
           </div>
           <div
             className="row mb-3"
@@ -319,6 +574,9 @@ const Home = () => {
             data-aos-duration="1000"
             data-aos-offset="300"
           >
+            <div className="col-lg-6" align="center">
+              <img className="img-fluid lp-img2" src={HomeImg2} alt="" />
+            </div>
             <div className="col-lg-6 order-last order-lg-first">
               <div className="lp-service-info">
                 <h2>Training and Mentorship </h2>
@@ -330,9 +588,6 @@ const Home = () => {
                 <div className="line" />
               </div>
             </div>
-            <div className="col-lg-6" align="center">
-              <img className="img-fluid lp-img2" src={HomeImg2} alt="" />
-            </div>
           </div>
           <div
             className="row"
@@ -340,9 +595,6 @@ const Home = () => {
             data-aos-duration="1000"
             data-aos-offset="300"
           >
-            <div className="col-lg-6" align="center">
-              <img className="img-fluid lp-img3" src={HomeImg3} alt="" />
-            </div>
             <div className="col-lg-6">
               <div className="lp-service-info">
                 <h2>Market Intelligence</h2>
@@ -352,6 +604,9 @@ const Home = () => {
                 </p>
                 <div className="line" />
               </div>
+            </div>
+            <div className="col-lg-6" align="center">
+              <img className="img-fluid lp-img3" src={HomeImg3} alt="" />
             </div>
           </div>
         </div>

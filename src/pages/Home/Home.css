@@ -215,7 +215,7 @@
   font-size: 1.2rem;
 }
 
-.metric_heading {
+/* .metric_heading {
   text-align: center;
 }
 
@@ -291,6 +291,50 @@
   font-size: 12px;
   font-weight: 400;
   color: #dc4d04;
+} */
+
+.metric__link {
+  text-decoration: none;
+}
+
+.metric__heading {
+  font-size: 24px;
+  margin-top: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.metric__heading:hover {
+  color: #dc4d04;
+}
+
+.metri__container {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.metri__container .metric__icon img {
+  width: 30px;
+  height: auto;
+}
+
+/* .metri__container .metric_first {
+  margin-top: 10px;
+} */
+
+.metri__container .metric__number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.metri__container .metric__unit {
+  font-size: 8px;
+  color: #dc4d04;
+}
+
+.metri__container .metric__title {
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
@@ -346,5 +390,31 @@
   }
   #lp-product .product-box {
     margin-bottom: 25px;
+  }
+  .metri__sup__header {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .metric__heading {
+    font-size: 18px;
+  }
+
+  .metri__container .metric__icon {
+    font-size: 18px;
+  }
+
+  .metri__container .metric_first {
+    margin-top: 5px;
+  }
+
+  .metri__container .metric__number {
+    font-size: 16px;
+  }
+
+  .metri__container .metric__title {
+    font-size: 10px;
   }
 }
