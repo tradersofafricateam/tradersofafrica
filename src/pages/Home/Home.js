@@ -23,8 +23,6 @@ import ColouredMap from "../../assets/img/map-col2.svg";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Partners from "../../components/Partners/Partners";
-import { GiCorn } from "react-icons/gi";
-import { GiMoneyStack } from "react-icons/gi";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
