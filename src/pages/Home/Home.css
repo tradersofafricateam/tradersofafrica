@@ -301,6 +301,29 @@
   font-size: 24px;
   margin-top: 20px;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.metric__heading span {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: block;
+}
+
+.metric__heading .span-1 {
+  background-color: #dc4d04;
+}
+.metric__heading .span-2 {
+  background-color: #f5aa82;
+}
+.metric__heading .span-3 {
+  background-color: #faea38;
+}
+.metric__heading .span-4 {
+  background-color: #82b2f5;
 }
 
 .metric__heading:hover {
@@ -323,7 +346,7 @@
 } */
 
 .metri__container .metric__number {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -335,6 +358,14 @@
 .metri__container .metric__title {
   font-size: 13px;
   text-transform: uppercase;
+}
+
+.map__african__tofa {
+  margin-top: 3rem;
+}
+
+.product-box .img-fluid {
+  height: 250px;
 }
 
 @media (max-width: 768px) {
@@ -416,5 +447,11 @@
 
   .metri__container .metric__title {
     font-size: 10px;
+  }
+  .metri__container .metric__unit {
+    font-size: 6px;
+  }
+  .map__african__tofa {
+    margin-top: 2rem;
   }
 }

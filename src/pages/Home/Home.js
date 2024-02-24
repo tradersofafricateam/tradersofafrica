@@ -11,15 +11,16 @@ import Request from "../../assets/img/female-services-support-icon.svg";
 import User from "../../assets/img/group-icon.svg";
 import Partner from "../../assets/img/young-businessman-icon.svg";
 import Logistic from "../../assets/img/truck-icon.svg";
+import Farmer from "../../assets/img/farmer-icon.svg";
 import Transaction from "../../assets/img/money-icon.svg";
 import SellerIcon from "../../assets/img/sellerIcon.svg";
 import BuyerIcon from "../../assets/img/shopper-icon.svg";
 import ProductFocus1 from "../../assets/img/pf-1.png";
 import ProductFocus2 from "../../assets/img/pf-2.png";
-import ProductFocus3 from "../../assets/img/pf-3.png";
+// import ProductFocus3 from "../../assets/img/pf-3.png";
 import ChevronRight from "../../assets/img/chevron-right.svg";
 import PlainMap from "../../assets/img/tst.jpg";
-import ColouredMap from "../../assets/img/map-col2.svg";
+import ColouredMap from "../../assets/img/map.png";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Partners from "../../components/Partners/Partners";
@@ -268,7 +269,9 @@ const Home = () => {
                       href="https://marketplase.tradersofafrica.com"
                       className="metric__link"
                     >
-                      <h4 className="metric__heading">Market Place</h4>{" "}
+                      <h4 className="metric__heading">
+                        Market Place <span className="span-1"></span>
+                      </h4>{" "}
                     </a>
                     <div className="row">
                       <div className="col-4 ">
@@ -332,7 +335,9 @@ const Home = () => {
                       href="https://www.quicklogisticshub.com/"
                       className="metric__link"
                     >
-                      <h4 className="metric__heading">Quick Logistics Hub</h4>{" "}
+                      <h4 className="metric__heading">
+                        Quick Logistics Hub <span className="span-3"></span>
+                      </h4>{" "}
                     </a>
                     <div className="row">
                       <div className="col-4 ">
@@ -363,16 +368,14 @@ const Home = () => {
                         </div>
                       </div>
 
-                      <div className="col-sm-4 col-8">
+                      <div className="col-sm-4 col-4">
                         <div className="metri__container">
                           <div className="metric__icon">
                             <img src={Logistic} alt="" />
                           </div>
                           <div className="metric_first">
                             <h4 className="metric__number">200+</h4>
-                            <h6 className="metric__title">
-                              Logistic Providers
-                            </h6>
+                            <h6 className="metric__title">Providers</h6>
                           </div>
                         </div>
                       </div>
@@ -385,7 +388,9 @@ const Home = () => {
                       href="https://www.tradersofafrica.com/buy-commodities"
                       className="metric__link"
                     >
-                      <h4 className="metric__heading">Source Pro</h4>
+                      <h4 className="metric__heading">
+                        Source Pro <span className="span-2"></span>
+                      </h4>
                     </a>
                     <div className="row">
                       <div className="col-4 ">
@@ -407,7 +412,7 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-8 ">
+                      <div className="col-4 ">
                         <div className="metri__container">
                           <div className="metric__icon">
                             {" "}
@@ -421,30 +426,29 @@ const Home = () => {
                                     sourceProStatistics.totalQuantity
                                   )
                                 : 0}{" "}
+                              <span className="metric__unit">/TONS</span>
                             </h4>
-                            <h6 className="metric__title">
-                              Transaction volume
-                            </h6>
+                            <h6 className="metric__title">Transaction</h6>
                           </div>
                         </div>
                       </div>
-                      {/* <div className="col-4 ">
+                      <div className="col-4 ">
                         <div className="metri__container">
                           <div className="metric__icon">
                             {" "}
-                            <GiFruitBowl />
+                            <img src={ProductBag} alt="" />
                           </div>
                           <div className="metric_first">
                             <h4 className="metric__number">
                               {" "}
                               {sourceProStatistics?.totalUniqueProducts
                                 ? sourceProStatistics?.totalUniqueProducts
-                                : 0}
+                                : 0}{" "}
                             </h4>
                             <h6 className="metric__title">PRODUCTS</h6>
                           </div>
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                   <div className="col-12 mt-4">
@@ -455,7 +459,9 @@ const Home = () => {
                       className="metric__link"
                     >
                       {" "}
-                      <h4 className="metric__heading">Tofa Pay</h4>
+                      <h4 className="metric__heading">
+                        Tofa Pay <span className="span-4"></span>
+                      </h4>
                     </a>
 
                     <div className="row">
@@ -477,7 +483,7 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-8 ">
+                      <div className="col-4 ">
                         <div className="metri__container">
                           <div className="metric__icon">
                             {" "}
@@ -492,9 +498,25 @@ const Home = () => {
                                 )}{" "}
                               <span className="metric__unit">/TONS</span>
                             </h4>
-                            <h6 className="metric__title">
-                              Transaction Volume
-                            </h6>
+                            <h6 className="metric__title">Transaction</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-4 ">
+                        <div className="metri__container">
+                          <div className="metric__icon">
+                            {" "}
+                            <img src={Farmer} alt="" />
+                          </div>
+                          <div className="metric_first">
+                            <h4 className="metric__number">
+                              {" "}
+                              {tofapayStatistics?.totalNumberOfSuppliers &&
+                                numberWithCommas(
+                                  tofapayStatistics.totalNumberOfSuppliers
+                                )}{" "}
+                            </h4>
+                            <h6 className="metric__title">Farmers</h6>
                           </div>
                         </div>
                       </div>
@@ -503,8 +525,12 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-12 mt-4">
-              <img className="img-fluid" src={ColouredMap} alt="" />
+            <div className="col-md-6 col-12 pt-5">
+              <img
+                className=" map__african__tofa img-fluid "
+                src={ColouredMap}
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -642,7 +668,11 @@ const Home = () => {
             </div>
             <div className="col-lg-4">
               <div className="product-box">
-                <img className="img-fluid" src={ProductFocus3} alt="" />
+                <img
+                  className="img-fluid"
+                  src="https://newtofaapibucket.s3.us-west-2.amazonaws.com/public/4CE87823-C97D-41C2-A2AF-B9F10C966261.jpeg"
+                  alt=""
+                />
                 <div className="title-bar">
                   <h2>Finished Goods</h2>
                 </div>

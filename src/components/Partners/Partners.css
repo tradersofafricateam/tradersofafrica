@@ -51,3 +51,67 @@
 #partners .partner-img {
   height: 100px;
 }
+
+.carousel-container {
+  overflow: hidden !important;
+  width: 100%;
+}
+
+.carousel-track {
+  position: relative;
+  width: 250%;
+  display: flex;
+  align-items: center;
+  /* height: 80px; */
+}
+
+/* .carousel-track {
+  display: flex;
+  left: 0;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 200%;
+  z-index: 40;
+  top: 0;
+  animation: slide 20s linear infinite;
+} */
+
+.carousel-card {
+  float: left;
+  width: 9.0909%; /* Each content div takes one-third of the container width */
+  height: 100%; /* Set your desired height */
+  box-sizing: border-box;
+  text-align: center;
+  animation: moveRightToLeft 25s linear infinite;
+}
+
+.carousel-card:hover {
+  transform: scale(0.9);
+}
+
+.carousel-card .partner-img {
+  height: 100px !important;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes moveRightToLeft {
+  0% {
+    transform: translateX(330%);
+  }
+  100% {
+    transform: translateX(
+      -1100%
+    ); /* Adjust based on the number of content divs */
+  }
+}
+
+@media (max-width: 1020px) {
+  .carousel-track {
+    width: 620%;
+  }
+}
