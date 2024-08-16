@@ -1,0 +1,35 @@
+# [START cloudbuild_npm_node]
+steps:
+ # Install dependencies
+  - name: node:$_NODE_VERSION
+    entrypoint: npm
+    args: ['install']
+  # Run build
+  - name: node:$_NODE_VERSION
+    entrypoint: npm
+    args: ['run', 'build']
+    env:
+      - 'RREACT_APP_BACKEND_URL=$_REACT_APP_BACKEND_URL'
+ 
+
+  # copy package-lock to dist folder
+  - name: node:$_NODE_VERSION
+    entrypoint: bash
+    args: ['-c', 'cp package-lock.json build/']
+  # Copy everything in build folder to parent
+  - name: node
+    entrypoint: bash
+    args: ['-c', 'cp -r build/* .']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'gcloud app deploy',
+      ]
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+timeout: '2200s'
+# [END cloudbuild_npm_node]
