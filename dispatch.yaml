@@ -1,0 +1,4 @@
+dispatch:
+  - url: 'tradersofafrica.com/*'
+    service: tradersofafrica
+ 
