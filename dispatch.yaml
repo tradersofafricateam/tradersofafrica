@@ -1,4 +1,18 @@
 dispatch:
+  #landing page
   - url: 'tradersofafrica.com/*'
     service: tradersofafrica
+  #marketplace
+  - url: "marketplace.tradersofafrica.com/*"
+    service: marketplace
+  - url: "marketplase.tradersofafrica.com/*"
+    service: marketplace
+  #admin-marketplace
+  - url: "admin-marketplace.tradersofafrica.com/*" 
+    service: admin-marketplace
+  #momo-marketplace
+  - url: "mom-marketplase.tradersofafrica.com/*" 
+    service: momo-prod
  
+
+
