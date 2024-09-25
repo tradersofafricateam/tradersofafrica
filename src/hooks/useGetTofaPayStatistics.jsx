@@ -10,7 +10,7 @@ export const useGetTofaPayStatistics = () => {
   const getAllTofapayStatistics = async () => {
     try {
       const data = await axios.get(
-        `https://tofapaybackend.tradersofafrica.com/statistics`
+        `https://tofapay-api.tradersofafrica.com/statistics`
       );
       setTofapayStatistics(data?.data);
       setLoading(false);

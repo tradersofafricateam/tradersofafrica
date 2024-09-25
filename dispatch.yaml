@@ -11,8 +11,16 @@ dispatch:
   - url: "admin-marketplace.tradersofafrica.com/*" 
     service: admin-marketplace
   #momo-marketplace
-  - url: "mom-marketplase.tradersofafrica.com/*" 
+  - url: "momo-marketplase.tradersofafrica.com/*" 
     service: momo-prod
- 
+  #marketplace-server
+  - url: "api.tradersofafrica.com/*"
+    service: marketplace-server-prod
+  #Tofa-pay-frontend
+  - url: "tofapay.tradersofafrica.com/*"
+    service: tofa-pay-new
+  #tofa-pay-server
+  - url: "tofapay-api.tradersofafrica.com/*"
+    service: tofa-pay-server
 
 
