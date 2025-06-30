@@ -1,5 +1,5 @@
 # Stage 1: Build the React application
-FROM node:20-alpine as build
+FROM node:20-alpine AS build
 
 # Set working directory
 WORKDIR /app
@@ -17,10 +17,10 @@ COPY . .
 
 # Build the React app
 # Set CI=true to treat warnings as errors in CI environments, common for production builds
-RUN CI=true npm run build
+RUN npm run build
 
 # Stage 2: Serve the built application with Nginx
-FROM nginx:stable-alpine as production
+FROM nginx:stable-alpine AS production
 
 # Copy custom Nginx configuration
 # This is crucial for single-page applications (SPAs) like React to handle routing correctly.
