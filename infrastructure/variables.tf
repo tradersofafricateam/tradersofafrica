@@ -1,12 +1,11 @@
 # ── Variables ───────────────────────────────────────────────────────────────
 variable "location" {
   type    = string
-  default = "germanywestcentral"
 }
 
 variable "container_name" {
-  type    = string
-  default = "marketplace"
+  description = "Name of the Azure CI"
+  type = string
 }
 
 variable "container_image" {
@@ -31,29 +30,22 @@ variable "ghcr_password" {
   sensitive   = true
 }
 
-variable "container_name" {
-  description = "Name of the Azure CI"
-  type = string
-}
-
-
-
 variable "cpu" {
-  description = "vCPU for your container"
+  description = "CPU for your container GB"
   type        = number
-  default     = 1.0
+  default     = 0.5
 }
 
 variable "memory" {
   description = "Memory (GB) for your container"
   type        = number
-  default     = 1.5
+  default     = 1.0
 }
 
 variable "container_port" {
   description = "Port your app listens on"
   type        = number
-  default     = 8081
+  default     = 80
 }
 
 variable "node_env" {
@@ -68,4 +60,7 @@ variable "random_string" {
   default     = "4vxt"
 }
 
-
+variable "domain_name" {
+  description = "The domain name to use for the container app"
+  type        = string
+}

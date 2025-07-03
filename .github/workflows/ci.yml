@@ -4,12 +4,13 @@ name: Build & Publish Docker Image
 on:
   push:
     branches:
-      - ola
+      - feat/victor/ebanqo-widget
 
 
 env:
   IMAGE_NAME: "ghcr.io/tradersofafricateam"
   CONTAINER_NAME: "tradersofafrica"
+  CONTAINER_PORT: "80"
 
 jobs:
   build-and-push:
@@ -29,12 +30,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      #- name: Export ALL_SECRETS to .env
-      #  run: |
-      #    cat << 'EOF' > .env
-      #     ${{ secrets.ALL_SECRETS }}
-      #    EOF
-      #  shell: bash
+      - name: Export ALL_SECRETS to .env
+        run: |
+          cat << 'EOF' > .env
+            REACT_APP_BACKEND_URL=${{ vars.REACT_APP_BACKEND }}
+          EOF
+        shell: bash
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -48,6 +49,12 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID:     ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID:     ${{ secrets.ARM_TENANT_ID }}
+
     permissions:
       contents: read # Required for actions/checkout
       packages: read # Required to pull from GHCR
@@ -75,8 +82,9 @@ jobs:
           ghcr_registry_server = "ghcr.io"
           ghcr_username        = "${{ github.actor }}"
           ghcr_password        = "${{ secrets.GITHUB_TOKEN }}"
-          container_port       = 80
+          container_port       = "${{ env.CONTAINER_PORT }}"
           node_env             = "production"
+          domain_name          = "tradersofafrica.com"
           EOF
 
       - name: Terraform Init
@@ -88,8 +96,3 @@ jobs:
         run: |
           cd infrastructure
           terraform apply -auto-approve
-        env:
-          ARM_CLIENT_ID:     ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID:     ${{ secrets.ARM_TENANT_ID }}
