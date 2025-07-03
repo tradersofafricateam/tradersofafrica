@@ -52,7 +52,7 @@ const Story = () => {
                 in our locality and from our surroundings, as well as showcase
                 African products to the rest of the world. - Uju Uzo-Ojinnaka
               </h3>
-              <div className="d-flex justify-content-start">
+              {/* <div className="d-flex justify-content-start">
                 <img src={PlayBtn} alt="" />
                 <p className="play-icon-text">
                   <Link
@@ -62,6 +62,18 @@ const Story = () => {
                     {" "}
                     Watch the Groundnut Story
                   </Link>
+                </p>
+              </div> */}
+              <div className="d-flex justify-content-start">
+                <img src={PlayBtn} alt="" />
+                <p className="play-icon-text">
+                  
+                  <a href="https://www.youtube.com/watch?v=zsj0Tw38qj0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Watch the Groundnut Story
+                  </a>
                 </p>
               </div>
             </div>

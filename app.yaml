@@ -1,0 +1,12 @@
+runtime: nodejs20
+instance_class: F4
+service: tradersofafrica
+handlers:
+  - url: /(.*\..+)$
+    static_files: \1
+    upload: (.*\..+)$
+    secure: always
+  - url: /.*
+    static_files: index.html
+    upload: index.html
+    secure: always
