@@ -39,6 +39,9 @@ Azure Container Apps support custom domains and SSL certificates. While Terrafor
 After deploying with Terraform, run the following command to bind your custom domain and create a managed certificate:
 
 ```sh
+az containerapp hostname bind   --name tradersofafrica   --resource-group rg-node-4vxt   --hostname tradersofafrica.com   --environment ca-env-4vxt  --validation-method CNAME
+then push 
+then
 export CERT_ID=$(az containerapp env certificate list \
   --resource-group rg-node-4vxt \
   --name ca-env-4vxt \
