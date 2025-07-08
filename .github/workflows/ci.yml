@@ -28,7 +28,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT }}
 
       - name: Export ALL_SECRETS to .env
         run: |
@@ -81,7 +81,7 @@ jobs:
           container_name       = "${{ env.CONTAINER_NAME }}"
           ghcr_registry_server = "ghcr.io"
           ghcr_username        = "${{ github.actor }}"
-          ghcr_password        = "${{ secrets.GITHUB_TOKEN }}"
+          ghcr_password        = "${{ secrets.GH_PAT }}"
           container_port       = "${{ env.CONTAINER_PORT }}"
           node_env             = "production"
           domain_name          = "tradersofafrica.com"
