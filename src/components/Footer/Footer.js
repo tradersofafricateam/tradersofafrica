@@ -74,8 +74,11 @@ const Footer = () => {
               <div className="col-lg-4 col-12">
                 <ul>
                   <h5 className="footer-headers">Contact Us</h5>
-                  <li>7/9 Adebisi Oyenola Street, Idado Estate, Lekki Lagos</li>
-                  <li>Apt 3910 Miami, FL 33132</li>
+                  <li>650 ne 2nd ave Apt 3910 Miami, FL 33132</li>
+                  <li>
+                    1 Amaza Osagie Street, Olokonla, Lekki-Epe expressway,
+                    Lagos, Nigeria
+                  </li>
                   <li>info@tradersofafrica.com</li>
                 </ul>{" "}
                 650 ne 2nd ave
