@@ -77,16 +77,16 @@ resource "azurerm_container_app_custom_domain" "domain" {
   }
 }
 
-resource "azapi_resource" "managed_cert" {
-  name      = var.domain_name
-  type      = "Microsoft.App/managedEnvironments/managedCertificates@2025-02-02-preview"
-  parent_id = data.azurerm_container_app_environment.env.id
-  location  = var.location
-
-  body = {
-    properties = {
-      subjectName             = var.domain_name
-      domainControlValidation = "TXT"
-    }
-  }
-}
+# resource "azapi_resource" "managed_cert" {
+#   name      = var.domain_name
+#   type      = "Microsoft.App/managedEnvironments/managedCertificates@2025-02-02-preview"
+#   parent_id = data.azurerm_container_app_environment.env.id
+#   location  = var.location
+# 
+#   body = {
+#     properties = {
+#       subjectName             = var.domain_name
+#       domainControlValidation = "TXT"
+#     }
+#   }
+# }
